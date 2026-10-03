@@ -87,10 +87,15 @@ def timetable(sector, limit=10, now=None):
 
     if len(rows) < limit:
         tomorrow = today + timedelta(days=1)
+        # key= so simultaneous departures (bus and train at 10:05) never
+        # fall through to comparing route dicts.
         extra = sorted(
-            (_departure(tomorrow, hhmm), route, True)
-            for route in routes_for(sector)
-            for hhmm in route['times']
+            (
+                (_departure(tomorrow, hhmm), route, True)
+                for route in routes_for(sector)
+                for hhmm in route['times']
+            ),
+            key=lambda row: row[0],
         )
         rows.extend(extra[:limit - len(rows)])
 

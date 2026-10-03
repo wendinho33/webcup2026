@@ -1410,6 +1410,23 @@ class TransportTests(TestCase):
         self.assertTrue(all('|' in row['value'] for row in board))
         self.assertLessEqual(len(board), 10)
 
+    def test_timetable_tomorrow_block_tolerates_simultaneous_departures(self):
+        """Late at night the board rolls into tomorrow, where the village bus
+        and the Continental Express both depart at 10:05 — a tie that used to
+        make sorted() compare route dicts and crash the transport page."""
+        from terra.transit import timetable
+
+        late = timezone.localtime().replace(hour=23, minute=10, second=0,
+                                            microsecond=0)
+        board = timetable('vermilion', now=late)
+        epochs = [row['epoch'] for row in board]
+        self.assertEqual(epochs, sorted(epochs))
+        self.assertEqual(len(board), 10)
+        kinds = {row['kind'] for row in board}
+        self.assertEqual(kinds, {'bus', 'train'})
+        self.assertTrue(all(row['day_label'] == 'Tomorrow'
+                            for row in board))
+
     # ---- paying fares ----
 
     def test_pay_fare_decreases_balance_and_issues_qr(self):
