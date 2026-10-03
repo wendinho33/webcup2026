@@ -85,7 +85,7 @@ class BuyForm(forms.Form):
     """Spend Earth credits on TerraX."""
 
     amount = forms.DecimalField(
-        label='Earth credits to spend',
+        label=_('Earth credits to spend'),
         min_value=Decimal('1.00'),
         max_value=Decimal('10000000.00'),
         max_digits=12,
@@ -103,7 +103,7 @@ class SellForm(forms.Form):
     """Sell TerraX back for Earth credits."""
 
     amount = forms.DecimalField(
-        label='TerraX to sell',
+        label=_('TerraX to sell'),
         min_value=Decimal('0.000001'),
         max_value=Decimal('100000000.000000'),
         max_digits=14,

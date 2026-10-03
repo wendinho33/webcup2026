@@ -121,17 +121,73 @@
       .catch(function () {});
   }
 
+  /* ---- real Web Push (VAPID) subscription ----------------------------
+     Subscribes this device to server push and stores the subscription
+     on /webpush/save_information. Resolves false when the browser cannot
+     do Web Push — the local notification path then still works. */
+  function urlBase64ToUint8Array(base64String) {
+    var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    var base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    var rawData = window.atob(base64);
+    var outputArray = new Uint8Array(rawData.length);
+    for (var i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  }
+
+  function browserName() {
+    var ua = navigator.userAgent;
+    if (/firefox/i.test(ua)) return 'Firefox';
+    if (/edg/i.test(ua)) return 'Edge';
+    if (/chrome|crios/i.test(ua)) return 'Chrome';
+    if (/safari/i.test(ua)) return 'Safari';
+    return 'Other';
+  }
+
+  function subscribeToPush() {
+    var vapidKey = wx.getAttribute('data-vapid-key');
+    var saveUrl = wx.getAttribute('data-push-url');
+    if (!('serviceWorker' in navigator) || !('PushManager' in window) ||
+        !vapidKey || !saveUrl) {
+      return Promise.resolve(false);
+    }
+    return navigator.serviceWorker.register('/serviceworker.js')
+      .then(function (reg) {
+        return reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(vapidKey),
+        });
+      })
+      .then(function (subscription) {
+        return fetch(saveUrl, {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            status_type: 'subscribe',
+            browser: browserName(),
+            subscription: subscription.toJSON(),
+          }),
+        });
+      })
+      .then(function (response) { return response.status === 201; })
+      .catch(function () { return false; });
+  }
+
   if (enableBtn) {
     enableBtn.addEventListener('click', function () {
       if (!('Notification' in window)) { permissionState(); return; }
       Notification.requestPermission().then(function () {
         permissionState();
         if (Notification.permission === 'granted') {
-          notify('Heat alerts enabled',
-            'Terra Nova will warn you when surface temperatures rise. ' +
-            'The simulation issues one alert per day for the next week.',
-            'terra-ack');
-          poll(false);
+          subscribeToPush().then(function () {
+            notify('Heat alerts enabled',
+              'Terra Nova will warn you when surface temperatures rise. ' +
+              'The simulation issues one alert per day for the next week.',
+              'terra-ack');
+            poll(false);
+          });
         }
       });
     });

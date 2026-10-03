@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block title %}{{ item.title }} — {% trans "News — Terra Nova" %}{% endblock %}
+
+{% block content %}
+<section class="nws nws--article">
+  <div class="container">
+    <nav class="nws-crumb mono" data-reveal aria-label="{% trans "Breadcrumb" %}">
+      <a href="{% url 'terra:news' %}">{% trans "News" %}</a>
+      <span aria-hidden="true">/</span>
+      <a href="{% url 'terra:news' %}?category={{ item.category }}">{{ item.get_category_display }}</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ item.published_at|date:"d M Y" }}</span>
+    </nav>
+
+    <article class="nws-article" data-reveal>
+      <header class="nws-article__head">
+        <p class="nws-meta mono">
+          <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display }}</span>
+          {% if item.is_featured %}<span>{% trans "Featured" %}</span>{% endif %}
+          <span>{{ item.published_at|date:"d M Y · H:i" }}</span>
+        </p>
+        <h1>{{ item.title }}</h1>
+        <p class="nws-article__summary">{{ item.summary }}</p>
+        <p class="nws-byline mono">
+          {{ item.source }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}
+        </p>
+      </header>
+
+      <div class="nws-article__body">
+        {% for para in paragraphs %}
+          <p>{{ para }}</p>
+        {% endfor %}
+      </div>
+
+      <footer class="nws-article__foot">
+        <a class="btn btn--line" href="{% url 'terra:news' %}">{% trans "← All dispatches" %}</a>
+      </footer>
+    </article>
+
+    <section class="nws-comments" data-reveal>
+      <header class="section__head">
+        <p class="eyebrow">{% trans "Reader signals" %}</p>
+        <h2 class="section__title">{% blocktrans count n=comments|length %}{{ n }} comment{% plural %}{{ n }} comments{% endblocktrans %}</h2>
+      </header>
+
+      {% if comments %}
+        <ul class="nws-comments__list">
+          {% for c in comments %}
+            <li class="nws-comment">
+              <p class="nws-comment__meta mono">
+                <strong>{{ c.user.get_full_name|default:c.user.username }}</strong>
+                <span>{{ c.created_at|date:"d M Y · H:i" }}</span>
+              </p>
+              <p class="nws-comment__body">{{ c.body }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="nws-comments__empty">{% trans "No comments yet — leave the first signal below." %}</p>
+      {% endif %}
+
+      {% if user.is_authenticated %}
+        <form class="nws-comments__form" method="post" action="{% url 'terra:news_comment' item.slug %}">
+          {% csrf_token %}
+          <label class="visually-hidden" for="id-news-comment">{% trans "Your comment" %}</label>
+          <textarea id="id-news-comment" name="body" rows="3" maxlength="1000" required
+                    placeholder="{% trans "Add to the discussion…" %}"></textarea>
+          <button class="btn btn--solid" type="submit">{% trans "Post comment" %}</button>
+        </form>
+      {% else %}
+        <p class="nws-comments__signin">
+          <a href="{% url 'terra:login' %}?next={{ request.path }}">{% trans "Sign in" %}</a>
+          {% trans "to join the discussion." %}
+        </p>
+      {% endif %}
+    </section>
+
+    {% if related %}
+      <section class="nws-section">
+        <header class="section__head">
+          <p class="eyebrow" data-reveal>{% trans "More from this desk" %}</p>
+          <h2 class="section__title" data-reveal style="--d:.06s">{{ item.get_category_display }} <em>{% trans "stories." %}</em></h2>
+        </header>
+        <div class="nws-grid">
+          {% for rel in related %}
+            <article class="nws-card" data-reveal style="--d: calc({{ forloop.counter0 }} * .05s)">
+              <p class="nws-meta mono">
+                <span class="nws-cat nws-cat--{{ rel.category }}">{{ rel.get_category_display }}</span>
+                <span>{{ rel.published_at|date:"d M" }}</span>
+              </p>
+              <h3><a href="{% url 'terra:news_detail' rel.slug %}">{{ rel.title }}</a></h3>
+              <p class="nws-card__summary">{{ rel.summary }}</p>
+              <p class="nws-byline mono">{{ rel.source }} · {% blocktrans with mins=rel.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

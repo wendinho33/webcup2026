@@ -1,64 +1,64 @@
 {% extends "base.html" %}
-{% load static money %}
+{% load static i18n money %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/civic.css' %}">
 {% endblock %}
 
-{% block title %}Government Portal — Terra Nova{% endblock %}
+{% block title %}{% trans "Government Portal — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="gov">
   <div class="container">
     <header class="gov__head" data-reveal>
       <div>
-        <p class="eyebrow"><span class="pulse"></span>Novarian government · portal 01</p>
-        <h1 class="gov__title">Civic duties, <em>settled.</em></h1>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Novarian government · portal 01" %}</p>
+        <h1 class="gov__title">{% trans "Civic duties," %} <em>{% trans "settled." %}</em></h1>
         <p class="gov__lede">
-          Taxation, road and waste requests, social security and the elder
-          pension desk — every service the colony owes you, in one portal.
+          {% blocktrans %}Taxation, road and waste requests, social security and the elder
+          pension desk — every service the colony owes you, in one portal.{% endblocktrans %}
         </p>
       </div>
-      <nav class="gov__anchors" aria-label="Portal sections">
-        <a href="#tax">Taxation</a>
-        <a href="#services">Roads &amp; waste</a>
-        <a href="#security">Social security</a>
-        <a href="#pension">Pension</a>
+      <nav class="gov__anchors" aria-label="{% trans "Portal sections" %}">
+        <a href="#tax">{% trans "Taxation" %}</a>
+        <a href="#services">{% trans "Roads &amp; waste" %}</a>
+        <a href="#security">{% trans "Social security" %}</a>
+        <a href="#pension">{% trans "Pension" %}</a>
       </nav>
     </header>
 
     <div class="gov__record">
       <article class="gov-card gov-record" data-reveal>
-        <span class="gov-tag mono">Novarian record</span>
+        <span class="gov-tag mono">{% trans "Novarian record" %}</span>
         <strong class="gov-record__name">{{ user.get_full_name|default:user.username }}</strong>
         <dl class="gov-record__rows">
-          <div><dt class="mono">SSN</dt><dd>{{ ss.number }}</dd></div>
-          <div><dt class="mono">Callsign</dt><dd>{{ profile.callsign }}</dd></div>
-          <div><dt class="mono">Sector</dt><dd>{{ profile.sector_name }}</dd></div>
-          <div><dt class="mono">Standing</dt><dd class="is-ok">{{ ss.standing }}</dd></div>
+          <div><dt class="mono">{% trans "SSN" %}</dt><dd>{{ ss.number }}</dd></div>
+          <div><dt class="mono">{% trans "Callsign" %}</dt><dd>{{ profile.callsign }}</dd></div>
+          <div><dt class="mono">{% trans "Sector" %}</dt><dd>{{ profile.sector_name }}</dd></div>
+          <div><dt class="mono">{% trans "Standing" %}</dt><dd class="is-ok">{{ ss.standing }}</dd></div>
         </dl>
       </article>
 
       <article class="gov-card gov-record gov-record--wallet" data-reveal style="--d:.08s">
-        <span class="gov-tag mono">Wallet</span>
+        <span class="gov-tag mono">{% trans "Wallet" %}</span>
         <strong class="gov-record__name">{{ profile.trx_balance|trx }} <em>TRX</em></strong>
         <p class="gov-card__note">
-          Levies, requests and pension claims settle straight from your TerraX
-          balance — every civic payment lands in your ledger.
+          {% blocktrans %}Levies, requests and pension claims settle straight from your TerraX
+          balance — every civic payment lands in your ledger.{% endblocktrans %}
         </p>
-        <a class="btn btn--line btn--sm" href="{% url 'terra:market' %}#ledger">Open the ledger</a>
+        <a class="btn btn--line btn--sm" href="{% url 'terra:market' %}#ledger">{% trans "Open the ledger" %}</a>
       </article>
     </div>
     <section class="section gov-section" id="tax">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Taxation</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">The <em>fiscal levy.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Taxation" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "The" %} <em>{% trans "fiscal levy." %}</em></h2>
       </header>
 
       <div class="gov__grid-2">
         <article class="gov-card gov-card--bill" data-reveal>
           <header class="gov-card__head">
-            <h3>Current bill</h3>
+            <h3>{% trans "Current bill" %}</h3>
             <span class="gov-tag mono">{{ fiscal }}</span>
           </header>
           <div class="gov-bill">
@@ -66,36 +66,36 @@
             <span class="gov-pill gov-pill--{{ bill.status }}">{{ bill.get_status_display }}</span>
           </div>
           <p class="gov-card__note">
-            Sector levy{% if profile.priority %} + priority-boarding surcharge{% endif %}
-            · due within 30 days of issue · settled in TerraX.
+            {% trans "Sector levy" %}{% if profile.priority %} {% trans "+ priority-boarding surcharge" %}{% endif %}
+            {% blocktrans %}· due within 30 days of issue · settled in TerraX.{% endblocktrans %}
           </p>
           {% if bill.status == 'unpaid' %}
             <form method="post" action="{% url 'terra:tax_pay' %}">
               {% csrf_token %}
               <button class="btn btn--solid btn--block" type="submit">
-                Pay {{ bill.amount_trx|trx }} TRX
+                {% blocktrans with amount=bill.amount_trx|trx %}Pay {{ amount }} TRX{% endblocktrans %}
               </button>
             </form>
           {% else %}
-            <p class="gov-paid mono">SETTLED {{ bill.paid_at|date:"d M Y · H:i" }}</p>
+            <p class="gov-paid mono">{% blocktrans with when=bill.paid_at|date:"d M Y · H:i" %}SETTLED {{ when }}{% endblocktrans %}</p>
           {% endif %}
         </article>
 
         <article class="gov-card" data-reveal style="--d:.08s">
           <header class="gov-card__head">
-            <h3>Schedule</h3>
-            <span class="gov-tag mono">By sector</span>
+            <h3>{% trans "Schedule" %}</h3>
+            <span class="gov-tag mono">{% trans "By sector" %}</span>
           </header>
           <table class="gov-table">
             <tbody>
               {% for code, name, amount in tax_schedule %}
                 <tr{% if code == profile.sector %} class="is-mine"{% endif %}>
-                  <td>{{ name }}{% if code == profile.sector %} <span class="gov-mini mono">YOURS</span>{% endif %}</td>
+                  <td>{{ name }}{% if code == profile.sector %} <span class="gov-mini mono">{% trans "YOURS" %}</span>{% endif %}</td>
                   <td>{{ amount|trx }} TRX</td>
                 </tr>
               {% endfor %}
               <tr>
-                <td>Priority-boarding surcharge</td>
+                <td>{% trans "Priority-boarding surcharge" %}</td>
                 <td>+ 0.150000 TRX</td>
               </tr>
             </tbody>
@@ -105,8 +105,8 @@
 
       <article class="gov-card" data-reveal style="--d:.12s">
         <header class="gov-card__head">
-          <h3>Payment history</h3>
-          <span class="gov-tag mono">Receipts</span>
+          <h3>{% trans "Payment history" %}</h3>
+          <span class="gov-tag mono">{% trans "Receipts" %}</span>
         </header>
         <ul class="gov-list">
           {% for b in paid_bills %}
@@ -116,34 +116,34 @@
               <b>{{ b.amount_trx|trx }} TRX</b>
             </li>
           {% empty %}
-            <li class="gov-empty">No settlements yet — receipts appear here the moment a levy is paid.</li>
+            <li class="gov-empty">{% trans "No settlements yet — receipts appear here the moment a levy is paid." %}</li>
           {% endfor %}
         </ul>
       </article>
     </section>
     <section class="section gov-section" id="services">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Services</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">Roads, zones &amp; <em>waste.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Services" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Roads, zones &amp;" %} <em>{% trans "waste." %}</em></h2>
       </header>
 
       <div class="gov__grid-2">
         <article class="gov-card gov-card--waste" data-reveal>
           <header class="gov-card__head">
-            <h3>Waste management</h3>
+            <h3>{% trans "Waste management" %}</h3>
             <span class="gov-tag mono">{{ profile.sector_name }}</span>
           </header>
           <div class="gov-waste">
             <div>
-              <span class="mono">Collection days</span>
+              <span class="mono">{% trans "Collection days" %}</span>
               <strong>{{ waste.days }}</strong>
             </div>
             <div>
-              <span class="mono">Next pickup</span>
+              <span class="mono">{% trans "Next pickup" %}</span>
               <strong>
                 {{ waste.next|date:"D d M" }}
-                {% if waste.in_days == 0 %}<em class="gov-mini gov-mini--live">TODAY</em>
-                {% elif waste.in_days == 1 %}<em class="gov-mini gov-mini--live">TOMORROW</em>
+                {% if waste.in_days == 0 %}<em class="gov-mini gov-mini--live">{% trans "TODAY" %}</em>
+                {% elif waste.in_days == 1 %}<em class="gov-mini gov-mini--live">{% trans "TOMORROW" %}</em>
                 {% endif %}
               </strong>
             </div>
@@ -153,54 +153,54 @@
             {% csrf_token %}
             <input type="hidden" name="category" value="waste">
             <input type="hidden" name="next" value="government">
-            <label for="waste-zone">Zone / address for special pickup</label>
+            <label for="waste-zone">{% trans "Zone / address for special pickup" %}</label>
             <input id="waste-zone" name="location" maxlength="140"
-                   placeholder="e.g. Habitat 12, east platform" required>
-            <label for="waste-detail">What needs collecting?</label>
+                   placeholder="{% trans "e.g. Habitat 12, east platform" %}" required>
+            <label for="waste-detail">{% trans "What needs collecting?" %}</label>
             <textarea id="waste-detail" name="detail" rows="2" maxlength="600"
-                      placeholder="Bulk, recyclables, organics, hazardous…"></textarea>
+                      placeholder="{% trans "Bulk, recyclables, organics, hazardous…" %}"></textarea>
             <div class="gov-form__row">
-              <label class="visually-hidden" for="waste-sector">Sector</label>
+              <label class="visually-hidden" for="waste-sector">{% trans "Sector" %}</label>
               <select id="waste-sector" name="sector" required>
                 {% for code, name in sector_names.items %}
                   <option value="{{ code }}"{% if code == profile.sector %} selected{% endif %}>{{ name }}</option>
                 {% endfor %}
               </select>
-              <button class="btn btn--line" type="submit">Request pickup</button>
+              <button class="btn btn--line" type="submit">{% trans "Request pickup" %}</button>
             </div>
           </form>
         </article>
 
         <article class="gov-card" data-reveal style="--d:.08s">
           <header class="gov-card__head">
-            <h3>Request road upgrade</h3>
-            <span class="gov-tag mono">Tracking GR-####</span>
+            <h3>{% trans "Request road upgrade" %}</h3>
+            <span class="gov-tag mono">{% trans "Tracking GR-####" %}</span>
           </header>
           <form class="gov-form" method="post" action="{% url 'terra:civic_request' %}">
             {% csrf_token %}
             <input type="hidden" name="category" value="road">
             <input type="hidden" name="next" value="government">
-            <label for="road-sector">Sector</label>
+            <label for="road-sector">{% trans "Sector" %}</label>
             <select id="road-sector" name="sector" required>
               {% for code, name in sector_names.items %}
                 <option value="{{ code }}"{% if code == profile.sector %} selected{% endif %}>{{ name }}</option>
               {% endfor %}
             </select>
-            <label for="road-location">Road / junction</label>
+            <label for="road-location">{% trans "Road / junction" %}</label>
             <input id="road-location" name="location" maxlength="140"
-                   placeholder="e.g. Basin Ring Road, km 4" required>
-            <label for="road-detail">What needs upgrading?</label>
+                   placeholder="{% trans "e.g. Basin Ring Road, km 4" %}" required>
+            <label for="road-detail">{% trans "What needs upgrading?" %}</label>
             <textarea id="road-detail" name="detail" rows="3" maxlength="600"
-                      placeholder="Lighting, resurfacing, dust barrier, signage…"></textarea>
-            <button class="btn btn--solid" type="submit">File upgrade request</button>
+                      placeholder="{% trans "Lighting, resurfacing, dust barrier, signage…" %}"></textarea>
+            <button class="btn btn--solid" type="submit">{% trans "File upgrade request" %}</button>
           </form>
         </article>
       </div>
 
       <article class="gov-card" data-reveal style="--d:.12s">
         <header class="gov-card__head">
-          <h3>My requests</h3>
-          <span class="gov-tag mono">{{ requests|length }} on file</span>
+          <h3>{% trans "My requests" %}</h3>
+          <span class="gov-tag mono">{% blocktrans count n=requests|length %}{{ n }} on file{% plural %}{{ n }} on file{% endblocktrans %}</span>
         </header>
         <ul class="gov-requests">
           {% for r in requests %}
@@ -214,25 +214,25 @@
               <span class="gov-pill gov-pill--{{ r.status_slug }}">{{ r.status_label }}</span>
             </li>
           {% empty %}
-            <li class="gov-empty">No open requests — file one above and watch its status evolve.</li>
+            <li class="gov-empty">{% trans "No open requests — file one above and watch its status evolve." %}</li>
           {% endfor %}
         </ul>
       </article>
     </section>
     <section class="section gov-section" id="security">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Social security</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">Cover for <em>every Novarian.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Social security" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Cover for" %} <em>{% trans "every Novarian." %}</em></h2>
       </header>
 
       <div class="gov__grid-2">
         <article class="gov-card" data-reveal>
           <header class="gov-card__head">
-            <h3>Security record</h3>
+            <h3>{% trans "Security record" %}</h3>
             <span class="gov-pill gov-pill--paid">{{ ss.standing }}</span>
           </header>
           <div class="gov-ssn">
-            <span class="mono">Social security number</span>
+            <span class="mono">{% trans "Social security number" %}</span>
             <strong>{{ ss.number }}</strong>
           </div>
           <ul class="gov-coverage">
@@ -244,15 +244,15 @@
 
         <article class="gov-card" data-reveal style="--d:.08s">
           <header class="gov-card__head">
-            <h3>Contributions</h3>
-            <span class="gov-tag mono">Last 6 periods</span>
+            <h3>{% trans "Contributions" %}</h3>
+            <span class="gov-tag mono">{% trans "Last 6 periods" %}</span>
           </header>
           <table class="gov-table">
             <tbody>
               {% for c in ss.contributions %}
                 <tr><td>{{ c.period }}</td><td>{{ c.amount|trx }} TRX</td></tr>
               {% endfor %}
-              <tr class="is-total"><td>Total on file</td><td>{{ ss.total|trx }} TRX</td></tr>
+              <tr class="is-total"><td>{% trans "Total on file" %}</td><td>{{ ss.total|trx }} TRX</td></tr>
             </tbody>
           </table>
         </article>
@@ -261,71 +261,71 @@
 
     <section class="section gov-section" id="pension">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Pension</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">The elder <em>pension.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Pension" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "The elder" %} <em>{% trans "pension." %}</em></h2>
       </header>
 
       <div class="gov__grid-2">
         <article class="gov-card gov-card--pension" data-reveal>
           <header class="gov-card__head">
-            <h3>Pension desk</h3>
-            <span class="gov-tag mono">From age 65</span>
+            <h3>{% trans "Pension desk" %}</h3>
+            <span class="gov-tag mono">{% trans "From age 65" %}</span>
           </header>
 
           {% if age is None %}
             <p class="gov-card__note">
-              No date of birth on file. Register it once and the desk can
-              check your eligibility.
+              {% blocktrans %}No date of birth on file. Register it once and the desk can
+              check your eligibility.{% endblocktrans %}
             </p>
             <form class="gov-form gov-form--row" method="post" action="{% url 'terra:civic_profile' %}">
               {% csrf_token %}
-              <label for="id_dob">Date of birth</label>
+              <label for="id_dob">{% trans "Date of birth" %}</label>
               <div class="gov-form__row">
                 <input id="id_dob" type="date" name="date_of_birth"
                        max="{{ today }}" required>
-                <button class="btn btn--line" type="submit">File record</button>
+                <button class="btn btn--line" type="submit">{% trans "File record" %}</button>
               </div>
             </form>
 
           {% elif eligible %}
             <div class="gov-eligible">
-              <strong>Eligible · age {{ age }}</strong>
+              <strong>{% blocktrans with age=age %}Eligible · age {{ age }}{% endblocktrans %}</strong>
               <p class="gov-card__note">
-                {{ pension_monthly|trx }} TRX per month, claimable once per
-                calendar month straight to your wallet.
+                {% blocktrans with monthly=pension_monthly|trx %}{{ monthly }} TRX per month, claimable once per
+                calendar month straight to your wallet.{% endblocktrans %}
               </p>
             </div>
             {% if claimed_this_month %}
-              <p class="gov-paid mono">CLAIMED THIS MONTH · NEXT OPENS 1ST</p>
+              <p class="gov-paid mono">{% trans "CLAIMED THIS MONTH · NEXT OPENS 1ST" %}</p>
             {% else %}
               <form method="post" action="{% url 'terra:pension_claim' %}">
                 {% csrf_token %}
                 <button class="btn btn--solid btn--block" type="submit">
-                  Claim {{ pension_monthly|trx }} TRX pension
+                  {% blocktrans with monthly=pension_monthly|trx %}Claim {{ monthly }} TRX pension{% endblocktrans %}
                 </button>
               </form>
             {% endif %}
 
           {% else %}
             <div class="gov-eligible">
-              <strong>Age {{ age }} · {{ months_left }} months to eligibility</strong>
+              <strong>{% blocktrans with age=age months=months_left %}Age {{ age }} · {{ months }} months to eligibility{% endblocktrans %}</strong>
               {% widthratio age 65 100 as pw %}
               <div class="gov-progress" aria-hidden="true">
                 <span style="--w: {{ pw }}%"></span>
               </div>
               <p class="gov-card__note">
-                Eligibility begins at 65. The pension desk pays
-                {{ pension_monthly|trx }} TRX monthly from then on — indexed
-                every year against the colony's productivity.
+                {% blocktrans with monthly=pension_monthly|trx %}Eligibility begins at 65. The pension desk pays
+                {{ monthly }} TRX monthly from then on — indexed
+                every year against the colony's productivity.{% endblocktrans %}
               </p>
             </div>
             <form class="gov-form" method="post" action="{% url 'terra:civic_profile' %}">
               {% csrf_token %}
-              <label for="id_dob">Update date of birth</label>
+              <label for="id_dob">{% trans "Update date of birth" %}</label>
               <div class="gov-form__row">
                 <input id="id_dob" type="date" name="date_of_birth"
                        max="{{ today }}" value="{{ profile.date_of_birth|date:'Y-m-d' }}" required>
-                <button class="btn btn--line" type="submit">Update</button>
+                <button class="btn btn--line" type="submit">{% trans "Update" %}</button>
               </div>
             </form>
           {% endif %}
@@ -333,16 +333,16 @@
 
         <article class="gov-card" data-reveal style="--d:.08s">
           <header class="gov-card__head">
-            <h3>Terms</h3>
-            <span class="gov-tag mono">Schedule</span>
+            <h3>{% trans "Terms" %}</h3>
+            <span class="gov-tag mono">{% trans "Schedule" %}</span>
           </header>
           <table class="gov-table">
             <tbody>
-              <tr><td>Eligibility age</td><td>65 years</td></tr>
-              <tr><td>Monthly rate</td><td>{{ pension_monthly|trx }} TRX</td></tr>
-              <tr><td>Claim window</td><td>1st → last of month</td></tr>
-              <tr><td>Indexation</td><td>Annual</td></tr>
-              <tr><td>Funded by</td><td>Colony levy + exports</td></tr>
+              <tr><td>{% trans "Eligibility age" %}</td><td>{% trans "65 years" %}</td></tr>
+              <tr><td>{% trans "Monthly rate" %}</td><td>{{ pension_monthly|trx }} TRX</td></tr>
+              <tr><td>{% trans "Claim window" %}</td><td>{% trans "1st → last of month" %}</td></tr>
+              <tr><td>{% trans "Indexation" %}</td><td>{% trans "Annual" %}</td></tr>
+              <tr><td>{% trans "Funded by" %}</td><td>{% trans "Colony levy + exports" %}</td></tr>
             </tbody>
           </table>
         </article>

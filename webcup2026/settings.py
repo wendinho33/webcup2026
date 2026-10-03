@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'terra',
     'pwa',
+    'pwa_webpush',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'terra.context_processors.notifications',
                 'terra.context_processors.net_tier',
+                'terra.context_processors.webpush',
             ],
         },
     },
@@ -246,3 +248,16 @@ PWA_APP_SHORTCUTS = [
         }],
     },
 ]
+
+
+# Web Push (django-pwa-webpush) — VAPID keys for the heat-alert push
+# service. VAPID_ADMIN_EMAIL becomes the "mailto:" subject the push
+# services use to contact the application operator.
+WEBPUSH_SETTINGS = {
+    'VAPID_PUBLIC_KEY': (
+        'BF_NxwUAbgdKlEuVsmLC7xTt2bb_Hde-pCdRm6kkUAaxF0-bokx38ojia-'
+        'zdhPiupHKSavwI3DIQmPjN5jjmsB4'
+    ),
+    'VAPID_PRIVATE_KEY': 'ZOMlLDMy-dXQpOFfxQuwXFObaEIIEElfG-J4Q_p7_9M',
+    'VAPID_ADMIN_EMAIL': 'ice.glisik@gmail.com',
+}

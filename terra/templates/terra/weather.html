@@ -1,16 +1,18 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static i18n %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/weather.css' %}">
 {% endblock %}
 
-{% block title %}Weather — Terra Nova{% endblock %}
+{% block title %}{% trans "Weather — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="wx" data-wx
          data-status-url="{% url 'terra:weather_status' %}"
-         data-trigger-url="{% url 'terra:weather_trigger' %}">
+         data-trigger-url="{% url 'terra:weather_trigger' %}"
+         data-vapid-key="{{ vapid_public_key }}"
+         data-push-url="{{ webpush_save_url }}">
   <div class="container">
     {% if today %}
       <div class="wx-banner wx-banner--{{ today.severity }}" role="alert" data-wx-banner>
@@ -25,37 +27,37 @@
 
     <div class="wx-hero">
       <div class="wx-now" data-reveal>
-        <p class="eyebrow"><span class="pulse"></span>Live · Aurelia observatory · observed {{ current.observed_at }}</p>
+        <p class="eyebrow"><span class="pulse"></span>{% blocktrans with observed=current.observed_at %}Live · Aurelia observatory · observed {{ observed }}{% endblocktrans %}</p>
         <div class="wx-now__main">
           {% include "terra/_wx_icon.html" with icon=current.icon %}
           <span class="wx-now__temp" data-wx-temp>{{ current.temp }}<em>°C</em></span>
         </div>
         <h1 class="wx-now__cond">{{ current.condition }}</h1>
         <p class="wx-now__lede">
-          Feels like {{ current.feels }}°C across the surveyed sectors —
-          running well above the {{ current.mean_summer }}°C seasonal mean
-          while the heat wave holds.
+          {% blocktrans with feels=current.feels mean=current.mean_summer %}Feels like {{ feels }}°C across the surveyed sectors —
+          running well above the {{ mean }}°C seasonal mean
+          while the heat wave holds.{% endblocktrans %}
         </p>
         <dl class="wx-chips">
-          <div><dt class="mono">Humidity</dt><dd data-wx-hum>{{ current.humidity }}%</dd></div>
-          <div><dt class="mono">Wind</dt><dd data-wx-wind>{{ current.wind }} km/h</dd></div>
-          <div><dt class="mono">Seasonal mean</dt><dd>{{ current.mean_summer }}°C</dd></div>
+          <div><dt class="mono">{% trans "Humidity" %}</dt><dd data-wx-hum>{{ current.humidity }}%</dd></div>
+          <div><dt class="mono">{% trans "Wind" %}</dt><dd data-wx-wind>{{ current.wind }} km/h</dd></div>
+          <div><dt class="mono">{% trans "Seasonal mean" %}</dt><dd>{{ current.mean_summer }}°C</dd></div>
           {% if today %}
-            <div><dt class="mono">Heat anomaly</dt><dd class="is-hot">+{{ today.anomaly }}°C</dd></div>
+            <div><dt class="mono">{% trans "Heat anomaly" %}</dt><dd class="is-hot">+{{ today.anomaly }}°C</dd></div>
           {% endif %}
         </dl>
         <div class="wx-hero__cta">
-          <a class="btn btn--line" href="{% url 'terra:map' %}">Open the 3D map →</a>
+          <a class="btn btn--line" href="{% url 'terra:map' %}">{% trans "Open the 3D map →" %}</a>
         </div>
       </div>
 
-      <aside class="wx-sectors" data-reveal style="--d:.1s" aria-label="Sector conditions">
+      <aside class="wx-sectors" data-reveal style="--d:.1s" aria-label="{% trans "Sector conditions" %}">
         {% for key, s in sectors.items %}
           <div class="wx-sector{% if profile and profile.sector == key %} is-mine{% endif %}">
             {% include "terra/_wx_icon.html" with icon=s.icon %}
             <div class="wx-sector__name">
               <strong>{{ s.name }}</strong>
-              <span class="mono">{{ s.condition }} · {{ s.humidity }}% RH{% if profile and profile.sector == key %} · YOUR SECTOR{% endif %}</span>
+              <span class="mono">{{ s.condition }} · {{ s.humidity }}% RH{% if profile and profile.sector == key %} · {% trans "YOUR SECTOR" %}{% endif %}</span>
             </div>
             <b class="wx-sector__temp">{{ s.temp }}°</b>
           </div>
@@ -68,21 +70,21 @@
   <div class="container">
     <header class="section__head section__head--split">
       <div>
-        <p class="eyebrow" data-reveal>Heat simulation</p>
-        <h2 class="section__title" data-reveal style="--d:.08s">Eight days of <em>rising heat.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Heat simulation" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.08s">{% trans "Eight days of" %} <em>{% trans "rising heat." %}</em></h2>
       </div>
       <p class="section__lede" data-reveal style="--d:.14s">
-        The thermal model runs from <strong>{{ forecast.0.day|date:"d M Y" }}</strong>
-        through <strong>{{ forecast.7.day|date:"d M Y" }}</strong>. Every day in the
+        {% blocktrans with start=forecast.0.day|date:"d M Y" end=forecast.7.day|date:"d M Y" %}The thermal model runs from <strong>{{ start }}</strong>
+        through <strong>{{ end }}</strong>. Every day in the
         window crosses the alert threshold, so your device receives one
-        temperature-rise notification per day for the whole week.
+        temperature-rise notification per day for the whole week.{% endblocktrans %}
       </p>
     </header>
 
     <div class="wx-days">
       {% for d in forecast %}
         <article class="wx-day wx-day--{{ d.severity }}" data-reveal style="--d: calc({{ forloop.counter0 }} * .06s)">
-          <span class="wx-day__label mono">{{ d.label }}{% if forloop.first %} · NOW{% endif %}</span>
+          <span class="wx-day__label mono">{{ d.label }}{% if forloop.first %} · {% trans "NOW" %}{% endif %}</span>
           {% include "terra/_wx_icon.html" with icon=d.icon %}
           <div class="wx-day__temps">
             <b>{{ d.high }}°</b><i>{{ d.low }}°</i>
@@ -99,32 +101,32 @@
 <section class="section wx-watch" id="alerts">
   <div class="container">
     <header class="section__head">
-      <p class="eyebrow" data-reveal>Heat watch</p>
-      <h2 class="section__title" data-reveal style="--d:.08s">Be told before <em>the air burns.</em></h2>
+      <p class="eyebrow" data-reveal>{% trans "Heat watch" %}</p>
+      <h2 class="section__title" data-reveal style="--d:.08s">{% trans "Be told before" %} <em>{% trans "the air burns." %}</em></h2>
     </header>
 
     <div class="wx-notify" data-reveal>
       <div class="wx-notify__copy">
-        <h3>Push notifications</h3>
+        <h3>{% trans "Push notifications" %}</h3>
         <p>
-          Allow notifications and Terra Nova warns you the moment a heat alert
+          {% blocktrans %}Allow notifications and Terra Nova warns you the moment a heat alert
           is issued — delivered by the service worker even when this tab is
           closed. The simulation keeps one alert firing per day for the whole
-          window below.
+          window below.{% endblocktrans %}
         </p>
-        <p class="wx-notify__state mono" data-notify-state role="status" aria-live="polite">CHECKING PERMISSION…</p>
+        <p class="wx-notify__state mono" data-notify-state role="status" aria-live="polite">{% trans "CHECKING PERMISSION…" %}</p>
       </div>
       <form class="wx-notify__actions">
         {% csrf_token %}
-        <button class="btn btn--solid" type="button" data-notify-enable>Enable push alerts</button>
-        <button class="btn btn--line" type="button" data-notify-test>Trigger heat alert now</button>
+        <button class="btn btn--solid" type="button" data-notify-enable>{% trans "Enable push alerts" %}</button>
+        <button class="btn btn--line" type="button" data-notify-test>{% trans "Trigger heat alert now" %}</button>
       </form>
     </div>
 
     <ol class="wx-alert-list">
       {% for a in alerts %}
         <li class="wx-alert wx-alert--{{ a.severity }}" data-reveal style="--d: calc({{ forloop.counter0 }} * .05s)">
-          <span class="wx-alert__day mono">{{ a.day|date:"d M" }}{% if forloop.first %} · TODAY{% endif %}</span>
+          <span class="wx-alert__day mono">{{ a.day|date:"d M" }}{% if forloop.first %} · {% trans "TODAY" %}{% endif %}</span>
           <div class="wx-alert__copy">
             <strong>{{ a.headline }}</strong>
             <p>{{ a.message }}</p>
@@ -132,13 +134,13 @@
           <span class="wx-alert__sev mono">{{ a.severity }} · {{ a.temp_c }}°C</span>
         </li>
       {% empty %}
-        <li class="wx-alert wx-alert--empty">The simulation is warming up — no alerts issued yet.</li>
+        <li class="wx-alert wx-alert--empty">{% trans "The simulation is warming up — no alerts issued yet." %}</li>
       {% endfor %}
     </ol>
 
     <p class="wx-fine mono">
-      SIMULATION WINDOW · {{ alerts|length }} DAYS · ONE NOTIFICATION PER DAY ·
-      DEMO NETWORK
+      {% blocktrans with days=alerts|length %}SIMULATION WINDOW · {{ days }} DAYS · ONE NOTIFICATION PER DAY ·
+      DEMO NETWORK{% endblocktrans %}
     </p>
   </div>
 </section>

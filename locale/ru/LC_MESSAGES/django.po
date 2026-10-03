@@ -3,167 +3,3105 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Terra Nova 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 00:00+0000\n"
+"POT-Creation-Date: 2026-10-03 23:19+0000\n"
 "PO-Revision-Date: 2026-10-03 00:00+0000\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: templates/admin/change_form.html:4 templates/admin/change_list.html:4
+#: templates/admin/login.html:4
+msgid "Error:"
+msgstr "Ошибка:"
+
+#: templates/admin/change_form.html:23 templates/admin/change_list.html:31
+msgid "Home"
+msgstr "Главная"
+
+#: templates/admin/change_form.html:26
+#, python-format
+msgid "Add %(name)s"
+msgstr "Добавить %(name)s"
+
+#: templates/admin/change_form.html:66 templates/admin/change_list.html:66
+#: templates/admin/login.html:42
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Исправьте ошибку ниже."
+msgstr[1] "Исправьте ошибки ниже."
+msgstr[2] "Исправьте ошибки ниже."
+
+#: templates/admin/change_list.html:76
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/admin/change_list.html:81
+msgid "Hide counts"
+msgstr "Скрыть счётчики"
+
+#: templates/admin/change_list.html:82
+msgid "Show counts"
+msgstr "Показать счётчики"
+
+#: templates/admin/change_list.html:86
+msgid "Clear all filters"
+msgstr "Сбросить все фильтры"
+
+#: templates/admin/change_list.html:112 terra/templates/terra/dashboard.html:40
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/admin/index.html:104
+msgid "Recent actions"
+msgstr "Недавние действия"
+
+#: templates/admin/index.html:108
+msgid "None available"
+msgstr "Нет записей"
+
+#: templates/admin/index.html:118
+msgid "Unknown content"
+msgstr "Неизвестное содержимое"
+
+#: templates/admin/login.html:54
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+"Вы вошли как %(username)s, но не авторизованы на этой странице. Войти под "
+"другим аккаунтом?"
+
+#: templates/admin/login.html:76
+msgid "Forgotten your login credentials?"
+msgstr "Забыли данные для входа?"
+
+#: templates/admin/login.html:80
+msgid "Enter Control Deck"
+msgstr "Войти в пульт управления"
+
+#: templates/admin/login.html:85
+msgid "Back to Terra Nova surface"
+msgstr "Назад к поверхности Terra Nova"
+
+#: templates/admin/pagination.html:3
+#, python-format
+msgid "Pagination %(name)s"
+msgstr "Страница %(name)s"
+
+#: templates/admin/pagination.html:12 templates/admin/search_form.html:16
+msgid "Show all"
+msgstr "Показать всё"
+
+#: templates/admin/search_form.html:4
+#, python-format
+msgid "Search %(name)s"
+msgstr "Поиск %(name)s"
+
+#: templates/admin/search_form.html:11
+#, python-format
+msgid "Search %(name)s…"
+msgstr "Поиск %(name)s…"
+
+#: templates/admin/search_form.html:14
+msgid "Go"
+msgstr "ОК"
+
+#: templates/admin/search_form.html:16
+#, python-format
+msgid "%(counter)s result"
+msgid_plural "%(counter)s results"
+msgstr[0] "%(counter)s результат"
+msgstr[1] "%(counter)s результата"
+msgstr[2] "%(counter)s результатов"
+
+#: templates/admin/search_form.html:16
+#, python-format
+msgid "%(full_result_count)s total"
+msgstr "Всего %(full_result_count)s"
+
+#: templates/base.html:51
 msgid "Skip to content"
 msgstr "Перейти к содержанию"
 
+#: templates/base.html:65 templates/base.html:152
 msgid "Manifesto"
 msgstr "Манифест"
 
+#: templates/base.html:66 templates/base.html:153
 msgid "Atlas"
 msgstr "Атлас"
 
+#: templates/base.html:67 templates/base.html:155
+#: terra/templates/terra/news_detail.html:14
+msgid "News"
+msgstr "Новости"
+
+#: templates/base.html:68
 msgid "Market"
 msgstr "Рынок"
 
+#: templates/base.html:69 templates/base.html:157
 msgid "Weather"
 msgstr "Погода"
 
+#: templates/base.html:70 terra/templates/terra/dashboard.html:143
 msgid "Transport"
 msgstr "Транспорт"
 
+#: templates/base.html:71 terra/templates/terra/dashboard.html:144
 msgid "Health"
 msgstr "Здоровье"
 
+#: templates/base.html:72 terra/templates/terra/dashboard.html:145
 msgid "Government"
 msgstr "Правительство"
 
+#: templates/base.html:84
 msgid "Language"
 msgstr "Язык"
 
+#: templates/base.html:95 templates/base.html:96
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: templates/base.html:105
+#, python-format
+msgid "%(counter)s unread signal"
+msgid_plural "%(counter)s unread signals"
+msgstr[0] "%(counter)s непрочитанный сигнал"
+msgstr[1] "%(counter)s непрочитанных сигнала"
+msgstr[2] "%(counter)s непрочитанных сигналов"
+
+#: templates/base.html:111 templates/base.html:112
+#: terra/templates/terra/account.html:8
+msgid "Account centre"
+msgstr "Центр аккаунта"
+
+#: templates/base.html:120 templates/base.html:169
+#: terra/templates/terra/account.html:149
 msgid "Mission Control"
 msgstr "Центр управления"
 
+#: templates/base.html:123
 msgid "Sign out"
 msgstr "Выйти"
 
+#: templates/base.html:126 templates/base.html:167
+#: terra/templates/terra/market.html:273
+#: terra/templates/terra/news_detail.html:78
 msgid "Sign in"
 msgstr "Войти"
 
+#: templates/base.html:127 templates/base.html:168
+#: terra/templates/terra/market.html:272
 msgid "Claim passage"
 msgstr "Получить пропуск"
 
+#: templates/base.html:129
 msgid "Menu"
 msgstr "Меню"
 
-msgid "Open Terra Chat"
-msgstr "Открыть Terra Chat"
+#: templates/base.html:147
+msgid ""
+"A second Earth, catalogued and waiting. Expedition 01 opens the transit "
+"window for the first one thousand passengers."
+msgstr ""
+"Вторая Земля, каталогированная и ожидающая. Экспедиция 01 открывает "
+"транзитное окно для первой тысячи пассажиров."
 
-msgid "Accessibility settings"
-msgstr "Настройки доступности"
-
-msgid "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers."
-msgstr "Вторая Земля, каталогированная и ожидающая. Экспедиция 01 открывает транзитное окно для первой тысячи пассажиров."
-
+#: templates/base.html:151
 msgid "Explore"
 msgstr "Обзор"
 
+#: templates/base.html:154
 msgid "Program"
 msgstr "Программа"
 
+#: templates/base.html:156
 msgid "TerraX market"
 msgstr "Рынок TerraX"
 
+#: templates/base.html:158
 msgid "Map of Terra Nova"
 msgstr "Карта Терра-Нова"
 
+#: templates/base.html:159
 msgid "Access"
 msgstr "Посадка"
 
+#: templates/base.html:162
 msgid "Novarians"
 msgstr "Новарианцы"
 
+#: templates/base.html:163
 msgid "Transport & fares"
 msgstr "Транспорт и тарифы"
 
+#: templates/base.html:164
 msgid "Government portal"
 msgstr "Портал правительства"
 
+#: templates/base.html:165
 msgid "Health & Terra Watch"
 msgstr "Здоровье и Terra Watch"
 
+#: templates/base.html:172
 msgid "Signals"
 msgstr "Сигналы"
 
+#: templates/base.html:180
 msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
 msgstr "ПРАВА СОЛНЕЧНОЙ СИСТЕМЫ СОХРАНЕНЫ — ПОКА ЧТО"
 
-msgid "Sign in — Terra Nova"
-msgstr "Вход — Terra Nova"
+#: templates/base.html:184
+msgid "Open Terra Chat"
+msgstr "Открыть Terra Chat"
 
-msgid "Passenger access"
-msgstr "Вход для пассажиров"
+#: templates/base.html:194 templates/base.html:195
+msgid "Accessibility settings"
+msgstr "Настройки доступности"
 
-msgid "Welcome back,"
-msgstr "С возвращением,"
-
-msgid "traveler."
-msgstr "путешественник."
-
-msgid "Sign in to Mission Control to watch your departure window count down."
-msgstr "Войдите в Центр управления, чтобы следить за обратным отсчётом окна отправления."
-
-msgid "Enter Mission Control"
-msgstr "Войти в Центр управления"
-
-msgid "No passage yet?"
-msgstr "Ещё нет пропуска?"
-
-msgid "Claim it →"
-msgstr "Получить →"
-
-msgid "Claim your passage — Terra Nova"
-msgstr "Получите свой пропуск — Terra Nova"
-
-msgid "Passenger registry · Expedition 01"
-msgstr "Реестр пассажиров · Экспедиция 01"
-
-msgid "Claim your"
-msgstr "Получите свой"
-
-msgid "passage."
-msgstr "пропуск."
-
-msgid "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes."
-msgstr "Позывной выдаётся сразу после регистрации, а сектор выбирается случайно из четырёх изученных биомов."
-
-msgid "Issue my passage"
-msgstr "Выдать мой пропуск"
-
-msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
-msgstr "БЕЗ СБОРОВ · БЕЗ ОЧЕРЕДИ · ОДИН ПРОПУСК НА ЗЕМЛЮ"
-
-msgid "Already on the manifest?"
-msgstr "Уже в манифесте?"
-
-msgid "Sign in →"
-msgstr "Войти →"
-
+#: terra/forms.py:17 terra/forms.py:124
 msgid "Full name"
 msgstr "Полное имя"
 
+#: terra/forms.py:25 terra/forms.py:130
 msgid "Email"
 msgstr "Эл. почта"
 
-msgid "Passenger name"
-msgstr "Имя пассажира"
-
-msgid "Passphrase"
-msgstr "Пароль"
-
+#: terra/forms.py:42
 msgid "Letters, digits and @/./+/-/_ only."
 msgstr "Только буквы, цифры и @/./+/-/_."
 
+#: terra/forms.py:48
 msgid "Repeat it to confirm."
 msgstr "Повторите для подтверждения."
 
+#: terra/forms.py:58 terra/forms.py:169
 msgid "A passenger already uses that email address."
 msgstr "Этот адрес электронной почты уже используется."
+
+#: terra/forms.py:67
+msgid "Passenger name"
+msgstr "Имя пассажира"
+
+#: terra/forms.py:75
+msgid "Passphrase"
+msgstr "Пароль"
+
+#: terra/forms.py:88 terra/templates/terra/market.html:225
+msgid "Earth credits to spend"
+msgstr "Земельные кредиты на трату"
+
+#: terra/forms.py:106 terra/templates/terra/market.html:240
+msgid "TerraX to sell"
+msgstr "TerraX на продажу"
+
+#: terra/forms.py:135 terra/templates/terra/government.html:282
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: terra/forms.py:176
+msgid "That date is in the future."
+msgstr "Эта дата в будущем."
+
+#: terra/forms.py:199 terra/templates/terra/account.html:51
+#: terra/templates/terra/account.html:57
+msgid "Passenger photo"
+msgstr "Фото пассажира"
+
+#: terra/forms.py:200
+msgid "JPEG or PNG, up to 2 MB. Resized to 640 px."
+msgstr "JPEG или PNG, до 2 МБ. Уменьшается до 640 пикс."
+
+#: terra/forms.py:206
+msgid "Keep the photo under 2 MB."
+msgstr "Держите фото меньше 2 МБ."
+
+#: terra/forms.py:220
+msgid "That file is not a readable image."
+msgstr "Этот файл не является читаемым изображением."
+
+#: terra/forms.py:233
+msgid "Stars"
+msgstr "Звёзды"
+
+#: terra/forms.py:241
+msgid "Comment"
+msgstr "Комментарий"
+
+#: terra/forms.py:246 terra/templates/terra/account.html:114
+msgid "How did the agent handle your signal?"
+msgstr "Как агент справился с вашим сигналом?"
+
+#: terra/forms.py:253
+msgid "Unknown agent."
+msgstr "Неизвестный агент."
+
+#: terra/templates/terra/account.html:15
+msgid "Passage office · passenger file"
+msgstr "Офис пассажиров · досье пассажира"
+
+#: terra/templates/terra/account.html:16
+msgid "Account"
+msgstr "Аккаунт"
+
+#: terra/templates/terra/account.html:18
+msgid ""
+"Your record as the colony holds it: edit the file, set a photo, download the "
+"dossier, rate the agents who answered your signals."
+msgstr ""
+"Все, что колония знает о вас: правьте запись, ставьте фото, скачивайте "
+"досье, оценивайте агентов, ответивших на ваши сигналы."
+
+#: terra/templates/terra/account.html:31
+msgid "Identity record"
+msgstr "Запись личности"
+
+#: terra/templates/terra/account.html:32
+msgid "EDITABLE"
+msgstr "РЕДАКТИРУЕМОЕ"
+
+#: terra/templates/terra/account.html:45
+msgid "Save record"
+msgstr "Сохранить запись"
+
+#: terra/templates/terra/account.html:52
+msgid "JPG · 2 MB"
+msgstr "JPG · 2 МБ"
+
+#: terra/templates/terra/account.html:70
+msgid "Upload photo"
+msgstr "Загрузить фото"
+
+#: terra/templates/terra/account.html:76
+msgid "Remove"
+msgstr "Удалить"
+
+#: terra/templates/terra/account.html:85
+msgid "Rate a Novarian agent"
+msgstr "Оценить агента Novarian"
+
+#: terra/templates/terra/account.html:86
+msgid "1–5 STARS"
+msgstr "1–5 ЗВЁЗД"
+
+#: terra/templates/terra/account.html:96
+msgid "MET"
+msgstr "ВСТРЕЧЕН"
+
+#: terra/templates/terra/account.html:103
+msgid "Rating for"
+msgstr "Оценка для"
+
+#: terra/templates/terra/account.html:116
+#: terra/templates/terra/government.html:328
+msgid "Update"
+msgstr "Обновить"
+
+#: terra/templates/terra/account.html:116
+msgid "Rate"
+msgstr "Оценить"
+
+#: terra/templates/terra/account.html:124
+msgid ""
+"No Novarian agents on the network yet — the first rating is yours to give."
+msgstr "В сети пока нет агентов Novarian — первую оценку оставите вы."
+
+#: terra/templates/terra/account.html:132
+msgid "Passenger dossier"
+msgstr "Досье пассажира"
+
+#: terra/templates/terra/account.html:136
+msgid ""
+"Every record we hold on you — identity, wallet, ledger, civic requests, "
+"travel manifest, chat signals, ratings and security events — typeset as one "
+"document."
+msgstr ""
+"Все наши записи о вас — личность, кошелёк, реестр, гражданские заявки, "
+"манифест путешествия, сигналы чата, оценки и события безопасности — "
+"свёрстанные в один документ."
+
+#: terra/templates/terra/account.html:139
+msgid "Download dossier (PDF)"
+msgstr "Скачать досье (PDF)"
+
+#: terra/templates/terra/account.html:141
+msgid "GENERATED ON DEMAND · PAPERWORK, SIGNED"
+msgstr "ГЕНЕРИРУЕТСЯ ПО ЗАПРОСУ · БУМАГИ ПОДПИСАНЫ"
+
+#: terra/templates/terra/account.html:146
+msgid "Quick links"
+msgstr "Быстрые ссылки"
+
+#: terra/templates/terra/account.html:150
+#: terra/templates/terra/notifications.html:8
+msgid "Notification centre"
+msgstr "Центр уведомлений"
+
+#: terra/templates/terra/account.html:151
+msgid "Civic profile"
+msgstr "Гражданский профиль"
+
+#: terra/templates/terra/account.html:152
+msgid "Terra Chat"
+msgstr "Terra Chat"
+
+#: terra/templates/terra/chat.html:8
+msgid "Terra Chat — Terra Nova"
+msgstr "Terra Chat — Terra Nova"
+
+#: terra/templates/terra/chat.html:18
+msgid "Agent desk"
+msgstr "Пульт агента"
+
+#: terra/templates/terra/chat.html:18
+msgid "Your signals"
+msgstr "Ваши сигналы"
+
+#: terra/templates/terra/chat.html:21
+msgid "My signals"
+msgstr "Мои сигналы"
+
+#: terra/templates/terra/chat.html:23
+msgid "New signal"
+msgstr "Новый сигнал"
+
+#: terra/templates/terra/chat.html:28
+msgid "Agent desk →"
+msgstr "Пульт агента →"
+
+#: terra/templates/terra/chat.html:44
+msgid "The queue is clear — no signals waiting."
+msgstr "Очередь пуста — сигналов в ожидании нет."
+
+#: terra/templates/terra/chat.html:57
+msgid "No signals yet — the channel is brand new."
+msgstr "Сигналов пока нет — канал только открыт."
+
+#: terra/templates/terra/chat.html:70
+#, python-format
+msgid "OPENED %(opened)s"
+msgstr "ОТКРЫТ %(opened)s"
+
+#: terra/templates/terra/chat.html:72
+msgid "AGENT"
+msgstr "АГЕНТ"
+
+#: terra/templates/terra/chat.html:82
+msgid "Escalate to an agent"
+msgstr "Эскалировать агенту"
+
+#: terra/templates/terra/chat.html:89
+msgid "Resolved ✓"
+msgstr "Решено ✓"
+
+#: terra/templates/terra/chat.html:110
+msgid "SIGNAL RESOLVED · REPLY TO REOPEN"
+msgstr "СИГНАЛ РЕШЁН · ОТВЕТИТЕ, ЧТОБЫ ОТКРЫТЬ ЗАНОВО"
+
+#: terra/templates/terra/chat.html:112
+msgid "A NOVARIAN AGENT HAS THIS THREAD · TERRA AI IS STANDING BY"
+msgstr "АГЕНТ NOVARIAN ВЕДЁТ ЭТОТ ТРЕД · TERRA AI НА СМЕНЕ"
+
+#: terra/templates/terra/chat.html:117 terra/templates/terra/chat.html:142
+msgid "Message"
+msgstr "Сообщение"
+
+#: terra/templates/terra/chat.html:119 terra/templates/terra/chat.html:144
+msgid "Transmit to Terra AI…"
+msgstr "Передать Terra AI…"
+
+#: terra/templates/terra/chat.html:119
+msgid "Reply as a Novarian agent…"
+msgstr "Ответить как агент Novarian…"
+
+#: terra/templates/terra/chat.html:120 terra/templates/terra/chat.html:145
+msgid "Send"
+msgstr "Отправить"
+
+#: terra/templates/terra/chat.html:125
+msgid "Channel open · Terra AI on duty"
+msgstr "Канал открыт · Terra AI на службе"
+
+#: terra/templates/terra/chat.html:126
+msgid "Signal us,"
+msgstr "Подайте сигнал,"
+
+#: terra/templates/terra/chat.html:126
+msgid "Novarian."
+msgstr "новарианец."
+
+#: terra/templates/terra/chat.html:128
+msgid ""
+"Report an issue, ask about TerraX, your wallet or your passage —\n"
+"            Terra AI answers in seconds. When a problem needs a person, "
+"escalate\n"
+"            and a Novarian agent joins this very thread."
+msgstr ""
+"Сообщите о проблеме, спросите про TerraX, кошелёк или проезд —\n"
+"            Terra AI ответит за секунды. Когда нужен живой человек, "
+"эскалируйте —\n"
+"            и агент Novarian подключится к этому треду."
+
+#: terra/templates/terra/chat.html:134
+msgid "Signal an issue"
+msgstr "Сообщить о проблеме"
+
+#: terra/templates/terra/chat.html:135
+msgid "Ask about TerraX"
+msgstr "Спросить про TerraX"
+
+#: terra/templates/terra/chat.html:136
+msgid "Claim a passage"
+msgstr "Заявить на проезд"
+
+#: terra/templates/terra/chat.html:137
+msgid "About the planet"
+msgstr "О планете"
+
+#: terra/templates/terra/dashboard.html:4
+msgid "Mission Control — Terra Nova"
+msgstr "Центр управления — Terra Nova"
+
+#: terra/templates/terra/dashboard.html:11
+msgid "Mission control · session active"
+msgstr "Центр управления · сессия активна"
+
+#: terra/templates/terra/dashboard.html:12
+#, python-format
+msgid "Welcome back, <em>%(who)s</em>."
+msgstr "С возвращением, <em>%(who)s</em>."
+
+#: terra/templates/terra/dashboard.html:13
+msgid "Passage confirmed. Your sector, clearance and manifest are below."
+msgstr "Проезд подтверждён. Ваш сектор, допуск и манифест ниже."
+
+#: terra/templates/terra/dashboard.html:16
+msgid "CALLSIGN"
+msgstr "ПОЗЫВНОЙ"
+
+#: terra/templates/terra/dashboard.html:18
+msgid "★ PRIORITY BOARDING"
+msgstr "★ ПРИОРИТЕТНАЯ ПОСАДКА"
+
+#: terra/templates/terra/dashboard.html:19
+#, python-format
+msgid "RECORDED %(date)s"
+msgstr "ЗАПИСАНО %(date)s"
+
+#: terra/templates/terra/dashboard.html:26
+msgid "Passenger record"
+msgstr "Запись пассажира"
+
+#: terra/templates/terra/dashboard.html:27
+msgid "CLEARANCE · C3"
+msgstr "ДОПУСК · C3"
+
+#: terra/templates/terra/dashboard.html:30
+msgid "NAME"
+msgstr "ИМЯ"
+
+#: terra/templates/terra/dashboard.html:31
+msgid "PASSENGER"
+msgstr "ПАССАЖИР"
+
+#: terra/templates/terra/dashboard.html:32
+msgid "SIGNAL"
+msgstr "СИГНАЛ"
+
+#: terra/templates/terra/dashboard.html:33
+msgid "SECTOR"
+msgstr "СЕКТОР"
+
+#: terra/templates/terra/dashboard.html:37
+msgid "Log entry"
+msgstr "Запись в журнале"
+
+#: terra/templates/terra/dashboard.html:39
+msgid "Botanist. Prefers warm gravity."
+msgstr "Ботаник. Любит тёплую гравитацию."
+
+#: terra/templates/terra/dashboard.html:44
+msgid "Full record, photo, dossier &amp; agent ratings in the"
+msgstr "Полная запись, фото, досье и оценки агентов в"
+
+#: terra/templates/terra/dashboard.html:45
+msgid "account centre →"
+msgstr "центре аккаунта →"
+
+#: terra/templates/terra/dashboard.html:51
+msgid "Departure window"
+msgstr "Окно отправления"
+
+#: terra/templates/terra/dashboard.html:52
+msgid "LIVE"
+msgstr "В ЭФИРЕ"
+
+#: terra/templates/terra/dashboard.html:55
+msgid "DAYS"
+msgstr "ДНЕЙ"
+
+#: terra/templates/terra/dashboard.html:56
+msgid "HRS"
+msgstr "ЧАС"
+
+#: terra/templates/terra/dashboard.html:57
+msgid "MIN"
+msgstr "МИН"
+
+#: terra/templates/terra/dashboard.html:58
+msgid "SEC"
+msgstr "СЕК"
+
+#: terra/templates/terra/dashboard.html:60
+msgid ""
+"Transit window opens <strong>21 March 2027</strong> · Aurelia Basin landing "
+"site."
+msgstr ""
+"Окно транзита открывается <strong>21 марта 2027</strong> · посадочная "
+"площадка бассейна Aurelia."
+
+#: terra/templates/terra/dashboard.html:66
+msgid "Assigned sector"
+msgstr "Назначенный сектор"
+
+#: terra/templates/terra/dashboard.html:67
+msgid "DRAWN AT RANDOM"
+msgstr "ВЫТЯНУТ СЛУЧАЙНО"
+
+#: terra/templates/terra/dashboard.html:78
+msgid "Boarding readiness"
+msgstr "Готовность к посадке"
+
+#: terra/templates/terra/dashboard.html:92
+msgid "Documents"
+msgstr "Документы"
+
+#: terra/templates/terra/dashboard.html:93
+msgid "Medical"
+msgstr "Медицина"
+
+#: terra/templates/terra/dashboard.html:94
+msgid "Orientation"
+msgstr "Ориентация"
+
+#: terra/templates/terra/dashboard.html:100
+msgid "Latest on the manifest"
+msgstr "Последние в манифесте"
+
+#: terra/templates/terra/dashboard.html:101
+msgid "CREW"
+msgstr "ЭКИПАЖ"
+
+#: terra/templates/terra/dashboard.html:108
+msgid "★ PRIORITY"
+msgstr "★ ПРИОРИТЕТ"
+
+#: terra/templates/terra/dashboard.html:109
+#, python-format
+msgid "JOINED %(date)s"
+msgstr "ЗАПИСАН %(date)s"
+
+#: terra/templates/terra/dashboard.html:113
+msgid "The manifest opens with your passage."
+msgstr "Манифест откроется вместе с вашим проездом."
+
+#: terra/templates/terra/dashboard.html:121
+msgid "TerraX wallet"
+msgstr "Кошелёк TerraX"
+
+#: terra/templates/terra/dashboard.html:126
+msgid "BALANCE"
+msgstr "БАЛАНС"
+
+#: terra/templates/terra/dashboard.html:130
+#: terra/templates/terra/market.html:209
+msgid "EARTH CREDITS"
+msgstr "ЗЕМЕЛЬНЫЕ КРЕДИТЫ"
+
+#: terra/templates/terra/dashboard.html:134
+msgid "Open the market"
+msgstr "Открыть рынок"
+
+#: terra/templates/terra/dashboard.html:139
+msgid "Continue"
+msgstr "Продолжить"
+
+#: terra/templates/terra/dashboard.html:140
+msgid "EXPEDITION 01"
+msgstr "ЭКСПЕДИЦИЯ 01"
+
+#: terra/templates/terra/dashboard.html:150
+msgid "Sign out of Mission Control"
+msgstr "Выйти из центра управления"
+
+#: terra/templates/terra/government.html:8
+msgid "Government Portal — Terra Nova"
+msgstr "Портал правительства — Terra Nova"
+
+#: terra/templates/terra/government.html:15
+msgid "Novarian government · portal 01"
+msgstr "Правительство Novarian · портал 01"
+
+#: terra/templates/terra/government.html:16
+msgid "Civic duties,"
+msgstr "Гражданские обязанности,"
+
+#: terra/templates/terra/government.html:16
+msgid "settled."
+msgstr "закрыты."
+
+#: terra/templates/terra/government.html:18
+msgid ""
+"Taxation, road and waste requests, social security and the elder\n"
+"          pension desk — every service the colony owes you, in one portal."
+msgstr ""
+"Налоги, заявки на дороги и мусор, социальное обеспечение и\n"
+"          стойка пенсий — все услуги, которые колония вам должна, на одном "
+"портале."
+
+#: terra/templates/terra/government.html:22
+msgid "Portal sections"
+msgstr "Разделы портала"
+
+#: terra/templates/terra/government.html:23
+#: terra/templates/terra/government.html:54
+msgid "Taxation"
+msgstr "Налоги"
+
+#: terra/templates/terra/government.html:24
+msgid "Roads &amp; waste"
+msgstr "Дороги и мусор"
+
+#: terra/templates/terra/government.html:25
+#: terra/templates/terra/government.html:224
+msgid "Social security"
+msgstr "Социальное обеспечение"
+
+#: terra/templates/terra/government.html:26
+#: terra/templates/terra/government.html:264
+msgid "Pension"
+msgstr "Пенсия"
+
+#: terra/templates/terra/government.html:32
+msgid "Novarian record"
+msgstr "Запись Novarian"
+
+#: terra/templates/terra/government.html:35
+msgid "SSN"
+msgstr "СНИЛС"
+
+#: terra/templates/terra/government.html:36
+msgid "Callsign"
+msgstr "Позывной"
+
+#: terra/templates/terra/government.html:37
+#: terra/templates/terra/government.html:163
+#: terra/templates/terra/government.html:183
+#: terra/templates/terra/health.html:132 terra/templates/terra/market.html:308
+msgid "Sector"
+msgstr "Сектор"
+
+#: terra/templates/terra/government.html:38
+msgid "Standing"
+msgstr "Репутация"
+
+#: terra/templates/terra/government.html:43
+msgid "Wallet"
+msgstr "Кошелёк"
+
+#: terra/templates/terra/government.html:46
+msgid ""
+"Levies, requests and pension claims settle straight from your TerraX\n"
+"          balance — every civic payment lands in your ledger."
+msgstr ""
+"Сборы, заявки и пенсии списываются прямо с вашего баланса\n"
+"          TerraX — каждый гражданский платёж попадает в ваш реестр."
+
+#: terra/templates/terra/government.html:49
+msgid "Open the ledger"
+msgstr "Открыть реестр"
+
+#: terra/templates/terra/government.html:55
+msgid "The"
+msgstr "Фискальный"
+
+#: terra/templates/terra/government.html:55
+msgid "fiscal levy."
+msgstr "сбор."
+
+#: terra/templates/terra/government.html:61
+msgid "Current bill"
+msgstr "Текущий счёт"
+
+#: terra/templates/terra/government.html:69
+msgid "Sector levy"
+msgstr "Секторный сбор"
+
+#: terra/templates/terra/government.html:69
+msgid "+ priority-boarding surcharge"
+msgstr "+ надбавка за приоритетную посадку"
+
+#: terra/templates/terra/government.html:70
+msgid "· due within 30 days of issue · settled in TerraX."
+msgstr "· к оплате в течение 30 дней · оплата в TerraX."
+
+#: terra/templates/terra/government.html:76
+#, python-format
+msgid "Pay %(amount)s TRX"
+msgstr "Заплатить %(amount)s TRX"
+
+#: terra/templates/terra/government.html:80
+#, python-format
+msgid "SETTLED %(when)s"
+msgstr "ОПЛАЧЕНО %(when)s"
+
+#: terra/templates/terra/government.html:86
+#: terra/templates/terra/government.html:337
+msgid "Schedule"
+msgstr "Расписание"
+
+#: terra/templates/terra/government.html:87
+msgid "By sector"
+msgstr "По секторам"
+
+#: terra/templates/terra/government.html:93
+msgid "YOURS"
+msgstr "ВАШ"
+
+#: terra/templates/terra/government.html:98
+msgid "Priority-boarding surcharge"
+msgstr "Надбавка за приоритетную посадку"
+
+#: terra/templates/terra/government.html:108
+msgid "Payment history"
+msgstr "История платежей"
+
+#: terra/templates/terra/government.html:109
+msgid "Receipts"
+msgstr "Чеки"
+
+#: terra/templates/terra/government.html:119
+msgid "No settlements yet — receipts appear here the moment a levy is paid."
+msgstr "Пока нет оплат — чеки появятся здесь сразу после платежа."
+
+#: terra/templates/terra/government.html:126
+msgid "Services"
+msgstr "Сервисы"
+
+#: terra/templates/terra/government.html:127
+msgid "Roads, zones &amp;"
+msgstr "Дороги, зоны и"
+
+#: terra/templates/terra/government.html:127
+msgid "waste."
+msgstr "мусор."
+
+#: terra/templates/terra/government.html:133
+msgid "Waste management"
+msgstr "Управление отходами"
+
+#: terra/templates/terra/government.html:138
+msgid "Collection days"
+msgstr "Дни вывоза"
+
+#: terra/templates/terra/government.html:142
+msgid "Next pickup"
+msgstr "Следующий вывоз"
+
+#: terra/templates/terra/government.html:145
+#: terra/templates/terra/weather.html:127
+msgid "TODAY"
+msgstr "СЕГОДНЯ"
+
+#: terra/templates/terra/government.html:146
+msgid "TOMORROW"
+msgstr "ЗАВТРА"
+
+#: terra/templates/terra/government.html:156
+msgid "Zone / address for special pickup"
+msgstr "Зона / адрес для спецвывоза"
+
+#: terra/templates/terra/government.html:158
+msgid "e.g. Habitat 12, east platform"
+msgstr "напр. Habitat 12, восточная платформа"
+
+#: terra/templates/terra/government.html:159
+msgid "What needs collecting?"
+msgstr "Что нужно вывезти?"
+
+#: terra/templates/terra/government.html:161
+msgid "Bulk, recyclables, organics, hazardous…"
+msgstr "Крупное, переработка, органика, опасное…"
+
+#: terra/templates/terra/government.html:169
+msgid "Request pickup"
+msgstr "Запросить вывоз"
+
+#: terra/templates/terra/government.html:176
+msgid "Request road upgrade"
+msgstr "Запросить улучшение дороги"
+
+#: terra/templates/terra/government.html:177
+msgid "Tracking GR-####"
+msgstr "Отслеживание GR-####"
+
+#: terra/templates/terra/government.html:189
+msgid "Road / junction"
+msgstr "Дорога / перекрёсток"
+
+#: terra/templates/terra/government.html:191
+msgid "e.g. Basin Ring Road, km 4"
+msgstr "напр. кольцевая дорога бассейна, км 4"
+
+#: terra/templates/terra/government.html:192
+msgid "What needs upgrading?"
+msgstr "Что нужно улучшить?"
+
+#: terra/templates/terra/government.html:194
+msgid "Lighting, resurfacing, dust barrier, signage…"
+msgstr "Освещение, покрытие, пылезащита, указатели…"
+
+#: terra/templates/terra/government.html:195
+msgid "File upgrade request"
+msgstr "Подать заявку на улучшение"
+
+#: terra/templates/terra/government.html:202
+msgid "My requests"
+msgstr "Мои заявки"
+
+#: terra/templates/terra/government.html:203
+#: terra/templates/terra/health.html:148
+#, python-format
+msgid "%(n)s on file"
+msgid_plural "%(n)s on file"
+msgstr[0] "%(n)s запись в файле"
+msgstr[1] "%(n)s записи в файле"
+msgstr[2] "%(n)s записей в файле"
+
+#: terra/templates/terra/government.html:217
+msgid "No open requests — file one above and watch its status evolve."
+msgstr "Активных заявок нет — подайте одну выше и следите за статусом."
+
+#: terra/templates/terra/government.html:225
+msgid "Cover for"
+msgstr "Защита для"
+
+#: terra/templates/terra/government.html:225
+msgid "every Novarian."
+msgstr "каждого новарианца."
+
+#: terra/templates/terra/government.html:231
+msgid "Security record"
+msgstr "Запись безопасности"
+
+#: terra/templates/terra/government.html:235
+msgid "Social security number"
+msgstr "Номер социального страхования"
+
+#: terra/templates/terra/government.html:247
+msgid "Contributions"
+msgstr "Взносы"
+
+#: terra/templates/terra/government.html:248
+msgid "Last 6 periods"
+msgstr "Последние 6 периодов"
+
+#: terra/templates/terra/government.html:255
+msgid "Total on file"
+msgstr "Итого в файле"
+
+#: terra/templates/terra/government.html:265
+msgid "The elder"
+msgstr "Пенсия"
+
+#: terra/templates/terra/government.html:265
+msgid "pension."
+msgstr "старших."
+
+#: terra/templates/terra/government.html:271
+msgid "Pension desk"
+msgstr "Стойка пенсий"
+
+#: terra/templates/terra/government.html:272
+msgid "From age 65"
+msgstr "С 65 лет"
+
+#: terra/templates/terra/government.html:277
+msgid ""
+"No date of birth on file. Register it once and the desk can\n"
+"              check your eligibility."
+msgstr ""
+"Дата рождения не указана. Укажите её один раз — стойка\n"
+"              проверит вашуeligibility.` — hmm 'eligibility' word: `проверит "
+"право на пенсию.`"
+
+#: terra/templates/terra/government.html:286
+msgid "File record"
+msgstr "Заработано · возраст %(age)s"
+
+#: terra/templates/terra/government.html:292
+#, python-format
+msgid "Eligible · age %(age)s"
+msgstr "Заработано · возраст %(age)s"
+
+#: terra/templates/terra/government.html:294
+#, python-format
+msgid ""
+"%(monthly)s TRX per month, claimable once per\n"
+"                calendar month straight to your wallet."
+msgstr ""
+"%(monthly)s TRX в месяц, можно запросить раз в\n"
+"                календарный месяц прямо на кошелёк."
+
+#: terra/templates/terra/government.html:299
+msgid "CLAIMED THIS MONTH · NEXT OPENS 1ST"
+msgstr "ЗАПРОШЕНО В ЭТОМ МЕСЯЦЕ · СЛЕДУЮЩЕЕ 1-ГО"
+
+#: terra/templates/terra/government.html:304
+#, python-format
+msgid "Claim %(monthly)s TRX pension"
+msgstr "Запросить пенсию %(monthly)s TRX"
+
+#: terra/templates/terra/government.html:311
+#, python-format
+msgid "Age %(age)s · %(months)s months to eligibility"
+msgstr "Возраст %(age)s · до права %(months)s мес."
+
+#: terra/templates/terra/government.html:317
+#, python-format
+msgid ""
+"Eligibility begins at 65. The pension desk pays\n"
+"                %(monthly)s TRX monthly from then on — indexed\n"
+"                every year against the colony's productivity."
+msgstr ""
+"Право начинается с 65 лет. Стойка пенсий выплачивает\n"
+"                %(monthly)s TRX в месяц — с ежегодной индексацией\n"
+"                по продуктивности колонии."
+
+#: terra/templates/terra/government.html:324
+msgid "Update date of birth"
+msgstr "Обновить дату рождения"
+
+#: terra/templates/terra/government.html:336
+msgid "Terms"
+msgstr "Условия"
+
+#: terra/templates/terra/government.html:341
+msgid "Eligibility age"
+msgstr "Возраст права"
+
+#: terra/templates/terra/government.html:341
+msgid "65 years"
+msgstr "65 лет"
+
+#: terra/templates/terra/government.html:342
+msgid "Monthly rate"
+msgstr "Месячная ставка"
+
+#: terra/templates/terra/government.html:343
+msgid "Claim window"
+msgstr "Окно запроса"
+
+#: terra/templates/terra/government.html:343
+msgid "1st → last of month"
+msgstr "1-е → последнее число месяца"
+
+#: terra/templates/terra/government.html:344
+msgid "Indexation"
+msgstr "Индексация"
+
+#: terra/templates/terra/government.html:344
+msgid "Annual"
+msgstr "Ежегодная"
+
+#: terra/templates/terra/government.html:345
+msgid "Funded by"
+msgstr "Источник финансирования"
+
+#: terra/templates/terra/government.html:345
+msgid "Colony levy + exports"
+msgstr "Сбор колонии + экспорт"
+
+#: terra/templates/terra/health.html:8
+msgid "Health — Terra Nova"
+msgstr "Здоровье — Terra Nova"
+
+#: terra/templates/terra/health.html:15
+msgid "Health services · nova network"
+msgstr "Медицинские сервисы · сеть nova"
+
+#: terra/templates/terra/health.html:16
+msgid "Your body,"
+msgstr "Ваше тело,"
+
+#: terra/templates/terra/health.html:16
+msgid "watched."
+msgstr "под наблюдением."
+
+#: terra/templates/terra/health.html:18
+msgid ""
+"The Terra Watch streams your vitals into the colony's health record,\n"
+"          books medical services and points you at the nearest care — "
+"wherever\n"
+"          you wake up on the new Earth."
+msgstr ""
+"Terra Watch передаёт ваши показатели в медицинскую запись колонии,\n"
+"          записывает на приём и ведёт к ближайшей помощи — где бы вы\n"
+"          ни проснулись на новой Земле."
+
+#: terra/templates/terra/health.html:23
+msgid "Health sections"
+msgstr "Разделы здоровья"
+
+#: terra/templates/terra/health.html:25 terra/templates/terra/health.html:110
+msgid "Medical service"
+msgstr "Медицинская услуга"
+
+#: terra/templates/terra/health.html:26 terra/templates/terra/health.html:172
+msgid "Nearby care"
+msgstr "Ближайшая помощь"
+
+#: terra/templates/terra/health.html:47
+msgid "Paired · streaming"
+msgstr "Спарен · в эфире"
+
+#: terra/templates/terra/health.html:55
+msgid ""
+"The colony's health band: continuous heart rate and blood oxygen,\n"
+"            sleep and step tracking, heat-strain warnings during the "
+"current\n"
+"            warm spell, and a one-press beacon that opens Terra Chat with "
+"your\n"
+"            vitals attached. 50 TRX, one payment, yours for the expedition."
+msgstr ""
+"Здоровый браслет колонии: непрерывные пульс и сатурация,\n"
+"            сон и шаги, предупреждения о перегреве в текущую жару\n"
+"            и маяк в одно нажатие, открывающий Terra Chat с вашими\n"
+"            показателями. 50 TRX, один раз — на всю экспедицию."
+
+#: terra/templates/terra/health.html:61
+msgid "24/7 vitals streaming to your health record"
+msgstr "Круглосуточная передача показателей в запись"
+
+#: terra/templates/terra/health.html:62
+msgid "Heat-strain alerts synced with the weather service"
+msgstr "Оповещения о перегреве синхронизированы с метеослужбой"
+
+#: terra/templates/terra/health.html:63
+msgid "Fall detection → instant Novarian-agent contact"
+msgstr "Обнаружение падения → мгновенная связь с агентом Novarian"
+
+#: terra/templates/terra/health.html:68
+#, python-format
+msgid "Buy Terra Watch · %(price)s TRX"
+msgstr "Купить Terra Watch · %(price)s TRX"
+
+#: terra/templates/terra/health.html:71
+msgid "SETTLES FROM YOUR WALLETS · LEDGER ENTRY: TERRA WATCH DEVICE"
+msgstr "СПИСЫВАЕТСЯ С КОШЕЛЬКА · ЗАПИСЬ: TERRA WATCH DEVICE"
+
+#: terra/templates/terra/health.html:74
+#, python-format
+msgid ""
+"Device <strong class=\"hlt-device-id\">%(device)s</strong> paired ·\n"
+"            streaming to your social-security health cover since\n"
+"            %(since)s."
+msgstr ""
+"Устройство <strong class=\"hlt-device-id\">%(device)s</strong> привязано ·\n"
+"            передаёт показатели в ваш медицинский полис\n"
+"            с %(since)s."
+
+#: terra/templates/terra/health.html:84
+msgid "Today’s reading"
+msgstr "Сегодняшние показатели"
+
+#: terra/templates/terra/health.html:89
+#, python-format
+msgid ""
+"Elevated heat strain — anomaly +%(anomaly)s°C. Hydrate\n"
+"            every 30 minutes and avoid surface work 11:00–16:00."
+msgstr ""
+"Повышенная тепловая нагрузка — аномалия +%(anomaly)s°C. Пейте воду\n"
+"            каждые 30 минут и избегайте работ на поверхности с 11:00 до "
+"16:00."
+
+#: terra/templates/terra/health.html:94
+msgid "Heart rate"
+msgstr "Пульс"
+
+#: terra/templates/terra/health.html:95
+msgid "Blood oxygen"
+msgstr "Сатурация"
+
+#: terra/templates/terra/health.html:96
+msgid "Sleep"
+msgstr "Сон"
+
+#: terra/templates/terra/health.html:97
+msgid "Steps"
+msgstr "Шаги"
+
+#: terra/templates/terra/health.html:97
+msgid "today"
+msgstr "сегодня"
+
+#: terra/templates/terra/health.html:98
+msgid "Stress"
+msgstr "Стресс"
+
+#: terra/templates/terra/health.html:98
+msgid "index"
+msgstr "индекс"
+
+#: terra/templates/terra/health.html:99
+msgid "Readiness"
+msgstr "Готовность"
+
+#: terra/templates/terra/health.html:101
+msgid "Seven day readiness"
+msgstr "Готовность за 7 дней"
+
+#: terra/templates/terra/health.html:111
+msgid "Care that"
+msgstr "Забота, которая"
+
+#: terra/templates/terra/health.html:111
+msgid "comes to you."
+msgstr "приходит к вам."
+
+#: terra/templates/terra/health.html:117
+msgid "Request medical service"
+msgstr "Запросить медуслугу"
+
+#: terra/templates/terra/health.html:118
+msgid "Tracking MD-####"
+msgstr "Отслеживание MD-####"
+
+#: terra/templates/terra/health.html:124
+msgid "Service needed"
+msgstr "Нужна услуга"
+
+#: terra/templates/terra/health.html:126
+msgid "Home visit — a medic comes to you"
+msgstr "Вызов на дом — медик приедет к вам"
+
+#: terra/templates/terra/health.html:127
+msgid "Teleconsult — video with Nova Central"
+msgstr "Телеконсультация — видео с Nova Central"
+
+#: terra/templates/terra/health.html:128
+msgid "Medication delivery"
+msgstr "Доставка лекарств"
+
+#: terra/templates/terra/health.html:129
+msgid "Ambulance support"
+msgstr "Поддержка скорой"
+
+#: terra/templates/terra/health.html:130
+msgid "Physiotherapy session"
+msgstr "Сеанс физиотерапии"
+
+#: terra/templates/terra/health.html:138
+msgid "Notes for the care team"
+msgstr "Заметки для бригады"
+
+#: terra/templates/terra/health.html:140
+msgid "Symptoms, address, best time to reach you…"
+msgstr "Симптомы, адрес, удобное время связи…"
+
+#: terra/templates/terra/health.html:141
+msgid "Request service"
+msgstr "Отправить запрос"
+
+#: terra/templates/terra/health.html:147
+msgid "My medical requests"
+msgstr "Мои медзапросы"
+
+#: terra/templates/terra/health.html:162
+msgid "No medical requests — the care team is standing by."
+msgstr "Медзапросов нет — бригада на готове."
+
+#: terra/templates/terra/health.html:173
+msgid "Hospitals in your"
+msgstr "Больницы"
+
+#: terra/templates/terra/health.html:173
+msgid "vicinity."
+msgstr "поблизости."
+
+#: terra/templates/terra/health.html:176
+msgid ""
+"Distances are measured from your habitat. Your sector's facility is\n"
+"          always walkable; the full network is shown nearest-first."
+msgstr ""
+"Расстояния считаются от вашего обиталища. Учреждение вашего сектора\n"
+"          всегда в шаговой доступности; вся сеть — от ближнего."
+
+#: terra/templates/terra/health.html:188
+msgid "Nearest"
+msgstr "Ближайший"
+
+#: terra/templates/terra/health.html:190
+msgid "Your sector"
+msgstr "Ваш сектор"
+
+#: terra/templates/terra/health.html:205
+#, python-format
+msgid "~%(min)s min walk"
+msgstr "~%(min)s мин пешком"
+
+#: terra/templates/terra/health.html:207
+msgid "View on the 3D map"
+msgstr "Смотреть на 3D-карте"
+
+#: terra/templates/terra/home.html:8
+msgid "Transit window 07 · 41.2 ly from Sol"
+msgstr "Транзитное окно 07 · 41,2 св. года от Солнца"
+
+#: terra/templates/terra/home.html:10
+msgid "A second <em>Earth</em>,<br>ready for first<br><em>footsteps.</em>"
+msgstr "Вторая <em>Земля</em>,<br>готовая к первым<br><em>шагам.</em>"
+
+#: terra/templates/terra/home.html:13
+#, python-format
+msgid ""
+"Forty-one light-years out, Terra Nova circles a quiet sun: 1.02&nbsp;g, a "
+"21%%\n"
+"        oxygen sky, six oceans — and no extinction events on record. "
+"Expedition&nbsp;01\n"
+"        opens this year."
+msgstr ""
+"Сорок один световой год отсюда Terra Nova кружит вокруг тихого солнца: "
+"1,02&nbsp;g, небо с\n"
+"        21%% кислородом, шесть океанов — и ни одного вымирания в записях. "
+"Экспедиция&nbsp;01\n"
+"        открывается в этом году."
+
+#: terra/templates/terra/home.html:18 terra/templates/terra/home.html:253
+msgid "Claim your passage"
+msgstr "Заявить на проезд"
+
+#: terra/templates/terra/home.html:19
+msgid "Read the manifesto"
+msgstr "Прочитать манифест"
+
+#: terra/templates/terra/home.html:22
+msgid "Gravity"
+msgstr "Гравитация"
+
+#: terra/templates/terra/home.html:23 terra/templates/terra/home.html:179
+msgid "Oxygen"
+msgstr "Кислород"
+
+#: terra/templates/terra/home.html:24
+msgid "Ocean"
+msgstr "Океан"
+
+#: terra/templates/terra/home.html:42
+msgid "OCEAN COVER"
+msgstr "ПОКРЫТИЕ ОКЕАНОМ"
+
+#: terra/templates/terra/home.html:43
+msgid "SURFACE GRAVITY"
+msgstr "ГРАВИТАЦИЯ ПОВЕРХНОСТИ"
+
+#: terra/templates/terra/home.html:44
+msgid "STATUS"
+msgstr "СТАТУС"
+
+#: terra/templates/terra/home.html:44
+msgid "BOARDING"
+msgstr "ПОСАДКА"
+
+#: terra/templates/terra/home.html:48
+msgid "SCROLL"
+msgstr "ПРОКРУТКА"
+
+#: terra/templates/terra/home.html:55 terra/templates/terra/home.html:64
+msgid "DAY LENGTH 26.5 H"
+msgstr "ДЛИНА СУТОК 26,5 Ч"
+
+#: terra/templates/terra/home.html:57 terra/templates/terra/home.html:66
+msgid "MEAN TEMP 14.2°C"
+msgstr "СРЕДН. ТЕМП. 14,2°C"
+
+#: terra/templates/terra/home.html:58 terra/templates/terra/home.html:67
+msgid "NO EXTINCTION EVENTS ON RECORD"
+msgstr "ВЫМИРАНИЙ В ЗАПИСЯХ НЕТ"
+
+#: terra/templates/terra/home.html:59 terra/templates/terra/home.html:68
+msgid "EXPEDITION 01 · BOARDING NOW"
+msgstr "ЭКСПЕДИЦИЯ 01 · ПОСАДКА СЕЙЧАС"
+
+#: terra/templates/terra/home.html:76
+msgid "01 — Manifesto"
+msgstr "01 — Манифест"
+
+#: terra/templates/terra/home.html:77
+msgid "We were never meant to live on only"
+msgstr "Мы никогда не были созданы жить только на"
+
+#: terra/templates/terra/home.html:77
+msgid "one"
+msgstr "одном"
+
+#: terra/templates/terra/home.html:77 terra/templates/terra/home.html:117
+msgid "world."
+msgstr "мире."
+
+#: terra/templates/terra/home.html:83
+msgid ""
+"Terra Nova was found the honest way — by an array of telescopes listening\n"
+"          for the colour of water. In 2025 the LAGOON survey returned a "
+"spectrum that\n"
+"          no model could explain away: shallow seas, free oxygen, a "
+"magnetosphere\n"
+"          holding the line."
+msgstr ""
+"Terra Nova найден честно — решёткой телескопов, слушающих\n"
+"          цвет воды. В 2025 году обзор LAGOON вернул спектр, который\n"
+"          не смог отмести ни один модель: мелководье, свободный кислород,\n"
+"          магнитосфера, держащая строй."
+
+#: terra/templates/terra/home.html:89
+msgid ""
+"So we are going. Not because this world failed, but because a species with\n"
+"          one habitat is a species one accident from silence. The first "
+"thousand\n"
+"          passengers will land at Aurelia Basin with seeds, printers and "
+"the\n"
+"          patience to do it better."
+msgstr ""
+"Мы идём. Не потому, что этот мир провалился, а потому, что вид\n"
+"          с одним средой обитания — вид в одном происшествии от тишины.\n"
+"          Первая тысяча пассажиров сядет в бассейне Aurelia с семенами,\n"
+"          принтерами и терпением сделать лучше."
+
+#: terra/templates/terra/home.html:95
+msgid ""
+"“Terra Nova is not an escape. It is a second draft, written in the same\n"
+"          hand — gentler this time.”"
+msgstr ""
+"«Terra Nova — не побег. Это второй черновик, той же рукой —\n"
+"          в этот раз мягче.»"
+
+#: terra/templates/terra/home.html:102
+msgid "DESIGNATION"
+msgstr "ОБОЗНАЧЕНИЕ"
+
+#: terra/templates/terra/home.html:103
+msgid "DISTANCE"
+msgstr "РАССТОЯНИЕ"
+
+#: terra/templates/terra/home.html:104
+msgid "DISCOVERED"
+msgstr "ОТКРЫТ"
+
+#: terra/templates/terra/home.html:105
+msgid "ATMOSPHERE"
+msgstr "АТМОСФЕРА"
+
+#: terra/templates/terra/home.html:106
+msgid "EXTINCTIONS"
+msgstr "ВЫМИРАНИЯ"
+
+#: terra/templates/terra/home.html:106
+msgid "0 on record"
+msgstr "В записях нет"
+
+#: terra/templates/terra/home.html:116
+msgid "02 — Atlas"
+msgstr "02 — Атлас"
+
+#: terra/templates/terra/home.html:117
+msgid "Four biomes, one"
+msgstr "Четыре биома, один"
+
+#: terra/templates/terra/home.html:117
+msgid "breathable"
+msgstr "дышащий"
+
+#: terra/templates/terra/home.html:120
+msgid ""
+"Every sector has been surveyed, named and reserved for its first residents.\n"
+"        Your assignment is drawn the moment your passage is confirmed."
+msgstr ""
+"Каждый сектор обследован, назван и зарезервирован под своих\n"
+"        первых жителей. Ваше назначение вытягивается в момент подтверждения "
+"проезда."
+
+#: terra/templates/terra/home.html:130
+msgid ""
+"Warm shallow seas and floating forests. The landing site, and the only place "
+"on the manifest with a beach."
+msgstr ""
+"Тёплые мелководья и плавучие леса. Место посадки — и единственное место в "
+"манифесте с пляжем."
+
+#: terra/templates/terra/home.html:131
+msgid "WATER 29°C"
+msgstr "ВОДА 29°C"
+
+#: terra/templates/terra/home.html:139
+msgid ""
+"Iron-red canyon country, dry and climbable at dawn. Oxide dust turns the "
+"whole valley the colour of embers."
+msgstr ""
+"Страна железно-красных каньонов, сухая и покорная на рассвете. Окисная пыль "
+"окрашивает всю долину в цвет углей."
+
+#: terra/templates/terra/home.html:140
+msgid "CANYON DEPTH 4 KM"
+msgstr "ГЛУБИНА КАНЬОНА 4 КМ"
+
+#: terra/templates/terra/home.html:148
+msgid ""
+"Frozen plains of silicate frost that ring like struck crystal at dusk. "
+"Quietest terrain surveyed."
+msgstr ""
+"Замёрзшие равнины кремниевой изморози, звенящие как ударенный хрусталь на "
+"закате. Самая тихая из обследованных местностей."
+
+#: terra/templates/terra/home.html:149
+msgid "LOW −40°C"
+msgstr "МИНИМУМ −40°C"
+
+#: terra/templates/terra/home.html:157
+msgid ""
+"A midnight ocean lit from below by living light. Nine kilometres of water "
+"and the planet's best nightsky."
+msgstr ""
+"Полночный океан, освещённый снизу живым светом. Девять километров воды и "
+"лучшее ночное небо планеты."
+
+#: terra/templates/terra/home.html:158
+msgid "DEPTH 11 KM"
+msgstr "ГЛУБИНА 11 КМ"
+
+#: terra/templates/terra/home.html:164
+msgid "Planet facts"
+msgstr "Факты о планете"
+
+#: terra/templates/terra/home.html:169
+msgid "From Sol"
+msgstr "От Солнца"
+
+#: terra/templates/terra/home.html:174
+msgid "Surface gravity"
+msgstr "Гравитация поверхности"
+
+#: terra/templates/terra/home.html:184
+msgid "Ocean cover"
+msgstr "Покрытие океаном"
+
+#: terra/templates/terra/home.html:188
+msgid "COUNT"
+msgstr "СЧЁТЧИК"
+
+#: terra/templates/terra/home.html:189
+msgid "Mass extinctions"
+msgstr "Массовые вымирания"
+
+#: terra/templates/terra/home.html:197
+msgid "03 — Program"
+msgstr "03 — Программа"
+
+#: terra/templates/terra/home.html:198
+msgid "The road to"
+msgstr "Путь к"
+
+#: terra/templates/terra/home.html:198
+msgid "first footsteps"
+msgstr "первым шагам"
+
+#: terra/templates/terra/home.html:205
+msgid "The LAGOON array wakes"
+msgstr "Массив LAGOON пробуждается"
+
+#: terra/templates/terra/home.html:206
+msgid ""
+"Ninety-six dishes across the southern hemisphere begin listening for the "
+"colour of water in 2,400 nearby systems."
+msgstr ""
+"Девяносто шесть антенн южного полушария начинают слушать цвет воды в 2 400 "
+"ближних системах."
+
+#: terra/templates/terra/home.html:212
+msgid "Terra Nova confirmed"
+msgstr "Terra Nova подтверждён"
+
+#: terra/templates/terra/home.html:213
+msgid ""
+"Free oxygen, liquid seas, a magnetosphere holding the line. The spectrum no "
+"model could explain away gets a name."
+msgstr ""
+"Свободный кислород, жидкие моря, магнитосфера, держащая строй. Спектру, "
+"который не смог отмести ни один модель, дают имя."
+
+#: terra/templates/terra/home.html:219
+msgid "Expedition 01 opens"
+msgstr "Экспедиция 01 открывается"
+
+#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:85
+msgid "NOW"
+msgstr "СЕЙЧАС"
+
+#: terra/templates/terra/home.html:220
+msgid ""
+"The passenger registry goes live. One thousand passages, assigned sectors, "
+"callsigns issued on confirmation."
+msgstr ""
+"Реестр пассажиров в эфире. Тысяча проездов, назначенные секторы, позывные по "
+"подтверждению."
+
+#: terra/templates/terra/home.html:226
+msgid "Touchdown at Aurelia Basin"
+msgstr "Посадка в бассейне Aurelia"
+
+#: terra/templates/terra/home.html:227
+msgid ""
+"First landing party steps onto warm sand with seeds, printers and the "
+"patience to do it better this time."
+msgstr ""
+"Первая посадочная команда ступает на тёплый песок с семенами, принтерами и "
+"терпением сделать лучше в этот раз."
+
+#: terra/templates/terra/home.html:233
+msgid "The first town"
+msgstr "Первый город"
+
+#: terra/templates/terra/home.html:234
+msgid ""
+"A thousand researchers, a harbour, and the first child to hold a passport "
+"issued by two worlds."
+msgstr "Тысяча исследователей, гавань и первый ребёнок с паспортом двух миров."
+
+#: terra/templates/terra/home.html:245
+msgid "04 — Access"
+msgstr "04 — Доступ"
+
+#: terra/templates/terra/home.html:246
+msgid "Passage is free.<br><em>Seats are not infinite.</em>"
+msgstr "Проезд бесплатный.<br><em>Мест не бесконечно.</em>"
+
+#: terra/templates/terra/home.html:248
+msgid ""
+"Create your passenger record and you are on the manifest: callsign issued,\n"
+"          sector assigned, departure window reserved. Sign in any time to "
+"watch the\n"
+"          countdown from Mission Control."
+msgstr ""
+"Создайте запись пассажира — и вы в манифесте: позывной выдан,\n"
+"          сектор назначен, окно отправления зарезервировано. Входите когда "
+"угодно,\n"
+"          чтобы смотреть обратный отсчёт из центра управления."
+
+#: terra/templates/terra/home.html:254
+msgid "I already fly"
+msgstr "Я уже летаю"
+
+#: terra/templates/terra/login.html:4
+msgid "Sign in — Terra Nova"
+msgstr "Вход — Terra Nova"
+
+#: terra/templates/terra/login.html:9
+msgid "Passenger access"
+msgstr "Вход для пассажиров"
+
+#: terra/templates/terra/login.html:10
+msgid "Welcome back,"
+msgstr "С возвращением,"
+
+#: terra/templates/terra/login.html:10
+msgid "traveler."
+msgstr "путешественник."
+
+#: terra/templates/terra/login.html:11
+msgid "Sign in to Mission Control to watch your departure window count down."
+msgstr ""
+"Войдите в Центр управления, чтобы следить за обратным отсчётом окна "
+"отправления."
+
+#: terra/templates/terra/login.html:30
+msgid "Enter Mission Control"
+msgstr "Войти в Центр управления"
+
+#: terra/templates/terra/login.html:33
+msgid "No passage yet?"
+msgstr "Ещё нет пропуска?"
+
+#: terra/templates/terra/login.html:33
+msgid "Claim it →"
+msgstr "Получить →"
+
+#: terra/templates/terra/map.html:8
+msgid "Map of Terra Nova — Terra Nova"
+msgstr "Карта Terra Nova — Terra Nova"
+
+#: terra/templates/terra/map.html:15
+msgid "Cartography · survey 04 · realtime relief"
+msgstr "Картография · съёмка 04 · рельеф в реальном времени"
+
+#: terra/templates/terra/map.html:16
+msgid "Terra Nova,"
+msgstr "Terra Nova,"
+
+#: terra/templates/terra/map.html:16
+msgid "rendered in relief."
+msgstr "в рельефe."
+
+#: terra/templates/terra/map.html:18
+msgid ""
+"A live terrain model of the single continent — seabed, shelves and\n"
+"          summits shaded by the sun, weather painted onto the biome. Orbit "
+"the\n"
+"          plate, zoom into the passes, tap a beacon for the sector readout."
+msgstr ""
+"Живая модель рельефа единственного континента — дно, шельфы и\n"
+"          вершины в тени солнца, погода, написанная на биоме. Вращайте\n"
+"          плиту, приближайте перевалы, коснитесь маяка для показаний сектора."
+
+#: terra/templates/terra/map.html:23
+msgid "<kbd>DRAG</kbd> ORBIT · <kbd>SCROLL</kbd> ZOOM · <kbd>TAP</kbd> BEACON"
+msgstr ""
+"<kbd>ТЯНИ</kbd> ОРБИТА · <kbd>КРУТИ</kbd> МАСШТАБ · <kbd>КОСНИСЬ</kbd> МАЯКА"
+
+#: terra/templates/terra/map.html:27
+#, python-format
+msgid "PLANET %(temp)s°C · %(cond)s"
+msgstr "ПЛАНЕТА %(temp)s°C · %(cond)s"
+
+#: terra/templates/terra/map.html:28
+msgid "Full weather →"
+msgstr "Полный прогноз →"
+
+#: terra/templates/terra/map.html:36
+msgid "Three-dimensional terrain map of Terra Nova with live weather beacons"
+msgstr "Трёхмерная карта рельефа Terra Nova с живыми метеомаяками"
+
+#: terra/templates/terra/map.html:61
+msgid "500 KM"
+msgstr "500 КМ"
+
+#: terra/templates/terra/map.html:78
+msgid "Relief"
+msgstr "Рельеф"
+
+#: terra/templates/terra/map.html:80
+msgid "Routes"
+msgstr "Маршруты"
+
+#: terra/templates/terra/map.html:82
+msgid "Heat"
+msgstr "Тепло"
+
+#: terra/templates/terra/map.html:87
+msgid "Sector readout"
+msgstr "Показания сектора"
+
+#: terra/templates/terra/map.html:88
+msgid "Live readout"
+msgstr "Живые показания"
+
+#: terra/templates/terra/map.html:107
+msgid "Feels like"
+msgstr "Ощущается как"
+
+#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:41
+msgid "Wind"
+msgstr "Ветер"
+
+#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:40
+msgid "Humidity"
+msgstr "Влажность"
+
+#: terra/templates/terra/map.html:114
+msgid "Wind force"
+msgstr "Сила ветра"
+
+#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:58
+msgid "YOUR SECTOR"
+msgstr "ВАШ СЕКТОР"
+
+#: terra/templates/terra/map.html:134
+msgid ""
+"BEACONS CARRY LIVE SECTOR WEATHER · ROUTES LINK THE COLONY ·\n"
+"          OCEAN: PELAGOS DEEP"
+msgstr ""
+"Маяки несут живую погоду секторов · маршруты связывают колонию ·\n"
+"          океан: PELAGOS DEEP"
+
+#: terra/templates/terra/map.html:141
+msgid "BEACH"
+msgstr "ПЛЯЖ"
+
+#: terra/templates/terra/map.html:142
+msgid "SAVANNA"
+msgstr "САВАННА"
+
+#: terra/templates/terra/map.html:143
+msgid "FOREST"
+msgstr "ЛЕС"
+
+#: terra/templates/terra/map.html:144
+msgid "HIGHLAND"
+msgstr "ВОЗВЫШЕННОСТЬ"
+
+#: terra/templates/terra/map.html:145
+msgid "GLASS ICE"
+msgstr "СТЕКЛЯННЫЙ ЛЁД"
+
+#: terra/templates/terra/map.html:146
+msgid "PELAGOS DEEP"
+msgstr "PELAGOS DEEP"
+
+#: terra/templates/terra/map.html:147
+msgid "SURVEY 04 RELIEF MODEL · RENDERED ON YOUR DEVICE"
+msgstr "МОДЕЛЬ РЕЛЬЕФА СЪЁМКА 04 · РЕНДЕР НА ВАШЕМ УСТРОЙСТВЕ"
+
+#: terra/templates/terra/market.html:8
+msgid "TerraX market — Terra Nova"
+msgstr "Рынок TerraX — Terra Nova"
+
+#: terra/templates/terra/market.html:15
+msgid "TerraX market · earth pairs"
+msgstr "Рынок TerraX · земельные пары"
+
+#: terra/templates/terra/market.html:16
+msgid "One coin,<br><em>two worlds.</em>"
+msgstr "Одна монета,<br><em>два мира.</em>"
+
+#: terra/templates/terra/market.html:18
+msgid ""
+"TerraX (TRX) is the currency of the second Earth — pegged at\n"
+"          <strong>1.25&#215; Bitcoin</strong> and quoted at <strong>5&#215;\n"
+"          Ethereum</strong>, traded around the clock against Earth credits."
+msgstr ""
+"TerraX (TRX) — валюта второй Земли, привязанная к\n"
+"          <strong>1,25&#215; биткоина</strong> и котируемая как "
+"<strong>5&#215;\n"
+"          эфира</strong>, торгуется круглосуточно за земельные кредиты."
+
+#: terra/templates/terra/market.html:38 terra/templates/terra/market.html:103
+#: terra/templates/terra/market.html:123 terra/templates/terra/market.html:143
+msgid "24H"
+msgstr "24Ч"
+
+#: terra/templates/terra/market.html:42
+msgid "24H HIGH"
+msgstr "МАКС 24Ч"
+
+#: terra/templates/terra/market.html:43
+msgid "24H LOW"
+msgstr "МИН 24Ч"
+
+#: terra/templates/terra/market.html:56
+msgid "FEED"
+msgstr "ПОТОК"
+
+#: terra/templates/terra/market.html:62
+msgid "TerraX price over the last 24 hours"
+msgstr "Цена TerraX за последние 24 часа"
+
+#: terra/templates/terra/market.html:73
+#, python-format
+msgid "LAST 24 HOURS · TRX/USD · FEED %(source)s"
+msgstr "24 ЧАСА · TRX/USD · ПОТОК %(source)s"
+
+#: terra/templates/terra/market.html:81
+msgid "The comparison"
+msgstr "Сравнение"
+
+#: terra/templates/terra/market.html:82
+msgid "TerraX against"
+msgstr "TerraX против"
+
+#: terra/templates/terra/market.html:82
+msgid "Earth's"
+msgstr "земельных"
+
+#: terra/templates/terra/market.html:82
+msgid "money."
+msgstr "денег."
+
+#: terra/templates/terra/market.html:85
+msgid ""
+"Earth pairs stream from the CoinGecko reference feed, cached for sixty\n"
+"        seconds. TerraX trades at its declared pegs against both."
+msgstr ""
+"Земельные пары идут из опорного потока CoinGecko с кэшем на шестьдесят\n"
+"        секунд. TerraX торгуется по своим заявленным привязкам против обеих."
+
+#: terra/templates/terra/market.html:97
+msgid "TRX · NATIVE"
+msgstr "TRX · НАТИВНАЯ"
+
+#: terra/templates/terra/market.html:106
+msgid "Peg vs Bitcoin"
+msgstr "Привязка к биткоину"
+
+#: terra/templates/terra/market.html:107
+msgid "Peg vs Ethereum"
+msgstr "Привязка к эфиру"
+
+#: terra/templates/terra/market.html:108
+msgid "Exchange fee"
+msgstr "Комиссия"
+
+#: terra/templates/terra/market.html:117
+msgid "BTC · EARTH"
+msgstr "BTC · ЗЕМЛЯ"
+
+#: terra/templates/terra/market.html:119 terra/templates/terra/market.html:139
+msgid "REFERENCE"
+msgstr "ЭТАЛОН"
+
+#: terra/templates/terra/market.html:126 terra/templates/terra/market.html:146
+#: terra/templates/terra/market.html:166
+msgid "1 TRX buys"
+msgstr "1 TRX купит"
+
+#: terra/templates/terra/market.html:127
+msgid "1 BTC costs"
+msgstr "1 BTC стоит"
+
+#: terra/templates/terra/market.html:128
+msgid "TerraX premium"
+msgstr "Премия TerraX"
+
+#: terra/templates/terra/market.html:137
+msgid "ETH · EARTH"
+msgstr "ETH · ЗЕМЛЯ"
+
+#: terra/templates/terra/market.html:147
+msgid "1 ETH costs"
+msgstr "1 ETH стоит"
+
+#: terra/templates/terra/market.html:148
+msgid "TerraX multiple"
+msgstr "Множитель TerraX"
+
+#: terra/templates/terra/market.html:155
+msgid "Earth markets"
+msgstr "Земельные рынки"
+
+#: terra/templates/terra/market.html:156
+msgid "LIVE · COINGECKO · 60S CACHE"
+msgstr "В ЭФИРЕ · COINGECKO · КЭШ 60 С"
+
+#: terra/templates/terra/market.html:162
+msgid "Asset"
+msgstr "Актив"
+
+#: terra/templates/terra/market.html:163 terra/templates/terra/market.html:349
+msgid "Price"
+msgstr "Цена"
+
+#: terra/templates/terra/market.html:164
+msgid "24h"
+msgstr "24ч"
+
+#: terra/templates/terra/market.html:165
+msgid "Market cap"
+msgstr "Рыночная капитализация"
+
+#: terra/templates/terra/market.html:198 terra/templates/terra/market.html:263
+msgid "Trading desk"
+msgstr "Торговый терминал"
+
+#: terra/templates/terra/market.html:199
+msgid "Buy, sell,"
+msgstr "Купить, продать,"
+
+#: terra/templates/terra/market.html:199
+msgid "settle."
+msgstr "рассчитаться."
+
+#: terra/templates/terra/market.html:204
+msgid "TERRAX"
+msgstr "TERRAX"
+
+#: terra/templates/terra/market.html:214
+msgid "PORTFOLIO VALUE"
+msgstr "СТОИМОСТЬ ПОРТФЕЛЯ"
+
+#: terra/templates/terra/market.html:216
+#, python-format
+msgid "credits + %(amount)s in TRX"
+msgstr "кредиты + %(amount)s в TRX"
+
+#: terra/templates/terra/market.html:224
+msgid "Buy TerraX"
+msgstr "Купить TerraX"
+
+#: terra/templates/terra/market.html:229
+msgid "Buy TRX"
+msgstr "Купить TRX"
+
+#: terra/templates/terra/market.html:232
+#, python-format
+msgid "FEE 0.5%% · YOU RECEIVE ≈"
+msgstr "КОМИССИЯ 0,5%% · ВЫ ПОЛУЧИТЕ ≈"
+
+#: terra/templates/terra/market.html:239
+msgid "Sell TerraX"
+msgstr "Продать TerraX"
+
+#: terra/templates/terra/market.html:244
+msgid "Sell TRX"
+msgstr "Продать TRX"
+
+#: terra/templates/terra/market.html:247
+#, python-format
+msgid "FEE 0.5%% · YOU RECEIVE ≈ $"
+msgstr "КОМИССИЯ 0,5%% · ВЫ ПОЛУЧИТЕ ≈ $"
+
+#: terra/templates/terra/market.html:247
+msgid "IN CREDITS"
+msgstr "В КРЕДИТАХ"
+
+#: terra/templates/terra/market.html:253
+msgid ""
+"ORDERS SETTLE INSTANTLY AGAINST YOUR EXPEDITION ACCOUNT · DEMO NETWORK ·\n"
+"      NO REAL FUNDS MOVE"
+msgstr ""
+"ОРДЕРА РАЗМЕЩАЮТСЯ МГНОВЕННО ПРОТИВ ВАШЕГО ЭКСПЕДИЦИОННОГО СЧЁТА · ДЕМО-СЕТЬ "
+"·\n"
+"      РЕАЛЬНЫЕ СРЕДСТВА НЕ ДВИГАЮТСЯ"
+
+#: terra/templates/terra/market.html:264
+msgid "Open a TerraX"
+msgstr "Открыть кошелёк"
+
+#: terra/templates/terra/market.html:264
+msgid "wallet."
+msgstr "TerraX."
+
+#: terra/templates/terra/market.html:266
+msgid ""
+"Every passenger account carries a wallet: Earth credits to trade with\n"
+"          and a TerraX balance to spend across the site. Signing in opens "
+"the\n"
+"          desk — buying, selling and your private ledger."
+msgstr ""
+"Каждый аккаунт пассажира имеет кошелёк: земельные кредиты для торговли\n"
+"          и баланс TerraX для трат по сайту. Вход открывает терминал —\n"
+"          покупку, продажу и ваш личный реестр."
+
+#: terra/templates/terra/market.html:283
+msgid "Spend TerraX"
+msgstr "Тратить TerraX"
+
+#: terra/templates/terra/market.html:284
+msgid "Currency that"
+msgstr "Валюта, которая"
+
+#: terra/templates/terra/market.html:284
+msgid "does"
+msgstr "делает"
+
+#: terra/templates/terra/market.html:284
+msgid "things."
+msgstr "дела."
+
+#: terra/templates/terra/market.html:287
+msgid ""
+"TerraX isn't only traded — it settles the site's own services. Every\n"
+"        purchase lands in your ledger and takes effect immediately."
+msgstr ""
+"TerraX не только торгуется — он рассчитывает сервисы сайта. Каждая\n"
+"        покупка попадает в реестр и вступает в силу сразу."
+
+#: terra/templates/terra/market.html:315
+msgid "New callsign"
+msgstr "Новый позывной"
+
+#: terra/templates/terra/market.html:318
+msgid "3–24 characters: letters, digits and dashes"
+msgstr "3–24 символа: буквы, цифры и дефисы"
+
+#: terra/templates/terra/market.html:321
+#, python-format
+msgid "Buy for %(price)s TRX"
+msgstr "Купить за %(price)s TRX"
+
+#: terra/templates/terra/market.html:325
+msgid "Sign in to purchase"
+msgstr "Войти, чтобы купить"
+
+#: terra/templates/terra/market.html:337
+msgid "Your ledger"
+msgstr "Ваш реестр"
+
+#: terra/templates/terra/market.html:338
+msgid "Every move,"
+msgstr "Каждое движение"
+
+#: terra/templates/terra/market.html:338
+msgid "on record."
+msgstr "на записи."
+
+#: terra/templates/terra/market.html:345
+msgid "When"
+msgstr "Когда"
+
+#: terra/templates/terra/market.html:346
+msgid "Action"
+msgstr "Действие"
+
+#: terra/templates/terra/market.html:348
+msgid "Credits"
+msgstr "Кредиты"
+
+#: terra/templates/terra/market.html:364
+msgid "No trades yet — the ledger opens with your first order."
+msgstr "Пока нет сделок — реестр откроется с вашим первым ордером."
+
+#: terra/templates/terra/news.html:8 terra/templates/terra/news_detail.html:8
+msgid "News — Terra Nova"
+msgstr "Новости — Terra Nova"
+
+#: terra/templates/terra/news.html:15
+msgid "Newsroom · live feed"
+msgstr "Новостная · живая лента"
+
+#: terra/templates/terra/news.html:16
+msgid "Dispatches from"
+msgstr "Сводки с"
+
+#: terra/templates/terra/news.html:16
+msgid "the new Earth."
+msgstr "новой Земли."
+
+#: terra/templates/terra/news.html:18
+msgid ""
+"Every signal filed by the colony's desks — expedition, weather,\n"
+"          TerraX, transit and civic works — in the order it was\n"
+"          published."
+msgstr ""
+"Все сигналы редакций колонии — экспедиция, погода,\n"
+"          TerraX, транспорт и гражданские работы — в порядке\n"
+"          публикации."
+
+#: terra/templates/terra/news.html:23
+msgid "News sections"
+msgstr "Разделы новостей"
+
+#: terra/templates/terra/news.html:24
+msgid "Lead story"
+msgstr "Главное"
+
+#: terra/templates/terra/news.html:25 terra/templates/terra/news.html:59
+msgid "Archive"
+msgstr "Архив"
+
+#: terra/templates/terra/news.html:29
+msgid "Filter by desk"
+msgstr "Фильтр по редакции"
+
+#: terra/templates/terra/news.html:31
+msgid "All desks"
+msgstr "Все редакции"
+
+#: terra/templates/terra/news.html:43 terra/templates/terra/news_detail.html:25
+msgid "Featured"
+msgstr "Избранное"
+
+#: terra/templates/terra/news.html:49 terra/templates/terra/news.html:77
+#: terra/templates/terra/news_detail.html:31
+#: terra/templates/terra/news_detail.html:99
+#, python-format
+msgid "%(mins)s min read"
+msgstr "%(mins)s мин чтения"
+
+#: terra/templates/terra/news.html:51
+msgid "Read the dispatch →"
+msgstr "Читать сводку →"
+
+#: terra/templates/terra/news.html:60
+msgid "Everything else"
+msgstr "Всё остальное"
+
+#: terra/templates/terra/news.html:60
+msgid "on the wire."
+msgstr "в эфире."
+
+#: terra/templates/terra/news.html:63
+#, python-format
+msgid ""
+"%(n)s dispatches filed below. Open any one\n"
+"          to read it in full — each card links to the full article."
+msgstr ""
+"%(n)s сводок ниже. Откройте любую,\n"
+"          чтобы прочитать целиком — каждая карточка ведёт к полной статье."
+
+#: terra/templates/terra/news.html:80
+msgid "No dispatches on this desk yet — pick another filter above."
+msgstr "В этой редакции пока нет сводок — выберите другой фильтр выше."
+
+#: terra/templates/terra/news_detail.html:13
+msgid "Breadcrumb"
+msgstr "Навигационная цепочка"
+
+#: terra/templates/terra/news_detail.html:42
+msgid "← All dispatches"
+msgstr "← Все сводки"
+
+#: terra/templates/terra/news_detail.html:48
+msgid "Reader signals"
+msgstr "Сигналы читателей"
+
+#: terra/templates/terra/news_detail.html:49
+#, python-format
+msgid "%(n)s comment"
+msgid_plural "%(n)s comments"
+msgstr[0] "%(n)s комментарий"
+msgstr[1] "%(n)s комментария"
+msgstr[2] "%(n)s комментариев"
+
+#: terra/templates/terra/news_detail.html:65
+msgid "No comments yet — leave the first signal below."
+msgstr "Пока нет комментариев — оставьте первый сигнал ниже."
+
+#: terra/templates/terra/news_detail.html:71
+msgid "Your comment"
+msgstr "Ваш комментарий"
+
+#: terra/templates/terra/news_detail.html:73
+msgid "Add to the discussion…"
+msgstr "Добавьте в обсуждение…"
+
+#: terra/templates/terra/news_detail.html:74
+msgid "Post comment"
+msgstr "Отправить комментарий"
+
+#: terra/templates/terra/news_detail.html:79
+msgid "to join the discussion."
+msgstr "чтобы присоединиться к обсуждению."
+
+#: terra/templates/terra/news_detail.html:87
+msgid "More from this desk"
+msgstr "Ещё из этой редакции"
+
+#: terra/templates/terra/news_detail.html:88
+msgid "stories."
+msgstr "статей."
+
+#: terra/templates/terra/notifications.html:15
+msgid "Comms · security watch"
+msgstr "Связь · охрана"
+
+#: terra/templates/terra/notifications.html:16
+msgid "Notification"
+msgstr "Уведомление"
+
+#: terra/templates/terra/notifications.html:18
+msgid ""
+"Sign-ins from your devices and anything that looks like an attack land here "
+"— and in your inbox. Two active devices are allowed per passenger."
+msgstr ""
+"Входы с ваших устройств и всё похожее на атаку попадают сюда — и в почту. "
+"Разрешены два активных устройства на пассажира."
+
+#: terra/templates/terra/notifications.html:23
+#, python-format
+msgid "%(counter)s unread"
+msgid_plural "%(counter)s unread"
+msgstr[0] "%(counter)s непрочитанное"
+msgstr[1] "%(counter)s непрочитанных"
+msgstr[2] "%(counter)s непрочитанных"
+
+#: terra/templates/terra/notifications.html:25
+msgid "DEVICES"
+msgstr "УСТРОЙСТВА"
+
+#: terra/templates/terra/notifications.html:34
+msgid "Mark all as read"
+msgstr "Отметить всё прочитанным"
+
+#: terra/templates/terra/notifications.html:41
+msgid "Sign out all other sessions"
+msgstr "Завершить все остальные сессии"
+
+#: terra/templates/terra/notifications.html:54
+msgid "DEVICE"
+msgstr "УСТРОЙСТВО"
+
+#: terra/templates/terra/notifications.html:55
+msgid "SECURITY"
+msgstr "БЕЗОПАСНОСТЬ"
+
+#: terra/templates/terra/notifications.html:56
+msgid "SYSTEM"
+msgstr "СИСТЕМА"
+
+#: terra/templates/terra/notifications.html:57
+msgid "INFO"
+msgstr "ИНФО"
+
+#: terra/templates/terra/notifications.html:60
+#: terra/templates/terra/notifications.html:111
+msgid "ago"
+msgstr "назад"
+
+#: terra/templates/terra/notifications.html:67
+msgid "EMAILED"
+msgstr "ОТПРАВЛЕНО ПОЧТОЙ"
+
+#: terra/templates/terra/notifications.html:70
+msgid "Open"
+msgstr "Открыть"
+
+#: terra/templates/terra/notifications.html:77
+msgid "Acknowledge"
+msgstr "Подтвердить"
+
+#: terra/templates/terra/notifications.html:81
+msgid "READ"
+msgstr "ПРОЧИТАНО"
+
+#: terra/templates/terra/notifications.html:89
+msgid "CHANNEL CLEAR"
+msgstr "КАНАЛ ЧИСТ"
+
+#: terra/templates/terra/notifications.html:91
+msgid ""
+"No signals on this channel. You will hear from Mission Control here the "
+"moment a new device signs in or the security watch trips."
+msgstr ""
+"На этом канале сигналов нет. Здесь появится сообщение от центра управления, "
+"как только новое устройство войдёт или сработает охрана."
+
+#: terra/templates/terra/notifications.html:98
+msgid "YOUR DEVICES"
+msgstr "ВАШИ УСТРОЙСТВА"
+
+#: terra/templates/terra/notifications.html:101
+msgid "unknown device"
+msgstr "неизвестное устройство"
+
+#: terra/templates/terra/notifications.html:111
+msgid "LAST SEEN"
+msgstr "ПОСЛЕДНИЙ РАЗ"
+
+#: terra/templates/terra/notifications.html:116
+msgid "No devices registered yet."
+msgstr "Устройства пока не зарегистрированы."
+
+#: terra/templates/terra/notifications.html:120
+#, python-format
+msgid "%(counter)s DEVICE REGISTERED · ALLOWED %(active_limit)s"
+msgid_plural "%(counter)s DEVICES REGISTERED · ALLOWED %(active_limit)s"
+msgstr[0] ""
+"%(counter)s УСТРОЙСТВО ЗАРЕГИСТРИРОВАНО · РАЗРЕШЕНО %(active_limit)s"
+msgstr[1] ""
+"%(counter)s УСТРОЙСТВА ЗАРЕГИСТРИРОВАНО · РАЗРЕШЕНО %(active_limit)s"
+msgstr[2] "%(counter)s УСТРОЙСТВ ЗАРЕГИСТРИРОВАНО · РАЗРЕШЕНО %(active_limit)s"
+
+#: terra/templates/terra/signup.html:4
+msgid "Claim your passage — Terra Nova"
+msgstr "Получите свой пропуск — Terra Nova"
+
+#: terra/templates/terra/signup.html:9
+msgid "Passenger registry · Expedition 01"
+msgstr "Реестр пассажиров · Экспедиция 01"
+
+#: terra/templates/terra/signup.html:10
+msgid "Claim your"
+msgstr "Получите свой"
+
+#: terra/templates/terra/signup.html:10
+msgid "passage."
+msgstr "пропуск."
+
+#: terra/templates/terra/signup.html:12
+msgid ""
+"Your callsign is issued the moment you register, and your sector is drawn at "
+"random from the four surveyed biomes."
+msgstr ""
+"Позывной выдаётся сразу после регистрации, а сектор выбирается случайно из "
+"четырёх изученных биомов."
+
+#: terra/templates/terra/signup.html:32
+msgid "Issue my passage"
+msgstr "Выдать мой пропуск"
+
+#: terra/templates/terra/signup.html:33
+msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
+msgstr "БЕЗ СБОРОВ · БЕЗ ОЧЕРЕДИ · ОДИН ПРОПУСК НА ЗЕМЛЮ"
+
+#: terra/templates/terra/signup.html:36
+msgid "Already on the manifest?"
+msgstr "Уже в манифесте?"
+
+#: terra/templates/terra/signup.html:36
+msgid "Sign in →"
+msgstr "Войти →"
+
+#: terra/templates/terra/transport.html:8
+msgid "Transport — Terra Nova"
+msgstr "Транспорт — Terra Nova"
+
+#: terra/templates/terra/transport.html:15
+#, python-format
+msgid "Nova transit · %(village)s"
+msgstr "Nova transit · %(village)s"
+
+#: terra/templates/terra/transport.html:16
+msgid "Travel the"
+msgstr "Пересекайте"
+
+#: terra/templates/terra/transport.html:16
+msgid "new Earth."
+msgstr "новую Землю."
+
+#: terra/templates/terra/transport.html:18
+msgid ""
+"Live departure times for the buses and trains passing your village —\n"
+"          pay in TerraX and show the QR ticket to the receiver aboard."
+msgstr ""
+"Живое расписание автобусов и поездов через вашу деревню —\n"
+"          платите TerraX и показывайте QR-билет проводнику на борту."
+
+#: terra/templates/terra/transport.html:22
+msgid "Transport sections"
+msgstr "Разделы транспорта"
+
+#: terra/templates/terra/transport.html:23
+msgid "Departures"
+msgstr "Отправления"
+
+#: terra/templates/terra/transport.html:24
+#: terra/templates/terra/transport.html:91
+msgid "Buy a fare"
+msgstr "Купить билет"
+
+#: terra/templates/terra/transport.html:25
+msgid "My tickets"
+msgstr "Мои билеты"
+
+#: terra/templates/terra/transport.html:32
+msgid "Wallet · TerraX"
+msgstr "Кошелёк · TerraX"
+
+#: terra/templates/terra/transport.html:37
+msgid "Welcome bonus"
+msgstr "Приветственный бонус"
+
+#: terra/templates/terra/transport.html:39
+#, python-format
+msgid "CREDITED AT SIGN-IN · LEDGER: %(note)s"
+msgstr "ЗАЧИСЛЕН ПРИ ВХОДЕ · РЕЕСТР: %(note)s"
+
+#: terra/templates/terra/transport.html:43
+msgid "Earth credits"
+msgstr "Земельные кредиты"
+
+#: terra/templates/terra/transport.html:45
+msgid "Ledger"
+msgstr "Реестр"
+
+#: terra/templates/terra/transport.html:51
+#, python-format
+msgid "Departures · %(village)s"
+msgstr "Отправления · %(village)s"
+
+#: terra/templates/terra/transport.html:52
+msgid "When the ride"
+msgstr "Когда рейс"
+
+#: terra/templates/terra/transport.html:52
+msgid "passes your village."
+msgstr "проходит вашу деревню."
+
+#: terra/templates/terra/transport.html:55
+msgid ""
+"Buses stop at your habitat; the trains run the whole continent.\n"
+"          Times tick down live — select one to buy its fare below."
+msgstr ""
+"Автобусы останавливаются у вашего обиталища; поезда идут через весь "
+"континент.\n"
+"          Время идёт вживую — выберите рейс, чтобы купить билет ниже."
+
+#: terra/templates/terra/transport.html:60
+msgid "Departure board"
+msgstr "Табло отправлений"
+
+#: terra/templates/terra/transport.html:62
+msgid "Time"
+msgstr "Время"
+
+#: terra/templates/terra/transport.html:62
+msgid "Line"
+msgstr "Линия"
+
+#: terra/templates/terra/transport.html:62
+msgid "Service"
+msgstr "Сервис"
+
+#: terra/templates/terra/transport.html:63
+msgid "Fare"
+msgstr "Тариф"
+
+#: terra/templates/terra/transport.html:63
+msgid "Departs in"
+msgstr "Отправится через"
+
+#: terra/templates/terra/transport.html:77
+msgid "Select"
+msgstr "Выбрать"
+
+#: terra/templates/terra/transport.html:80
+msgid "No further departures today — the board refreshes at midnight."
+msgstr "Сегодня больше нет отправлений — табло обновится в полночь."
+
+#: terra/templates/terra/transport.html:92
+msgid "Children ride at half fare"
+msgstr "Дети едут за половинный тариф"
+
+#: terra/templates/terra/transport.html:96
+msgid "Who is travelling"
+msgstr "Кто едет"
+
+#: terra/templates/terra/transport.html:104
+msgid "HALF FARE"
+msgstr "ПОЛУТАРИФ"
+
+#: terra/templates/terra/transport.html:110
+#: terra/templates/terra/transport.html:186
+msgid "Departure"
+msgstr "Отправление"
+
+#: terra/templates/terra/transport.html:121
+msgid "Calculation — each fare decreases your wallet"
+msgstr "Расчёт — каждый билет уменьшает кошелёк"
+
+#: terra/templates/terra/transport.html:131
+msgid "Pay fare &amp; get QR ticket"
+msgstr "Оплатить билет и получить QR"
+
+#: terra/templates/terra/transport.html:136
+msgid "Family travellers"
+msgstr "Семейные попутчики"
+
+#: terra/templates/terra/transport.html:138
+msgid ""
+"Add children, spouses or elders and pay their fares from the same\n"
+"            wallet — each ticket gets its own QR code."
+msgstr ""
+"Добавьте детей, супругов или старших и оплачивайте их билеты с того же\n"
+"            кошелька — у каждого билета свой QR-код."
+
+#: terra/templates/terra/transport.html:144
+msgid "New traveller"
+msgstr "Новый попутчик"
+
+#: terra/templates/terra/transport.html:146
+msgid "e.g. Mia"
+msgstr "напр. Мия"
+
+#: terra/templates/terra/transport.html:147
+msgid "Relationship"
+msgstr "Родство"
+
+#: terra/templates/terra/transport.html:148
+msgid "Child · half fare"
+msgstr "Ребёнок · половинный тариф"
+
+#: terra/templates/terra/transport.html:149
+msgid "Spouse"
+msgstr "Супруг(а)"
+
+#: terra/templates/terra/transport.html:150
+msgid "Elder"
+msgstr "Старший"
+
+#: terra/templates/terra/transport.html:152
+msgid "Add"
+msgstr "Добавить"
+
+#: terra/templates/terra/transport.html:168
+msgid "Your tickets"
+msgstr "Мои билеты"
+
+#: terra/templates/terra/transport.html:169
+msgid "Show the code,"
+msgstr "Покажите код —"
+
+#: terra/templates/terra/transport.html:169
+msgid "board the ride."
+msgstr "садитесь."
+
+#: terra/templates/terra/transport.html:177
+#, python-format
+msgid "QR code for ticket %(code)s"
+msgstr "QR-код билета %(code)s"
+
+#: terra/templates/terra/transport.html:187
+msgid "Fare paid"
+msgstr "Оплаченный тариф"
+
+#: terra/templates/terra/transport.html:188
+msgid "Code"
+msgstr "Код"
+
+#: terra/templates/terra/transport.html:196
+msgid "Receiver demo — scan me aboard"
+msgstr "Демо приёмника — просканируйте меня на борту"
+
+#: terra/templates/terra/transport.html:203
+msgid "No tickets yet — pick a departure on the board above and pay its fare."
+msgstr ""
+"Билетов пока нет — выберите отправление на табло выше и оплатите тариф."
+
+#: terra/templates/terra/weather.html:8
+msgid "Weather — Terra Nova"
+msgstr "Погода — Terra Nova"
+
+#: terra/templates/terra/weather.html:28
+#, python-format
+msgid "Live · Aurelia observatory · observed %(observed)s"
+msgstr "В эфире · обсерватория Aurelia · наблюдение %(observed)s"
+
+#: terra/templates/terra/weather.html:35
+#, python-format
+msgid ""
+"Feels like %(feels)s°C across the surveyed sectors —\n"
+"          running well above the %(mean)s°C seasonal mean\n"
+"          while the heat wave holds."
+msgstr ""
+"Ощущается %(feels)s°C по обследованным секторам —\n"
+"          заметно выше сезонной нормы %(mean)s°C,\n"
+"          пока держится жара."
+
+#: terra/templates/terra/weather.html:42
+msgid "Seasonal mean"
+msgstr "Сезонная норма"
+
+#: terra/templates/terra/weather.html:44
+msgid "Heat anomaly"
+msgstr "Тепловая аномалия"
+
+#: terra/templates/terra/weather.html:48
+msgid "Open the 3D map →"
+msgstr "Открыть 3D-карту →"
+
+#: terra/templates/terra/weather.html:52
+msgid "Sector conditions"
+msgstr "Состояние секторов"
+
+#: terra/templates/terra/weather.html:71
+msgid "Heat simulation"
+msgstr "Симуляция жары"
+
+#: terra/templates/terra/weather.html:72
+msgid "Eight days of"
+msgstr "Восемь дней"
+
+#: terra/templates/terra/weather.html:72
+msgid "rising heat."
+msgstr "нарастающего зноя."
+
+#: terra/templates/terra/weather.html:75
+#, python-format
+msgid ""
+"The thermal model runs from <strong>%(start)s</strong>\n"
+"        through <strong>%(end)s</strong>. Every day in the\n"
+"        window crosses the alert threshold, so your device receives one\n"
+"        temperature-rise notification per day for the whole week."
+msgstr ""
+"Тепловая модель идёт с <strong>%(start)s</strong>\n"
+"        по <strong>%(end)s</strong>. Каждый день в\n"
+"        окне превышает порог оповещения, поэтому ваше устройство получает\n"
+"        одно уведомление о повышении температуры в день всю неделю."
+
+#: terra/templates/terra/weather.html:102
+msgid "Heat watch"
+msgstr "Наблюдение за жарой"
+
+#: terra/templates/terra/weather.html:103
+msgid "Be told before"
+msgstr "Узнайте раньше, чем"
+
+#: terra/templates/terra/weather.html:103
+msgid "the air burns."
+msgstr "воздух сгорит."
+
+#: terra/templates/terra/weather.html:108
+msgid "Push notifications"
+msgstr "Push-уведомления"
+
+#: terra/templates/terra/weather.html:110
+msgid ""
+"Allow notifications and Terra Nova warns you the moment a heat alert\n"
+"          is issued — delivered by the service worker even when this tab is\n"
+"          closed. The simulation keeps one alert firing per day for the "
+"whole\n"
+"          window below."
+msgstr ""
+"Разрешите уведомления — Terra Nova предупредит в момент выпуска\n"
+"          теплового оповещения — доставкой через service worker, даже когда\n"
+"          вкладка закрыта. Симуляция выдаёт по одному оповещению в день\n"
+"          на всё окно ниже."
+
+#: terra/templates/terra/weather.html:115
+msgid "CHECKING PERMISSION…"
+msgstr "ПРОВЕРКА РАЗРЕШЕНИЯ…"
+
+#: terra/templates/terra/weather.html:119
+msgid "Enable push alerts"
+msgstr "Включить push-оповещения"
+
+#: terra/templates/terra/weather.html:120
+msgid "Trigger heat alert now"
+msgstr "Запустить тепловое оповещение сейчас"
+
+#: terra/templates/terra/weather.html:135
+msgid "The simulation is warming up — no alerts issued yet."
+msgstr "Симуляция прогревается — оповещений пока нет."
+
+#: terra/templates/terra/weather.html:140
+#, python-format
+msgid ""
+"SIMULATION WINDOW · %(days)s DAYS · ONE NOTIFICATION PER DAY ·\n"
+"      DEMO NETWORK"
+msgstr ""
+"ОКНО СИМУЛЯЦИИ · %(days)s ДНЕЙ · ПО ОДНОМУ ОПОВЕЩЕНИЮ В ДЕНЬ ·\n"
+"      ДЕМО-СЕТЬ"
+
+#: terra/templates/tn_admin/active_filters.html:3
+msgid "Active filters"
+msgstr "Активные фильтры"
+
+#: terra/templates/tn_admin/active_filters.html:4
+msgid "FILTERS"
+msgstr "ФИЛЬТРЫ"
+
+#: terra/templates/tn_admin/active_filters.html:6
+msgid "Remove this filter"
+msgstr "Убрать этот фильтр"
+
+#: terra/templates/tn_admin/active_filters.html:12
+msgid "Clear all ✕"
+msgstr "Сбросить всё ✕"
+
+#: terra/views.py:128
+#, python-format
+msgid ""
+"Passage confirmed — you fly as %(callsign)s. Welcome bonus: +%(bonus)s TRX "
+"is in your wallet."
+msgstr ""
+"Проезд подтверждён — вы летите под позывным %(callsign)s. Приветственный "
+"бонус: +%(bonus)s TRX уже в кошельке."
+
+#: terra/views.py:152
+msgid "Airlock sealed. Mission Control is yours."
+msgstr "Шлюз закрыт. Центр управления ваш."
+
+#: terra/views.py:164
+msgid "Signed out. The hatch is sealed behind you."
+msgstr "Вы вышли. Люк закрылся за вами."
+
+#: terra/views.py:176
+msgid "Log entry updated."
+msgstr "Запись в журнале обновлена."
+
+#: terra/views.py:224 terra/views.py:260
+msgid "Invalid amount."
+msgstr "Неверная сумма."
+
+#: terra/views.py:233
+#, python-format
+msgid "Not enough Earth credits — your wallet holds $%(balance)s."
+msgstr "Недостаточно земельных кредитов — на кошельке $%(balance)s."
+
+#: terra/views.py:250
+#, python-format
+msgid "Filled: %(trx)s TRX for $%(usd)s."
+msgstr "Исполнено: %(trx)s TRX за $%(usd)s."
+
+#: terra/views.py:271
+#, python-format
+msgid "Not enough TerraX — your wallet holds %(balance)s TRX."
+msgstr "Недостаточно TerraX — на кошельке %(balance)s TRX."
+
+#: terra/views.py:288
+#, python-format
+msgid "Sold %(trx)s TRX for $%(usd)s."
+msgstr "Продано %(trx)s TRX за $%(usd)s."
+
+#: terra/views.py:295
+msgid "Unknown trade action."
+msgstr "Неизвестное действие обмена."
+
+#: terra/views.py:303
+msgid "That service does not exist."
+msgstr "Такого сервиса нет."
+
+#: terra/views.py:311 terra/views.py:861
+msgid "Choose a valid sector."
+msgstr "Выберите допустимый сектор."
+
+#: terra/views.py:318
+msgid "Callsigns are 3–24 characters: letters, digits and dashes."
+msgstr "Позывной — 3–24 символа: буквы, цифры и дефисы."
+
+#: terra/views.py:331
+msgid "Priority boarding is already active on your manifest."
+msgstr "Приоритетная посадка уже активна в вашем манифесте."
+
+#: terra/views.py:339
+#, python-format
+msgid "Callsign %(callsign)s is already in use."
+msgstr "Позывной %(callsign)s уже занят."
+
+#: terra/views.py:347
+#, python-format
+msgid ""
+"Not enough TerraX — %(name)s costs %(price)s TRX and your wallet holds "
+"%(balance)s TRX."
+msgstr ""
+"Недостаточно TerraX — %(name)s стоит %(price)s TRX, а на кошельке "
+"%(balance)s TRX."
+
+#: terra/views.py:377
+msgid "That callsign was claimed by another passenger a moment ago."
+msgstr "Этот позывной только что занял другой пассажир."
+
+#: terra/views.py:383
+#, python-format
+msgid "%(name)s purchased for %(price)s TRX."
+msgstr "%(name)s куплено за %(price)s TRX."
+
+#: terra/views.py:438
+msgid "The channel is open — say something first."
+msgstr "Канал открыт — скажите что-нибудь."
+
+#: terra/views.py:490
+msgid "Empty transmission — nothing was sent."
+msgstr "Пустая передача — ничего не отправлено."
+
+#: terra/views.py:727
+#, python-format
+msgid "%(code)s is already settled."
+msgstr "%(code)s уже оплачен."
+
+#: terra/views.py:737
+#, python-format
+msgid ""
+"Not enough TerraX — the %(code)s levy is %(amount)s TRX and your wallet "
+"holds %(balance)s TRX."
+msgstr ""
+"Недостаточно TerraX — сбор %(code)s составляет %(amount)s TRX, а на кошельке "
+"%(balance)s TRX."
+
+#: terra/views.py:761
+#, python-format
+msgid ""
+"%(code)s settled — %(amount)s TRX paid. The receipt is in your TerraX ledger."
+msgstr "%(code)s оплачен — %(amount)s TRX внесено. Чек в вашем реестре TerraX."
+
+#: terra/views.py:780
+msgid "No date of birth on file — register it at the pension desk first."
+msgstr ""
+"Дата рождения не в записи — сначала зарегистрируйте её на стойке пенсий."
+
+#: terra/views.py:786
+#, python-format
+msgid "Eligibility starts at age %(age)s — you are %(months)s months away."
+msgstr "Право начинается с %(age)s лет — до него %(months)s мес."
+
+#: terra/views.py:794
+msgid "This month’s pension is already on your ledger."
+msgstr "Пенсия за этот месяц уже в вашем реестре."
+
+#: terra/views.py:812
+#, python-format
+msgid "Pension claimed — %(amount)s TRX credited. Next claim opens next month."
+msgstr ""
+"Пенсия получена — %(amount)s TRX зачислено. Следующий запрос — в следующем "
+"месяце."
+
+#: terra/views.py:826
+msgid "Enter a valid date of birth (YYYY-MM-DD)."
+msgstr "Введите корректную дату рождения (ГГГГ-ММ-ДД)."
+
+#: terra/views.py:831
+msgid "Date of birth cannot be in the future."
+msgstr "Дата рождения не может быть в будущем."
+
+#: terra/views.py:835
+msgid "That age cannot be right — check the date."
+msgstr "Такого возраста не может быть — проверьте дату."
+
+#: terra/views.py:843
+#, python-format
+msgid "Date of birth on file — age %(age)s. The pension desk is updated."
+msgstr "Дата рождения в записи — возраст %(age)s. Стойка пенсий обновлена."
+
+#: terra/views.py:856
+msgid "Unknown request type."
+msgstr "Неизвестный тип заявки."
+
+#: terra/views.py:866
+msgid "Give the location at least a few characters."
+msgstr "Укажите в адресе хотя бы несколько символов."
+
+#: terra/views.py:880
+#, python-format
+msgid ""
+"%(label)s request filed · tracking %(tracking)s. Watch it move through "
+"review below."
+msgstr ""
+"Заявка %(label)s принята · отслеживание %(tracking)s. Следите за статусом "
+"ниже."
+
+#: terra/views.py:917
+#, python-format
+msgid "Terra Watch %(device)s is already paired."
+msgstr "Terra Watch %(device)s уже привязан."
+
+#: terra/views.py:929
+#, python-format
+msgid ""
+"Not enough TerraX — the Terra Watch costs %(price)s TRX and your wallet "
+"holds %(balance)s TRX."
+msgstr ""
+"Недостаточно TerraX — Terra Watch стоит %(price)s TRX, а на кошельке "
+"%(balance)s TRX."
+
+#: terra/views.py:950
+#, python-format
+msgid "Terra Watch paired · device %(device)s is streaming vitals."
+msgstr "Terra Watch привязан · устройство %(device)s передаёт показатели."
+
+#: terra/views.py:975
+msgid "Choose a departure from the board first."
+msgstr "Сначала выберите отправление на табло."
+
+#: terra/views.py:980
+msgid "That departure has already left the station."
+msgstr "Этот рейс уже ушёл."
+
+#: terra/views.py:991
+msgid "Choose who is travelling first."
+msgstr "Сначала выберите, кто едет."
+
+#: terra/views.py:1005
+#, python-format
+msgid ""
+"Not enough TerraX — this fare is %(fare)s TRX and your wallet holds "
+"%(balance)s TRX."
+msgstr ""
+"Недостаточно TerraX — этот тариф %(fare)s TRX, а на кошельке %(balance)s TRX."
+
+#: terra/views.py:1037
+#, python-format
+msgid ""
+"Fare paid — %(before)s − %(fare)s = %(balance)s TRX. QR ticket issued for "
+"%(route)s at %(time)s, ready for the receiver."
+msgstr ""
+"Тариф оплачен — %(before)s − %(fare)s = %(balance)s TRX. QR-билет выдан на "
+"%(route)s в %(time)s, готов для приёмника."
+
+#: terra/views.py:1068
+msgid "Give the traveller a name."
+msgstr "Дайте попутчику имя."
+
+#: terra/views.py:1070
+msgid "Choose a relationship."
+msgstr "Выберите родство."
+
+#: terra/views.py:1077
+#, python-format
+msgid "%(name)s added — you can now buy their fare too."
+msgstr "%(name)s добавлен — теперь можно купить и его билет."
+
+#: terra/views.py:1090
+msgid "That ticket is not on your account."
+msgstr "Этого билета нет на вашем аккаунте."
+
+#: terra/views.py:1093
+msgid "This ticket was already scanned."
+msgstr "Этот билет уже сканировали."
+
+#: terra/views.py:1099
+#, python-format
+msgid "Receiver accepted %(route)s · %(who)s is aboard. Safe travels."
+msgstr "Приёмник принял %(route)s · %(who)s на борту. Счастливого пути."
+
+#: terra/views.py:1107
+msgid "Unknown transport action."
+msgstr "Неизвестное действие транспорта."
+
+#: terra/views.py:1175
+msgid "The comment is empty — write something first."
+msgstr "Комментарий пуст — сначала что-нибудь напишите."
+
+#: terra/views.py:1179
+msgid "Comment posted."
+msgstr "Комментарий опубликован."
+
+#: terra/views.py:1198
+#, python-format
+msgid "%(n)s signal acknowledged."
+msgid_plural "%(n)s signals acknowledged."
+msgstr[0] "%(n)s сигнал подтверждён."
+msgstr[1] "%(n)s сигнала подтверждены."
+msgstr[2] "%(n)s сигналов подтверждено."
+
+#: terra/views.py:1207
+msgid "Signal acknowledged."
+msgstr "Сигнал подтверждён."
+
+#: terra/views.py:1225
+#, python-format
+msgid "%(n)s other session sealed behind you."
+msgid_plural "%(n)s other sessions sealed behind you."
+msgstr[0] "%(n)s другая сессия запечатана за вами."
+msgstr[1] "%(n)s другие сессии запечатаны за вами."
+msgstr[2] "%(n)s других сессий запечатано за вами."
+
+#: terra/views.py:1231
+msgid "Unknown signal action."
+msgstr "Неизвестное действие сигнала."
+
+#: terra/views.py:1288
+msgid "Passenger record updated."
+msgstr "Запись пассажира обновлена."
+
+#: terra/views.py:1292
+msgid "Could not save the record."
+msgstr "Не удалось сохранить запись."
+
+#: terra/views.py:1303
+msgid "Passenger photo updated."
+msgstr "Фото пассажира обновлено."
+
+#: terra/views.py:1307
+msgid "Could not store the photo."
+msgstr "Не удалось сохранить фото."
+
+#: terra/views.py:1316
+msgid "Passenger photo removed."
+msgstr "Фото пассажира удалено."
+
+#: terra/views.py:1335
+#, python-format
+msgid "Rating saved — %(stars)s★ for %(who)s."
+msgstr "Оценка сохранена — %(stars)s★ для %(who)s."
+
+#: terra/views.py:1343
+msgid "Could not save the rating."
+msgstr "Не удалось сохранить оценку."
+
+#: terra/views.py:1347
+msgid "Unknown account action."
+msgstr "Неизвестное действие аккаунта."

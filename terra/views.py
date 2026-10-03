@@ -14,6 +14,7 @@ from django.db.models import Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.translation import gettext as _, ngettext
 from django.views.decorators.http import require_http_methods, require_POST
 
 from .chat_ai import respond as ai_respond
@@ -43,6 +44,8 @@ from .forms import (
     SignupForm,
 )
 from .market import EXCHANGE_FEE, SERVICES, get_market, get_service
+from .news import ensure_news
+from .push import broadcast_push
 from .models import (
     SECTOR_CHOICES,
     AgentRating,
@@ -51,6 +54,8 @@ from .models import (
     CivicRequest,
     DeviceLogin,
     FareTicket,
+    NewsComment,
+    NewsItem,
     Notification,
     Profile,
     TaxBill,
@@ -121,8 +126,11 @@ def signup(request):
             login(request, user)
             messages.success(
                 request,
-                f'Passage confirmed — you fly as {profile.callsign}. '
-                f'Welcome bonus: +{WELCOME_BONUS} TRX is in your wallet.',
+                _('Passage confirmed — you fly as %(callsign)s. '
+                  'Welcome bonus: +%(bonus)s TRX is in your wallet.') % {
+                      'callsign': profile.callsign,
+                      'bonus': WELCOME_BONUS,
+                  },
             )
             return redirect('terra:dashboard')
     else:
@@ -142,7 +150,7 @@ def login_view(request):
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            messages.success(request, 'Airlock sealed. Mission Control is yours.')
+            messages.success(request, _('Airlock sealed. Mission Control is yours.'))
             return redirect(request.POST.get('next') or 'terra:dashboard')
     else:
         form = LoginForm(request)
@@ -154,7 +162,7 @@ def login_view(request):
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
-        messages.info(request, 'Signed out. The hatch is sealed behind you.')
+        messages.info(request, _('Signed out. The hatch is sealed behind you.'))
     return redirect('terra:home')
 
 
@@ -166,7 +174,7 @@ def dashboard(request):
     if request.method == 'POST':
         profile.tagline = request.POST.get('tagline', '').strip()[:140]
         profile.save(update_fields=['tagline'])
-        messages.success(request, 'Log entry updated.')
+        messages.success(request, _('Log entry updated.'))
         return redirect('terra:dashboard')
 
     crew = User.objects.filter(is_active=True).select_related(
@@ -214,7 +222,7 @@ def trade(request):
     if action == 'buy':
         form = BuyForm(request.POST)
         if not form.is_valid():
-            messages.error(request, _first_error(form) or 'Invalid amount.')
+            messages.error(request, _first_error(form) or _('Invalid amount.'))
             return redirect('terra:market')
         usd = form.cleaned_data['amount']
         trx_got = ((usd * (Decimal('1') - EXCHANGE_FEE)) / price).quantize(TRX_QUANTUM)
@@ -223,8 +231,8 @@ def trade(request):
             if profile.usd_balance < usd:
                 messages.error(
                     request,
-                    f'Not enough Earth credits — your wallet holds '
-                    f'${profile.usd_balance:,.2f}.',
+                    _('Not enough Earth credits — your wallet holds '
+                      '$%(balance)s.') % {'balance': f'{profile.usd_balance:,.2f}'},
                 )
                 return redirect('terra:market')
             profile.usd_balance -= usd
@@ -238,13 +246,19 @@ def trade(request):
                 price_usd=price,
                 note=f'Bought TRX at ${price:,.2f}',
             )
-        messages.success(request, f'Filled: {trx_got} TRX for ${usd:,.2f}.')
+        messages.success(
+            request,
+            _('Filled: %(trx)s TRX for $%(usd)s.') % {
+                'trx': trx_got,
+                'usd': f'{usd:,.2f}',
+            },
+        )
         return redirect('terra:market')
 
     if action == 'sell':
         form = SellForm(request.POST)
         if not form.is_valid():
-            messages.error(request, _first_error(form) or 'Invalid amount.')
+            messages.error(request, _first_error(form) or _('Invalid amount.'))
             return redirect('terra:market')
         trx_sold = form.cleaned_data['amount']
         usd_got = (trx_sold * price * (Decimal('1') - EXCHANGE_FEE)).quantize(
@@ -255,8 +269,8 @@ def trade(request):
             if profile.trx_balance < trx_sold:
                 messages.error(
                     request,
-                    f'Not enough TerraX — your wallet holds '
-                    f'{profile.trx_balance} TRX.',
+                    _('Not enough TerraX — your wallet holds '
+                      '%(balance)s TRX.') % {'balance': profile.trx_balance},
                 )
                 return redirect('terra:market')
             profile.trx_balance -= trx_sold
@@ -270,10 +284,16 @@ def trade(request):
                 price_usd=price,
                 note=f'Sold TRX at ${price:,.2f}',
             )
-        messages.success(request, f'Sold {trx_sold} TRX for ${usd_got:,.2f}.')
+        messages.success(
+            request,
+            _('Sold %(trx)s TRX for $%(usd)s.') % {
+                'trx': trx_sold,
+                'usd': f'{usd_got:,.2f}',
+            },
+        )
         return redirect('terra:market')
 
-    messages.error(request, 'Unknown trade action.')
+    messages.error(request, _('Unknown trade action.'))
     return redirect('terra:market')
 @login_required
 @require_POST
@@ -281,7 +301,7 @@ def buy_service(request):
     """Purchase a site service with TerraX and apply its effect."""
     service = get_service(request.POST.get('service', ''))
     if not service:
-        messages.error(request, 'That service does not exist.')
+        messages.error(request, _('That service does not exist.'))
         return redirect('terra:market')
 
     sector = None
@@ -289,14 +309,14 @@ def buy_service(request):
     if service['input'] == 'sector':
         sector = request.POST.get('sector', '')
         if sector not in dict(SECTOR_CHOICES):
-            messages.error(request, 'Choose a valid sector.')
+            messages.error(request, _('Choose a valid sector.'))
             return redirect('terra:market')
     elif service['input'] == 'callsign':
         callsign = request.POST.get('callsign', '').strip().upper()
         if not re.fullmatch(r'[A-Z0-9][A-Z0-9-]{2,23}', callsign):
             messages.error(
                 request,
-                'Callsigns are 3–24 characters: letters, digits and dashes.',
+                _('Callsigns are 3–24 characters: letters, digits and dashes.'),
             )
             return redirect('terra:market')
 
@@ -309,7 +329,7 @@ def buy_service(request):
             if service['slug'] == 'priority' and profile.priority:
                 messages.error(
                     request,
-                    'Priority boarding is already active on your manifest.',
+                    _('Priority boarding is already active on your manifest.'),
                 )
                 return redirect('terra:market')
             if callsign and Profile.objects.filter(
@@ -317,15 +337,21 @@ def buy_service(request):
             ).exists():
                 messages.error(
                     request,
-                    f'Callsign {callsign} is already in use.',
+                    _('Callsign %(callsign)s is already in use.') % {
+                        'callsign': callsign,
+                    },
                 )
                 return redirect('terra:market')
             if profile.trx_balance < price:
                 messages.error(
                     request,
-                    f'Not enough TerraX — {service["name"]} costs '
-                    f'{price} TRX and your wallet holds '
-                    f'{profile.trx_balance} TRX.',
+                    _('Not enough TerraX — %(name)s costs '
+                      '%(price)s TRX and your wallet holds '
+                      '%(balance)s TRX.') % {
+                          'name': service['name'],
+                          'price': price,
+                          'balance': profile.trx_balance,
+                      },
                 )
                 return redirect('terra:market')
 
@@ -349,13 +375,13 @@ def buy_service(request):
     except IntegrityError:
         messages.error(
             request,
-            'That callsign was claimed by another passenger a moment ago.',
+            _('That callsign was claimed by another passenger a moment ago.'),
         )
         return redirect('terra:market')
 
     messages.success(
         request,
-        f"{service['name']} purchased for {price} TRX.",
+        _('%(name)s purchased for %(price)s TRX.') % service,
     )
     return redirect('terra:market')
 
@@ -410,7 +436,7 @@ def chat(request):
     if request.method == 'POST':
         body = (request.POST.get('body') or '').strip()[:2000]
         if not body:
-            messages.error(request, 'The channel is open — say something first.')
+            messages.error(request, _('The channel is open — say something first.'))
             return redirect('terra:chat')
         subject = re.sub(r'\s+', ' ', body)
         if len(subject) > 57:
@@ -462,7 +488,7 @@ def chat_send(request, thread_id):
 
     body = (request.POST.get('body') or '').strip()[:2000]
     if not body:
-        messages.error(request, 'Empty transmission — nothing was sent.')
+        messages.error(request, _('Empty transmission — nothing was sent.'))
         return redirect('terra:chat_thread', thread_id=thread.id)
 
     is_agent_reply = thread.user_id != request.user.id
@@ -648,7 +674,16 @@ def weather_status(request):
 def weather_trigger(request):
     """Fire the heat simulation immediately (demo button)."""
     ensure_alerts()
-    return JsonResponse(simulate_alert())
+    data = simulate_alert()
+    # Fan the same alert out as a real web push — subscribers see it
+    # through the service worker even with this tab closed.
+    data['push_sent'] = broadcast_push(
+        title=data['headline'],
+        message=data['message'],
+        url='/weather/',
+        tag=f"terra-sim-{data['id']}",
+    )
+    return JsonResponse(data)
 
 
 # ---------------- Government portal ----------------
@@ -661,7 +696,7 @@ def _civic_profile(user):
 def government(request):
     """The Novarian government portal: tax, roads, records, pension, waste."""
     profile = _civic_profile(request.user)
-    bill, _ = get_or_create_tax_bill(profile)
+    bill, _created = get_or_create_tax_bill(profile)
     age, eligible, months_left = pension_state(profile)
     sector_names = dict(SECTOR_CHOICES)
 
@@ -694,10 +729,13 @@ def government(request):
 def tax_pay(request):
     """Settle the current fiscal levy in TerraX."""
     profile = _civic_profile(request.user)
-    bill, _ = get_or_create_tax_bill(profile)
+    bill, _created = get_or_create_tax_bill(profile)
 
     if bill.status == 'paid':
-        messages.info(request, f'{bill.code} is already settled.')
+        messages.info(
+            request,
+            _('%(code)s is already settled.') % {'code': bill.code},
+        )
         return redirect('terra:government')
 
     price = get_market()['trx_price']
@@ -706,9 +744,13 @@ def tax_pay(request):
         if profile.trx_balance < bill.amount_trx:
             messages.error(
                 request,
-                f'Not enough TerraX — the {bill.code} levy is '
-                f'{bill.amount_trx} TRX and your wallet holds '
-                f'{profile.trx_balance} TRX.',
+                _('Not enough TerraX — the %(code)s levy is '
+                  '%(amount)s TRX and your wallet holds '
+                  '%(balance)s TRX.') % {
+                      'code': bill.code,
+                      'amount': bill.amount_trx,
+                      'balance': profile.trx_balance,
+                  },
             )
             return redirect('terra:government')
         profile.trx_balance -= bill.amount_trx
@@ -726,8 +768,11 @@ def tax_pay(request):
         )
     messages.success(
         request,
-        f'{bill.code} settled — {bill.amount_trx} TRX paid. '
-        'The receipt is in your TerraX ledger.',
+        _('%(code)s settled — %(amount)s TRX paid. '
+          'The receipt is in your TerraX ledger.') % {
+              'code': bill.code,
+              'amount': bill.amount_trx,
+          },
     )
     return redirect('terra:government')
 
@@ -742,18 +787,21 @@ def pension_claim(request):
     if age is None:
         messages.error(
             request,
-            'No date of birth on file — register it at the pension desk first.',
+            _('No date of birth on file — register it at the pension desk first.'),
         )
         return redirect('terra:government')
     if not eligible:
         messages.error(
             request,
-            f'Eligibility starts at age {PENSION_AGE} — '
-            f'you are {months_left} months away.',
+            _('Eligibility starts at age %(age)s — '
+              'you are %(months)s months away.') % {
+                  'age': PENSION_AGE,
+                  'months': months_left,
+              },
         )
         return redirect('terra:government')
     if months_since_claim(request.user):
-        messages.info(request, 'This month’s pension is already on your ledger.')
+        messages.info(request, _('This month’s pension is already on your ledger.'))
         return redirect('terra:government')
 
     price = get_market()['trx_price']
@@ -771,8 +819,8 @@ def pension_claim(request):
         )
     messages.success(
         request,
-        f'Pension claimed — {PENSION_MONTHLY} TRX credited. '
-        'Next claim opens next month.',
+        _('Pension claimed — %(amount)s TRX credited. '
+          'Next claim opens next month.') % {'amount': PENSION_MONTHLY},
     )
     return redirect('terra:government')
 
@@ -785,16 +833,16 @@ def civic_profile(request):
     try:
         dob = date.fromisoformat(raw)
     except ValueError:
-        messages.error(request, 'Enter a valid date of birth (YYYY-MM-DD).')
+        messages.error(request, _('Enter a valid date of birth (YYYY-MM-DD).'))
         return redirect('terra:government')
 
     today = timezone.localdate()
     if dob > today:
-        messages.error(request, 'Date of birth cannot be in the future.')
+        messages.error(request, _('Date of birth cannot be in the future.'))
         return redirect('terra:government')
     age = age_on(dob)
     if age > 120:
-        messages.error(request, 'That age cannot be right — check the date.')
+        messages.error(request, _('That age cannot be right — check the date.'))
         return redirect('terra:government')
 
     profile = _civic_profile(request.user)
@@ -802,7 +850,9 @@ def civic_profile(request):
     profile.save(update_fields=['date_of_birth'])
     messages.success(
         request,
-        f'Date of birth on file — age {age}. The pension desk is updated.',
+        _('Date of birth on file — age %(age)s. The pension desk is updated.') % {
+            'age': age,
+        },
     )
     return redirect('terra:government')
 
@@ -813,17 +863,17 @@ def civic_request(request):
     """File a road, waste or medical service request."""
     category = request.POST.get('category')
     if category not in dict(CivicRequest.CATEGORY_CHOICES):
-        messages.error(request, 'Unknown request type.')
+        messages.error(request, _('Unknown request type.'))
         return redirect('terra:government')
 
     sector = request.POST.get('sector')
     if sector not in dict(SECTOR_CHOICES):
-        messages.error(request, 'Choose a valid sector.')
+        messages.error(request, _('Choose a valid sector.'))
         return redirect('terra:government')
 
     location = (request.POST.get('location') or '').strip()[:140]
     if len(location) < 3:
-        messages.error(request, 'Give the location at least a few characters.')
+        messages.error(request, _('Give the location at least a few characters.'))
         return redirect('terra:government')
 
     detail = (request.POST.get('detail') or '').strip()[:600]
@@ -837,8 +887,11 @@ def civic_request(request):
     label = dict(CivicRequest.CATEGORY_CHOICES)[category]
     messages.success(
         request,
-        f'{label} request filed · tracking {civic.tracking}. '
-        'Watch it move through review below.',
+        _('%(label)s request filed · tracking %(tracking)s. '
+          'Watch it move through review below.') % {
+              'label': label,
+              'tracking': civic.tracking,
+          },
     )
     next_view = request.POST.get('next')
     if next_view in ('government', 'health'):
@@ -871,7 +924,9 @@ def terra_watch(request):
     if profile.terra_watch:
         messages.info(
             request,
-            f'Terra Watch {device_id(request.user)} is already paired.',
+            _('Terra Watch %(device)s is already paired.') % {
+                'device': device_id(request.user),
+            },
         )
         return redirect('terra:health')
 
@@ -881,9 +936,12 @@ def terra_watch(request):
         if profile.trx_balance < TERRA_WATCH_PRICE:
             messages.error(
                 request,
-                f'Not enough TerraX — the Terra Watch costs '
-                f'{TERRA_WATCH_PRICE} TRX and your wallet holds '
-                f'{profile.trx_balance} TRX.',
+                _('Not enough TerraX — the Terra Watch costs '
+                  '%(price)s TRX and your wallet holds '
+                  '%(balance)s TRX.') % {
+                      'price': TERRA_WATCH_PRICE,
+                      'balance': profile.trx_balance,
+                  },
             )
             return redirect('terra:health')
         profile.trx_balance -= TERRA_WATCH_PRICE
@@ -899,8 +957,8 @@ def terra_watch(request):
         )
     messages.success(
         request,
-        f'Terra Watch paired · device {device_id(request.user)} '
-        'is streaming vitals.',
+        _('Terra Watch paired · device %(device)s '
+          'is streaming vitals.') % {'device': device_id(request.user)},
     )
     return redirect('terra:health')
 
@@ -909,7 +967,7 @@ def terra_watch(request):
 
 def _self_traveler(user):
     """Every account travels as themselves — created on first visit."""
-    traveler, _ = Traveler.objects.get_or_create(
+    traveler, _created = Traveler.objects.get_or_create(
         user=user,
         relation='self',
         defaults={'name': user.get_full_name() or user.username},
@@ -924,12 +982,12 @@ def _pay_fare(request, profile):
         route_id, epoch_raw = selection.split('|', 1)
         epoch = int(epoch_raw)
     except ValueError:
-        messages.error(request, 'Choose a departure from the board first.')
+        messages.error(request, _('Choose a departure from the board first.'))
         return redirect('terra:transport')
 
     route = ROUTES_BY_ID.get(route_id)
     if route is None or epoch not in ticket_allowed_epochs(route):
-        messages.error(request, 'That departure has already left the station.')
+        messages.error(request, _('That departure has already left the station.'))
         return redirect('terra:transport')
 
     try:
@@ -940,7 +998,7 @@ def _pay_fare(request, profile):
         id=traveler_id, user=request.user,
     ).first()
     if traveler is None:
-        messages.error(request, 'Choose who is travelling first.')
+        messages.error(request, _('Choose who is travelling first.'))
         return redirect('terra:transport')
 
     fare = fare_for(route, traveler)
@@ -954,8 +1012,11 @@ def _pay_fare(request, profile):
         if profile.trx_balance < fare:
             messages.error(
                 request,
-                f'Not enough TerraX — this fare is {fare} TRX and your '
-                f'wallet holds {profile.trx_balance} TRX.',
+                _('Not enough TerraX — this fare is %(fare)s TRX and your '
+                  'wallet holds %(balance)s TRX.') % {
+                      'fare': fare,
+                      'balance': profile.trx_balance,
+                  },
             )
             return redirect('terra:transport')
         balance_before = profile.trx_balance
@@ -983,9 +1044,15 @@ def _pay_fare(request, profile):
 
     messages.success(
         request,
-        f'Fare paid — {balance_before} − {fare} = '
-        f'{profile.trx_balance} TRX. QR ticket issued for '
-        f"{route['id']} at {departure:%H:%M}, ready for the receiver.",
+        _('Fare paid — %(before)s − %(fare)s = %(balance)s TRX. '
+          'QR ticket issued for %(route)s at %(time)s, ready for the '
+          'receiver.') % {
+              'before': balance_before,
+              'fare': fare,
+              'balance': profile.trx_balance,
+              'route': route['id'],
+              'time': f'{departure:%H:%M}',
+          },
     )
     return redirect('terra:transport')
 
@@ -1008,16 +1075,18 @@ def transport(request):
             relation = request.POST.get('relation')
             relations = dict(Traveler.RELATION_CHOICES)
             if len(name) < 2:
-                messages.error(request, 'Give the traveller a name.')
+                messages.error(request, _('Give the traveller a name.'))
             elif relation not in relations:
-                messages.error(request, 'Choose a relationship.')
+                messages.error(request, _('Choose a relationship.'))
             else:
                 Traveler.objects.create(
                     user=request.user, name=name, relation=relation,
                 )
                 messages.success(
                     request,
-                    f'{name} added — you can now buy their fare too.',
+                    _('%(name)s added — you can now buy their fare too.') % {
+                        'name': name,
+                    },
                 )
             return redirect('terra:transport')
 
@@ -1028,21 +1097,24 @@ def transport(request):
                     user=request.user,
                 )
             except (ValueError, FareTicket.DoesNotExist):
-                messages.error(request, 'That ticket is not on your account.')
+                messages.error(request, _('That ticket is not on your account.'))
                 return redirect('terra:transport')
             if ticket.used:
-                messages.info(request, 'This ticket was already scanned.')
+                messages.info(request, _('This ticket was already scanned.'))
             else:
                 ticket.used = True
                 ticket.save(update_fields=['used'])
                 messages.success(
                     request,
-                    f'Receiver accepted {ticket.route_id} · '
-                    f'{ticket.traveler.name} is aboard. Safe travels.',
+                    _('Receiver accepted %(route)s · %(who)s is aboard. '
+                      'Safe travels.') % {
+                          'route': ticket.route_id,
+                          'who': ticket.traveler.name,
+                      },
                 )
             return redirect('terra:transport')
 
-        messages.error(request, 'Unknown transport action.')
+        messages.error(request, _('Unknown transport action.'))
         return redirect('terra:transport')
 
     board = timetable(profile.sector)
@@ -1061,6 +1133,63 @@ def transport(request):
     })
 
 
+# ---------------- News section ----------------
+
+def news(request):
+    """The newsroom: featured lead story plus the archive, filterable."""
+    ensure_news()
+    category = request.GET.get('category', '')
+    items = NewsItem.objects.all()
+    active = ''
+    if category in dict(NewsItem.CATEGORY_CHOICES):
+        items = items.filter(category=category)
+        active = category
+
+    lead = next((item for item in items if item.is_featured), None)
+    stream = [item for item in items if item is not lead]
+    return render(request, 'terra/news.html', {
+        'lead': lead,
+        'stream': stream,
+        'categories': [
+            (code, label, NewsItem.objects.filter(category=code).count())
+            for code, label in NewsItem.CATEGORY_CHOICES
+        ],
+        'active': active,
+        'total': NewsItem.objects.count(),
+    })
+
+
+def news_detail(request, slug):
+    """A single dispatch, with the rest of its category beneath it."""
+    ensure_news()
+    item = get_object_or_404(NewsItem, slug=slug)
+    related = NewsItem.objects.filter(category=item.category).exclude(pk=item.pk)[:3]
+    return render(request, 'terra/news_detail.html', {
+        'item': item,
+        'related': related,
+        'paragraphs': [p.strip() for p in item.body.split('\n\n') if p.strip()],
+        'comments': item.comments.select_related('user'),
+    })
+
+
+@login_required
+@require_POST
+def news_comment(request, slug):
+    """Post a reader comment under a dispatch."""
+    ensure_news()
+    item = get_object_or_404(NewsItem, slug=slug)
+    body = (request.POST.get('body') or '').strip()[:1000]
+    if not body:
+        messages.error(
+            request,
+            _('The comment is empty — write something first.'),
+        )
+    else:
+        NewsComment.objects.create(item=item, user=request.user, body=body)
+        messages.success(request, _('Comment posted.'))
+    return redirect('terra:news_detail', slug=slug)
+
+
 # ---------------- Notification centre ----------------
 
 @login_required
@@ -1075,13 +1204,17 @@ def notifications(request):
             )
             messages.success(
                 request,
-                f'{updated} signal{"s" if updated != 1 else ""} acknowledged.',
+                ngettext(
+                    '%(n)s signal acknowledged.',
+                    '%(n)s signals acknowledged.',
+                    updated,
+                ) % {'n': updated},
             )
         elif action == 'mark' and request.POST.get('id'):
             request.user.notifications.filter(
                 id=request.POST['id'],
             ).update(is_read=True)
-            messages.success(request, 'Signal acknowledged.')
+            messages.success(request, _('Signal acknowledged.'))
         elif action == 'sign_out_elsewhere':
             # Revoke every other session for this user (keep the current one).
             from django.contrib.sessions.models import Session
@@ -1098,11 +1231,14 @@ def notifications(request):
                         revoked += 1
             messages.success(
                 request,
-                f'{revoked} other session{"s" if revoked != 1 else ""} '
-                f'sealed behind you.',
+                ngettext(
+                    '%(n)s other session sealed behind you.',
+                    '%(n)s other sessions sealed behind you.',
+                    revoked,
+                ) % {'n': revoked},
             )
         else:
-            messages.error(request, 'Unknown signal action.')
+            messages.error(request, _('Unknown signal action.'))
         return redirect('terra:notifications')
 
     alert_count = request.user.notifications.filter(is_read=False).count()
@@ -1159,11 +1295,11 @@ def account(request):
             form = AccountForm(request.POST, user=request.user)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Passenger record updated.')
+                messages.success(request, _('Passenger record updated.'))
             else:
                 messages.error(
                     request,
-                    _first_error(form) or 'Could not save the record.',
+                    _first_error(form) or _('Could not save the record.'),
                 )
             return redirect('terra:account')
 
@@ -1174,11 +1310,11 @@ def account(request):
                     profile.avatar.delete(save=False)
                 profile.avatar = avatar_form.cleaned_data['avatar']
                 profile.save(update_fields=['avatar'])
-                messages.success(request, 'Passenger photo updated.')
+                messages.success(request, _('Passenger photo updated.'))
             else:
                 messages.error(
                     request,
-                    _first_error(avatar_form) or 'Could not store the photo.',
+                    _first_error(avatar_form) or _('Could not store the photo.'),
                 )
             return redirect('terra:account')
 
@@ -1187,7 +1323,7 @@ def account(request):
                 profile.avatar.delete(save=False)
                 profile.avatar = ''
                 profile.save(update_fields=['avatar'])
-                messages.info(request, 'Passenger photo removed.')
+                messages.info(request, _('Passenger photo removed.'))
             return redirect('terra:account')
 
         if action == 'rate':
@@ -1206,17 +1342,19 @@ def account(request):
                 )
                 messages.success(
                     request,
-                    f'Rating saved — {rating_form.cleaned_data["rating"]}★ '
-                    f'for {agent.username}.',
+                    _('Rating saved — %(stars)s★ for %(who)s.') % {
+                        'stars': rating_form.cleaned_data['rating'],
+                        'who': agent.username,
+                    },
                 )
             else:
                 messages.error(
                     request,
-                    _first_error(rating_form) or 'Could not save the rating.',
+                    _first_error(rating_form) or _('Could not save the rating.'),
                 )
             return redirect('terra:account')
 
-        messages.error(request, 'Unknown account action.')
+        messages.error(request, _('Unknown account action.'))
         return redirect('terra:account')
 
     return render(request, 'terra/account.html', {

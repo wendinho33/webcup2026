@@ -1,66 +1,66 @@
 {% extends "base.html" %}
-{% load static money %}
+{% load static i18n money %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/transport.css' %}">
 {% endblock %}
 
-{% block title %}Transport — Terra Nova{% endblock %}
+{% block title %}{% trans "Transport — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="trp">
   <div class="container">
     <header class="trp__head" data-reveal>
       <div>
-        <p class="eyebrow"><span class="pulse"></span>Nova transit · {{ village }}</p>
-        <h1 class="trp__title">Travel the <em>new Earth.</em></h1>
+        <p class="eyebrow"><span class="pulse"></span>{% blocktrans with village=village %}Nova transit · {{ village }}{% endblocktrans %}</p>
+        <h1 class="trp__title">{% trans "Travel the" %} <em>{% trans "new Earth." %}</em></h1>
         <p class="trp__lede">
-          Live departure times for the buses and trains passing your village —
-          pay in TerraX and show the QR ticket to the receiver aboard.
+          {% blocktrans %}Live departure times for the buses and trains passing your village —
+          pay in TerraX and show the QR ticket to the receiver aboard.{% endblocktrans %}
         </p>
       </div>
-      <nav class="trp__anchors" aria-label="Transport sections">
-        <a href="#board">Departures</a>
-        <a href="#buy">Buy a fare</a>
-        <a href="#tickets">My tickets</a>
+      <nav class="trp__anchors" aria-label="{% trans "Transport sections" %}">
+        <a href="#board">{% trans "Departures" %}</a>
+        <a href="#buy">{% trans "Buy a fare" %}</a>
+        <a href="#tickets">{% trans "My tickets" %}</a>
       </nav>
     </header>
 
     <!-- balance at the very top of the page -->
     <div class="trp-balance" data-reveal>
       <div class="trp-balance__main">
-        <span class="mono">Wallet · TerraX</span>
+        <span class="mono">{% trans "Wallet · TerraX" %}</span>
         <strong class="trp-balance__amount">{{ profile.trx_balance|trx }}<em>TRX</em></strong>
       </div>
       {% if bonus %}
         <div class="trp-balance__bonus">
-          <span class="mono">Welcome bonus</span>
+          <span class="mono">{% trans "Welcome bonus" %}</span>
           <strong>+10,000 TRX</strong>
-          <span class="trp-balance__note mono">CREDITED AT SIGN-IN · LEDGER: {{ bonus.note|upper }}</span>
+          <span class="trp-balance__note mono">{% blocktrans with note=bonus.note|upper %}CREDITED AT SIGN-IN · LEDGER: {{ note }}{% endblocktrans %}</span>
         </div>
       {% endif %}
       <div class="trp-balance__credits">
-        <span class="mono">Earth credits</span>
+        <span class="mono">{% trans "Earth credits" %}</span>
         <strong>{{ profile.usd_balance|usd }}</strong>
-        <a class="btn btn--line btn--sm" href="{% url 'terra:market' %}#ledger">Ledger</a>
+        <a class="btn btn--line btn--sm" href="{% url 'terra:market' %}#ledger">{% trans "Ledger" %}</a>
       </div>
     </div>
     <section class="trp-section" id="board">
       <header class="section__head section__head--split">
         <div>
-          <p class="eyebrow" data-reveal>Departures · {{ village }}</p>
-          <h2 class="section__title" data-reveal style="--d:.06s">When the ride <em>passes your village.</em></h2>
+          <p class="eyebrow" data-reveal>{% blocktrans with village=village %}Departures · {{ village }}{% endblocktrans %}</p>
+          <h2 class="section__title" data-reveal style="--d:.06s">{% trans "When the ride" %} <em>{% trans "passes your village." %}</em></h2>
         </div>
         <p class="section__lede" data-reveal style="--d:.12s">
-          Buses stop at your habitat; the trains run the whole continent.
-          Times tick down live — select one to buy its fare below.
+          {% blocktrans %}Buses stop at your habitat; the trains run the whole continent.
+          Times tick down live — select one to buy its fare below.{% endblocktrans %}
         </p>
       </header>
 
-      <div class="trp-board" data-reveal role="table" aria-label="Departure board">
+      <div class="trp-board" data-reveal role="table" aria-label="{% trans "Departure board" %}">
         <div class="trp-board__row trp-board__row--head mono" role="row">
-          <span>Time</span><span></span><span>Line</span><span>Service</span>
-          <span>Fare</span><span>Departs in</span><span></span>
+          <span>{% trans "Time" %}</span><span></span><span>{% trans "Line" %}</span><span>{% trans "Service" %}</span>
+          <span>{% trans "Fare" %}</span><span>{% trans "Departs in" %}</span><span></span>
         </div>
         {% for d in board %}
           <div class="trp-board__row" role="row" data-depart="{{ d.epoch }}">
@@ -74,10 +74,10 @@
             <span class="trp-board__fare mono">{{ d.fare }} TRX</span>
             <span class="trp-board__count" data-countdown="{{ d.epoch }}" data-suffix="{{ d.day_label }}">—</span>
             <button type="button" class="btn btn--line btn--sm" data-select
-                    data-value="{{ d.value }}" data-fare="{{ d.fare }}">Select</button>
+                    data-value="{{ d.value }}" data-fare="{{ d.fare }}">{% trans "Select" %}</button>
           </div>
         {% empty %}
-          <p class="gov-empty">No further departures today — the board refreshes at midnight.</p>
+          <p class="gov-empty">{% trans "No further departures today — the board refreshes at midnight." %}</p>
         {% endfor %}
       </div>
     </section>
@@ -88,12 +88,12 @@
           {% csrf_token %}
           <input type="hidden" name="action" value="pay">
           <header class="trp-form__head">
-            <h2>Buy a fare</h2>
-            <span class="gov-tag mono">Children ride at half fare</span>
+            <h2>{% trans "Buy a fare" %}</h2>
+            <span class="gov-tag mono">{% trans "Children ride at half fare" %}</span>
           </header>
 
           <fieldset class="trp-travelers">
-            <legend class="mono">Who is travelling</legend>
+            <legend class="mono">{% trans "Who is travelling" %}</legend>
             {% for t in travelers %}
               <label class="trp-pick">
                 <input type="radio" name="traveler_id" value="{{ t.id }}"
@@ -101,13 +101,13 @@
                        {% if forloop.first %}checked{% endif %}>
                 <span>
                   {{ t.name }}
-                  <em class="mono">{{ t.get_relation_display }}{% if t.is_child %} · HALF FARE{% endif %}</em>
+                  <em class="mono">{{ t.get_relation_display }}{% if t.is_child %} · {% trans "HALF FARE" %}{% endif %}</em>
                 </span>
               </label>
             {% endfor %}
           </fieldset>
 
-          <label class="trp-label mono" for="depart-select">Departure</label>
+          <label class="trp-label mono" for="depart-select">{% trans "Departure" %}</label>
           <select id="depart-select" name="depart" data-depart-select>
             {% for d in board %}
               <option value="{{ d.value }}" data-fare="{{ d.fare }}"
@@ -118,7 +118,7 @@
           </select>
 
           <div class="trp-calc" data-calc data-balance="{{ profile.trx_balance }}">
-            <span class="mono">Calculation — each fare decreases your wallet</span>
+            <span class="mono">{% trans "Calculation — each fare decreases your wallet" %}</span>
             <p>
               <b data-calc-balance>{{ profile.trx_balance|trx }}</b>
               − <b data-calc-fare>{{ first_fare|trx }}</b>
@@ -128,28 +128,28 @@
 
           <button class="btn btn--solid btn--block" type="submit"
                   {% if not board %}disabled{% endif %}>
-            Pay fare &amp; get QR ticket
+            {% trans "Pay fare &amp; get QR ticket" %}
           </button>
         </form>
 
         <aside class="trp-family">
-          <h3>Family travellers</h3>
+          <h3>{% trans "Family travellers" %}</h3>
           <p class="gov-card__note">
-            Add children, spouses or elders and pay their fares from the same
-            wallet — each ticket gets its own QR code.
+            {% blocktrans %}Add children, spouses or elders and pay their fares from the same
+            wallet — each ticket gets its own QR code.{% endblocktrans %}
           </p>
           <form class="trp-family__form" method="post" action="{% url 'terra:transport' %}">
             {% csrf_token %}
             <input type="hidden" name="action" value="add_traveler">
-            <label class="trp-label mono" for="tv-name">New traveller</label>
+            <label class="trp-label mono" for="tv-name">{% trans "New traveller" %}</label>
             <div class="trp-family__row">
-              <input id="tv-name" name="name" maxlength="60" placeholder="e.g. Mia" required>
-              <select name="relation" aria-label="Relationship">
-                <option value="child">Child · half fare</option>
-                <option value="spouse">Spouse</option>
-                <option value="elder">Elder</option>
+              <input id="tv-name" name="name" maxlength="60" placeholder="{% trans "e.g. Mia" %}" required>
+              <select name="relation" aria-label="{% trans "Relationship" %}">
+                <option value="child">{% trans "Child · half fare" %}</option>
+                <option value="spouse">{% trans "Spouse" %}</option>
+                <option value="elder">{% trans "Elder" %}</option>
               </select>
-              <button class="btn btn--line" type="submit">Add</button>
+              <button class="btn btn--line" type="submit">{% trans "Add" %}</button>
             </div>
           </form>
           <ul class="trp-family__list">
@@ -165,8 +165,8 @@
     </section>
     <section class="trp-section" id="tickets">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Your tickets</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">Show the code, <em>board the ride.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Your tickets" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Show the code," %} <em>{% trans "board the ride." %}</em></h2>
       </header>
 
       <div class="trp-tickets">
@@ -174,7 +174,7 @@
           <article class="trp-ticket trp-ticket--{{ t.status }}"
                    data-reveal style="--d: calc({{ forloop.counter0 }} * .06s)">
             <div class="trp-ticket__qr" role="img"
-                 aria-label="QR code for ticket {{ t.code }}">{{ t.qr_svg }}</div>
+                 aria-label="{% blocktrans with code=t.code %}QR code for ticket {{ code }}{% endblocktrans %}">{{ t.qr_svg }}</div>
             <div class="trp-ticket__body">
               <header class="trp-ticket__head">
                 <span class="trp-badge trp-badge--{{ t.kind }}">{{ t.kind }} {{ t.route_id }}</span>
@@ -183,9 +183,9 @@
               <strong class="trp-ticket__who">{{ t.traveler.name }}</strong>
               <p class="trp-ticket__route">{{ t.route_name }} → {{ t.destination }}</p>
               <dl class="trp-ticket__meta">
-                <div><dt class="mono">Departure</dt><dd>{{ t.departure|date:"D d M · H:i" }}</dd></div>
-                <div><dt class="mono">Fare paid</dt><dd>{{ t.fare_trx }} TRX</dd></div>
-                <div><dt class="mono">Code</dt><dd>{{ t.code }}</dd></div>
+                <div><dt class="mono">{% trans "Departure" %}</dt><dd>{{ t.departure|date:"D d M · H:i" }}</dd></div>
+                <div><dt class="mono">{% trans "Fare paid" %}</dt><dd>{{ t.fare_trx }} TRX</dd></div>
+                <div><dt class="mono">{% trans "Code" %}</dt><dd>{{ t.code }}</dd></div>
               </dl>
               {% if t.status == 'valid' %}
                 <form method="post" action="{% url 'terra:transport' %}">
@@ -193,14 +193,14 @@
                   <input type="hidden" name="action" value="scan">
                   <input type="hidden" name="ticket_id" value="{{ t.id }}">
                   <button class="btn btn--line btn--sm btn--block" type="submit">
-                    Receiver demo — scan me aboard
+                    {% trans "Receiver demo — scan me aboard" %}
                   </button>
                 </form>
               {% endif %}
             </div>
           </article>
         {% empty %}
-          <p class="gov-empty">No tickets yet — pick a departure on the board above and pay its fare.</p>
+          <p class="gov-empty">{% trans "No tickets yet — pick a departure on the board above and pay its fare." %}</p>
         {% endfor %}
       </div>
     </section>

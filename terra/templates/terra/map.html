@@ -5,27 +5,27 @@
   <link rel="stylesheet" href="{% static 'css/map.css' %}">
 {% endblock %}
 
-{% block title %}Map of Terra Nova — Terra Nova{% endblock %}
+{% block title %}{% trans "Map of Terra Nova — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="mappage">
   <div class="container">
     <header class="mappage__head">
       <div>
-        <p class="eyebrow" data-reveal>Cartography · survey 04 · realtime relief</p>
-        <h1 class="mappage__title" data-reveal style="--d:.06s">Terra Nova, <em>rendered in relief.</em></h1>
+        <p class="eyebrow" data-reveal>{% trans "Cartography · survey 04 · realtime relief" %}</p>
+        <h1 class="mappage__title" data-reveal style="--d:.06s">{% trans "Terra Nova," %} <em>{% trans "rendered in relief." %}</em></h1>
         <p class="mappage__lede" data-reveal style="--d:.12s">
-          A live terrain model of the single continent — seabed, shelves and
+          {% blocktrans %}A live terrain model of the single continent — seabed, shelves and
           summits shaded by the sun, weather painted onto the biome. Orbit the
-          plate, zoom into the passes, tap a beacon for the sector readout.
+          plate, zoom into the passes, tap a beacon for the sector readout.{% endblocktrans %}
         </p>
         <p class="mappage__hint mono" data-reveal style="--d:.16s">
-          <kbd>DRAG</kbd> ORBIT · <kbd>SCROLL</kbd> ZOOM · <kbd>TAP</kbd> BEACON
+          {% blocktrans %}<kbd>DRAG</kbd> ORBIT · <kbd>SCROLL</kbd> ZOOM · <kbd>TAP</kbd> BEACON{% endblocktrans %}
         </p>
       </div>
       <div class="mappage__meta" data-reveal style="--d:.2s">
-        <span class="gov-tag mono">PLANET {{ current.temp }}°C · {{ current.condition|upper }}</span>
-        <a class="btn btn--line" href="{% url 'terra:weather' %}">Full weather →</a>
+        <span class="gov-tag mono">{% blocktrans with temp=current.temp cond=current.condition|upper %}PLANET {{ temp }}°C · {{ cond }}{% endblocktrans %}</span>
+        <a class="btn btn--line" href="{% url 'terra:weather' %}">{% trans "Full weather →" %}</a>
       </div>
     </header>
 
@@ -33,7 +33,7 @@
       <div class="map-scene" data-map>
         <canvas class="map-canvas" data-map-canvas
                 role="img"
-                aria-label="Three-dimensional terrain map of Terra Nova with live weather beacons"></canvas>
+                aria-label="{% trans "Three-dimensional terrain map of Terra Nova with live weather beacons" %}"></canvas>
         <div class="map-grid" aria-hidden="true"></div>
 
         <span class="map-corner map-corner--tl" aria-hidden="true"></span>
@@ -58,7 +58,7 @@
           </svg>
         </div>
 
-        <p class="map-scale mono" aria-hidden="true"><span></span>500 KM</p>
+        <p class="map-scale mono" aria-hidden="true"><span></span>{% trans "500 KM" %}</p>
 
         {% for key, s in sectors.items %}
           <button class="pin pin--{{ key }}{% if profile and profile.sector == key %} is-mine{% endif %}"
@@ -75,17 +75,17 @@
 
         <div class="map-toolbar" role="group" aria-label="Map layers">
           <button type="button" class="map-tool is-on" data-layer="relief"
-                  aria-pressed="true">Relief</button>
+                  aria-pressed="true">{% trans "Relief" %}</button>
           <button type="button" class="map-tool is-on" data-layer="routes"
-                  aria-pressed="true">Routes</button>
+                  aria-pressed="true">{% trans "Routes" %}</button>
           <button type="button" class="map-tool" data-layer="heat"
-                  aria-pressed="false">Heat</button>
+                  aria-pressed="false">{% trans "Heat" %}</button>
         </div>
       </div>
 
 
-      <aside class="map-hud" aria-label="Sector readout">
-        <p class="eyebrow">Live readout</p>
+      <aside class="map-hud" aria-label="{% trans "Sector readout" %}">
+        <p class="eyebrow">{% trans "Live readout" %}</p>
         <div class="map-hud__detail" data-hud-detail>
           <div class="map-hud__top">
             <span class="map-hud__icon" data-hud-icon>
@@ -104,14 +104,14 @@
           <div class="map-hud__temp"><span data-hud-temp>0</span>°C</div>
           <div class="map-hud__anom mono" data-hud-anom>+8.0°C ABOVE SEASONAL</div>
           <dl class="map-hud__stats">
-            <div><dt class="mono">Feels like</dt><dd><span data-hud-feels>0</span>°</dd></div>
-            <div><dt class="mono">Wind</dt><dd><span data-hud-wind>0</span> km/h</dd></div>
+            <div><dt class="mono">{% trans "Feels like" %}</dt><dd><span data-hud-feels>0</span>°</dd></div>
+            <div><dt class="mono">{% trans "Wind" %}</dt><dd><span data-hud-wind>0</span> km/h</dd></div>
             <div class="map-hud__bar">
-              <dt class="mono">Humidity <span><span data-hud-hum>0</span>%</span></dt>
+              <dt class="mono">{% trans "Humidity" %} <span><span data-hud-hum>0</span>%</span></dt>
               <dd><i class="meter" style="--w: 0%" data-hud-humbars></i></dd>
             </div>
             <div class="map-hud__bar">
-              <dt class="mono">Wind force <span><span data-hud-wind2>0</span></span></dt>
+              <dt class="mono">{% trans "Wind force" %} <span><span data-hud-wind2>0</span></span></dt>
               <dd><i class="meter" style="--w: 0%" data-hud-windbars></i></dd>
             </div>
           </dl>
@@ -124,27 +124,27 @@
                       data-temp="{{ s.temp }}" data-hum="{{ s.humidity }}"
                       data-wind="{{ s.wind }}" data-feels="{{ s.feels }}"
                       data-anom="{{ s.anomaly }}" data-icon="{{ s.icon }}">
-                <span>{{ s.name }}{% if profile and profile.sector == key %} <em class="mono">· YOUR SECTOR</em>{% endif %}</span>
+                <span>{{ s.name }}{% if profile and profile.sector == key %} <em class="mono">· {% trans "YOUR SECTOR" %}</em>{% endif %}</span>
                 <b>{{ s.temp }}°</b>
               </button>
             </li>
           {% endfor %}
         </ul>
         <p class="map-hud__legend mono">
-          BEACONS CARRY LIVE SECTOR WEATHER · ROUTES LINK THE COLONY ·
-          OCEAN: PELAGOS DEEP
+          {% blocktrans %}BEACONS CARRY LIVE SECTOR WEATHER · ROUTES LINK THE COLONY ·
+          OCEAN: PELAGOS DEEP{% endblocktrans %}
         </p>
       </aside>
     </div>
 
     <p class="mappage__credits mono" data-reveal>
-      <span class="sw sw--sand"></span>BEACH ·
-      <span class="sw sw--grass"></span>SAVANNA ·
-      <span class="sw sw--forest"></span>FOREST ·
-      <span class="sw sw--rock"></span>HIGHLAND ·
-      <span class="sw sw--snow"></span>GLASS ICE ·
-      <span class="sw sw--sea"></span>PELAGOS DEEP
-      &nbsp;·&nbsp; SURVEY 04 RELIEF MODEL · RENDERED ON YOUR DEVICE
+      <span class="sw sw--sand"></span>{% trans "BEACH" %} ·
+      <span class="sw sw--grass"></span>{% trans "SAVANNA" %} ·
+      <span class="sw sw--forest"></span>{% trans "FOREST" %} ·
+      <span class="sw sw--rock"></span>{% trans "HIGHLAND" %} ·
+      <span class="sw sw--snow"></span>{% trans "GLASS ICE" %} ·
+      <span class="sw sw--sea"></span>{% trans "PELAGOS DEEP" %}
+      &nbsp;·&nbsp; {% trans "SURVEY 04 RELIEF MODEL · RENDERED ON YOUR DEVICE" %}
     </p>
   </div>
 </section>

@@ -1,0 +1,128 @@
+/* ---------------------------------------------------------------
+ * Terra Nova — toastr theme
+ *
+ * Reskins jQuery Toastr so it matches the site's native toasts
+ * (dark glass card, coloured hairline border, no sprite icons).
+ * Load order matters: vendor/toastr/toastr.min.css → this file.
+ * --------------------------------------------------------------- */
+
+/* --- container: same spot as .toasts (above the mobile bar) --- */
+#toast-container {
+  position: fixed;
+  z-index: 90;
+  top: auto;
+  right: 1.3rem;
+  bottom: 5.6rem;
+  left: auto;
+  width: min(370px, calc(100vw - 2.6rem));
+  pointer-events: none;
+}
+
+/* --- card --- */
+#toast-container > div {
+  position: relative;
+  margin: 0 0 .7rem;
+  width: 100%;
+  padding: .95rem 1.9rem .95rem 1.15rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: rgba(8, 14, 25, .94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .9);
+  color: #e8eefc;
+  font-size: .9rem;
+  line-height: 1.45;
+  opacity: 1;
+  filter: none;
+  animation: toast-in .55s var(--ease) both;
+}
+#toast-container > div:hover {
+  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, .9);
+  opacity: 1;
+  filter: none;
+  cursor: default;
+}
+
+/* drop the default sprite icons — the border carries the meaning */
+#toast-container > .toast-success,
+#toast-container > .toast-error,
+#toast-container > .toast-info,
+#toast-container > .toast-warning,
+.toast-success, .toast-error, .toast-info, .toast-warning {
+  background-image: none !important;
+}
+
+/* --- per-type accents (mirrors .toast--* in terra.css: border only,
+       the dark glass background stays put) --- */
+#toast-container > .toast-success { border-color: rgba(127, 240, 192, .5); }
+#toast-container > .toast-info    { border-color: rgba(155, 215, 255, .45); }
+#toast-container > .toast-warning,
+#toast-container > .toast-error   { border-color: rgba(255, 122, 107, .5); }
+
+/* --- typography --- */
+#toast-container .toast-title {
+  display: block;
+  margin-bottom: .15rem;
+  color: var(--ink, #eef3ff);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+#toast-container .toast-message {
+  color: var(--mute, #aab6d0);
+  font-size: .9rem;
+  word-wrap: break-word;
+}
+#toast-container .toast-message a { color: #9bd7ff; }
+
+/* --- close button --- */
+#toast-container .toast-close-button {
+  position: absolute;
+  top: .55rem;
+  right: .6rem;
+  float: none;
+  border: 0;
+  background: none;
+  color: var(--mute, #aab6d0);
+  font-size: 1rem;
+  line-height: 1;
+  text-shadow: none;
+  opacity: .7;
+  filter: none;
+}
+#toast-container .toast-close-button:hover,
+#toast-container .toast-close-button:focus {
+  color: #ff7a6b;
+  opacity: 1;
+  filter: none;
+}
+
+/* --- progress bar --- */
+#toast-container .toast-progress {
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background-color: rgba(155, 215, 255, .65);
+  opacity: .8;
+  filter: none;
+}
+#toast-container > .toast-success .toast-progress { background-color: rgba(127, 240, 192, .7); }
+#toast-container > .toast-error .toast-progress,
+#toast-container > .toast-warning .toast-progress { background-color: rgba(255, 122, 107, .7); }
+
+/* --- mobile: full width, same offsets as .toasts --- */
+@media (max-width: 640px) {
+  #toast-container {
+    right: .9rem;
+    bottom: 5.2rem;
+    left: .9rem;
+    width: auto;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #toast-container > div { animation: none; }
+}

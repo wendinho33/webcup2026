@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block title %}{% trans "News — Terra Nova" %}{% endblock %}
+
+{% block content %}
+<section class="nws">
+  <div class="container">
+    <header class="nws__head" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Newsroom · live feed" %}</p>
+        <h1 class="nws__title">{% trans "Dispatches from" %} <em>{% trans "the new Earth." %}</em></h1>
+        <p class="nws__lede">
+          {% blocktrans %}Every signal filed by the colony's desks — expedition, weather,
+          TerraX, transit and civic works — in the order it was
+          published.{% endblocktrans %}
+        </p>
+      </div>
+      <nav class="nws__anchors" aria-label="{% trans "News sections" %}">
+        <a href="#lead">{% trans "Lead story" %}</a>
+        <a href="#archive">{% trans "Archive" %}</a>
+      </nav>
+    </header>
+
+    <nav class="nws-filters" aria-label="{% trans "Filter by desk" %}" data-reveal>
+      <a class="nws-chip{% if not active %} is-active{% endif %}"
+         href="{% url 'terra:news' %}">{% trans "All desks" %}<b>{{ total }}</b></a>
+      {% for code, label, count in categories %}
+        <a class="nws-chip{% if active == code %} is-active{% endif %}"
+           href="{% url 'terra:news' %}?category={{ code }}">{{ label }}<b>{{ count }}</b></a>
+      {% endfor %}
+    </nav>
+
+    {% if lead %}
+      <article class="nws-lead" id="lead" data-reveal>
+        <div class="nws-lead__body">
+          <p class="nws-meta mono">
+            <span class="nws-cat nws-cat--{{ lead.category }}">{{ lead.get_category_display }}</span>
+            <span>{% trans "Featured" %}</span>
+            <span>{{ lead.published_at|date:"d M Y · H:i" }}</span>
+          </p>
+          <h2><a href="{% url 'terra:news_detail' lead.slug %}">{{ lead.title }}</a></h2>
+          <p class="nws-lead__summary">{{ lead.summary }}</p>
+          <p class="nws-byline mono">
+            {{ lead.source }} · {% blocktrans with mins=lead.reading_minutes %}{{ mins }} min read{% endblocktrans %}
+          </p>
+          <a class="btn btn--line" href="{% url 'terra:news_detail' lead.slug %}">{% trans "Read the dispatch →" %}</a>
+        </div>
+      </article>
+    {% endif %}
+
+    <section class="nws-section" id="archive">
+      <header class="section__head section__head--split">
+        <div>
+          <p class="eyebrow" data-reveal>{% trans "Archive" %}</p>
+          <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Everything else" %} <em>{% trans "on the wire." %}</em></h2>
+        </div>
+        <p class="section__lede" data-reveal style="--d:.12s">
+          {% blocktrans with n=stream|length %}{{ n }} dispatches filed below. Open any one
+          to read it in full — each card links to the full article.{% endblocktrans %}
+        </p>
+      </header>
+
+      <div class="nws-grid">
+        {% for item in stream %}
+          <article class="nws-card" data-reveal style="--d: calc({{ forloop.counter0 }} * .05s)">
+            <p class="nws-meta mono">
+              <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display }}</span>
+              <span>{{ item.published_at|date:"d M" }}</span>
+            </p>
+            <h3><a href="{% url 'terra:news_detail' item.slug %}">{{ item.title }}</a></h3>
+            <p class="nws-card__summary">{{ item.summary }}</p>
+            <p class="nws-byline mono">{{ item.source }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
+          </article>
+        {% empty %}
+          <p class="nws-empty">{% trans "No dispatches on this desk yet — pick another filter above." %}</p>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

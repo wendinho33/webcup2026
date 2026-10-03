@@ -436,6 +436,74 @@ class WeatherAlert(models.Model):
         return f'{self.day} · {self.severity} · {self.temp_c}°C'
 
 
+class NewsItem(models.Model):
+    """One dispatch from the Terra Nova newsroom (the News section)."""
+
+    CATEGORY_CHOICES = [
+        ('expedition', 'Expedition'),
+        ('weather', 'Weather'),
+        ('market', 'Market'),
+        ('transport', 'Transport'),
+        ('civic', 'Civic'),
+        ('health', 'Health'),
+        ('science', 'Science'),
+    ]
+
+    title = models.CharField(max_length=160)
+    slug = models.SlugField(max_length=180, unique=True)
+    category = models.CharField(max_length=12, choices=CATEGORY_CHOICES, default='expedition')
+    summary = models.CharField(
+        max_length=300,
+        help_text='One-line standfirst shown on the news cards.',
+    )
+    body = models.TextField(help_text='Article body; blank lines separate paragraphs.')
+    source = models.CharField(
+        max_length=80,
+        default='Terra Nova Newsroom',
+        help_text='Byline or wire service shown on the article.',
+    )
+    is_featured = models.BooleanField(
+        default=False,
+        help_text='Promoted to the lead story on the News page.',
+    )
+    published_at = models.DateTimeField(db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-published_at']
+
+    def __str__(self):
+        return f'{self.get_category_display()} · {self.title}'
+
+    @property
+    def reading_minutes(self):
+        """Rough reading time — 200 words per minute, minimum one."""
+        return max(1, len(self.body.split()) // 200)
+
+
+class NewsComment(models.Model):
+    """One reader comment under a dispatch (the News comment section)."""
+
+    item = models.ForeignKey(
+        NewsItem,
+        on_delete=models.CASCADE,
+        related_name='comments',
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='news_comments',
+    )
+    body = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return f'{self.user} · {self.item_id}: {self.body[:40]}'
+
+
 class DeviceLogin(models.Model):
     """One device (user-agent fingerprint) a Novarian signs in from.
 

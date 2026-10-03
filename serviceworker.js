@@ -27,11 +27,16 @@ var PRECACHE_URLS = [
   '/static/css/weather.css',
   '/static/css/accessibility.css',
   '/static/css/map.css',
+  '/static/css/toastr.css',
+  '/static/vendor/toastr/toastr.min.css',
   '/static/js/terra.js',
+  '/static/js/toasts.js',
   '/static/js/weather.js',
   '/static/js/accessibility.js',
   '/static/js/net.js',
   '/static/js/map.js',
+  '/static/vendor/jquery/jquery.min.js',
+  '/static/vendor/toastr/toastr.min.js',
   '/static/img/pwa/icon-192x192.png',
   '/static/img/pwa/icon-512x512.png'
 ];

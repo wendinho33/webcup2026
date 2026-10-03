@@ -1,3 +1,7 @@
+from django.conf import settings
+from django.urls import reverse
+
+
 def notifications(request):
     """Unread notification count for the nav bell (passenger pages only)."""
     if getattr(request, 'user', None) and request.user.is_authenticated:
@@ -24,3 +28,12 @@ def net_tier(request):
     raw = request.COOKIES.get('tn_net', '')
     tier = raw if raw in VALID_TIERS else 'full'
     return {'net_tier': tier, 'is_lite': tier == 'lite'}
+
+
+def webpush(request):
+    """VAPID public key + subscription endpoint for the push UI."""
+    conf = getattr(settings, 'WEBPUSH_SETTINGS', {})
+    return {
+        'vapid_public_key': conf.get('VAPID_PUBLIC_KEY', ''),
+        'webpush_save_url': reverse('save_webpush_info'),
+    }

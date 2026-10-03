@@ -18,12 +18,17 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from pwa_webpush.views import save_info
+
 from terra.admin import terra_admin_site
 
 urlpatterns = [
     path('admin/', terra_admin_site.urls),  # Terra Nova Control Deck
     path('i18n/', include('django.conf.urls.i18n')),  # language switcher
     path('', include('pwa.urls')),  # /manifest.json, /serviceworker.js, /offline/
+    # Subscription endpoint from django-pwa-webpush (keep the package's
+    # other routes off the stack — pwa.urls already owns them).
+    path('webpush/save_information', save_info, name='save_webpush_info'),
     path('', include('terra.urls')),
 ]
 

@@ -4,7 +4,7 @@ import re
 from datetime import timedelta
 from decimal import Decimal
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from django.apps import apps
 from django.conf import settings
@@ -22,6 +22,8 @@ from .models import (
     DeviceLogin,
     FareTicket,
     LoginAttempt,
+    NewsComment,
+    NewsItem,
     Notification,
     Profile,
     TaxBill,
@@ -1022,6 +1024,306 @@ class WeatherTests(TestCase):
         home = self.client.get(reverse('terra:home'))
         self.assertContains(home, reverse('terra:weather'))
         self.assertContains(home, reverse('terra:map'))
+
+    # ---- web push (django-pwa-webpush) ----
+
+    def _push_payload(self, endpoint='https://push.example/sub-1'):
+        return {
+            'status_type': 'subscribe',
+            'browser': 'Chrome',
+            'subscription': {
+                'endpoint': endpoint,
+                'keys': {'auth': 'a' * 27, 'p256dh': 'p' * 27},
+            },
+        }
+
+    def _post_subscription(self, payload):
+        return self.client.post(
+            reverse('save_webpush_info'),
+            data=json.dumps(payload),
+            content_type='application/json',
+        )
+
+    def _seed_subscription(self, endpoint='https://push.example/seed'):
+        from pwa_webpush.models import PushInformation, SubscriptionInfo
+
+        user = User.objects.create_user(
+            'pushfan', 'pushfan@example.com', 'push-pass-99x',
+        )
+        sub = SubscriptionInfo.objects.create(
+            browser='Chrome',
+            endpoint=endpoint,
+            auth='auth-token-0000000000000000',
+            p256dh='p256-key-0000000000000000',
+        )
+        PushInformation.objects.create(user=user, subscription=sub)
+        return user, sub
+
+    def test_push_endpoint_saves_subscription_for_reader(self):
+        from pwa_webpush.models import PushInformation, SubscriptionInfo
+
+        user = User.objects.create_user(
+            'pusher', 'pusher@example.com', 'push-pass-99x',
+        )
+        self.client.force_login(user)
+        response = self._post_subscription(self._push_payload())
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(SubscriptionInfo.objects.count(), 1)
+        info = PushInformation.objects.get()
+        self.assertEqual(info.user, user)
+        self.assertEqual(
+            info.subscription.endpoint,
+            'https://push.example/sub-1',
+        )
+        # repeating the same subscription stays idempotent
+        again = self._post_subscription(self._push_payload())
+        self.assertEqual(again.status_code, 201)
+        self.assertEqual(PushInformation.objects.count(), 1)
+
+    def test_push_endpoint_rejects_anonymous_readers(self):
+        from pwa_webpush.models import PushInformation
+
+        response = self._post_subscription(self._push_payload())
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(PushInformation.objects.count(), 0)
+
+    def test_weather_trigger_broadcasts_to_subscribers(self):
+        from pwa_webpush.models import PushInformation
+
+        self._seed_subscription()
+        with patch('terra.push.send_to_subscription') as send:
+            response = self.client.post(reverse('terra:weather_trigger'))
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data['is_simulation'])
+        # a fresh database seeds the 8-day window first (one broadcast),
+        # then the demo fires its own push.
+        self.assertGreaterEqual(data['push_sent'], 1)
+        self.assertTrue(send.called)
+        sim_calls = [
+            str(call.args[1])
+            for call in send.call_args_list
+            if 'terra-sim-' in str(call.args[1])
+        ]
+        self.assertTrue(sim_calls, 'the demo push must carry its tag')
+        payload = sim_calls[0]
+        self.assertIn('"headline"', payload)
+        self.assertIn('"message"', payload)
+        self.assertEqual(PushInformation.objects.count(), 1)
+
+    def test_broadcast_prunes_subscriptions_revoked_by_the_browser(self):
+        from pywebpush import WebPushException
+
+        from terra.push import broadcast_push
+
+        self._seed_subscription(endpoint='https://push.example/dead')
+
+        def revoke(*args, **kwargs):
+            raise WebPushException('Gone', response=Mock(status_code=410))
+
+        with patch('terra.push.send_to_subscription', side_effect=revoke):
+            sent = broadcast_push('Title', 'Body')
+        self.assertEqual(sent, 0)
+        # 410 → the dead subscription rows are removed (cascade)
+        from pwa_webpush.models import PushInformation, SubscriptionInfo
+
+        self.assertEqual(SubscriptionInfo.objects.count(), 0)
+        self.assertEqual(PushInformation.objects.count(), 0)
+
+    def test_broadcast_is_a_noop_without_subscribers(self):
+        from terra.push import broadcast_push
+
+        with patch('terra.push.send_to_subscription') as send:
+            sent = broadcast_push('Title', 'Body')
+        self.assertEqual(sent, 0)
+        send.assert_not_called()
+
+
+class NewsTests(TestCase):
+    """News section: seeded newsroom, filters, article pages, nav links."""
+
+    def test_news_page_renders_lead_story_and_stream(self):
+        response = self.client.get(reverse('terra:news'))
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        for marker in ('nws-lead', 'nws-grid', 'nws-chip', 'nws-filters',
+                       'css/news.css', 'Newsroom'):
+            self.assertIn(marker, html)
+        # the featured dispatch leads the page
+        self.assertContains(
+            response, 'Expedition 01 boarding window opens',
+        )
+        # every other dispatch is listed in the archive
+        self.assertContains(response, 'Heat wave holds')
+        self.assertContains(response, 'TerraX steadies')
+
+    def test_exactly_ten_dispatches_are_seeded(self):
+        from terra.news import NEWS_ITEMS, ensure_news
+
+        created = ensure_news()
+        self.assertEqual(created, [])          # migration already seeded them
+        self.assertEqual(NewsItem.objects.count(), 10)
+        self.assertEqual(len(NEWS_ITEMS), 10)
+        # second run is idempotent — no duplicates
+        self.assertEqual(ensure_news(), [])
+        self.assertEqual(NewsItem.objects.count(), 10)
+
+    def test_seeder_creates_missing_dispatches_only(self):
+        from terra.news import ensure_news
+
+        NewsItem.objects.all().delete()
+        created = ensure_news()
+        self.assertEqual(len(created), 10)
+        self.assertEqual(NewsItem.objects.count(), 10)
+        self.assertEqual(
+            len({n.slug for n in NewsItem.objects.all()}), 10,
+        )                                     # slugs are unique
+
+    def test_dispatches_cover_the_colony_desks(self):
+        categories = set(
+            NewsItem.objects.values_list('category', flat=True),
+        )
+        # all seven desks represented
+        self.assertEqual(
+            categories,
+            {'expedition', 'weather', 'market', 'transport',
+             'civic', 'health', 'science'},
+        )
+        # exactly one lead story, and it is published most recently first
+        self.assertEqual(
+            NewsItem.objects.filter(is_featured=True).count(), 1,
+        )
+        for item in NewsItem.objects.all():
+            self.assertTrue(item.title)
+            self.assertTrue(item.summary)
+            self.assertGreaterEqual(len(item.body.split('\n\n')), 3)
+            self.assertGreaterEqual(item.reading_minutes, 1)
+
+    def test_category_filter_narrows_the_stream(self):
+        response = self.client.get(reverse('terra:news'), {'category': 'transport'})
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        self.assertContains(response, 'Night rails return')
+        self.assertContains(response, 'Second bus line')
+        self.assertNotIn('Heat wave holds', html)
+
+    def test_unknown_category_falls_back_to_the_full_wire(self):
+        response = self.client.get(
+            reverse('terra:news'), {'category': 'nonsense'},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Heat wave holds')
+
+    def test_article_page_renders_paragraphs_and_related(self):
+        item = NewsItem.objects.get(slug='heat-wave-eight-day-anomaly-forecast')
+        response = self.client.get(
+            reverse('terra:news_detail', args=[item.slug]),
+        )
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        self.assertContains(response, item.title)
+        self.assertContains(response, 'nws-article__body')
+        # body splits into distinct paragraphs
+        self.assertEqual(response.context['paragraphs'][0][:30],
+                         item.body.split('\n\n')[0][:30])
+        self.assertGreaterEqual(len(response.context['paragraphs']), 3)
+        # a weather sibling is offered beneath the article
+        self.assertIn('related', response.context)
+        self.assertNotIn(item, response.context['related'])
+        self.assertIn('css/news.css', html)
+
+    def test_unknown_slug_404s(self):
+        response = self.client.get(
+            reverse('terra:news_detail', args=['no-such-dispatch']),
+        )
+        self.assertEqual(response.status_code, 404)
+
+    def test_nav_and_footer_link_to_news(self):
+        home = self.client.get(reverse('terra:news'))
+        self.assertContains(home, reverse('terra:news'))
+        landing = self.client.get(reverse('terra:home'))
+        self.assertContains(landing, reverse('terra:news'))
+
+    # ---- reader comments ----
+
+    SLUG = 'heat-wave-eight-day-anomaly-forecast'
+
+    def _login(self, username='reader'):
+        user = User.objects.create_user(
+            username, f'{username}@example.com', 'news-pass-77x',
+        )
+        self.client.force_login(user)
+        return user
+
+    def test_comment_section_renders_on_the_article(self):
+        response = self.client.get(
+            reverse('terra:news_detail', args=[self.SLUG]),
+        )
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        self.assertIn('nws-comments', html)
+        self.assertIn('nws-comments__empty', html)      # empty state
+        # anonymous readers get a sign-in prompt, not the form
+        self.assertIn(reverse('terra:login'), html)
+        self.assertNotIn('id-news-comment', html)
+
+    def test_signed_in_reader_gets_the_comment_form(self):
+        self._login()
+        page = self.client.get(
+            reverse('terra:news_detail', args=[self.SLUG]),
+        )
+        self.assertContains(page, 'id-news-comment')
+        self.assertContains(page, 'Post comment')
+        self.assertContains(
+            page, reverse('terra:news_comment', args=[self.SLUG]),
+        )
+
+    def test_anonymous_comment_redirects_to_login(self):
+        response = self.client.post(
+            reverse('terra:news_comment', args=[self.SLUG]),
+            {'body': 'hello from orbit'},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('terra:login'), response['Location'])
+        self.assertEqual(NewsComment.objects.count(), 0)
+
+    def test_comment_posts_displays_and_counts(self):
+        self._login()
+        body = 'Eight days of anomalies — hydrate, Novarians.'
+        response = self.client.post(
+            reverse('terra:news_comment', args=[self.SLUG]),
+            {'body': body},
+        )
+        self.assertRedirects(
+            response, reverse('terra:news_detail', args=[self.SLUG]),
+        )
+        comment = NewsComment.objects.get()
+        self.assertEqual(comment.body, body)
+        self.assertEqual(comment.user.username, 'reader')
+
+        page = self.client.get(
+            reverse('terra:news_detail', args=[self.SLUG]),
+        )
+        self.assertContains(page, body)                  # the comment itself
+        self.assertContains(page, 'reader')              # the author
+        self.assertContains(page, '1 comment')           # plural heading (en)
+        self.assertNotIn('nws-comments__empty', page.content.decode())
+
+    def test_blank_comment_is_rejected(self):
+        self._login()
+        self.client.post(
+            reverse('terra:news_comment', args=[self.SLUG]),
+            {'body': '    '},
+        )
+        self.assertEqual(NewsComment.objects.count(), 0)
+
+    def test_long_comments_are_capped_at_1000_characters(self):
+        self._login()
+        self.client.post(
+            reverse('terra:news_comment', args=[self.SLUG]),
+            {'body': 'x' * 1500},
+        )
+        self.assertEqual(len(NewsComment.objects.get().body), 1000)
 
 
 class CivicTests(TestCase):

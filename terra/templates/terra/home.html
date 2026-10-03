@@ -1,26 +1,27 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <section class="hero">
   <div class="container hero__grid">
     <div class="hero__copy">
-      <p class="eyebrow" data-reveal><span class="pulse"></span>Transit window 07 · 41.2 ly from Sol</p>
+      <p class="eyebrow" data-reveal><span class="pulse"></span>{% trans "Transit window 07 · 41.2 ly from Sol" %}</p>
       <h1 class="hero__title" data-reveal style="--d:.08s">
-        A second <em>Earth</em>,<br>ready for first<br><em>footsteps.</em>
+        {% blocktrans %}A second <em>Earth</em>,<br>ready for first<br><em>footsteps.</em>{% endblocktrans %}
       </h1>
       <p class="hero__lede" data-reveal style="--d:.16s">
-        Forty-one light-years out, Terra Nova circles a quiet sun: 1.02&nbsp;g, a 21%
+        {% blocktrans %}Forty-one light-years out, Terra Nova circles a quiet sun: 1.02&nbsp;g, a 21%
         oxygen sky, six oceans — and no extinction events on record. Expedition&nbsp;01
-        opens this year.
+        opens this year.{% endblocktrans %}
       </p>
       <div class="hero__cta" data-reveal style="--d:.24s">
-        <a class="btn btn--solid btn--lg" href="{% url 'terra:signup' %}">Claim your passage</a>
-        <a class="btn btn--line btn--lg" href="#manifesto">Read the manifesto</a>
+        <a class="btn btn--solid btn--lg" href="{% url 'terra:signup' %}">{% trans "Claim your passage" %}</a>
+        <a class="btn btn--line btn--lg" href="#manifesto">{% trans "Read the manifesto" %}</a>
       </div>
       <dl class="hero__stats" data-reveal style="--d:.32s">
-        <div><dt>Gravity</dt><dd>1.02 <span>g</span></dd></div>
-        <div><dt>Oxygen</dt><dd>21.4 <span>%</span></dd></div>
-        <div><dt>Ocean</dt><dd>68 <span>%</span></dd></div>
+        <div><dt>{% trans "Gravity" %}</dt><dd>1.02 <span>g</span></dd></div>
+        <div><dt>{% trans "Oxygen" %}</dt><dd>21.4 <span>%</span></dd></div>
+        <div><dt>{% trans "Ocean" %}</dt><dd>68 <span>%</span></dd></div>
       </dl>
     </div>
 
@@ -38,33 +39,33 @@
           <div class="planet__rim"></div>
         </div>
       </div>
-      <div class="stage__chip stage__chip--a mono"><span>OCEAN COVER</span><strong>68%</strong></div>
-      <div class="stage__chip stage__chip--b mono"><span>SURFACE GRAVITY</span><strong>1.02 G</strong></div>
-      <div class="stage__chip stage__chip--c mono"><span>STATUS</span><strong class="ok">BOARDING</strong></div>
+      <div class="stage__chip stage__chip--a mono"><span>{% trans "OCEAN COVER" %}</span><strong>68%</strong></div>
+      <div class="stage__chip stage__chip--b mono"><span>{% trans "SURFACE GRAVITY" %}</span><strong>1.02 G</strong></div>
+      <div class="stage__chip stage__chip--c mono"><span>{% trans "STATUS" %}</span><strong class="ok">{% trans "BOARDING" %}</strong></div>
     </div>
   </div>
 
-  <div class="hero__scroll mono" aria-hidden="true"><span></span>SCROLL</div>
+  <div class="hero__scroll mono" aria-hidden="true"><span></span>{% trans "SCROLL" %}</div>
 </section>
 
 <div class="ticker" aria-hidden="true">
   <div class="ticker__track">
     <div class="ticker__group">
       <span>TERRA NOVA · K-284 b</span><span class="tick-dot">✦</span>
-      <span>DAY LENGTH 26.5 H</span><span class="tick-dot">✦</span>
+      <span>{% trans "DAY LENGTH 26.5 H" %}</span><span class="tick-dot">✦</span>
       <span>O₂ 21.4% · N₂ 76%</span><span class="tick-dot">✦</span>
-      <span>MEAN TEMP 14.2°C</span><span class="tick-dot">✦</span>
-      <span>NO EXTINCTION EVENTS ON RECORD</span><span class="tick-dot">✦</span>
-      <span>EXPEDITION 01 · BOARDING NOW</span><span class="tick-dot">✦</span>
+      <span>{% trans "MEAN TEMP 14.2°C" %}</span><span class="tick-dot">✦</span>
+      <span>{% trans "NO EXTINCTION EVENTS ON RECORD" %}</span><span class="tick-dot">✦</span>
+      <span>{% trans "EXPEDITION 01 · BOARDING NOW" %}</span><span class="tick-dot">✦</span>
       <span>TERRAX (TRX) · 1.25× BTC</span><span class="tick-dot">✦</span>
     </div>
     <div class="ticker__group">
       <span>TERRA NOVA · K-284 b</span><span class="tick-dot">✦</span>
-      <span>DAY LENGTH 26.5 H</span><span class="tick-dot">✦</span>
+      <span>{% trans "DAY LENGTH 26.5 H" %}</span><span class="tick-dot">✦</span>
       <span>O₂ 21.4% · N₂ 76%</span><span class="tick-dot">✦</span>
-      <span>MEAN TEMP 14.2°C</span><span class="tick-dot">✦</span>
-      <span>NO EXTINCTION EVENTS ON RECORD</span><span class="tick-dot">✦</span>
-      <span>EXPEDITION 01 · BOARDING NOW</span><span class="tick-dot">✦</span>
+      <span>{% trans "MEAN TEMP 14.2°C" %}</span><span class="tick-dot">✦</span>
+      <span>{% trans "NO EXTINCTION EVENTS ON RECORD" %}</span><span class="tick-dot">✦</span>
+      <span>{% trans "EXPEDITION 01 · BOARDING NOW" %}</span><span class="tick-dot">✦</span>
       <span>TERRAX (TRX) · 1.25× BTC</span><span class="tick-dot">✦</span>
     </div>
   </div>
@@ -72,37 +73,37 @@
 <section class="section manifesto" id="manifesto">
   <div class="container">
     <header class="section__head">
-      <p class="eyebrow" data-reveal>01 — Manifesto</p>
-      <h2 class="section__title" data-reveal style="--d:.08s">We were never meant to live on only <em>one</em> world.</h2>
+      <p class="eyebrow" data-reveal>{% trans "01 — Manifesto" %}</p>
+      <h2 class="section__title" data-reveal style="--d:.08s">{% trans "We were never meant to live on only" %} <em>{% trans "one" %}</em> {% trans "world." %}</h2>
     </header>
 
     <div class="manifesto__grid">
       <div class="manifesto__body">
         <p data-reveal>
-          Terra Nova was found the honest way — by an array of telescopes listening
+          {% blocktrans %}Terra Nova was found the honest way — by an array of telescopes listening
           for the colour of water. In 2025 the LAGOON survey returned a spectrum that
           no model could explain away: shallow seas, free oxygen, a magnetosphere
-          holding the line.
+          holding the line.{% endblocktrans %}
         </p>
         <p data-reveal style="--d:.1s">
-          So we are going. Not because this world failed, but because a species with
+          {% blocktrans %}So we are going. Not because this world failed, but because a species with
           one habitat is a species one accident from silence. The first thousand
           passengers will land at Aurelia Basin with seeds, printers and the
-          patience to do it better.
+          patience to do it better.{% endblocktrans %}
         </p>
         <blockquote data-reveal style="--d:.16s">
-          “Terra Nova is not an escape. It is a second draft, written in the same
-          hand — gentler this time.”
+          {% blocktrans %}“Terra Nova is not an escape. It is a second draft, written in the same
+          hand — gentler this time.”{% endblocktrans %}
           <cite class="mono">— LAGOON CHARTER, ART. I</cite>
         </blockquote>
       </div>
 
       <aside class="manifesto__facts">
-        <div class="fact" data-reveal><span class="fact__k mono">DESIGNATION</span><span class="fact__v">K-284 b</span></div>
-        <div class="fact" data-reveal style="--d:.06s"><span class="fact__k mono">DISTANCE</span><span class="fact__v">41.2 ly</span></div>
-        <div class="fact" data-reveal style="--d:.12s"><span class="fact__k mono">DISCOVERED</span><span class="fact__v">2025 · LAGOON</span></div>
-        <div class="fact" data-reveal style="--d:.18s"><span class="fact__k mono">ATMOSPHERE</span><span class="fact__v">N₂ 76% · O₂ 21.4%</span></div>
-        <div class="fact" data-reveal style="--d:.24s"><span class="fact__k mono">EXTINCTIONS</span><span class="fact__v fact__v--ok">0 on record</span></div>
+        <div class="fact" data-reveal><span class="fact__k mono">{% trans "DESIGNATION" %}</span><span class="fact__v">K-284 b</span></div>
+        <div class="fact" data-reveal style="--d:.06s"><span class="fact__k mono">{% trans "DISTANCE" %}</span><span class="fact__v">41.2 ly</span></div>
+        <div class="fact" data-reveal style="--d:.12s"><span class="fact__k mono">{% trans "DISCOVERED" %}</span><span class="fact__v">2025 · LAGOON</span></div>
+        <div class="fact" data-reveal style="--d:.18s"><span class="fact__k mono">{% trans "ATMOSPHERE" %}</span><span class="fact__v">N₂ 76% · O₂ 21.4%</span></div>
+        <div class="fact" data-reveal style="--d:.24s"><span class="fact__k mono">{% trans "EXTINCTIONS" %}</span><span class="fact__v fact__v--ok">{% trans "0 on record" %}</span></div>
       </aside>
     </div>
   </div>
@@ -112,12 +113,12 @@
   <div class="container">
     <header class="section__head section__head--split">
       <div>
-        <p class="eyebrow" data-reveal>02 — Atlas</p>
-        <h2 class="section__title" data-reveal style="--d:.08s">Four biomes, one <em>breathable</em> world.</h2>
+        <p class="eyebrow" data-reveal>{% trans "02 — Atlas" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.08s">{% trans "Four biomes, one" %} <em>{% trans "breathable" %}</em> {% trans "world." %}</h2>
       </div>
       <p class="section__lede" data-reveal style="--d:.14s">
-        Every sector has been surveyed, named and reserved for its first residents.
-        Your assignment is drawn the moment your passage is confirmed.
+        {% blocktrans %}Every sector has been surveyed, named and reserved for its first residents.
+        Your assignment is drawn the moment your passage is confirmed.{% endblocktrans %}
       </p>
     </header>
 
@@ -126,8 +127,8 @@
         <div class="biome__art"><span class="biome__index mono">A—01</span><span class="biome__sun"></span></div>
         <div class="biome__meta">
           <h3>Aurelia Basin</h3>
-          <p>Warm shallow seas and floating forests. The landing site, and the only place on the manifest with a beach.</p>
-          <span class="biome__stat mono">WATER 29°C</span>
+          <p>{% trans "Warm shallow seas and floating forests. The landing site, and the only place on the manifest with a beach." %}</p>
+          <span class="biome__stat mono">{% trans "WATER 29°C" %}</span>
         </div>
       </article>
 
@@ -135,8 +136,8 @@
         <div class="biome__art"><span class="biome__index mono">B—02</span><span class="biome__sun"></span></div>
         <div class="biome__meta">
           <h3>Vermilion Steps</h3>
-          <p>Iron-red canyon country, dry and climbable at dawn. Oxide dust turns the whole valley the colour of embers.</p>
-          <span class="biome__stat mono">CANYON DEPTH 4 KM</span>
+          <p>{% trans "Iron-red canyon country, dry and climbable at dawn. Oxide dust turns the whole valley the colour of embers." %}</p>
+          <span class="biome__stat mono">{% trans "CANYON DEPTH 4 KM" %}</span>
         </div>
       </article>
 
@@ -144,8 +145,8 @@
         <div class="biome__art"><span class="biome__index mono">C—03</span><span class="biome__sun"></span></div>
         <div class="biome__meta">
           <h3>The Glass Tundra</h3>
-          <p>Frozen plains of silicate frost that ring like struck crystal at dusk. Quietest terrain surveyed.</p>
-          <span class="biome__stat mono">LOW −40°C</span>
+          <p>{% trans "Frozen plains of silicate frost that ring like struck crystal at dusk. Quietest terrain surveyed." %}</p>
+          <span class="biome__stat mono">{% trans "LOW −40°C" %}</span>
         </div>
       </article>
 
@@ -153,39 +154,39 @@
         <div class="biome__art"><span class="biome__index mono">D—04</span><span class="biome__sun"></span></div>
         <div class="biome__meta">
           <h3>Pelagos Deep</h3>
-          <p>A midnight ocean lit from below by living light. Nine kilometres of water and the planet's best nightsky.</p>
-          <span class="biome__stat mono">DEPTH 11 KM</span>
+          <p>{% trans "A midnight ocean lit from below by living light. Nine kilometres of water and the planet's best nightsky." %}</p>
+          <span class="biome__stat mono">{% trans "DEPTH 11 KM" %}</span>
         </div>
       </article>
     </div>
   </div>
 </section>
-<section class="band" aria-label="Planet facts">
+<section class="band" aria-label="{% trans "Planet facts" %}">
   <div class="container band__grid">
     <div class="stat" data-reveal>
       <span class="stat__num" data-count="41.2" data-decimals="1">41.2</span>
       <span class="stat__unit mono">LY</span>
-      <span class="stat__k">From Sol</span>
+      <span class="stat__k">{% trans "From Sol" %}</span>
     </div>
     <div class="stat" data-reveal style="--d:.06s">
       <span class="stat__num" data-count="1.02" data-decimals="2">1.02</span>
       <span class="stat__unit mono">G</span>
-      <span class="stat__k">Surface gravity</span>
+      <span class="stat__k">{% trans "Surface gravity" %}</span>
     </div>
     <div class="stat" data-reveal style="--d:.12s">
       <span class="stat__num" data-count="21.4" data-decimals="1">21.4</span>
       <span class="stat__unit mono">%</span>
-      <span class="stat__k">Oxygen</span>
+      <span class="stat__k">{% trans "Oxygen" %}</span>
     </div>
     <div class="stat" data-reveal style="--d:.18s">
       <span class="stat__num" data-count="68">68</span>
       <span class="stat__unit mono">%</span>
-      <span class="stat__k">Ocean cover</span>
+      <span class="stat__k">{% trans "Ocean cover" %}</span>
     </div>
     <div class="stat" data-reveal style="--d:.24s">
       <span class="stat__num">0</span>
-      <span class="stat__unit mono">COUNT</span>
-      <span class="stat__k">Mass extinctions</span>
+      <span class="stat__unit mono">{% trans "COUNT" %}</span>
+      <span class="stat__k">{% trans "Mass extinctions" %}</span>
     </div>
   </div>
 </section>
@@ -193,44 +194,44 @@
 <section class="section program" id="program">
   <div class="container">
     <header class="section__head">
-      <p class="eyebrow" data-reveal>03 — Program</p>
-      <h2 class="section__title" data-reveal style="--d:.08s">The road to <em>first footsteps</em>.</h2>
+      <p class="eyebrow" data-reveal>{% trans "03 — Program" %}</p>
+      <h2 class="section__title" data-reveal style="--d:.08s">{% trans "The road to" %} <em>{% trans "first footsteps" %}</em>.</h2>
     </header>
 
     <ol class="timeline">
       <li class="tl" data-reveal>
         <span class="tl__year mono">2023</span>
         <div class="tl__body">
-          <h3>The LAGOON array wakes</h3>
-          <p>Ninety-six dishes across the southern hemisphere begin listening for the colour of water in 2,400 nearby systems.</p>
+          <h3>{% trans "The LAGOON array wakes" %}</h3>
+          <p>{% trans "Ninety-six dishes across the southern hemisphere begin listening for the colour of water in 2,400 nearby systems." %}</p>
         </div>
       </li>
       <li class="tl" data-reveal style="--d:.06s">
         <span class="tl__year mono">2025</span>
         <div class="tl__body">
-          <h3>Terra Nova confirmed</h3>
-          <p>Free oxygen, liquid seas, a magnetosphere holding the line. The spectrum no model could explain away gets a name.</p>
+          <h3>{% trans "Terra Nova confirmed" %}</h3>
+          <p>{% trans "Free oxygen, liquid seas, a magnetosphere holding the line. The spectrum no model could explain away gets a name." %}</p>
         </div>
       </li>
       <li class="tl tl--now" data-reveal style="--d:.12s">
         <span class="tl__year mono">2026</span>
         <div class="tl__body">
-          <h3>Expedition 01 opens <span class="tl__tag mono">NOW</span></h3>
-          <p>The passenger registry goes live. One thousand passages, assigned sectors, callsigns issued on confirmation.</p>
+          <h3>{% trans "Expedition 01 opens" %} <span class="tl__tag mono">{% trans "NOW" %}</span></h3>
+          <p>{% trans "The passenger registry goes live. One thousand passages, assigned sectors, callsigns issued on confirmation." %}</p>
         </div>
       </li>
       <li class="tl" data-reveal style="--d:.18s">
         <span class="tl__year mono">2029</span>
         <div class="tl__body">
-          <h3>Touchdown at Aurelia Basin</h3>
-          <p>First landing party steps onto warm sand with seeds, printers and the patience to do it better this time.</p>
+          <h3>{% trans "Touchdown at Aurelia Basin" %}</h3>
+          <p>{% trans "First landing party steps onto warm sand with seeds, printers and the patience to do it better this time." %}</p>
         </div>
       </li>
       <li class="tl" data-reveal style="--d:.24s">
         <span class="tl__year mono">2034</span>
         <div class="tl__body">
-          <h3>The first town</h3>
-          <p>A thousand researchers, a harbour, and the first child to hold a passport issued by two worlds.</p>
+          <h3>{% trans "The first town" %}</h3>
+          <p>{% trans "A thousand researchers, a harbour, and the first child to hold a passport issued by two worlds." %}</p>
         </div>
       </li>
     </ol>
@@ -241,16 +242,16 @@
   <div class="container">
     <div class="access__panel" data-reveal>
       <div class="access__copy">
-        <p class="eyebrow">04 — Access</p>
-        <h2 class="section__title">Passage is free.<br><em>Seats are not infinite.</em></h2>
+        <p class="eyebrow">{% trans "04 — Access" %}</p>
+        <h2 class="section__title">{% blocktrans %}Passage is free.<br><em>Seats are not infinite.</em>{% endblocktrans %}</h2>
         <p class="access__lede">
-          Create your passenger record and you are on the manifest: callsign issued,
+          {% blocktrans %}Create your passenger record and you are on the manifest: callsign issued,
           sector assigned, departure window reserved. Sign in any time to watch the
-          countdown from Mission Control.
+          countdown from Mission Control.{% endblocktrans %}
         </p>
         <div class="access__cta">
-          <a class="btn btn--solid btn--lg" href="{% url 'terra:signup' %}">Claim your passage</a>
-          <a class="btn btn--line btn--lg" href="{% url 'terra:login' %}">I already fly</a>
+          <a class="btn btn--solid btn--lg" href="{% url 'terra:signup' %}">{% trans "Claim your passage" %}</a>
+          <a class="btn btn--line btn--lg" href="{% url 'terra:login' %}">{% trans "I already fly" %}</a>
         </div>
       </div>
       <div class="access__planet" aria-hidden="true"></div>

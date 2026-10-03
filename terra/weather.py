@@ -178,6 +178,19 @@ def ensure_alerts():
         )
         if was_created:
             created.append(alert)
+    if created:
+        # Server-initiated push: subscribers' devices receive this even
+        # with every tab closed (the service worker renders the payload).
+        from .push import broadcast_push  # local import avoids circulars
+
+        lead = created[0]
+        broadcast_push(
+            title=lead.headline,
+            message=lead.message,
+            url='/weather/',
+            tag=f'terra-alert-{lead.id}',
+            ttl=3600,
+        )
     return created
 
 

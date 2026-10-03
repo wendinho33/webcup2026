@@ -34,6 +34,8 @@ from .models import (
     DeviceLogin,
     FareTicket,
     LoginAttempt,
+    NewsComment,
+    NewsItem,
     Notification,
     Profile,
     TaxBill,
@@ -60,6 +62,9 @@ _TONES = {
     'user': 'ice', 'ai': 'mint', 'agent': 'solar2', 'system': 'dim',
     'bus': 'mint', 'train': 'ice',
     'device': 'ice', 'security': 'solar2', 'info': 'dim',
+    'expedition': 'mint', 'weather': 'solar', 'market': 'ice',
+    'transport': 'ice', 'civic': 'mint', 'health': 'solar2',
+    'science': 'ice',
 }
 
 
@@ -517,6 +522,72 @@ class WeatherAlertAdmin(admin.ModelAdmin):
         return f'{obj.anomaly:+} °C'
 
 
+# ── Newsroom ──────────────────────────────────────────────────────────
+class NewsItemAdmin(admin.ModelAdmin):
+    list_display = ('published', 'category_chip', 'featured', 'title',
+                    'source', 'reading_time')
+    list_filter = ('category', 'is_featured')
+    search_fields = ('title', 'summary', 'body')
+    date_hierarchy = 'published_at'
+    readonly_fields = ('created_at',)
+    ordering = ('-published_at',)
+    prepopulated_fields = {'slug': ('title',)}
+    fieldsets = (
+        (None, {'fields': ('title', 'slug', 'category', 'source')}),
+        ('Story', {'fields': ('summary', 'body', 'is_featured')}),
+        ('Timing', {'fields': ('published_at', 'created_at')}),
+    )
+
+    @admin.display(description='Published', ordering='published_at')
+    def published(self, obj):
+        return obj.published_at.strftime('%d %b %Y · %H:%M')
+
+    @admin.display(description='Desk')
+    def category_chip(self, obj):
+        return chip(obj.get_category_display(), obj.category)
+
+    @admin.display(description='Featured')
+    def featured(self, obj):
+        return chip('Lead' if obj.is_featured else '—',
+                    'solar' if obj.is_featured else 'dim')
+
+    @admin.display(description='Read')
+    def reading_time(self, obj):
+        return f'{obj.reading_minutes} min'
+
+
+class NewsCommentInline(admin.TabularInline):
+    """Reader comments, moderated from the dispatch itself."""
+
+    model = NewsComment
+    extra = 0
+    readonly_fields = ('user', 'body', 'created_at')
+    ordering = ('created_at',)
+
+
+class NewsCommentAdmin(admin.ModelAdmin):
+    list_display = ('passenger', 'excerpt', 'posted')
+    search_fields = ('body', 'user__username', 'user__first_name')
+    list_filter = ('created_at',)
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
+
+    @admin.display(description='Passenger', ordering='user__username')
+    def passenger(self, obj):
+        return obj.user.get_full_name() or obj.user.username
+
+    @admin.display(description='Comment')
+    def excerpt(self, obj):
+        return obj.body[:60]
+
+    @admin.display(description='Posted', ordering='created_at')
+    def posted(self, obj):
+        return obj.created_at.strftime('%d %b %Y · %H:%M')
+
+
+NewsItemAdmin.inlines = [NewsCommentInline]
+
+
 # ── Security watch ─────────────────────────────────────────────────────
 class DeviceLoginAdmin(admin.ModelAdmin):
     list_display = ('passenger', 'short_fp', 'ip', 'first_seen', 'last_seen',
@@ -641,6 +712,8 @@ terra_admin_site.register(FareTicket, FareTicketAdmin)
 terra_admin_site.register(ChatThread, ChatThreadAdmin)
 terra_admin_site.register(ChatMessage, ChatMessageAdmin)
 terra_admin_site.register(WeatherAlert, WeatherAlertAdmin)
+terra_admin_site.register(NewsItem, NewsItemAdmin)
+terra_admin_site.register(NewsComment, NewsCommentAdmin)
 terra_admin_site.register(DeviceLogin, DeviceLoginAdmin)
 terra_admin_site.register(LoginAttempt, LoginAttemptAdmin)
 terra_admin_site.register(Notification, NotificationAdmin)

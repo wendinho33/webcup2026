@@ -1,29 +1,29 @@
 {% extends "base.html" %}
-{% load static money %}
+{% load static i18n money %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/civic.css' %}">
 {% endblock %}
 
-{% block title %}Health — Terra Nova{% endblock %}
+{% block title %}{% trans "Health — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="hlt">
   <div class="container">
     <header class="hlt__head" data-reveal>
       <div>
-        <p class="eyebrow"><span class="pulse"></span>Health services · nova network</p>
-        <h1 class="hlt__title">Your body, <em>watched.</em></h1>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Health services · nova network" %}</p>
+        <h1 class="hlt__title">{% trans "Your body," %} <em>{% trans "watched." %}</em></h1>
         <p class="hlt__lede">
-          The Terra Watch streams your vitals into the colony's health record,
+          {% blocktrans %}The Terra Watch streams your vitals into the colony's health record,
           books medical services and points you at the nearest care — wherever
-          you wake up on the new Earth.
+          you wake up on the new Earth.{% endblocktrans %}
         </p>
       </div>
-      <nav class="hlt__anchors" aria-label="Health sections">
+      <nav class="hlt__anchors" aria-label="{% trans "Health sections" %}">
         <a href="#watch">Terra Watch</a>
-        <a href="#medical">Medical service</a>
-        <a href="#facilities">Nearby care</a>
+        <a href="#medical">{% trans "Medical service" %}</a>
+        <a href="#facilities">{% trans "Nearby care" %}</a>
       </nav>
     </header>
 
@@ -44,7 +44,7 @@
         <header class="gov-card__head">
           <h2>Terra Watch</h2>
           {% if profile.terra_watch %}
-            <span class="gov-pill gov-pill--paid">Paired · streaming</span>
+            <span class="gov-pill gov-pill--paid">{% trans "Paired · streaming" %}</span>
           {% else %}
             <span class="gov-tag mono">{{ watch_price|trx }} TRX</span>
           {% endif %}
@@ -52,28 +52,28 @@
 
         {% if not profile.terra_watch %}
           <p class="gov-card__note">
-            The colony's health band: continuous heart rate and blood oxygen,
+            {% blocktrans %}The colony's health band: continuous heart rate and blood oxygen,
             sleep and step tracking, heat-strain warnings during the current
             warm spell, and a one-press beacon that opens Terra Chat with your
-            vitals attached. 50 TRX, one payment, yours for the expedition.
+            vitals attached. 50 TRX, one payment, yours for the expedition.{% endblocktrans %}
           </p>
           <ul class="hlt-perks">
-            <li>24/7 vitals streaming to your health record</li>
-            <li>Heat-strain alerts synced with the weather service</li>
-            <li>Fall detection → instant Novarian-agent contact</li>
+            <li>{% trans "24/7 vitals streaming to your health record" %}</li>
+            <li>{% trans "Heat-strain alerts synced with the weather service" %}</li>
+            <li>{% trans "Fall detection → instant Novarian-agent contact" %}</li>
           </ul>
           <form method="post" action="{% url 'terra:terra_watch' %}">
             {% csrf_token %}
             <button class="btn btn--solid btn--block" type="submit">
-              Buy Terra Watch · {{ watch_price|trx }} TRX
+              {% blocktrans with price=watch_price|trx %}Buy Terra Watch · {{ price }} TRX{% endblocktrans %}
             </button>
           </form>
-          <p class="hlt-fine mono">SETTLES FROM YOUR WALLETS · LEDGER ENTRY: TERRA WATCH DEVICE</p>
+          <p class="hlt-fine mono">{% trans "SETTLES FROM YOUR WALLETS · LEDGER ENTRY: TERRA WATCH DEVICE" %}</p>
         {% else %}
           <p class="gov-card__note">
-            Device <strong class="hlt-device-id">{{ device }}</strong> paired ·
+            {% blocktrans with device=device since=profile.created_at|date:"d M Y" %}Device <strong class="hlt-device-id">{{ device }}</strong> paired ·
             streaming to your social-security health cover since
-            {{ profile.created_at|date:"d M Y" }}.
+            {{ since }}.{% endblocktrans %}
           </p>
         {% endif %}
       </div>
@@ -81,24 +81,24 @@
     {% if profile.terra_watch and vitals %}
       <article class="gov-card hlt-vitals" data-reveal style="--d:.06s">
         <header class="gov-card__head">
-          <h3>Today’s reading</h3>
+          <h3>{% trans "Today’s reading" %}</h3>
           <span class="gov-tag mono">{{ vitals.device }}</span>
         </header>
         {% if vitals.heat_strain %}
           <p class="hlt-heat">
-            Elevated heat strain — anomaly +{{ vitals.anomaly }}°C. Hydrate
-            every 30 minutes and avoid surface work 11:00–16:00.
+            {% blocktrans with anomaly=vitals.anomaly %}Elevated heat strain — anomaly +{{ anomaly }}°C. Hydrate
+            every 30 minutes and avoid surface work 11:00–16:00.{% endblocktrans %}
           </p>
         {% endif %}
         <div class="hlt-metrics">
-          <div class="hlt-metric"><span class="mono">Heart rate</span><strong>{{ vitals.heart_rate }}<em>bpm</em></strong></div>
-          <div class="hlt-metric"><span class="mono">Blood oxygen</span><strong>{{ vitals.spo2 }}<em>%</em></strong></div>
-          <div class="hlt-metric"><span class="mono">Sleep</span><strong>{{ vitals.sleep }}<em>h</em></strong></div>
-          <div class="hlt-metric"><span class="mono">Steps</span><strong>{{ vitals.steps }}<em>today</em></strong></div>
-          <div class="hlt-metric"><span class="mono">Stress</span><strong>{{ vitals.stress }}<em>index</em></strong></div>
-          <div class="hlt-metric"><span class="mono">Readiness</span><strong>{{ vitals.readiness }}<em>%</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Heart rate" %}</span><strong>{{ vitals.heart_rate }}<em>bpm</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Blood oxygen" %}</span><strong>{{ vitals.spo2 }}<em>%</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Sleep" %}</span><strong>{{ vitals.sleep }}<em>h</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Steps" %}</span><strong>{{ vitals.steps }}<em>{% trans "today" %}</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Stress" %}</span><strong>{{ vitals.stress }}<em>{% trans "index" %}</em></strong></div>
+          <div class="hlt-metric"><span class="mono">{% trans "Readiness" %}</span><strong>{{ vitals.readiness }}<em>%</em></strong></div>
         </div>
-        <div class="hlt-bars" aria-label="Seven day readiness">
+        <div class="hlt-bars" aria-label="{% trans "Seven day readiness" %}">
           {% for bar in vitals.bars %}
             <span class="hlt-bar" style="--h: {{ bar }}%"><em class="mono">{{ bar }}</em></span>
           {% endfor %}
@@ -107,45 +107,45 @@
     {% endif %}
     <section class="section gov-section" id="medical">
       <header class="section__head">
-        <p class="eyebrow" data-reveal>Medical service</p>
-        <h2 class="section__title" data-reveal style="--d:.06s">Care that <em>comes to you.</em></h2>
+        <p class="eyebrow" data-reveal>{% trans "Medical service" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Care that" %} <em>{% trans "comes to you." %}</em></h2>
       </header>
 
       <div class="gov__grid-2">
         <article class="gov-card" data-reveal>
           <header class="gov-card__head">
-            <h3>Request medical service</h3>
-            <span class="gov-tag mono">Tracking MD-####</span>
+            <h3>{% trans "Request medical service" %}</h3>
+            <span class="gov-tag mono">{% trans "Tracking MD-####" %}</span>
           </header>
           <form class="gov-form" method="post" action="{% url 'terra:civic_request' %}">
             {% csrf_token %}
             <input type="hidden" name="category" value="medical">
             <input type="hidden" name="next" value="health">
-            <label for="med-service">Service needed</label>
+            <label for="med-service">{% trans "Service needed" %}</label>
             <select id="med-service" name="location" required>
-              <option value="Home visit">Home visit — a medic comes to you</option>
-              <option value="Teleconsult">Teleconsult — video with Nova Central</option>
-              <option value="Medication delivery">Medication delivery</option>
-              <option value="Ambulance support">Ambulance support</option>
-              <option value="Physiotherapy">Physiotherapy session</option>
+              <option value="Home visit">{% trans "Home visit — a medic comes to you" %}</option>
+              <option value="Teleconsult">{% trans "Teleconsult — video with Nova Central" %}</option>
+              <option value="Medication delivery">{% trans "Medication delivery" %}</option>
+              <option value="Ambulance support">{% trans "Ambulance support" %}</option>
+              <option value="Physiotherapy">{% trans "Physiotherapy session" %}</option>
             </select>
-            <label for="med-sector">Sector</label>
+            <label for="med-sector">{% trans "Sector" %}</label>
             <select id="med-sector" name="sector" required>
               {% for code, name in sector_names.items %}
                 <option value="{{ code }}"{% if code == profile.sector %} selected{% endif %}>{{ name }}</option>
               {% endfor %}
             </select>
-            <label for="med-detail">Notes for the care team</label>
+            <label for="med-detail">{% trans "Notes for the care team" %}</label>
             <textarea id="med-detail" name="detail" rows="3" maxlength="600"
-                      placeholder="Symptoms, address, best time to reach you…"></textarea>
-            <button class="btn btn--solid" type="submit">Request service</button>
+                      placeholder="{% trans "Symptoms, address, best time to reach you…" %}"></textarea>
+            <button class="btn btn--solid" type="submit">{% trans "Request service" %}</button>
           </form>
         </article>
 
         <article class="gov-card" data-reveal style="--d:.08s">
           <header class="gov-card__head">
-            <h3>My medical requests</h3>
-            <span class="gov-tag mono">{{ medical_requests|length }} on file</span>
+            <h3>{% trans "My medical requests" %}</h3>
+            <span class="gov-tag mono">{% blocktrans count n=medical_requests|length %}{{ n }} on file{% plural %}{{ n }} on file{% endblocktrans %}</span>
           </header>
           <ul class="gov-requests">
             {% for r in medical_requests %}
@@ -159,7 +159,7 @@
                 <span class="gov-pill gov-pill--{{ r.status_slug }}">{{ r.status_label }}</span>
               </li>
             {% empty %}
-              <li class="gov-empty">No medical requests — the care team is standing by.</li>
+              <li class="gov-empty">{% trans "No medical requests — the care team is standing by." %}</li>
             {% endfor %}
           </ul>
         </article>
@@ -169,12 +169,12 @@
     <section class="section gov-section" id="facilities">
       <header class="section__head section__head--split">
         <div>
-          <p class="eyebrow" data-reveal>Nearby care</p>
-          <h2 class="section__title" data-reveal style="--d:.06s">Hospitals in your <em>vicinity.</em></h2>
+          <p class="eyebrow" data-reveal>{% trans "Nearby care" %}</p>
+          <h2 class="section__title" data-reveal style="--d:.06s">{% trans "Hospitals in your" %} <em>{% trans "vicinity." %}</em></h2>
         </div>
         <p class="section__lede" data-reveal style="--d:.14s">
-          Distances are measured from your habitat. Your sector's facility is
-          always walkable; the full network is shown nearest-first.
+          {% blocktrans %}Distances are measured from your habitat. Your sector's facility is
+          always walkable; the full network is shown nearest-first.{% endblocktrans %}
         </p>
       </header>
 
@@ -185,9 +185,9 @@
             <header class="gov-card__head">
               <h3>{{ f.name }}</h3>
               {% if forloop.first %}
-                <span class="gov-pill gov-pill--urgent">Nearest</span>
+                <span class="gov-pill gov-pill--urgent">{% trans "Nearest" %}</span>
               {% elif f.is_home %}
-                <span class="gov-tag mono">Your sector</span>
+                <span class="gov-tag mono">{% trans "Your sector" %}</span>
               {% endif %}
             </header>
             <div class="hlt-fac__meta">
@@ -202,9 +202,9 @@
                 {% widthratio f.distance 15 100 as dw %}
                 <span style="--w: {{ dw }}%"></span>
               </span>
-              <span class="mono hlt-fac__walk">~{{ f.walk_min }} min walk</span>
+              <span class="mono hlt-fac__walk">{% blocktrans with min=f.walk_min %}~{{ min }} min walk{% endblocktrans %}</span>
             </div>
-            <a class="btn btn--line btn--sm" href="{% url 'terra:map' %}">View on the 3D map</a>
+            <a class="btn btn--line btn--sm" href="{% url 'terra:map' %}">{% trans "View on the 3D map" %}</a>
           </article>
         {% endfor %}
       </div>
