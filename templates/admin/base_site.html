@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:"Terra Nova Admin" }}{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}">{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block extrabody %}{{ block.super }}
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}
+
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}" class="tn-brand">
+  <span class="tn-brand__mark" aria-hidden="true"></span>
+  <span class="tn-brand__name">Terra<i>Nova</i></span>
+  <span class="tn-brand__sub">MISSION CONTROL</span>
+</a></div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,22 @@
+{% load pwa %}
+{
+  "id": "/",
+  "name": {{ PWA_APP_NAME|js }},
+  "short_name": {{ PWA_APP_NAME|js }},
+  "description": {{ PWA_APP_DESCRIPTION|js }},
+  "start_url": {{ PWA_APP_START_URL|js }},
+  "scope": {{ PWA_APP_SCOPE|js }},
+  "display": {{ PWA_APP_DISPLAY|js }},
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": {{ PWA_APP_ORIENTATION|js }},
+  "dir": {{ PWA_APP_DIR|js }},
+  "lang": {{ PWA_APP_LANG|js }},
+  "background_color": {{ PWA_APP_BACKGROUND_COLOR|js }},
+  "theme_color": {{ PWA_APP_THEME_COLOR|js }},
+  "status_bar": {{ PWA_APP_STATUS_BAR_COLOR|js }},
+  "categories": ["education", "lifestyle"],
+  "prefer_related_applications": false,
+  "icons": {{ PWA_APP_ICONS|js }},
+  "screenshots": {{ PWA_APP_SCREENSHOTS|js }},
+  "shortcuts": {{ PWA_APP_SHORTCUTS|js }}
+}

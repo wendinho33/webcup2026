@@ -1,0 +1,26 @@
+{% load i18n static %}
+{% if cl.search_fields %}
+<div id="toolbar" class="tn-toolbar">
+<h2 id="changelist-search-form" class="visually-hidden">{% blocktranslate with name=cl.opts.verbose_name_plural %}Search {{ name }}{% endblocktranslate %}</h2>
+<form id="changelist-search" method="get" role="search" aria-labelledby="changelist-search-form">
+<div class="tn-search">
+<label for="searchbar" class="tn-search__icon" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+</label>
+<input type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar"
+       placeholder="{% blocktranslate with name=cl.opts.verbose_name %}Search {{ name }}…{% endblocktranslate %}"
+       {% if cl.search_help_text %}aria-describedby="searchbar_helptext"{% endif %}>
+<kbd class="tn-kbd" aria-hidden="true">/</kbd>
+<input type="submit" value="{% translate 'Go' %}">
+{% if show_result_count %}
+    <span class="tn-search__count">{% blocktranslate count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktranslate %} <a href="?{% if cl.is_popup %}{{ is_popup_var }}=1{% if cl.add_facets %}&{% endif %}{% endif %}{% if cl.add_facets %}{{ is_facets_var }}{% endif %}">{% if cl.show_full_result_count %}{% blocktranslate with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktranslate %}{% else %}{% translate "Show all" %}{% endif %}</a></span>
+{% endif %}
+{% for pair in cl.params.items %}
+    {% if pair.0 != search_var %}<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}">{% endif %}
+{% endfor %}
+</div>
+{% if cl.search_help_text %}
+<div class="help" id="searchbar_helptext">{{ cl.search_help_text }}</div>
+{% endif %}
+</form></div>
+{% endif %}

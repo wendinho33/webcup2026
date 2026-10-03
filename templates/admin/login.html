@@ -1,0 +1,90 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% if form.errors %}{% translate "Error:" %} {% endif %}{{ block.super }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+{% block usertools %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="tn-login">
+  <aside class="tn-login__art">
+    <p class="tn-login__brand">
+      <span class="tn-brand__mark" aria-hidden="true"></span>
+      <span class="tn-brand__name">Terra<i>Nova</i></span>
+      <span class="tn-login__brand-sub">ADMIN · CONTROL DECK</span>
+    </p>
+    <p class="tn-eyebrow">EXPEDITION 01 · RESTRICTED</p>
+    <p class="tn-login__display" aria-hidden="true">Mission <em>Control</em></p>
+    <p class="tn-login__blurb">
+      The administration deck of Terra Nova — ten live registries, seven
+      telemetry charts and a stamped ledger. Cleared crew only.
+    </p>
+    <ul class="tn-login__facts">
+      <li><b>10</b> registries</li>
+      <li><b>7</b> charts</li>
+      <li><b>24/7</b> audit log</li>
+    </ul>
+    <blockquote class="tn-login__quote">
+      “Precision is a form of respect.”
+      <cite class="tn-mono">— MISSION OPERATIONS CHARTER, ART. III</cite>
+    </blockquote>
+    <div class="tn-login__orb" aria-hidden="true"></div>
+  </aside>
+
+  <section class="tn-login__gate">
+    {% if form.errors and not form.non_field_errors %}
+      <p class="errornote">
+        {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
+      </p>
+    {% endif %}
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <p class="errornote">{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div id="content-main" class="tn-login__panel">
+      {% if user.is_authenticated %}
+        <p class="errornote">
+          {% blocktranslate trimmed %}You are authenticated as {{ username }}, but are not authorized to access this page. Would you like to login to a different account?{% endblocktranslate %}
+        </p>
+      {% endif %}
+
+      <p class="tn-eyebrow">CREW ACCESS · PASSPHRASE</p>
+      <h2 class="tn-login__h2">Sign <em>in</em></h2>
+
+      <form action="{{ app_path }}" method="post" id="login-form" class="tn-login__form">{% csrf_token %}
+        <div class="form-row tn-field">
+          {{ form.username.errors }}
+          {{ form.username.label_tag }}
+          {{ form.username }}
+        </div>
+        <div class="form-row tn-field">
+          {{ form.password.errors }}
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          <input type="hidden" name="next" value="{{ next }}">
+        </div>
+        {% url 'admin_password_reset' as password_reset_url %}
+        {% if password_reset_url %}
+          <div class="password-reset-link">
+            <a href="{{ password_reset_url }}">{% translate 'Forgotten your login credentials?' %}</a>
+          </div>
+        {% endif %}
+        <div class="submit-row tn-login__submit">
+          <input type="submit" value="{% translate 'Enter Control Deck' %}">
+        </div>
+      </form>
+
+      <p class="tn-login__back">
+        <a href="/">← {% translate 'Back to Terra Nova surface' %}</a>
+      </p>
+    </div>
+  </section>
+</div>
+{% endblock %}

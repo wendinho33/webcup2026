@@ -1,0 +1,169 @@
+# Terra Nova — Malagasy translations.
+msgid ""
+msgstr ""
+"Project-Id-Version: Terra Nova 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-03 00:00+0000\n"
+"PO-Revision-Date: 2026-10-03 00:00+0000\n"
+"Language-Team: Malagasy\n"
+"Language: mg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Skip to content"
+msgstr "Mandeha amin'ny vokatra"
+
+msgid "Manifesto"
+msgstr "Manifesty"
+
+msgid "Atlas"
+msgstr "Atlas"
+
+msgid "Market"
+msgstr "Tsena"
+
+msgid "Weather"
+msgstr "Toetr'andro"
+
+msgid "Transport"
+msgstr "Fifohazana"
+
+msgid "Health"
+msgstr "Fahasalamana"
+
+msgid "Government"
+msgstr "Firenena"
+
+msgid "Language"
+msgstr "Teny"
+
+msgid "Mission Control"
+msgstr "Kontrolin'ny misiona"
+
+msgid "Sign out"
+msgstr "Hivoaka"
+
+msgid "Sign in"
+msgstr "Hiditra"
+
+msgid "Claim passage"
+msgstr "Maka fandraisana"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Open Terra Chat"
+msgstr "Sokafy Terra Chat"
+
+msgid "Accessibility settings"
+msgstr "Fametrahana fahafahana"
+
+msgid "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers."
+msgstr "Anizin-po masoandro, voamarina ary miandry. Ny fandehan'ny fandevenana 01 dia manokatra ny fotoan'ny fipetrahana ho an'ny takelaka voalohany arivo."
+
+msgid "Explore"
+msgstr "Hijery"
+
+msgid "Program"
+msgstr "Programy"
+
+msgid "TerraX market"
+msgstr "Tsena TerraX"
+
+msgid "Map of Terra Nova"
+msgstr "Rakitr'i Terra Nova"
+
+msgid "Access"
+msgstr "Fampidirana"
+
+msgid "Novarians"
+msgstr "Novariana"
+
+msgid "Transport & fares"
+msgstr "Fifohazana sy vidiny"
+
+msgid "Government portal"
+msgstr "Portalin'ny firenena"
+
+msgid "Health & Terra Watch"
+msgstr "Fahasalamana sy Terra Watch"
+
+msgid "Signals"
+msgstr "Fampitana"
+
+msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
+msgstr "ZON-JAVAN'NY RAFAHANA SOLY VOATOKY — ANIO"
+
+msgid "Sign in — Terra Nova"
+msgstr "Hiditra — Terra Nova"
+
+msgid "Passenger access"
+msgstr "Fampidiran'ny mpandeha"
+
+msgid "Welcome back,"
+msgstr "Sakaiza,"
+
+msgid "traveler."
+msgstr "mpandeha."
+
+msgid "Sign in to Mission Control to watch your departure window count down."
+msgstr "Hiditra amin'ny Kontrolin'ny misiona hijerena ny famaranana ny fotoana handehananao."
+
+msgid "Enter Mission Control"
+msgstr "Hiditra amin'ny Kontrolin'ny misiona"
+
+msgid "No passage yet?"
+msgstr "Tsy mbola misy fandraisana ?"
+
+msgid "Claim it →"
+msgstr "Raiso ny fandraisana →"
+
+msgid "Claim your passage — Terra Nova"
+msgstr "Akany ny fandraisanao — Terra Nova"
+
+msgid "Passenger registry · Expedition 01"
+msgstr "Lisitry ny mpandeha · Fandevenana 01"
+
+msgid "Claim your"
+msgstr "Akany ny"
+
+msgid "passage."
+msgstr "fandraisanao."
+
+msgid "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes."
+msgstr "Hivoatra ny anaran'ny mpandehao raha misoratra ianao, ary alefan-dalàna ny sektorinao avy amin'ny ambara efatra voafetra."
+
+msgid "Issue my passage"
+msgstr "Aseho ny fandraisako"
+
+msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
+msgstr "TSY MISY VIDY · TSY MISY LISITY · IRAY FANDRAISANA HO AN'NY TERRA"
+
+msgid "Already on the manifest?"
+msgstr "Efa ao amin'ny lisitra ianao ?"
+
+msgid "Sign in →"
+msgstr "Hiditra →"
+
+msgid "Full name"
+msgstr "Anarana feno"
+
+msgid "Email"
+msgstr "Mailaka"
+
+msgid "Passenger name"
+msgstr "Anaran'ny mpandeha"
+
+msgid "Passphrase"
+msgstr "Teny miafina"
+
+msgid "Letters, digits and @/./+/-/_ only."
+msgstr "Litera, isa sy @/./+/-/_ ihany."
+
+msgid "Repeat it to confirm."
+msgstr "Ampianaro iorena mba hamarinoana."
+
+msgid "A passenger already uses that email address."
+msgstr "Efa ampiasaina io adiresy mailaka io."

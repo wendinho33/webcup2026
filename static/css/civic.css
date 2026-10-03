@@ -1,0 +1,284 @@
+/* ============================================================
+   TERRA NOVA — Government portal + Health page
+   ============================================================ */
+
+.gov, .hlt {
+  position: relative; z-index: 2;
+  padding: calc(var(--nav-h) + 2.2rem) 0 clamp(2rem, 5vh, 3rem);
+}
+.gov__head, .hlt__head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 5vw, 3.2rem);
+}
+.gov__title, .hlt__title {
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: .98; letter-spacing: -.02em; margin: 1.2rem 0 1.1rem;
+}
+.gov__lede, .hlt__lede { color: var(--dim); max-width: 58ch; }
+.gov__anchors, .hlt__anchors { display: flex; flex-wrap: wrap; gap: .6rem; }
+.gov__anchors a, .hlt__anchors a {
+  font-family: var(--font-mono); font-size: .6rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--dim);
+  border: 1px solid var(--line); border-radius: 99px;
+  padding: .6em 1.1em; transition: border-color .3s, color .3s, background .3s;
+}
+.gov__anchors a:hover, .hlt__anchors a:hover {
+  border-color: var(--solar); color: var(--solar); background: rgba(255, 178, 87, .08);
+}
+
+.gov-section { padding-top: clamp(2.5rem, 6vh, 4rem); padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+.gov__grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; }
+.gov__record { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.4rem; }
+
+/* --- cards --- */
+.gov-card {
+  display: flex; flex-direction: column; gap: 1.1rem;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: rgba(9, 15, 26, .6); padding: 1.5rem;
+  transition: border-color .35s;
+}
+.gov-card:hover { border-color: var(--line-strong); }
+.gov-card__head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.gov-card__head h2, .gov-card__head h3 { font-size: 1.45rem; }
+.gov-card__note { color: var(--dim); font-size: .93rem; }
+.gov-tag {
+  color: var(--mute); font-size: .55rem; letter-spacing: .16em;
+  border: 1px solid var(--line); border-radius: 99px;
+  padding: .4em .8em; white-space: nowrap;
+}
+.gov-mini {
+  color: var(--solar); font-size: .5rem; letter-spacing: .12em;
+  border: 1px solid rgba(255, 178, 87, .45); border-radius: 99px;
+  padding: .2em .6em; margin-left: .5em; font-style: normal;
+}
+.gov-mini--live { color: var(--mint); border-color: rgba(127, 240, 192, .5); }
+.gov-empty { color: var(--mute); font-size: .9rem; padding: .5rem .2rem; }
+
+.gov-pill {
+  font-family: var(--font-mono); font-size: .54rem;
+  letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--line); border-radius: 99px;
+  padding: .4em .85em; color: var(--dim); white-space: nowrap;
+}
+.gov-pill--unpaid { color: var(--solar); border-color: rgba(255, 178, 87, .5); }
+.gov-pill--paid, .gov-pill--approved { color: var(--mint); border-color: rgba(127, 240, 192, .5); }
+.gov-pill--received { color: var(--ice); border-color: rgba(155, 215, 255, .45); }
+.gov-pill--review { color: var(--solar); border-color: rgba(255, 178, 87, .45); }
+.gov-pill--scheduled { color: var(--paper); border-color: var(--line-strong); }
+.gov-pill--urgent { color: #140c03; background: var(--solar); border-color: var(--solar); }
+
+/* --- citizen record --- */
+.gov-record__name { font-family: var(--font-display); font-weight: 400; font-size: 2rem; line-height: 1.1; }
+.gov-record__name em { font-style: normal; color: var(--mute); font-size: .6em; }
+.gov-record__rows { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .4rem; }
+.gov-record__rows dt { color: var(--mute); font-size: .54rem; letter-spacing: .18em; margin-bottom: .3rem; }
+.gov-record__rows dd { font-size: 1rem; overflow-wrap: anywhere; }
+.gov-record__rows dd.is-ok { color: var(--mint); font-size: .88rem; }
+.gov-record--wallet .gov-card__note { margin-top: -.3rem; }
+.gov-record--wallet .btn { align-self: flex-start; }
+
+/* --- bill + tables --- */
+.gov-bill { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.gov-bill__amount { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1; }
+.gov-bill__amount em { font-style: normal; font-size: .4em; color: var(--mute); }
+.gov-paid { color: var(--mint); font-size: .6rem; letter-spacing: .18em; }
+.gov-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.gov-table td { padding: .7rem .2rem; border-bottom: 1px solid var(--line); }
+.gov-table td:last-child { text-align: right; font-family: var(--font-mono); font-size: .8rem; color: var(--paper); }
+.gov-table tr:last-child td { border-bottom: none; }
+.gov-table tr.is-mine td:first-child { color: var(--solar); }
+.gov-table tr.is-total td { border-top: 1px solid var(--line-strong); border-bottom: none; font-weight: 500; }
+.gov-table tr.is-total td:last-child { color: var(--mint); }
+/* --- civic forms --- */
+.gov-form { display: flex; flex-direction: column; gap: .75rem; }
+.gov-form label {
+  font-family: var(--font-mono); font-size: .56rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--mute);
+}
+.gov-form input, .gov-form select, .gov-form textarea {
+  width: 100%; background: rgba(8, 14, 25, .72); color: var(--paper);
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: .8em 1em; font: inherit; font-size: .95rem;
+  transition: border-color .3s, box-shadow .3s;
+}
+.gov-form textarea { resize: vertical; min-height: 64px; }
+.gov-form input:focus, .gov-form select:focus, .gov-form textarea:focus {
+  outline: none; border-color: var(--ice);
+  box-shadow: 0 0 0 3px rgba(155, 215, 255, .14);
+}
+.gov-form input::placeholder, .gov-form textarea::placeholder { color: #4c5e79; }
+.gov-form__row { display: flex; gap: .7rem; align-items: center; }
+.gov-form__row select, .gov-form__row input { flex: 1; min-width: 0; width: auto; }
+.gov-form__row .btn { white-space: nowrap; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* --- waste card --- */
+.gov-waste { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.gov-waste span { display: block; color: var(--mute); font-size: .54rem; letter-spacing: .16em; margin-bottom: .35rem; }
+.gov-waste strong { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; }
+.gov-waste strong em { font-style: normal; font-size: .5em; }
+
+/* --- request rows --- */
+.gov-requests { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.gov-request {
+  display: grid; grid-template-columns: 84px minmax(0, 1fr) auto auto;
+  gap: 1rem; align-items: center;
+  padding: .95rem .2rem; border-bottom: 1px solid var(--line);
+}
+.gov-request:last-child { border-bottom: none; }
+.gov-request__track { color: var(--solar); font-size: .62rem; letter-spacing: .1em; }
+.gov-request__body { min-width: 0; }
+.gov-request__body strong { font-weight: 500; font-size: .95rem; }
+.gov-request__body p { color: var(--mute); font-size: .82rem; margin-top: .2rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gov-request__age { color: var(--mute); font-size: .54rem; letter-spacing: .12em; }
+
+/* --- social security --- */
+.gov-ssn {
+  display: flex; flex-direction: column; gap: .4rem;
+  border: 1px dashed var(--line-strong); border-radius: 12px;
+  padding: 1.1rem 1.3rem; background: rgba(6, 11, 20, .6);
+}
+.gov-ssn span { color: var(--mute); font-size: .54rem; letter-spacing: .18em; }
+.gov-ssn strong {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: clamp(1.4rem, 3vw, 1.9rem); letter-spacing: .12em; color: var(--ice);
+}
+.gov-coverage { list-style: none; margin: 0; padding: 0; }
+.gov-coverage li {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; padding: .7rem 0; border-bottom: 1px solid var(--line);
+  font-size: .93rem;
+}
+.gov-coverage li:last-child { border-bottom: none; }
+.gov-coverage span { color: var(--dim); }
+.gov-coverage b { font-weight: 500; font-size: .82rem; color: var(--mint); text-align: right; }
+
+/* --- pension --- */
+.gov-eligible { display: flex; flex-direction: column; gap: .6rem; }
+.gov-eligible strong { font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; }
+.gov-progress { width: 100%; height: 8px; border-radius: 99px; background: rgba(155, 190, 235, .14); overflow: hidden; }
+.gov-progress span {
+  display: block; height: 100%; width: min(var(--w, 50%), 100%);
+  background: linear-gradient(90deg, var(--ice), var(--mint));
+  border-radius: 99px; transition: width 1.2s var(--ease);
+}
+/* ============================================================
+   HEALTH — Terra Watch, vitals, facilities
+   ============================================================ */
+
+.hlt-watch {
+  display: grid; grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.4rem); align-items: center;
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+}
+.hlt-watch__visual { display: grid; place-items: center; }
+.hlt-device {
+  position: relative; width: 150px; height: 190px;
+  border-radius: 40px; border: 1px solid var(--line-strong);
+  background: linear-gradient(160deg, #101a2c, #070d18);
+  box-shadow: 0 26px 60px -22px rgba(0, 0, 0, .9), inset 0 1px 0 rgba(255, 255, 255, .08);
+  display: grid; place-items: center;
+}
+.hlt-device__band {
+  position: absolute; inset: -26px 30px auto; height: 44px; z-index: -1;
+  border-radius: 16px 16px 0 0;
+  background: linear-gradient(180deg, #26364f, #131d30);
+}
+.hlt-device__band::after {
+  content: ""; position: absolute; inset: auto 0 -218px; height: 44px;
+  border-radius: 0 0 16px 16px;
+  background: linear-gradient(0deg, #26364f, #131d30);
+}
+.hlt-device__screen {
+  width: 116px; height: 146px; border-radius: 26px;
+  background: radial-gradient(120% 90% at 30% 10%, #0b2033, #050b14);
+  border: 1px solid rgba(127, 240, 192, .3);
+  display: grid; place-items: center; padding: 8px;
+  box-shadow: inset 0 0 26px rgba(127, 240, 192, .12);
+}
+.hlt-device__screen svg { width: 100%; height: auto; }
+.hlt-perks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.hlt-perks li { color: var(--dim); font-size: .93rem; padding-left: 1.4em; position: relative; }
+.hlt-perks li::before {
+  content: "+"; position: absolute; left: 0; top: 0;
+  color: var(--mint); font-family: var(--font-mono);
+}
+.hlt-fine { color: var(--mute); font-size: .52rem; letter-spacing: .16em; text-align: center; }
+.hlt-device-id { font-family: var(--font-mono); color: var(--mint); font-weight: 500; letter-spacing: .1em; }
+
+/* --- vitals --- */
+.hlt-heat {
+  border: 1px solid rgba(255, 178, 87, .5); border-radius: 10px;
+  background: rgba(255, 143, 69, .1); color: #ffd9ae;
+  padding: .8rem 1rem; font-size: .9rem;
+}
+.hlt-metrics { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .9rem; }
+.hlt-metric {
+  border: 1px solid var(--line); border-radius: 12px;
+  background: rgba(6, 11, 20, .55); padding: .9rem .8rem;
+  display: flex; flex-direction: column; gap: .4rem;
+}
+.hlt-metric span { color: var(--mute); font-size: .5rem; letter-spacing: .14em; }
+.hlt-metric strong {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 1.7rem; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.hlt-metric strong em {
+  font-style: normal; font-family: var(--font-mono);
+  font-size: .5rem; color: var(--mute); margin-left: .3em; letter-spacing: .1em;
+}
+.hlt-bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: .6rem; align-items: end; height: 92px; }
+.hlt-bar {
+  position: relative; height: var(--h, 50%);
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, var(--mint), rgba(127, 240, 192, .25));
+  min-height: 8px;
+}
+.hlt-bar em {
+  position: absolute; top: -1.2rem; left: 50%; transform: translateX(-50%);
+  font-style: normal; color: var(--mute); font-size: .5rem; letter-spacing: .06em;
+}
+
+/* --- facilities --- */
+.hlt-facilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; }
+.hlt-fac.is-nearest { border-color: rgba(255, 178, 87, .55); background: rgba(16, 12, 7, .5); }
+.hlt-fac.is-home { border-color: rgba(127, 240, 192, .4); }
+.hlt-fac.is-nearest.is-home { border-color: rgba(255, 178, 87, .55); }
+.hlt-fac__meta { display: flex; flex-wrap: wrap; gap: .5rem; }
+.hlt-fac__dist { display: flex; align-items: center; gap: .9rem; }
+.hlt-fac__km { font-family: var(--font-mono); font-size: .72rem; color: var(--dim); white-space: nowrap; }
+.hlt-fac__km strong { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--paper); }
+.hlt-fac__bar { flex: 1; height: 6px; border-radius: 99px; background: rgba(155, 190, 235, .14); overflow: hidden; }
+.hlt-fac__bar > span { display: block; height: 100%; width: min(var(--w, 40%), 100%); border-radius: 99px; background: linear-gradient(90deg, var(--solar), var(--mint)); }
+.hlt-fac__walk { color: var(--mute); font-size: .5rem; letter-spacing: .12em; white-space: nowrap; }
+
+/* --- responsive --- */
+@media (max-width: 1080px) {
+  .hlt-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hlt-facilities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .gov__record, .gov__grid-2 { grid-template-columns: 1fr; }
+  .hlt-watch { grid-template-columns: 1fr; }
+  .hlt-watch__visual { order: -1; }
+  .gov-request { grid-template-columns: 74px minmax(0, 1fr) auto; }
+  .gov-request__age { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hlt-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hlt-facilities { grid-template-columns: 1fr; }
+  .gov-record__rows { grid-template-columns: 1fr; }
+  .gov-waste { grid-template-columns: 1fr; }
+  .gov-form__row { flex-direction: column; align-items: stretch; }
+  .gov-form__row .btn { width: 100%; }
+  .gov-request { grid-template-columns: 1fr auto; gap: .5rem .8rem; }
+  .gov-request__track { grid-column: 1 / -1; }
+  .gov-anchors a, .hlt__anchors a { font-size: .54rem; padding: .55em .9em; }
+}

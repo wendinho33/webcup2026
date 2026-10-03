@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endblock %}
+
+{% block title %}Map of Terra Nova — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="mappage">
+  <div class="container">
+    <header class="mappage__head">
+      <div>
+        <p class="eyebrow" data-reveal>Cartography · survey 04 · realtime relief</p>
+        <h1 class="mappage__title" data-reveal style="--d:.06s">Terra Nova, <em>rendered in relief.</em></h1>
+        <p class="mappage__lede" data-reveal style="--d:.12s">
+          A live terrain model of the single continent — seabed, shelves and
+          summits shaded by the sun, weather painted onto the biome. Orbit the
+          plate, zoom into the passes, tap a beacon for the sector readout.
+        </p>
+        <p class="mappage__hint mono" data-reveal style="--d:.16s">
+          <kbd>DRAG</kbd> ORBIT · <kbd>SCROLL</kbd> ZOOM · <kbd>TAP</kbd> BEACON
+        </p>
+      </div>
+      <div class="mappage__meta" data-reveal style="--d:.2s">
+        <span class="gov-tag mono">PLANET {{ current.temp }}°C · {{ current.condition|upper }}</span>
+        <a class="btn btn--line" href="{% url 'terra:weather' %}">Full weather →</a>
+      </div>
+    </header>
+
+    <div class="map-wrap" data-reveal style="--d:.24s">
+      <div class="map-scene" data-map>
+        <canvas class="map-canvas" data-map-canvas
+                role="img"
+                aria-label="Three-dimensional terrain map of Terra Nova with live weather beacons"></canvas>
+        <div class="map-grid" aria-hidden="true"></div>
+
+        <span class="map-corner map-corner--tl" aria-hidden="true"></span>
+        <span class="map-corner map-corner--tr" aria-hidden="true"></span>
+        <span class="map-corner map-corner--bl" aria-hidden="true"></span>
+        <span class="map-corner map-corner--br" aria-hidden="true"></span>
+
+        <p class="map-readout mono" data-map-readout aria-hidden="true">AZ 000° · EL 40° · ZOOM 100%</p>
+
+        <div class="map-compass" data-compass aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="64" height="64">
+            <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor"
+                    stroke-opacity=".35" stroke-width="1"/>
+            <circle cx="32" cy="32" r="22" fill="none" stroke="currentColor"
+                    stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 5"/>
+            <g data-compass-needle>
+              <path d="M32 7 L37 33 L32 29 L27 33 Z" fill="#ff6f5e"/>
+              <path d="M32 57 L27 33 L32 37 L37 33 Z" fill="currentColor" fill-opacity=".55"/>
+            </g>
+            <text x="32" y="52" text-anchor="middle" font-size="9"
+                  fill="currentColor" opacity=".7" font-family="monospace">S</text>
+          </svg>
+        </div>
+
+        <p class="map-scale mono" aria-hidden="true"><span></span>500 KM</p>
+
+        {% for key, s in sectors.items %}
+          <button class="pin pin--{{ key }}{% if profile and profile.sector == key %} is-mine{% endif %}"
+                  type="button" data-sector="{{ key }}"
+                  data-name="{{ s.name }}" data-cond="{{ s.condition }}"
+                  data-temp="{{ s.temp }}" data-hum="{{ s.humidity }}"
+                  data-wind="{{ s.wind }}"
+                  data-wx="{% if key == 'vermilion' %}0.06{% elif key == 'aurelia' %}-0.16{% elif key == 'glasslands' %}0.12{% else %}-0.57{% endif %}"
+                  data-wy="{% if key == 'vermilion' %}-0.60{% elif key == 'aurelia' %}0.04{% elif key == 'glasslands' %}0.58{% else %}-0.21{% endif %}">
+            <span class="pin__dot" aria-hidden="true"></span>
+            <span class="pin__label mono">{{ s.name|upper }} {{ s.temp }}°</span>
+          </button>
+        {% endfor %}
+
+        <div class="map-toolbar" role="group" aria-label="Map layers">
+          <button type="button" class="map-tool is-on" data-layer="relief"
+                  aria-pressed="true">Relief</button>
+          <button type="button" class="map-tool is-on" data-layer="routes"
+                  aria-pressed="true">Routes</button>
+          <button type="button" class="map-tool" data-layer="heat"
+                  aria-pressed="false">Heat</button>
+        </div>
+      </div>
+
+
+      <aside class="map-hud" aria-label="Sector readout">
+        <p class="eyebrow">Live readout</p>
+        <div class="map-hud__detail" data-hud-detail>
+          <div class="map-hud__top">
+            <span class="map-hud__icon" data-hud-icon>
+              {% include "terra/_wx_icon.html" with icon=sectors.aurelia.icon %}
+            </span>
+            <span class="map-hud__icons" hidden aria-hidden="true">
+              {% for icon in wx_icons %}
+                <span data-wx-icon="{{ icon }}">{% include "terra/_wx_icon.html" with icon=icon %}</span>
+              {% endfor %}
+            </span>
+            <div>
+              <h2 data-hud-name>Aurelia Basin</h2>
+              <p class="map-hud__cond" data-hud-cond>Clear</p>
+            </div>
+          </div>
+          <div class="map-hud__temp"><span data-hud-temp>0</span>°C</div>
+          <div class="map-hud__anom mono" data-hud-anom>+8.0°C ABOVE SEASONAL</div>
+          <dl class="map-hud__stats">
+            <div><dt class="mono">Feels like</dt><dd><span data-hud-feels>0</span>°</dd></div>
+            <div><dt class="mono">Wind</dt><dd><span data-hud-wind>0</span> km/h</dd></div>
+            <div class="map-hud__bar">
+              <dt class="mono">Humidity <span><span data-hud-hum>0</span>%</span></dt>
+              <dd><i class="meter" style="--w: 0%" data-hud-humbars></i></dd>
+            </div>
+            <div class="map-hud__bar">
+              <dt class="mono">Wind force <span><span data-hud-wind2>0</span></span></dt>
+              <dd><i class="meter" style="--w: 0%" data-hud-windbars></i></dd>
+            </div>
+          </dl>
+        </div>
+        <ul class="map-hud__list">
+          {% for key, s in sectors.items %}
+            <li>
+              <button type="button" data-sector="{{ key }}"
+                      data-name="{{ s.name }}" data-cond="{{ s.condition }}"
+                      data-temp="{{ s.temp }}" data-hum="{{ s.humidity }}"
+                      data-wind="{{ s.wind }}" data-feels="{{ s.feels }}"
+                      data-anom="{{ s.anomaly }}" data-icon="{{ s.icon }}">
+                <span>{{ s.name }}{% if profile and profile.sector == key %} <em class="mono">· YOUR SECTOR</em>{% endif %}</span>
+                <b>{{ s.temp }}°</b>
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
+        <p class="map-hud__legend mono">
+          BEACONS CARRY LIVE SECTOR WEATHER · ROUTES LINK THE COLONY ·
+          OCEAN: PELAGOS DEEP
+        </p>
+      </aside>
+    </div>
+
+    <p class="mappage__credits mono" data-reveal>
+      <span class="sw sw--sand"></span>BEACH ·
+      <span class="sw sw--grass"></span>SAVANNA ·
+      <span class="sw sw--forest"></span>FOREST ·
+      <span class="sw sw--rock"></span>HIGHLAND ·
+      <span class="sw sw--snow"></span>GLASS ICE ·
+      <span class="sw sw--sea"></span>PELAGOS DEEP
+      &nbsp;·&nbsp; SURVEY 04 RELIEF MODEL · RENDERED ON YOUR DEVICE
+    </p>
+  </div>
+</section>
+
+<script type="application/json" id="tn-map-data">{{ sectors_json|safe }}</script>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/map.js' %}" defer></script>
+{% endblock %}
+

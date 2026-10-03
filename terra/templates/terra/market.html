@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+{% load static money %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/market.css' %}">
+{% endblock %}
+
+{% block title %}TerraX market — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="mkt-hero">
+  <div class="container">
+    <div class="mkt-hero__grid">
+      <div class="mkt-hero__copy">
+        <p class="eyebrow" data-reveal><span class="pulse"></span>TerraX market · earth pairs</p>
+        <h1 class="mkt-hero__title" data-reveal style="--d:.06s">One coin,<br><em>two worlds.</em></h1>
+        <p class="mkt-hero__lede" data-reveal style="--d:.12s">
+          TerraX (TRX) is the currency of the second Earth — pegged at
+          <strong>1.25&#215; Bitcoin</strong> and quoted at <strong>5&#215;
+          Ethereum</strong>, traded around the clock against Earth credits.
+        </p>
+        <div class="mkt-pegs" data-reveal style="--d:.18s">
+          <span class="peg">1 TRX = 1.25 BTC</span>
+          <span class="peg">1 TRX = 5 ETH</span>
+          <span class="peg peg--beta">β 1.25 vs BTC</span>
+        </div>
+      </div>
+      <div class="mkt-hero__coin" data-reveal style="--d:.1s" aria-hidden="true">
+        <img src="{% static 'img/terrax/terrax.svg' %}" alt="" width="320" height="320">
+      </div>
+    </div>
+
+    <div class="mkt-tape" data-reveal style="--d:.2s">
+      <div class="mkt-price">
+        <span class="mkt-price__label mono">TRX / USD</span>
+        <strong class="mkt-price__value">{{ market.trx_price|usd }}</strong>
+        <span class="mkt-price__change {% if market.trx_change > 0 %}is-up{% elif market.trx_change < 0 %}is-down{% endif %}">
+          {{ market.trx_change|pct }} <em class="mono">24H</em>
+        </span>
+      </div>
+      <dl class="mkt-tape__stats">
+        <div><dt class="mono">24H HIGH</dt><dd>{{ market.series_high|usd }}</dd></div>
+        <div><dt class="mono">24H LOW</dt><dd>{{ market.series_low|usd }}</dd></div>
+        <div>
+          <dt class="mono">BITCOIN</dt>
+          <dd>{{ market.btc|usd }}
+            <span class="{% if market.btc_change > 0 %}is-up{% elif market.btc_change < 0 %}is-down{% endif %}">{{ market.btc_change|pct }}</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono">ETHEREUM</dt>
+          <dd>{{ market.eth|usd }}
+            <span class="{% if market.eth_change > 0 %}is-up{% elif market.eth_change < 0 %}is-down{% endif %}">{{ market.eth_change|pct }}</span>
+          </dd>
+        </div>
+        <div><dt class="mono">FEED</dt><dd class="mono mkt-feed">{{ market.source }}</dd></div>
+      </dl>
+    </div>
+
+    <figure class="mkt-chart" data-reveal style="--d:.26s">
+      <svg viewBox="0 0 640 180" preserveAspectRatio="none" role="img"
+           aria-label="TerraX price over the last 24 hours">
+        <defs>
+          <linearGradient id="mktFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffb257" stop-opacity=".35"/>
+            <stop offset="100%" stop-color="#ffb257" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="{{ market.chart_area }}" fill="url(#mktFill)"/>
+        <path d="{{ market.chart_line }}" fill="none" stroke="#ffb257"
+              stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      <figcaption class="mono">LAST 24 HOURS · TRX/USD · FEED {{ market.source|upper }}</figcaption>
+    </figure>
+  </div>
+</section>
+<section class="section mkt-compare">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow" data-reveal>The comparison</p>
+        <h2 class="section__title" data-reveal style="--d:.08s">TerraX against <em>Earth's</em> money.</h2>
+      </div>
+      <p class="section__lede" data-reveal style="--d:.14s">
+        Earth pairs stream from the CoinGecko reference feed, cached for sixty
+        seconds. TerraX trades at its declared pegs against both.
+      </p>
+    </header>
+
+    <div class="mkt-cards">
+      <article class="mkt-card mkt-card--trx" data-reveal>
+        <header class="mkt-card__head">
+          <img class="mkt-card__coin" src="{% static 'img/terrax/terrax.svg' %}"
+               alt="" width="46" height="46">
+          <div>
+            <h3>TerraX</h3>
+            <span class="mono">TRX · NATIVE</span>
+          </div>
+          <span class="mkt-card__flag mono">1.25&#215; BTC</span>
+        </header>
+        <strong class="mkt-card__price">{{ market.trx_price|usd }}</strong>
+        <span class="mkt-card__change {% if market.trx_change > 0 %}is-up{% elif market.trx_change < 0 %}is-down{% endif %}">
+          {{ market.trx_change|pct }} <em class="mono">24H</em>
+        </span>
+        <ul class="mkt-card__rows">
+          <li><span>Peg vs Bitcoin</span><b>1.25 &#215; BTC</b></li>
+          <li><span>Peg vs Ethereum</span><b>5 &#215; ETH</b></li>
+          <li><span>Exchange fee</span><b>0.5%</b></li>
+        </ul>
+      </article>
+
+      <article class="mkt-card" data-reveal style="--d:.08s">
+        <header class="mkt-card__head">
+          <span class="coin-badge coin-badge--btc" aria-hidden="true">₿</span>
+          <div>
+            <h3>Bitcoin</h3>
+            <span class="mono">BTC · EARTH</span>
+          </div>
+          <span class="mkt-card__flag mono">REFERENCE</span>
+        </header>
+        <strong class="mkt-card__price">{{ market.btc|usd }}</strong>
+        <span class="mkt-card__change {% if market.btc_change > 0 %}is-up{% elif market.btc_change < 0 %}is-down{% endif %}">
+          {{ market.btc_change|pct }} <em class="mono">24H</em>
+        </span>
+        <ul class="mkt-card__rows">
+          <li><span>1 TRX buys</span><b>1.25 BTC</b></li>
+          <li><span>1 BTC costs</span><b>0.80 TRX</b></li>
+          <li><span>TerraX premium</span><b class="is-up">+25.0%</b></li>
+        </ul>
+      </article>
+
+      <article class="mkt-card" data-reveal style="--d:.16s">
+        <header class="mkt-card__head">
+          <span class="coin-badge coin-badge--eth" aria-hidden="true">Ξ</span>
+          <div>
+            <h3>Ethereum</h3>
+            <span class="mono">ETH · EARTH</span>
+          </div>
+          <span class="mkt-card__flag mono">REFERENCE</span>
+        </header>
+        <strong class="mkt-card__price">{{ market.eth|usd }}</strong>
+        <span class="mkt-card__change {% if market.eth_change > 0 %}is-up{% elif market.eth_change < 0 %}is-down{% endif %}">
+          {{ market.eth_change|pct }} <em class="mono">24H</em>
+        </span>
+        <ul class="mkt-card__rows">
+          <li><span>1 TRX buys</span><b>5.00 ETH</b></li>
+          <li><span>1 ETH costs</span><b>0.20 TRX</b></li>
+          <li><span>TerraX multiple</span><b class="is-up">5&#215;</b></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="mkt-market" data-reveal style="--d:.2s">
+      <div class="mkt-market__head">
+        <h3>Earth markets</h3>
+        <span class="mono">LIVE · COINGECKO · 60S CACHE</span>
+      </div>
+      <div class="mkt-table-wrap">
+        <table class="mkt-table mkt-table--coins">
+          <thead>
+            <tr>
+              <th scope="col">Asset</th>
+              <th scope="col">Price</th>
+              <th scope="col">24h</th>
+              <th scope="col" class="mkt-cap-col">Market cap</th>
+              <th scope="col">1 TRX buys</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for coin in market.coins %}
+              <tr>
+                <td>
+                  <span class="mkt-coin">
+                    <span class="coin-badge coin-badge--{{ coin.cls }}" aria-hidden="true">{{ coin.glyph }}</span>
+                    <strong>{{ coin.name }}</strong>
+                    <span class="mono">{{ coin.symbol }}</span>
+                  </span>
+                </td>
+                <td>{{ coin.price|price }}</td>
+                <td class="{% if coin.change > 0 %}is-up{% elif coin.change < 0 %}is-down{% endif %}">{{ coin.change|pct }}</td>
+                <td class="mkt-cap-col"><span class="mkt-market__cap">{{ coin.mcap|mcap }}</span></td>
+                <td>
+                  <span class="mkt-market__buys">{{ coin.buys|many }}
+                    <span class="mono">{{ coin.symbol }}</span></span>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% if user.is_authenticated %}
+<section class="section mkt-desk" id="desk">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow" data-reveal>Trading desk</p>
+      <h2 class="section__title" data-reveal style="--d:.08s">Buy, sell, <em>settle.</em></h2>
+    </header>
+
+    <div class="mkt-balances" data-reveal>
+      <div class="mkt-balance">
+        <span class="mono">TERRAX</span>
+        <strong>{{ profile.trx_balance|trx }}</strong>
+        <em>TRX</em>
+      </div>
+      <div class="mkt-balance">
+        <span class="mono">EARTH CREDITS</span>
+        <strong>{{ profile.usd_balance|usd }}</strong>
+        <em>USD</em>
+      </div>
+      <div class="mkt-balance">
+        <span class="mono">PORTFOLIO VALUE</span>
+        <strong>{{ market.trx_price|mul:profile.trx_balance|add:profile.usd_balance|usd }}</strong>
+        <em>credits + {{ profile.trx_balance|mul:market.trx_price|usd }} in TRX</em>
+      </div>
+    </div>
+
+    <div class="mkt-trade" data-trx-price="{{ market.trx_price }}">
+      <form class="mkt-form" method="post" action="{% url 'terra:trade' %}">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="buy">
+        <h3>Buy TerraX</h3>
+        <label for="id_mkt_buy">Earth credits to spend</label>
+        <div class="mkt-form__row">
+          <input id="id_mkt_buy" name="amount" type="number" step="0.01" min="1"
+                 placeholder="250.00" inputmode="decimal" required>
+          <button class="btn btn--solid" type="submit">Buy TRX</button>
+        </div>
+        <p class="mkt-form__note mono">
+          FEE 0.5% · YOU RECEIVE ≈ <span data-estimate="buy">—</span> TRX
+        </p>
+      </form>
+
+      <form class="mkt-form" method="post" action="{% url 'terra:trade' %}">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="sell">
+        <h3>Sell TerraX</h3>
+        <label for="id_mkt_sell">TerraX to sell</label>
+        <div class="mkt-form__row">
+          <input id="id_mkt_sell" name="amount" type="number" step="0.000001" min="0.000001"
+                 placeholder="0.250000" inputmode="decimal" required>
+          <button class="btn btn--line" type="submit">Sell TRX</button>
+        </div>
+        <p class="mkt-form__note mono">
+          FEE 0.5% · YOU RECEIVE ≈ $<span data-estimate="sell">—</span> IN CREDITS
+        </p>
+      </form>
+    </div>
+
+    <p class="mkt-fine mono">
+      ORDERS SETTLE INSTANTLY AGAINST YOUR EXPEDITION ACCOUNT · DEMO NETWORK ·
+      NO REAL FUNDS MOVE
+    </p>
+  </div>
+</section>
+{% else %}
+<section class="section mkt-desk" id="desk">
+  <div class="container">
+    <div class="mkt-join" data-reveal>
+      <div class="mkt-join__copy">
+        <p class="eyebrow">Trading desk</p>
+        <h2 class="section__title">Open a TerraX <em>wallet.</em></h2>
+        <p>
+          Every passenger account carries a wallet: Earth credits to trade with
+          and a TerraX balance to spend across the site. Signing in opens the
+          desk — buying, selling and your private ledger.
+        </p>
+      </div>
+      <div class="mkt-join__cta">
+        <a class="btn btn--solid btn--lg" href="{% url 'terra:signup' %}">Claim passage</a>
+        <a class="btn btn--line btn--lg" href="{% url 'terra:login' %}">Sign in</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<section class="section mkt-services" id="services">
+  <div class="container">
+    <header class="section__head section__head--split">
+      <div>
+        <p class="eyebrow" data-reveal>Spend TerraX</p>
+        <h2 class="section__title" data-reveal style="--d:.08s">Currency that <em>does</em> things.</h2>
+      </div>
+      <p class="section__lede" data-reveal style="--d:.14s">
+        TerraX isn't only traded — it settles the site's own services. Every
+        purchase lands in your ledger and takes effect immediately.
+      </p>
+    </header>
+
+    <div class="mkt-services__grid">
+      {% for service in services %}
+        <article class="mkt-service" data-reveal style="--d: calc({{ forloop.counter0 }} * .08s)">
+          <header class="mkt-service__head">
+            <h3>{{ service.name }}</h3>
+            <span class="mkt-service__price">
+              <img src="{% static 'img/terrax/terrax.svg' %}" alt="" width="20" height="20">
+              {{ service.price|trx }} <em class="mono">TRX</em>
+            </span>
+          </header>
+          <p>{{ service.blurb }}</p>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'terra:service' %}">
+              {% csrf_token %}
+              <input type="hidden" name="service" value="{{ service.slug }}">
+              {% if service.input == 'sector' %}
+                <label class="visually-hidden" for="id_svc_sector_{{ forloop.counter }}">Sector</label>
+                <select id="id_svc_sector_{{ forloop.counter }}" name="sector" required>
+                  {% for code, name in sectors %}
+                    <option value="{{ code }}" {% if code == profile.sector %}selected{% endif %}>{{ name }}</option>
+                  {% endfor %}
+                </select>
+              {% elif service.input == 'callsign' %}
+                <label class="visually-hidden" for="id_svc_callsign">New callsign</label>
+                <input id="id_svc_callsign" name="callsign" maxlength="24"
+                       placeholder="NOVA-77" pattern="[A-Za-z0-9][A-Za-z0-9-]{2,23}"
+                       title="3–24 characters: letters, digits and dashes" required>
+              {% endif %}
+              <button class="btn btn--line" type="submit">
+                Buy for {{ service.price|trx }} TRX
+              </button>
+            </form>
+          {% else %}
+            <a class="btn btn--line" href="{% url 'terra:login' %}">Sign in to purchase</a>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if user.is_authenticated %}
+<section class="section mkt-ledger" id="ledger">
+  <div class="container">
+    <header class="section__head">
+      <p class="eyebrow" data-reveal>Your ledger</p>
+      <h2 class="section__title" data-reveal style="--d:.08s">Every move, <em>on record.</em></h2>
+    </header>
+
+    <div class="mkt-table-wrap" data-reveal>
+      <table class="mkt-table">
+        <thead>
+          <tr>
+            <th scope="col">When</th>
+            <th scope="col">Action</th>
+            <th scope="col">TRX</th>
+            <th scope="col">Credits</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tx in transactions %}
+            <tr>
+              <td class="mono">{{ tx.created_at|date:"d M · H:i" }}</td>
+              <td>{{ tx.get_kind_display }}{% if tx.note %} <span class="mkt-table__note">— {{ tx.note }}</span>{% endif %}</td>
+              <td class="{% if tx.trx > 0 %}is-up{% else %}is-down{% endif %}">{{ tx.trx|trx }}</td>
+              <td class="{% if tx.usd > 0 %}is-up{% else %}is-down{% endif %}">{{ tx.usd|usd }}</td>
+              <td class="mono">{{ tx.price_usd|usd }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="mkt-empty">
+                No trades yet — the ledger opens with your first order.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  /* Live "you receive" estimates for the trade desk. */
+  (function () {
+    var desk = document.querySelector('[data-trx-price]');
+    if (!desk) return;
+    var price = parseFloat(desk.getAttribute('data-trx-price')) || 0;
+    var net = 0.995; /* 0.5% exchange fee */
+    var buyOut = desk.querySelector('[data-estimate="buy"]');
+    var sellOut = desk.querySelector('[data-estimate="sell"]');
+    var buyInput = document.getElementById('id_mkt_buy');
+    var sellInput = document.getElementById('id_mkt_sell');
+    if (!buyOut || !sellOut || !buyInput || !sellInput) return;
+
+    function fmtTrx(n) {
+      return n.toLocaleString('en-US', { maximumFractionDigits: 6 });
+    }
+    function fmtUsd(n) {
+      return n.toLocaleString('en-US', {
+        minimumFractionDigits: 2, maximumFractionDigits: 2
+      });
+    }
+    function updateBuy() {
+      var v = parseFloat(buyInput.value) || 0;
+      buyOut.textContent = fmtTrx((v * net) / price);
+    }
+    function updateSell() {
+      var v = parseFloat(sellInput.value) || 0;
+      sellOut.textContent = fmtUsd(v * price * net);
+    }
+    buyInput.addEventListener('input', updateBuy);
+    sellInput.addEventListener('input', updateSell);
+    updateBuy();
+    updateSell();
+  })();
+</script>
+{% endblock %}

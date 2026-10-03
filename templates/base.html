@@ -1,23 +1,56 @@
-{% load static %}
+{% load static pwa i18n %}
+{% get_current_language as LANGUAGE %}
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="{{ LANGUAGE }}" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Terra Nova — A second Earth{% endblock %}</title>
   <meta name="description" content="Terra Nova is a catalogued twin of Earth: 1.02 g, a 21% oxygen sky, six oceans and no extinction events on record. Expedition 01 is boarding.">
-  <meta name="theme-color" content="#04060b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lexend:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/terra.css' %}">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%23123a72'/><circle cx='16' cy='16' r='13' fill='none' stroke='%239bd7ff' stroke-width='1.5'/><path d='M8 12c3 1 4-2 7-1s2 4 5 4 4-2 5-1' stroke='%237ff0c0' stroke-width='2' fill='none'/></svg>">
+  <link rel="stylesheet" href="{% static 'css/accessibility.css' %}">
+  {% block extra_css %}{% endblock %}
+  {% progressive_web_app_meta %}
+  <link rel="icon" sizes="any" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%23123a72'/><circle cx='16' cy='16' r='13' fill='none' stroke='%239bd7ff' stroke-width='1.5'/><path d='M8 12c3 1 4-2 7-1s2 4 5 4 4-2 5-1' stroke='%237ff0c0' stroke-width='2' fill='none'/></svg>">
   <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <script>
+    /* Apply saved accessibility preferences before first paint (no flash). */
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('terra-a11y') || '{}');
+        var d = document.documentElement;
+        if (s.textSize) d.setAttribute('data-text-size', s.textSize);
+        if (s.contrast) d.setAttribute('data-contrast', 'high');
+        if (s.reading) d.setAttribute('data-reading', 'on');
+        if (s.links) d.setAttribute('data-links', 'underlined');
+        if (s.motion) d.setAttribute('data-motion', 'reduce');
+        if (s.rate && s.rate !== 1) d.setAttribute('data-speech-rate', s.rate);
+      } catch (e) { /* private mode etc. — fall back to defaults */ }
+    })();
+  </script>
+  <script>
+    /* Connection tier from the tn_net cookie — lite pages render
+       essential content only, before first paint (no flash). */
+    (function () {
+      try {
+        var m = ('; ' + document.cookie).split('; tn_net=');
+        var t = m.length > 1 ? m[1].split(';')[0] : '';
+        if (t === 'lite' || t === 'balanced' || t === 'full') {
+          document.documentElement.setAttribute('data-net-tier', t);
+        }
+      } catch (e) { /* private mode — net.js will re-measure */ }
+    })();
+  </script>
 </head>
 <body>
-  <a class="skip" href="#content">Skip to content</a>
-  <div class="grain" aria-hidden="true"></div>
-  <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+  <a class="skip" href="#content">{% trans "Skip to content" %}</a>
+  {% if net_tier != 'lite' %}
+    <div class="grain" aria-hidden="true" data-lite-hide></div>
+    <canvas id="starfield" class="starfield" aria-hidden="true" data-lite-hide></canvas>
+  {% endif %}
 
   <header class="nav" data-nav>
     <div class="nav__inner container">
@@ -27,24 +60,70 @@
       </a>
 
       <nav class="nav__links" data-nav-links aria-label="Sections">
-        <a href="{% url 'terra:home' %}#manifesto">Manifesto</a>
-        <a href="{% url 'terra:home' %}#atlas">Atlas</a>
-        <a href="{% url 'terra:home' %}#program">Program</a>
-        <a href="{% url 'terra:home' %}#access">Access</a>
+        <a href="{% url 'terra:home' %}#manifesto">{% trans "Manifesto" %}</a>
+        <a href="{% url 'terra:home' %}#atlas">{% trans "Atlas" %}</a>
+        <a href="{% url 'terra:market' %}">{% trans "Market" %}</a>
+        <a href="{% url 'terra:weather' %}">{% trans "Weather" %}</a>
+        <a href="{% url 'terra:transport' %}">{% trans "Transport" %}</a>
+        <a href="{% url 'terra:health' %}">{% trans "Health" %}</a>
+        <a href="{% url 'terra:government' %}">{% trans "Government" %}</a>
       </nav>
 
       <div class="nav__auth">
+        <form class="nav__lang" action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <svg class="nav__lang-icon" viewBox="0 0 24 24" width="15" height="15"
+               aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/>
+          </svg>
+          <label class="nav__lang-label" for="lang-select">{% trans "Language" %}</label>
+          <select id="lang-select" name="language" onchange="this.form.submit()">
+            {% get_available_languages as languages %}
+            {% get_current_language as current %}
+            {% for code, name in languages %}
+              <option value="{{ code }}"{% if code == current %} selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+          </select>
+        </form>
         {% if user.is_authenticated %}
-          <a class="btn btn--line btn--sm" href="{% url 'terra:dashboard' %}">Mission Control</a>
+          <a class="nav__bell" href="{% url 'terra:notifications' %}"
+             aria-label="{% trans "Notifications" %}"
+             title="{% trans "Notifications" %}">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"
+                 fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 15 18 9z"/>
+              <path d="M10.3 20a2 2 0 0 0 3.4 0"/>
+            </svg>
+            {% if unread_notifications %}
+              <span class="nav__bell-count"
+                    aria-label="{% blocktranslate count counter=unread_notifications %}{{ counter }} unread signal{% plural %}{{ counter }} unread signals{% endblocktranslate %}">
+                {{ unread_notifications }}
+              </span>
+            {% endif %}
+          </a>
+          <a class="nav__bell" href="{% url 'terra:account' %}"
+             aria-label="{% trans "Account centre" %}"
+             title="{% trans "Account centre" %}">
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"
+                 fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8.2" r="3.6"/>
+              <path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/>
+            </svg>
+          </a>
+          <a class="btn btn--line btn--sm" href="{% url 'terra:dashboard' %}">{% trans "Mission Control" %}</a>
           <form class="nav__form" method="post" action="{% url 'terra:logout' %}">
             {% csrf_token %}
-            <button class="btn btn--quiet btn--sm" type="submit">Sign out</button>
+            <button class="btn btn--quiet btn--sm" type="submit">{% trans "Sign out" %}</button>
           </form>
         {% else %}
-          <a class="btn btn--quiet btn--sm" href="{% url 'terra:login' %}">Sign in</a>
-          <a class="btn btn--solid btn--sm" href="{% url 'terra:signup' %}">Claim passage</a>
+          <a class="btn btn--quiet btn--sm" href="{% url 'terra:login' %}">{% trans "Sign in" %}</a>
+          <a class="btn btn--solid btn--sm" href="{% url 'terra:signup' %}">{% trans "Claim passage" %}</a>
         {% endif %}
-        <button class="nav__toggle" type="button" data-menu-toggle aria-label="Menu" aria-expanded="false">
+        <button class="nav__toggle" type="button" data-menu-toggle aria-label="{% trans "Menu" %}" aria-expanded="false">
           <span></span><span></span>
         </button>
       </div>
@@ -62,24 +141,31 @@
           <span class="brand__mark" aria-hidden="true"></span>
           <span class="brand__name">Terra<i>Nova</i></span>
         </a>
-        <p>A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers.</p>
+        <p>{% trans "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers." %}</p>
         <p class="footer__coords mono">12.0°N · 44.0°E — AURELIA BASIN · K-284 b</p>
       </div>
       <div class="footer__col">
-        <h4>Explore</h4>
-        <a href="{% url 'terra:home' %}#manifesto">Manifesto</a>
-        <a href="{% url 'terra:home' %}#atlas">Atlas</a>
-        <a href="{% url 'terra:home' %}#program">Program</a>
-        <a href="{% url 'terra:home' %}#access">Access</a>
+        <h4>{% trans "Explore" %}</h4>
+        <a href="{% url 'terra:home' %}#manifesto">{% trans "Manifesto" %}</a>
+        <a href="{% url 'terra:home' %}#atlas">{% trans "Atlas" %}</a>
+        <a href="{% url 'terra:home' %}#program">{% trans "Program" %}</a>
+        <a href="{% url 'terra:market' %}">{% trans "TerraX market" %}</a>
+        <a href="{% url 'terra:weather' %}">{% trans "Weather" %}</a>
+        <a href="{% url 'terra:map' %}">{% trans "Map of Terra Nova" %}</a>
+        <a href="{% url 'terra:home' %}#access">{% trans "Access" %}</a>
       </div>
       <div class="footer__col">
-        <h4>Passages</h4>
-        <a href="{% url 'terra:login' %}">Sign in</a>
-        <a href="{% url 'terra:signup' %}">Claim passage</a>
-        <a href="{% url 'terra:dashboard' %}">Mission Control</a>
+        <h4>{% trans "Novarians" %}</h4>
+        <a href="{% url 'terra:transport' %}">{% trans "Transport & fares" %}</a>
+        <a href="{% url 'terra:government' %}">{% trans "Government portal" %}</a>
+        <a href="{% url 'terra:health' %}">{% trans "Health & Terra Watch" %}</a>
+        <a href="{% url 'terra:chat' %}">Terra Chat</a>
+        <a href="{% url 'terra:login' %}">{% trans "Sign in" %}</a>
+        <a href="{% url 'terra:signup' %}">{% trans "Claim passage" %}</a>
+        <a href="{% url 'terra:dashboard' %}">{% trans "Mission Control" %}</a>
       </div>
       <div class="footer__col">
-        <h4>Signals</h4>
+        <h4>{% trans "Signals" %}</h4>
         <span class="footer__line">hello@terranova.earth</span>
         <span class="footer__line mono">LAGOON ARRAY · CH. 04</span>
         <span class="footer__line mono">RESPONSE TIME · 41 YRS</span>
@@ -87,9 +173,90 @@
     </div>
     <div class="container footer__bar">
       <span>© 2026 Terra Nova Expedition</span>
-      <span class="mono">SOL SYSTEM RIGHTS RESERVED — FOR NOW</span>
+      <span class="mono">{% trans "SOL SYSTEM RIGHTS RESERVED — FOR NOW" %}</span>
     </div>
   </footer>
+
+  <a class="chat-fab" href="{% url 'terra:chat' %}" aria-label="{% trans "Open Terra Chat" %}" title="Terra Chat">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none"
+         stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a8 8 0 0 1-8 8H7l-4 3 1.2-4.2A8 8 0 1 1 21 12z"/>
+      <path d="M8.5 10.5h7M8.5 13.5h4.5"/>
+    </svg>
+    <span>Terra Chat</span>
+  </a>
+
+  <button class="a11y-fab" type="button" data-a11y-open aria-expanded="false"
+          aria-controls="a11y-panel" aria-label="{% trans "Accessibility settings" %}"
+          title="{% trans "Accessibility settings" %}">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none"
+         stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="12" cy="4.4" r="1.9" fill="currentColor" stroke="none"/>
+      <path d="M4.6 8.6c2.4 1 4.9 1.5 7.4 1.5s5-.5 7.4-1.5"/>
+      <path d="M12 10.1v4.6m0 0-3.1 6.2M12 14.7l3.1 6.2"/>
+    </svg>
+  </button>
+
+  <div class="a11y-backdrop" data-a11y-close hidden></div>
+
+  <aside id="a11y-panel" class="a11y-panel" role="dialog" aria-modal="true"
+         aria-labelledby="a11y-title" hidden>
+    <header class="a11y-head">
+      <div>
+        <p class="mono a11y-kicker">Preferences</p>
+        <h2 id="a11y-title">Accessibility</h2>
+      </div>
+      <button class="a11y-x" type="button" data-a11y-close
+              aria-label="Close accessibility settings">✕</button>
+    </header>
+
+    <section class="a11y-group" aria-labelledby="a11y-size-h">
+      <h3 id="a11y-size-h">Text size</h3>
+      <div class="a11y-seg">
+        <label><input type="radio" name="a11y-text-size" value=""
+               data-a11y-key="textSize" checked><span>A<em>Default</em></span></label>
+        <label><input type="radio" name="a11y-text-size" value="large"
+               data-a11y-key="textSize"><span>A+<em>Large</em></span></label>
+        <label><input type="radio" name="a11y-text-size" value="xlarge"
+               data-a11y-key="textSize"><span>A++<em>Extra large</em></span></label>
+      </div>
+    </section>
+
+    <section class="a11y-group" aria-labelledby="a11y-display-h">
+      <h3 id="a11y-display-h">Display</h3>
+      <label class="a11y-switch"><input type="checkbox" data-a11y-toggle="contrast">
+        <span class="a11y-track" aria-hidden="true"></span><span>High contrast</span></label>
+      <label class="a11y-switch"><input type="checkbox" data-a11y-toggle="reading">
+        <span class="a11y-track" aria-hidden="true"></span><span>Easier reading font</span></label>
+      <label class="a11y-switch"><input type="checkbox" data-a11y-toggle="links">
+        <span class="a11y-track" aria-hidden="true"></span><span>Underline links</span></label>
+      <label class="a11y-switch"><input type="checkbox" data-a11y-toggle="motion">
+        <span class="a11y-track" aria-hidden="true"></span><span>Reduce motion</span></label>
+    </section>
+
+    <section class="a11y-group" aria-labelledby="a11y-tts-h">
+      <h3 id="a11y-tts-h">Text to speech</h3>
+      <div class="a11y-tts">
+        <button class="btn btn--solid" type="button" data-tts="play">Read this page aloud</button>
+        <button class="btn btn--line" type="button" data-tts="pause" hidden>Pause</button>
+        <button class="btn btn--line" type="button" data-tts="stop" hidden>Stop</button>
+      </div>
+      <label class="a11y-rate">
+        <span class="mono">Reading speed
+          <output data-tts-rate-out for="a11y-rate">1.0×</output></span>
+        <input id="a11y-rate" type="range" min="0.6" max="1.6" step="0.1" value="1"
+               data-tts-rate aria-label="Reading speed">
+      </label>
+      <p class="a11y-note" data-tts-status role="status" aria-live="polite"></p>
+    </section>
+
+    <button class="a11y-reset" type="button" data-a11y-reset>Reset all settings</button>
+    <p class="a11y-note" data-a11y-status role="status" aria-live="polite"></p>
+    <p class="a11y-note a11y-note--fine">
+      Preferences are saved on this device. Dictation microphones appear on text
+      fields where your browser supports the Web Speech API.
+    </p>
+  </aside>
 
   {% if messages %}
     <div class="toasts" data-toasts>
@@ -100,6 +267,8 @@
   {% endif %}
 
   <script src="{% static 'js/terra.js' %}" defer></script>
+  <script src="{% static 'js/accessibility.js' %}" defer></script>
+  <script src="{% static 'js/net.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

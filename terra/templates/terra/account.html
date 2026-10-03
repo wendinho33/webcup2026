@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/civic.css' %}">
+{% endblock %}
+
+{% block title %}{% trans "Account centre" %} — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="ac">
+  <div class="container">
+    <header class="ac__head" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Passage office · passenger file" %}</p>
+        <h1 class="ac__title">{% trans "Account" %} <em>centre.</em></h1>
+        <p class="ac__lede">
+          {% trans "Your record as the colony holds it: edit the file, set a photo, download the dossier, rate the agents who answered your signals." %}
+        </p>
+      </div>
+      <div class="ac__stats">
+        <span class="gov-tag mono">{{ profile.callsign }}</span>
+        <span class="gov-tag mono">{{ profile.sector_name }}</span>
+      </div>
+    </header>
+
+    <div class="ac__grid">
+      <div class="ac__main">
+        <article class="gov-card" id="profile" data-reveal>
+          <header class="gov-card__head">
+            <h2>{% trans "Identity record" %}</h2>
+            <span class="gov-tag mono">{% trans "EDITABLE" %}</span>
+          </header>
+          <form method="post" class="ac__form">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="profile">
+            {% for field in account_form %}
+              <div class="ac__field{% if field.errors %} has-error{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<p class="ac__help">{{ field.help_text }}</p>{% endif %}
+                {% for error in field.errors %}<p class="ac__error">{{ error }}</p>{% endfor %}
+              </div>
+            {% endfor %}
+            <button class="btn btn--solid" type="submit">{% trans "Save record" %}</button>
+          </form>
+        </article>
+
+        <article class="gov-card" id="photo" data-reveal>
+          <header class="gov-card__head">
+            <h2>{% trans "Passenger photo" %}</h2>
+            <span class="gov-tag mono">{% trans "JPG · 2 MB" %}</span>
+          </header>
+          <div class="ac__photo-row">
+            <span class="ac__photo">
+              {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="{% trans "Passenger photo" %}">
+              {% else %}
+                <span class="ac__photo-initials">{{ profile.callsign|first }}</span>
+              {% endif %}
+            </span>
+            <div class="ac__photo-forms">
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="avatar">
+                {{ avatar_form.avatar }}
+                {% for error in avatar_form.avatar.errors %}
+                  <p class="ac__error">{{ error }}</p>
+                {% endfor %}
+                <button class="btn btn--line btn--sm" type="submit">{% trans "Upload photo" %}</button>
+              </form>
+              {% if profile.avatar %}
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="action" value="avatar_clear">
+                  <button class="btn btn--quiet btn--sm" type="submit">{% trans "Remove" %}</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+
+        <article class="gov-card" id="ratings" data-reveal>
+          <header class="gov-card__head">
+            <h2>{% trans "Rate a Novarian agent" %}</h2>
+            <span class="gov-tag mono">{% trans "1–5 STARS" %}</span>
+          </header>
+          {% if rateable %}
+            <ul class="ac__agents">
+              {% for entry in rateable %}
+                <li class="ac__agent">
+                  <span class="ac__agent-avatar">{{ entry.user.username|first|upper }}</span>
+                  <div class="ac__agent-body">
+                    <strong>
+                      {{ entry.user.get_full_name|default:entry.user.username }}
+                      {% if entry.met %}<span class="ac__met mono">{% trans "MET" %}</span>{% endif %}
+                    </strong>
+                    <form method="post" class="ac__rate-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="action" value="rate">
+                      <input type="hidden" name="agent" value="{{ entry.user.pk }}">
+                      <fieldset class="ac__stars">
+                        <legend class="sr-only">{% trans "Rating for" %} {{ entry.user.username }}</legend>
+                        {% for star in "54321" %}
+                          <label class="ac__star">
+                            <input type="radio" name="rating" value="{{ star }}"
+                              {% if entry.rating.rating == star|first|add:0 %}checked{% endif %} required>
+                            <span aria-hidden="true">★</span>
+                          </label>
+                        {% endfor %}
+                      </fieldset>
+                      <input type="text" name="comment" maxlength="500"
+                             value="{{ entry.rating.comment }}"
+                             placeholder="{% trans 'How did the agent handle your signal?' %}">
+                      <button class="btn btn--line btn--sm" type="submit">
+                        {% if entry.rating %}{% trans "Update" %}{% else %}{% trans "Rate" %}{% endif %}
+                      </button>
+                    </form>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="ac__empty">{% trans "No Novarian agents on the network yet — the first rating is yours to give." %}</p>
+          {% endif %}
+        </article>
+      </div>
+
+      <aside class="ac__side">
+        <article class="gov-card ac__dossier" id="dossier" data-reveal>
+          <header class="gov-card__head">
+            <h2>{% trans "Passenger dossier" %}</h2>
+            <span class="gov-tag mono">PDF</span>
+          </header>
+          <p class="ac__dossier-copy">
+            {% trans "Every record we hold on you — identity, wallet, ledger, civic requests, travel manifest, chat signals, ratings and security events — typeset as one document." %}
+          </p>
+          <a class="btn btn--solid btn--block" href="{% url 'terra:account_pdf' %}">
+            {% trans "Download dossier (PDF)" %}
+          </a>
+          <p class="ac__fine mono">{% trans "GENERATED ON DEMAND · PAPERWORK, SIGNED" %}</p>
+        </article>
+
+        <article class="gov-card" data-reveal>
+          <header class="gov-card__head">
+            <h2>{% trans "Quick links" %}</h2>
+          </header>
+          <ul class="ac__links">
+            <li><a href="{% url 'terra:dashboard' %}">{% trans "Mission Control" %} →</a></li>
+            <li><a href="{% url 'terra:notifications' %}">{% trans "Notification centre" %} →</a></li>
+            <li><a href="{% url 'terra:government' %}#profile">{% trans "Civic profile" %} →</a></li>
+            <li><a href="{% url 'terra:chat' %}">{% trans "Terra Chat" %} →</a></li>
+          </ul>
+        </article>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

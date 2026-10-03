@@ -1,0 +1,169 @@
+# Terra Nova — French translations.
+msgid ""
+msgstr ""
+"Project-Id-Version: Terra Nova 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-03 00:00+0000\n"
+"PO-Revision-Date: 2026-10-03 00:00+0000\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+msgid "Manifesto"
+msgstr "Manifeste"
+
+msgid "Atlas"
+msgstr "Atlas"
+
+msgid "Market"
+msgstr "Marché"
+
+msgid "Weather"
+msgstr "Météo"
+
+msgid "Transport"
+msgstr "Transport"
+
+msgid "Health"
+msgstr "Santé"
+
+msgid "Government"
+msgstr "Gouvernement"
+
+msgid "Language"
+msgstr "Langue"
+
+msgid "Mission Control"
+msgstr "Centre de contrôle"
+
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+msgid "Sign in"
+msgstr "Se connecter"
+
+msgid "Claim passage"
+msgstr "Réserver un passage"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Open Terra Chat"
+msgstr "Ouvrir Terra Chat"
+
+msgid "Accessibility settings"
+msgstr "Paramètres d'accessibilité"
+
+msgid "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers."
+msgstr "Une seconde Terre, cataloguée et en attente. L'expédition 01 ouvre la fenêtre de transit pour les mille premiers passagers."
+
+msgid "Explore"
+msgstr "Explorer"
+
+msgid "Program"
+msgstr "Programme"
+
+msgid "TerraX market"
+msgstr "Marché TerraX"
+
+msgid "Map of Terra Nova"
+msgstr "Carte de Terra Nova"
+
+msgid "Access"
+msgstr "Accès"
+
+msgid "Novarians"
+msgstr "Novariens"
+
+msgid "Transport & fares"
+msgstr "Transport et tarifs"
+
+msgid "Government portal"
+msgstr "Portail gouvernemental"
+
+msgid "Health & Terra Watch"
+msgstr "Santé et Terra Watch"
+
+msgid "Signals"
+msgstr "Signaux"
+
+msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
+msgstr "DROITS DU SYSTÈME SOL RÉSERVÉS — POUR L'INSTANT"
+
+msgid "Sign in — Terra Nova"
+msgstr "Connexion — Terra Nova"
+
+msgid "Passenger access"
+msgstr "Accès passagers"
+
+msgid "Welcome back,"
+msgstr "Bon retour,"
+
+msgid "traveler."
+msgstr "voyageur."
+
+msgid "Sign in to Mission Control to watch your departure window count down."
+msgstr "Connectez-vous au centre de contrôle pour suivre le compte à rebours de votre fenêtre de départ."
+
+msgid "Enter Mission Control"
+msgstr "Entrer au centre de contrôle"
+
+msgid "No passage yet?"
+msgstr "Pas encore de passage ?"
+
+msgid "Claim it →"
+msgstr "Réserver le vôtre →"
+
+msgid "Claim your passage — Terra Nova"
+msgstr "Réservez votre passage — Terra Nova"
+
+msgid "Passenger registry · Expedition 01"
+msgstr "Registre passagers · Expédition 01"
+
+msgid "Claim your"
+msgstr "Réservez votre"
+
+msgid "passage."
+msgstr "passage."
+
+msgid "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes."
+msgstr "Votre indicatif est émis dès votre inscription et votre secteur est tiré au hasard parmi les quatre biomes étudiés."
+
+msgid "Issue my passage"
+msgstr "Émettre mon passage"
+
+msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
+msgstr "SANS FRAIS · SANS LISTE D'ATTENTE · UN PASSAGE PAR TERRE"
+
+msgid "Already on the manifest?"
+msgstr "Déjà sur le manifeste ?"
+
+msgid "Sign in →"
+msgstr "Se connecter →"
+
+msgid "Full name"
+msgstr "Nom complet"
+
+msgid "Email"
+msgstr "Courriel"
+
+msgid "Passenger name"
+msgstr "Nom du passager"
+
+msgid "Passphrase"
+msgstr "Mot de passe"
+
+msgid "Letters, digits and @/./+/-/_ only."
+msgstr "Lettres, chiffres et @/./+/-/_ uniquement."
+
+msgid "Repeat it to confirm."
+msgstr "Saisissez-le à nouveau pour confirmer."
+
+msgid "A passenger already uses that email address."
+msgstr "Un passager utilise déjà cette adresse e-mail."

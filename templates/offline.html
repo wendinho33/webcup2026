@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Offline — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="offline">
+  <div class="container offline__inner">
+    <p class="eyebrow" data-reveal><span class="pulse"></span>Signal lost</p>
+    <h1 class="offline__title" data-reveal style="--d:.06s">You are <em>offline</em>.</h1>
+    <p class="offline__lede" data-reveal style="--d:.12s">
+      Between you and the network there is, at this moment, nothing. Your cached
+      copy of Terra Nova is still aboard — reconnect and the transmission resumes
+      exactly where you left it.
+    </p>
+    <div class="offline__cta" data-reveal style="--d:.18s">
+      <button class="btn btn--solid btn--lg" type="button" onclick="window.location.reload()">Try again</button>
+      <a class="btn btn--line btn--lg" href="/">Back to base</a>
+    </div>
+    <p class="offline__meta mono" data-reveal style="--d:.24s">SERVED BY THE TERRA NOVA SERVICE WORKER · OFFLINE FALLBACK</p>
+  </div>
+</section>
+{% endblock %}

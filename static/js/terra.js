@@ -3,6 +3,10 @@
   'use strict';
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionReduced = function () {
+    return reduced ||
+      document.documentElement.getAttribute('data-motion') === 'reduce';
+  };
 
   /* ---------------- nav ---------------- */
   var nav = document.querySelector('[data-nav]');
@@ -136,10 +140,10 @@
     resize();
     window.addEventListener('resize', function () {
       resize();
-      if (reduced) draw(16, 0);
+      if (motionReduced()) draw(16, 0);
     });
 
-    if (reduced) {
+    if (motionReduced()) {
       draw(16, 0);
     } else {
       window.addEventListener('mousemove', function (e) {
@@ -151,16 +155,30 @@
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
           if (rafId) { window.cancelAnimationFrame(rafId); rafId = null; }
-        } else if (!rafId) {
+        } else if (!rafId && !motionReduced()) {
           last = 0;
           rafId = window.requestAnimationFrame(loop);
         }
       });
     }
   }
+  /* ---------------- accessibility: manual reduce-motion ---------------- */
+  document.addEventListener('terra:a11y-change', function (event) {
+    if (!canvas || !canvas.getContext || reduced) return;
+    var off = !!(event.detail && event.detail.motion);
+    if (off && rafId) {
+      window.cancelAnimationFrame(rafId);
+      rafId = null;
+      draw(16, 0);
+    } else if (!off && !rafId && !document.hidden) {
+      last = 0;
+      rafId = window.requestAnimationFrame(loop);
+    }
+  });
+
   /* ---------------- shared reveal observer ---------------- */
   var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
-  if ('IntersectionObserver' in window && !reduced) {
+  if ('IntersectionObserver' in window && !motionReduced()) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -179,7 +197,7 @@
     var target = parseFloat(el.getAttribute('data-count'));
     if (isNaN(target)) return;
     var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-    if (reduced) { el.textContent = target.toFixed(decimals); return; }
+    if (motionReduced()) { el.textContent = target.toFixed(decimals); return; }
 
     var play = function () {
       var start = null;

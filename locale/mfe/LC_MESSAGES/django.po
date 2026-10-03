@@ -1,0 +1,169 @@
+# Terra Nova — Morisien (Mauritian Creole) translations.
+msgid ""
+msgstr ""
+"Project-Id-Version: Terra Nova 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-03 00:00+0000\n"
+"PO-Revision-Date: 2026-10-03 00:00+0000\n"
+"Language-Team: Morisien\n"
+"Language: mfe\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Skip to content"
+msgstr "Al direk lasity"
+
+msgid "Manifesto"
+msgstr "Manifèsto"
+
+msgid "Atlas"
+msgstr "Atlas"
+
+msgid "Market"
+msgstr "Marché"
+
+msgid "Weather"
+msgstr "Tabilao"
+
+msgid "Transport"
+msgstr "Transpor"
+
+msgid "Health"
+msgstr "Santé"
+
+msgid "Government"
+msgstr "Gouvènman"
+
+msgid "Language"
+msgstr "Lang"
+
+msgid "Mission Control"
+msgstr "Kontrol Misyon"
+
+msgid "Sign out"
+msgstr "Soti"
+
+msgid "Sign in"
+msgstr "Antre"
+
+msgid "Claim passage"
+msgstr "Pran pasaj"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Open Terra Chat"
+msgstr "Ouvert Terra Chat"
+
+msgid "Accessibility settings"
+msgstr "Réglaj aksèssibilite"
+
+msgid "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers."
+msgstr "Dezièm Ter, klase ek ki an atann. Ekspedisyon 01 ouv la fenèt transpor pou 1000 premie pasaze."
+
+msgid "Explore"
+msgstr "Eksplore"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "TerraX market"
+msgstr "Marché TerraX"
+
+msgid "Map of Terra Nova"
+msgstr "Kartr Terra Nova"
+
+msgid "Access"
+msgstr "Aksè"
+
+msgid "Novarians"
+msgstr "Novarien"
+
+msgid "Transport & fares"
+msgstr "Transpor ek ekipi"
+
+msgid "Government portal"
+msgstr "Portal gouvènman"
+
+msgid "Health & Terra Watch"
+msgstr "Santé ek Terra Watch"
+
+msgid "Signals"
+msgstr "Sinal"
+
+msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
+msgstr "Dwa Systèm Sol rézervé — Kouma"
+
+msgid "Sign in — Terra Nova"
+msgstr "Antre — Terra Nova"
+
+msgid "Passenger access"
+msgstr "Aksè pasaze"
+
+msgid "Welcome back,"
+msgstr "Bannenvié,"
+
+msgid "traveler."
+msgstr "vwayazer."
+
+msgid "Sign in to Mission Control to watch your departure window count down."
+msgstr "Antre ladan Kontrol Misyon pou gad kont a-revou fenèt partaz ou."
+
+msgid "Enter Mission Control"
+msgstr "Entr ladan Kontrol Misyon"
+
+msgid "No passage yet?"
+msgstr "Pasaj ankor ?"
+
+msgid "Claim it →"
+msgstr "Pran li →"
+
+msgid "Claim your passage — Terra Nova"
+msgstr "Pran pasaj ou — Terra Nova"
+
+msgid "Passenger registry · Expedition 01"
+msgstr "Registre pasaze · Ekspedisyon 01"
+
+msgid "Claim your"
+msgstr "Pran"
+
+msgid "passage."
+msgstr "pasaj ou."
+
+msgid "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes."
+msgstr "Non-wap tiré letan ou anskriv, ek sektor-wap tiré lor zot dan 4 biyom ki pe etidyé."
+
+msgid "Issue my passage"
+msgstr "Kitir pasaj mwa"
+
+msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
+msgstr "PAKO FRA · PAKO LIT · IN PASAJ PER TER"
+
+msgid "Already on the manifest?"
+msgstr "Deza lor lis ?"
+
+msgid "Sign in →"
+msgstr "Antre →"
+
+msgid "Full name"
+msgstr "Non konplé"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Passenger name"
+msgstr "Non pasaze"
+
+msgid "Passphrase"
+msgstr "Mòt d pas"
+
+msgid "Letters, digits and @/./+/-/_ only."
+msgstr "Let, chiff ek @/./+/-/_ selman."
+
+msgid "Repeat it to confirm."
+msgstr "Ritir li ankò pou konfime."
+
+msgid "A passenger already uses that email address."
+msgstr "In pasaz pe déza serv zot adrès mail-la."

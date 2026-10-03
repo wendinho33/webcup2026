@@ -1,0 +1,169 @@
+# Terra Nova — Russian translations.
+msgid ""
+msgstr ""
+"Project-Id-Version: Terra Nova 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-03 00:00+0000\n"
+"PO-Revision-Date: 2026-10-03 00:00+0000\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Skip to content"
+msgstr "Перейти к содержанию"
+
+msgid "Manifesto"
+msgstr "Манифест"
+
+msgid "Atlas"
+msgstr "Атлас"
+
+msgid "Market"
+msgstr "Рынок"
+
+msgid "Weather"
+msgstr "Погода"
+
+msgid "Transport"
+msgstr "Транспорт"
+
+msgid "Health"
+msgstr "Здоровье"
+
+msgid "Government"
+msgstr "Правительство"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Mission Control"
+msgstr "Центр управления"
+
+msgid "Sign out"
+msgstr "Выйти"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Claim passage"
+msgstr "Получить пропуск"
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "Open Terra Chat"
+msgstr "Открыть Terra Chat"
+
+msgid "Accessibility settings"
+msgstr "Настройки доступности"
+
+msgid "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers."
+msgstr "Вторая Земля, каталогированная и ожидающая. Экспедиция 01 открывает транзитное окно для первой тысячи пассажиров."
+
+msgid "Explore"
+msgstr "Обзор"
+
+msgid "Program"
+msgstr "Программа"
+
+msgid "TerraX market"
+msgstr "Рынок TerraX"
+
+msgid "Map of Terra Nova"
+msgstr "Карта Терра-Нова"
+
+msgid "Access"
+msgstr "Посадка"
+
+msgid "Novarians"
+msgstr "Новарианцы"
+
+msgid "Transport & fares"
+msgstr "Транспорт и тарифы"
+
+msgid "Government portal"
+msgstr "Портал правительства"
+
+msgid "Health & Terra Watch"
+msgstr "Здоровье и Terra Watch"
+
+msgid "Signals"
+msgstr "Сигналы"
+
+msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
+msgstr "ПРАВА СОЛНЕЧНОЙ СИСТЕМЫ СОХРАНЕНЫ — ПОКА ЧТО"
+
+msgid "Sign in — Terra Nova"
+msgstr "Вход — Terra Nova"
+
+msgid "Passenger access"
+msgstr "Вход для пассажиров"
+
+msgid "Welcome back,"
+msgstr "С возвращением,"
+
+msgid "traveler."
+msgstr "путешественник."
+
+msgid "Sign in to Mission Control to watch your departure window count down."
+msgstr "Войдите в Центр управления, чтобы следить за обратным отсчётом окна отправления."
+
+msgid "Enter Mission Control"
+msgstr "Войти в Центр управления"
+
+msgid "No passage yet?"
+msgstr "Ещё нет пропуска?"
+
+msgid "Claim it →"
+msgstr "Получить →"
+
+msgid "Claim your passage — Terra Nova"
+msgstr "Получите свой пропуск — Terra Nova"
+
+msgid "Passenger registry · Expedition 01"
+msgstr "Реестр пассажиров · Экспедиция 01"
+
+msgid "Claim your"
+msgstr "Получите свой"
+
+msgid "passage."
+msgstr "пропуск."
+
+msgid "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes."
+msgstr "Позывной выдаётся сразу после регистрации, а сектор выбирается случайно из четырёх изученных биомов."
+
+msgid "Issue my passage"
+msgstr "Выдать мой пропуск"
+
+msgid "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH"
+msgstr "БЕЗ СБОРОВ · БЕЗ ОЧЕРЕДИ · ОДИН ПРОПУСК НА ЗЕМЛЮ"
+
+msgid "Already on the manifest?"
+msgstr "Уже в манифесте?"
+
+msgid "Sign in →"
+msgstr "Войти →"
+
+msgid "Full name"
+msgstr "Полное имя"
+
+msgid "Email"
+msgstr "Эл. почта"
+
+msgid "Passenger name"
+msgstr "Имя пассажира"
+
+msgid "Passphrase"
+msgstr "Пароль"
+
+msgid "Letters, digits and @/./+/-/_ only."
+msgstr "Только буквы, цифры и @/./+/-/_."
+
+msgid "Repeat it to confirm."
+msgstr "Повторите для подтверждения."
+
+msgid "A passenger already uses that email address."
+msgstr "Этот адрес электронной почты уже используется."

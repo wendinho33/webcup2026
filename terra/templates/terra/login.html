@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Sign in — Terra Nova{% endblock %}
+{% block title %}{% trans "Sign in — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <div class="auth">
   <div class="auth__panel">
-    <p class="eyebrow" data-reveal>Passenger access</p>
-    <h1 class="auth__title" data-reveal style="--d:.06s">Welcome back,<br><em>traveler.</em></h1>
-    <p class="auth__sub" data-reveal style="--d:.12s">Sign in to Mission Control to watch your departure window count down.</p>
+    <p class="eyebrow" data-reveal>{% trans "Passenger access" %}</p>
+    <h1 class="auth__title" data-reveal style="--d:.06s">{% trans "Welcome back," %}<br><em>{% trans "traveler." %}</em></h1>
+    <p class="auth__sub" data-reveal style="--d:.12s">{% trans "Sign in to Mission Control to watch your departure window count down." %}</p>
 
     <form class="form" method="post" action="{% url 'terra:login' %}" novalidate data-reveal style="--d:.18s">
       {% csrf_token %}
@@ -26,10 +27,10 @@
         </div>
       {% endfor %}
       {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
-      <button class="btn btn--solid btn--lg btn--block" type="submit">Enter Mission Control</button>
+      <button class="btn btn--solid btn--lg btn--block" type="submit">{% trans "Enter Mission Control" %}</button>
     </form>
 
-    <p class="auth__alt" data-reveal style="--d:.24s">No passage yet? <a href="{% url 'terra:signup' %}">Claim it →</a></p>
+    <p class="auth__alt" data-reveal style="--d:.24s">{% trans "No passage yet?" %} <a href="{% url 'terra:signup' %}">{% trans "Claim it →" %}</a></p>
   </div>
 
   <aside class="auth__art" aria-hidden="true">

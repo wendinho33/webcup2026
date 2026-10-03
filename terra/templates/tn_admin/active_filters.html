@@ -1,0 +1,13 @@
+{% if chips %}
+<div class="tn-active" aria-label="Active filters">
+  <span class="tn-active__label">FILTERS</span>
+  {% for chip in chips %}
+  <a class="tn-active__chip" href="{{ chip.href }}" title="Remove this filter">
+    <span class="tn-active__key">{{ chip.key }}</span>
+    <span class="tn-active__val">{{ chip.value|truncatechars:26 }}</span>
+    <i aria-hidden="true">✕</i>
+  </a>
+  {% endfor %}
+  {% if clear_qs %}<a class="tn-active__clear" href="{{ clear_qs }}">Clear all ✕</a>{% endif %}
+</div>
+{% endif %}

@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static money %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/civic.css' %}">
+{% endblock %}
+
+{% block title %}Health — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="hlt">
+  <div class="container">
+    <header class="hlt__head" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>Health services · nova network</p>
+        <h1 class="hlt__title">Your body, <em>watched.</em></h1>
+        <p class="hlt__lede">
+          The Terra Watch streams your vitals into the colony's health record,
+          books medical services and points you at the nearest care — wherever
+          you wake up on the new Earth.
+        </p>
+      </div>
+      <nav class="hlt__anchors" aria-label="Health sections">
+        <a href="#watch">Terra Watch</a>
+        <a href="#medical">Medical service</a>
+        <a href="#facilities">Nearby care</a>
+      </nav>
+    </header>
+
+    <article class="gov-card hlt-watch" id="watch" data-reveal>
+      <div class="hlt-watch__visual" aria-hidden="true">
+        <div class="hlt-device">
+          <span class="hlt-device__screen">
+            <svg viewBox="0 0 90 40" preserveAspectRatio="none">
+              <path d="M0 26 L14 26 L20 10 L26 34 L32 20 L40 26 L56 26 L62 14 L68 32 L74 26 L90 26"
+                    fill="none" stroke="#7ff0c0" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="hlt-device__band"></span>
+        </div>
+      </div>
+
+      <div class="hlt-watch__body">
+        <header class="gov-card__head">
+          <h2>Terra Watch</h2>
+          {% if profile.terra_watch %}
+            <span class="gov-pill gov-pill--paid">Paired · streaming</span>
+          {% else %}
+            <span class="gov-tag mono">{{ watch_price|trx }} TRX</span>
+          {% endif %}
+        </header>
+
+        {% if not profile.terra_watch %}
+          <p class="gov-card__note">
+            The colony's health band: continuous heart rate and blood oxygen,
+            sleep and step tracking, heat-strain warnings during the current
+            warm spell, and a one-press beacon that opens Terra Chat with your
+            vitals attached. 50 TRX, one payment, yours for the expedition.
+          </p>
+          <ul class="hlt-perks">
+            <li>24/7 vitals streaming to your health record</li>
+            <li>Heat-strain alerts synced with the weather service</li>
+            <li>Fall detection → instant Novarian-agent contact</li>
+          </ul>
+          <form method="post" action="{% url 'terra:terra_watch' %}">
+            {% csrf_token %}
+            <button class="btn btn--solid btn--block" type="submit">
+              Buy Terra Watch · {{ watch_price|trx }} TRX
+            </button>
+          </form>
+          <p class="hlt-fine mono">SETTLES FROM YOUR WALLETS · LEDGER ENTRY: TERRA WATCH DEVICE</p>
+        {% else %}
+          <p class="gov-card__note">
+            Device <strong class="hlt-device-id">{{ device }}</strong> paired ·
+            streaming to your social-security health cover since
+            {{ profile.created_at|date:"d M Y" }}.
+          </p>
+        {% endif %}
+      </div>
+    </article>
+    {% if profile.terra_watch and vitals %}
+      <article class="gov-card hlt-vitals" data-reveal style="--d:.06s">
+        <header class="gov-card__head">
+          <h3>Today’s reading</h3>
+          <span class="gov-tag mono">{{ vitals.device }}</span>
+        </header>
+        {% if vitals.heat_strain %}
+          <p class="hlt-heat">
+            Elevated heat strain — anomaly +{{ vitals.anomaly }}°C. Hydrate
+            every 30 minutes and avoid surface work 11:00–16:00.
+          </p>
+        {% endif %}
+        <div class="hlt-metrics">
+          <div class="hlt-metric"><span class="mono">Heart rate</span><strong>{{ vitals.heart_rate }}<em>bpm</em></strong></div>
+          <div class="hlt-metric"><span class="mono">Blood oxygen</span><strong>{{ vitals.spo2 }}<em>%</em></strong></div>
+          <div class="hlt-metric"><span class="mono">Sleep</span><strong>{{ vitals.sleep }}<em>h</em></strong></div>
+          <div class="hlt-metric"><span class="mono">Steps</span><strong>{{ vitals.steps }}<em>today</em></strong></div>
+          <div class="hlt-metric"><span class="mono">Stress</span><strong>{{ vitals.stress }}<em>index</em></strong></div>
+          <div class="hlt-metric"><span class="mono">Readiness</span><strong>{{ vitals.readiness }}<em>%</em></strong></div>
+        </div>
+        <div class="hlt-bars" aria-label="Seven day readiness">
+          {% for bar in vitals.bars %}
+            <span class="hlt-bar" style="--h: {{ bar }}%"><em class="mono">{{ bar }}</em></span>
+          {% endfor %}
+        </div>
+      </article>
+    {% endif %}
+    <section class="section gov-section" id="medical">
+      <header class="section__head">
+        <p class="eyebrow" data-reveal>Medical service</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">Care that <em>comes to you.</em></h2>
+      </header>
+
+      <div class="gov__grid-2">
+        <article class="gov-card" data-reveal>
+          <header class="gov-card__head">
+            <h3>Request medical service</h3>
+            <span class="gov-tag mono">Tracking MD-####</span>
+          </header>
+          <form class="gov-form" method="post" action="{% url 'terra:civic_request' %}">
+            {% csrf_token %}
+            <input type="hidden" name="category" value="medical">
+            <input type="hidden" name="next" value="health">
+            <label for="med-service">Service needed</label>
+            <select id="med-service" name="location" required>
+              <option value="Home visit">Home visit — a medic comes to you</option>
+              <option value="Teleconsult">Teleconsult — video with Nova Central</option>
+              <option value="Medication delivery">Medication delivery</option>
+              <option value="Ambulance support">Ambulance support</option>
+              <option value="Physiotherapy">Physiotherapy session</option>
+            </select>
+            <label for="med-sector">Sector</label>
+            <select id="med-sector" name="sector" required>
+              {% for code, name in sector_names.items %}
+                <option value="{{ code }}"{% if code == profile.sector %} selected{% endif %}>{{ name }}</option>
+              {% endfor %}
+            </select>
+            <label for="med-detail">Notes for the care team</label>
+            <textarea id="med-detail" name="detail" rows="3" maxlength="600"
+                      placeholder="Symptoms, address, best time to reach you…"></textarea>
+            <button class="btn btn--solid" type="submit">Request service</button>
+          </form>
+        </article>
+
+        <article class="gov-card" data-reveal style="--d:.08s">
+          <header class="gov-card__head">
+            <h3>My medical requests</h3>
+            <span class="gov-tag mono">{{ medical_requests|length }} on file</span>
+          </header>
+          <ul class="gov-requests">
+            {% for r in medical_requests %}
+              <li class="gov-request">
+                <span class="gov-request__track mono">{{ r.tracking }}</span>
+                <div class="gov-request__body">
+                  <strong>{{ r.location }}</strong>
+                  <p>{{ r.detail|default:"—"|truncatechars:90 }}</p>
+                </div>
+                <span class="gov-request__age mono">{{ r.created_at|date:"d M · H:i" }}</span>
+                <span class="gov-pill gov-pill--{{ r.status_slug }}">{{ r.status_label }}</span>
+              </li>
+            {% empty %}
+              <li class="gov-empty">No medical requests — the care team is standing by.</li>
+            {% endfor %}
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section gov-section" id="facilities">
+      <header class="section__head section__head--split">
+        <div>
+          <p class="eyebrow" data-reveal>Nearby care</p>
+          <h2 class="section__title" data-reveal style="--d:.06s">Hospitals in your <em>vicinity.</em></h2>
+        </div>
+        <p class="section__lede" data-reveal style="--d:.14s">
+          Distances are measured from your habitat. Your sector's facility is
+          always walkable; the full network is shown nearest-first.
+        </p>
+      </header>
+
+      <div class="hlt-facilities">
+        {% for f in facilities %}
+          <article class="gov-card hlt-fac{% if forloop.first %} is-nearest{% endif %}{% if f.is_home %} is-home{% endif %}"
+                   data-reveal style="--d: calc({{ forloop.counter0 }} * .06s)">
+            <header class="gov-card__head">
+              <h3>{{ f.name }}</h3>
+              {% if forloop.first %}
+                <span class="gov-pill gov-pill--urgent">Nearest</span>
+              {% elif f.is_home %}
+                <span class="gov-tag mono">Your sector</span>
+              {% endif %}
+            </header>
+            <div class="hlt-fac__meta">
+              <span class="gov-tag mono">{{ f.kind }}</span>
+              <span class="gov-tag mono">{{ f.hours }}</span>
+              <span class="gov-tag mono">{{ f.sector|capfirst }}</span>
+            </div>
+            <p class="gov-card__note">{{ f.services }}</p>
+            <div class="hlt-fac__dist">
+              <span class="hlt-fac__km"><strong>{{ f.distance }}</strong> km</span>
+              <span class="hlt-fac__bar" aria-hidden="true">
+                {% widthratio f.distance 15 100 as dw %}
+                <span style="--w: {{ dw }}%"></span>
+              </span>
+              <span class="mono hlt-fac__walk">~{{ f.walk_min }} min walk</span>
+            </div>
+            <a class="btn btn--line btn--sm" href="{% url 'terra:map' %}">View on the 3D map</a>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

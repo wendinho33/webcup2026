@@ -1,15 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Claim your passage — Terra Nova{% endblock %}
+{% block title %}{% trans "Claim your passage — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <div class="auth">
   <div class="auth__panel">
-    <p class="eyebrow" data-reveal>Passenger registry · Expedition 01</p>
-    <h1 class="auth__title" data-reveal style="--d:.06s">Claim your<br><em>passage.</em></h1>
+    <p class="eyebrow" data-reveal>{% trans "Passenger registry · Expedition 01" %}</p>
+    <h1 class="auth__title" data-reveal style="--d:.06s">{% trans "Claim your" %}<br><em>{% trans "passage." %}</em></h1>
     <p class="auth__sub" data-reveal style="--d:.12s">
-      Your callsign is issued the moment you register, and your sector is drawn at
-      random from the four surveyed biomes.
+      {% trans "Your callsign is issued the moment you register, and your sector is drawn at random from the four surveyed biomes." %}
     </p>
 
     <form class="form" method="post" action="{% url 'terra:signup' %}" novalidate data-reveal style="--d:.18s">
@@ -29,11 +29,11 @@
           {% endif %}
         </div>
       {% endfor %}
-      <button class="btn btn--solid btn--lg btn--block" type="submit">Issue my passage</button>
-      <p class="form__fine mono">NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH</p>
+      <button class="btn btn--solid btn--lg btn--block" type="submit">{% trans "Issue my passage" %}</button>
+      <p class="form__fine mono">{% trans "NO FEES · NO WAITING LIST · ONE PASSAGE PER EARTH" %}</p>
     </form>
 
-    <p class="auth__alt" data-reveal style="--d:.24s">Already on the manifest? <a href="{% url 'terra:login' %}">Sign in →</a></p>
+    <p class="auth__alt" data-reveal style="--d:.24s">{% trans "Already on the manifest?" %} <a href="{% url 'terra:login' %}">{% trans "Sign in →" %}</a></p>
   </div>
 
   <aside class="auth__art" aria-hidden="true">

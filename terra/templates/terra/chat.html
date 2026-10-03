@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+{% endblock %}
+
+{% block title %}Terra Chat — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="chat">
+  <div class="container chat__layout">
+
+    <aside class="chat__side">
+      <header class="chat__side-head">
+        <div>
+          <p class="eyebrow">Terra Chat</p>
+          <h2>{% if mode == 'agent' %}Agent desk{% else %}Your signals{% endif %}</h2>
+        </div>
+        {% if mode == 'agent' %}
+          <a class="btn btn--line btn--sm" href="{% url 'terra:chat' %}">My signals</a>
+        {% else %}
+          <a class="btn btn--solid btn--sm" href="{% url 'terra:chat' %}">New signal</a>
+        {% endif %}
+      </header>
+
+      {% if is_agent and mode != 'agent' %}
+        <a class="chat__desk-link mono" href="{% url 'terra:chat_agent' %}">Agent desk →</a>
+      {% endif %}
+
+      <ul class="chat__threads">
+        {% if mode == 'agent' %}
+          {% for t in queue %}
+            <li>
+              <a href="{% url 'terra:chat_thread' t.id %}" class="chat__thread">
+                <strong>{{ t.subject }}</strong>
+                <span class="chat__thread-meta mono">
+                  {{ t.get_kind_display }} · {{ t.user.username }} · {{ t.updated_at|date:"d M H:i" }}
+                </span>
+                <span class="chat__chip chat__chip--{{ t.status }}">{{ t.get_status_display }}</span>
+              </a>
+            </li>
+          {% empty %}
+            <li class="chat__empty">The queue is clear — no signals waiting.</li>
+          {% endfor %}
+        {% else %}
+          {% for t in threads %}
+            <li>
+              <a href="{% url 'terra:chat_thread' t.id %}"
+                 class="chat__thread{% if active and active.id == t.id %} is-active{% endif %}">
+                <strong>{{ t.subject }}</strong>
+                <span class="chat__thread-meta mono">{{ t.updated_at|date:"d M H:i" }} · {{ t.tracking }}</span>
+                <span class="chat__chip chat__chip--{{ t.status }}">{{ t.get_status_display }}</span>
+              </a>
+            </li>
+          {% empty %}
+            <li class="chat__empty">No signals yet — the channel is brand new.</li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </aside>
+
+    <div class="chat__main">
+      {% if active %}
+        <header class="chat__head">
+          <div class="chat__head-info">
+            <p class="eyebrow"><span class="pulse"></span>{{ active.tracking }} · {{ active.get_kind_display }}</p>
+            <h1>{{ active.subject }}</h1>
+            <p class="chat__head-sub mono">
+              OPENED {{ active.created_at|date:"d M Y · H:i" }}
+              {% if active.assigned_agent %}
+                · AGENT {{ active.assigned_agent.get_full_name|default:active.assigned_agent.username|upper }}
+              {% endif %}
+            </p>
+          </div>
+          <div class="chat__head-actions">
+            <span class="chat__chip chat__chip--{{ active.status }}" data-status-chip>{{ active.get_status_display }}</span>
+            {% if is_owner and active.status != 'escalated' and active.status != 'resolved' %}
+              <form method="post" action="{% url 'terra:chat_action' active.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="escalate">
+                <button class="btn btn--line btn--sm" type="submit">Escalate to an agent</button>
+              </form>
+            {% endif %}
+            {% if active.status != 'resolved' %}
+              <form method="post" action="{% url 'terra:chat_action' active.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="resolve">
+                <button class="btn btn--solid btn--sm" type="submit">Resolved ✓</button>
+              </form>
+            {% endif %}
+          </div>
+        </header>
+
+        <div class="chat__stream" id="chat-stream"
+             data-thread="{{ active.id }}"
+             data-poll-url="{% url 'terra:chat_messages' active.id %}">
+          {% for m in active.messages.all %}
+            <div class="msg msg--{{ m.role }}" data-id="{{ m.id }}">
+              <div class="msg__meta mono">
+                <span class="msg__who">{% if m.role == 'user' and is_owner %}You{% else %}{{ m.display_name }}{% endif %}</span>
+                <span>{{ m.created_at|date:"H:i" }}</span>
+              </div>
+              <div class="msg__body">{{ m.body|linebreaksbr }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if active.status == 'resolved' %}
+          <p class="chat__note mono">SIGNAL RESOLVED · REPLY TO REOPEN</p>
+        {% elif active.status == 'escalated' %}
+          <p class="chat__note mono">A NOVARIAN AGENT HAS THIS THREAD · TERRA AI IS STANDING BY</p>
+        {% endif %}
+
+        <form class="chat__composer" method="post" action="{% url 'terra:chat_send' active.id %}">
+          {% csrf_token %}
+          <label class="visually-hidden" for="chat-input">Message</label>
+          <textarea id="chat-input" name="body" rows="2" maxlength="2000" required
+                    placeholder="{% if is_owner %}Transmit to Terra AI…{% else %}Reply as a Novarian agent…{% endif %}"></textarea>
+          <button class="btn btn--solid" type="submit">Send</button>
+        </form>
+      {% else %}
+        <div class="chat__welcome">
+          <div class="chat__welcome-orb" aria-hidden="true"></div>
+          <p class="eyebrow">Channel open · Terra AI on duty</p>
+          <h1>Signal us, <em>Novarian.</em></h1>
+          <p class="chat__welcome-lede">
+            Report an issue, ask about TerraX, your wallet or your passage —
+            Terra AI answers in seconds. When a problem needs a person, escalate
+            and a Novarian agent joins this very thread.
+          </p>
+
+          <div class="chat__quick">
+            <button class="btn btn--line btn--sm" type="button" data-quick="I need to signal an issue. The page is broken.">Signal an issue</button>
+            <button class="btn btn--line btn--sm" type="button" data-quick="How does the TerraX market work?">Ask about TerraX</button>
+            <button class="btn btn--line btn--sm" type="button" data-quick="How do I claim my passage?">Claim a passage</button>
+            <button class="btn btn--line btn--sm" type="button" data-quick="Tell me about the planet">About the planet</button>
+          </div>
+
+          <form class="chat__composer chat__composer--welcome" method="post" action="{% url 'terra:chat' %}">
+            {% csrf_token %}
+            <label class="visually-hidden" for="chat-input">Message</label>
+            <textarea id="chat-input" name="body" rows="2" maxlength="2000" required
+                      placeholder="Transmit to Terra AI…"></textarea>
+            <button class="btn btn--solid" type="submit">Send</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/chat.js' %}" defer></script>
+{% endblock %}

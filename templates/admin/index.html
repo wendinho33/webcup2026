@@ -1,0 +1,125 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div id="content-main" class="tn-deck">
+  <header class="tn-deck__head">
+    <div>
+      <p class="tn-eyebrow">EXPEDITION 01 · ADMINISTRATION</p>
+      <h1 class="tn-deck__h1">Control <em>Deck</em></h1>
+      <p class="tn-deck__stamp">Ledger stamped <span class="tn-mono">{{ stamp }}</span> — every figure recomputed on this load</p>
+    </div>
+    <div class="tn-deck__quick">
+      {% for app in app_list %}{% for model in app.models %}
+        {% if model.add_url %}<a class="tn-quick" href="{{ model.add_url }}"><span>+</span>{{ model.name }}</a>{% endif %}
+      {% endfor %}{% endfor %}
+    </div>
+  </header>
+
+  <section class="tn-kpis" aria-label="Key figures">
+    {% for k in kpis %}
+    <article class="tn-kpi tn-kpi--{{ k.tone }}">
+      <p class="tn-kpi__label">{{ k.label }}</p>
+      <p class="tn-kpi__value">{{ k.value }}</p>
+      <p class="tn-kpi__note">{{ k.note }}</p>
+      {% if k.trend %}<div class="tn-kpi__trend">{{ k.trend }}</div>{% endif %}
+      <a class="tn-kpi__link" href="{{ k.href }}">inspect →</a>
+    </article>
+    {% endfor %}
+  </section>
+
+  <section class="tn-charts">
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">CREW ADMISSIONS</span><span class="tn-panel__meta">14 days</span></figcaption>
+      {{ chart_signups.svg }}
+      <p class="tn-panel__foot">{{ chart_signups.note }}</p>
+    </figure>
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">TERRAX SETTLEMENTS</span><span class="tn-panel__meta">per day · 14 days</span></figcaption>
+      {{ chart_flow.svg }}
+      <p class="tn-panel__foot">{{ chart_flow.note }}</p>
+    </figure>
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">WALLETS BY SECTOR</span><span class="tn-panel__meta">donut</span></figcaption>
+      <div class="tn-panel__donut">{{ chart_sectors.svg }}</div>
+      <ul class="tn-legend">{% for l in chart_sectors.legend %}<li><i style="background:{{ l.color }}"></i>{{ l.label }}<b>{{ l.value }}</b></li>{% endfor %}</ul>
+      <p class="tn-panel__foot">{{ chart_sectors.note }}</p>
+    </figure>
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">TERRA CHAT STATES</span><span class="tn-panel__meta">donut</span></figcaption>
+      <div class="tn-panel__donut">{{ chart_chat.svg }}</div>
+      <ul class="tn-legend">{% for l in chart_chat.legend %}<li><i style="background:{{ l.color }}"></i>{{ l.label }}<b>{{ l.value }}</b></li>{% endfor %}</ul>
+      <p class="tn-panel__foot">{{ chart_chat.note }}</p>
+    </figure>
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">CIVIC PIPELINE</span><span class="tn-panel__meta">age-driven stages</span></figcaption>
+      {{ chart_civic.svg }}
+      <div class="tn-chips">{% for s in chart_civic.stages %}<span class="tn-chipstat">{{ s.label }} <b>{{ s.n }}</b></span>{% endfor %}</div>
+      <p class="tn-panel__foot">{{ chart_civic.note }}</p>
+    </figure>
+    <figure class="tn-panel">
+      <figcaption><span class="tn-panel__title">FARE PASSES</span><span class="tn-panel__meta">boarding states</span></figcaption>
+      {{ chart_tickets.svg }}
+      <p class="tn-panel__foot">{{ chart_tickets.note }}</p>
+    </figure>
+    <figure class="tn-panel tn-panel--wide">
+      <figcaption><span class="tn-panel__title">HEAT RIBBON</span><span class="tn-panel__meta">next 8 days · severity coloured</span></figcaption>
+      {% if chart_weather.svg %}{{ chart_weather.svg }}{% endif %}
+      {% if chart_weather.legend %}<div class="tn-legend tn-legend--row">{% for l in chart_weather.legend %}<li><i style="background:{{ l.color }}"></i>{{ l.label }}</li>{% endfor %}</div>{% endif %}
+      <p class="tn-panel__foot">{{ chart_weather.note }}</p>
+    </figure>
+  </section>
+
+  <section class="tn-lower">
+    <div class="tn-panel tn-signals">
+      <div class="tn-panel__bar"><span class="tn-panel__title">SIGNALS · LIVE FEED</span><span class="tn-panel__meta">newest first</span></div>
+      <ul class="tn-feed">
+        {% for s in signals %}
+        <li>
+          <span class="tn-feed__time tn-mono">{{ s.ts|date:'d M H:i' }}</span>
+          <span class="tn-feed__tag tn-feed__tag--{{ s.kind|slugify }}">{{ s.kind }}</span>
+          <a href="{{ s.url }}">{{ s.label }}</a>
+        </li>
+        {% empty %}
+        <li class="tn-feed__empty">No signals yet — the decks are quiet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="tn-panel tn-registry">
+      <div class="tn-panel__bar"><span class="tn-panel__title">REGISTRY</span><span class="tn-panel__meta">all decks</span></div>
+      <div class="app-list">{% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}</div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+  <div class="module tn-recent" id="recent-actions-module">
+    <h2>{% translate 'Recent actions' %}</h2>
+    {% load log %}
+    {% get_admin_log 8 as admin_log for_user user %}
+    {% if not admin_log %}
+      <p class="tn-feed__empty">{% translate 'None available' %}</p>
+    {% else %}
+      <ul class="actionlist">
+      {% for entry in admin_log %}
+        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+          {% if entry.is_deletion or not entry.get_admin_url %}
+            {{ entry.object_repr }}
+          {% else %}
+            <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+          {% endif %}
+          <br><span class="mini quiet">{% if entry.content_type %}{{ entry.content_type.name }}{% else %}{% translate 'Unknown content' %}{% endif %}</span>
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/civic.css' %}">
+{% endblock %}
+
+{% block title %}{% trans "Notification centre" %} — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="nc">
+  <div class="container">
+    <header class="nc__head" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Comms · security watch" %}</p>
+        <h1 class="nc__title">{% trans "Notification" %} <em>centre.</em></h1>
+        <p class="nc__lede">
+          {% trans "Sign-ins from your devices and anything that looks like an attack land here — and in your inbox. Two active devices are allowed per passenger." %}
+        </p>
+      </div>
+      <div class="nc__stats">
+        <span class="gov-tag mono">
+          {% blocktranslate count counter=alert_count %}{{ counter }} unread{% plural %}{{ counter }} unread{% endblocktranslate %}
+        </span>
+        <span class="gov-tag mono">{% trans "DEVICES" %} {{ devices|length }}/{{ active_limit }}</span>
+      </div>
+    </header>
+
+    <div class="nc__actions" data-reveal>
+      {% if alert_count %}
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn--line btn--sm" name="action" value="mark_all" type="submit">
+            {% trans "Mark all as read" %}
+          </button>
+        </form>
+      {% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <button class="btn btn--quiet btn--sm" name="action" value="sign_out_elsewhere" type="submit">
+          {% trans "Sign out all other sessions" %}
+        </button>
+      </form>
+    </div>
+
+    <div class="nc__grid">
+      <div class="nc__feed">
+        {% if notifications %}
+          <ul class="nc__list">
+            {% for n in notifications %}
+              <li class="nc__item nc__item--{{ n.kind }}{% if not n.is_read %} is-unread{% endif %}" data-reveal>
+                <div class="nc__item-head">
+                  <span class="nc__kind mono">
+                    {% if n.kind == 'device' %}{% trans "DEVICE" %}
+                    {% elif n.kind == 'security' %}{% trans "SECURITY" %}
+                    {% elif n.kind == 'system' %}{% trans "SYSTEM" %}
+                    {% else %}{% trans "INFO" %}{% endif %}
+                  </span>
+                  <time class="nc__time mono" datetime="{{ n.created_at|date:'c' }}">
+                    {{ n.created_at|timesince }} {% trans "ago" %}
+                  </time>
+                </div>
+                <h2 class="nc__item-title">{{ n.title }}</h2>
+                <p class="nc__item-body">{{ n.body|linebreaksbr }}</p>
+                <div class="nc__item-foot">
+                  {% if n.emailed %}
+                    <span class="nc__flag mono">{% trans "EMAILED" %}</span>
+                  {% endif %}
+                  {% if n.link %}
+                    <a class="nc__link" href="{{ n.link }}">{% trans "Open" %} →</a>
+                  {% endif %}
+                  {% if not n.is_read %}
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="id" value="{{ n.pk }}">
+                      <button class="nc__ack" name="action" value="mark" type="submit">
+                        {% trans "Acknowledge" %}
+                      </button>
+                    </form>
+                  {% else %}
+                    <span class="nc__flag nc__flag--read mono">{% trans "READ" %}</span>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="nc__empty gov-card" data-reveal>
+            <p class="mono nc__empty-tag">{% trans "CHANNEL CLEAR" %}</p>
+            <p>
+              {% trans "No signals on this channel. You will hear from Mission Control here the moment a new device signs in or the security watch trips." %}
+            </p>
+          </div>
+        {% endif %}
+      </div>
+
+      <aside class="nc__devices" data-reveal>
+        <h2 class="nc__devices-title mono">{% trans "YOUR DEVICES" %}</h2>
+        <ul class="nc__device-list">
+          {% for d in devices %}
+            {% trans "unknown device" as unknown_device %}
+    <li class="nc__device{% if d.is_active %} is-active{% endif %}">
+              <span class="nc__device-dot" aria-hidden="true"></span>
+              <div>
+                <p class="nc__device-id mono">{{ d.fingerprint|slice:":12" }}</p>
+                <p class="nc__device-meta">
+                  {{ d.user_agent|default:unknown_device|truncatechars:46 }}
+                </p>
+                <p class="nc__device-meta mono">
+                  {{ d.ip_address|default:"?" }} ·
+                  {% trans "LAST SEEN" %} {{ d.last_seen|timesince }} {% trans "ago" %}
+                </p>
+              </div>
+            </li>
+          {% empty %}
+            <li class="nc__device">{% trans "No devices registered yet." %}</li>
+          {% endfor %}
+        </ul>
+        <p class="nc__devices-fine mono">
+          {% blocktranslate count counter=devices|length %}{{ counter }} DEVICE REGISTERED · ALLOWED {{ active_limit }}{% plural %}{{ counter }} DEVICES REGISTERED · ALLOWED {{ active_limit }}{% endblocktranslate %}
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

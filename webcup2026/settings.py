@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'terra',
+    'pwa',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -64,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'terra.context_processors.notifications',
+                'terra.context_processors.net_tier',
             ],
         },
     },
@@ -113,7 +117,20 @@ LOGOUT_REDIRECT_URL = 'terra:home'
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fr', 'Français'),
+    ('mg', 'Malagasy'),
+    ('mfe', 'Morisien'),
+    ('zh', '中文'),
+    ('ru', 'Русский'),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 TIME_ZONE = 'UTC'
 
@@ -151,3 +168,81 @@ STORAGES = {
         'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
     },
 }
+
+
+# Progressive Web App
+# https://github.com/silviolleite/django-pwa
+
+PWA_SERVICE_WORKER_PATH = BASE_DIR / 'serviceworker.js'
+PWA_APP_NAME = 'Terra Nova'
+PWA_APP_DESCRIPTION = (
+    'A second Earth, catalogued and waiting. Claim your passage, '
+    'receive your callsign and watch the departure window count down.'
+)
+PWA_APP_LANG = 'en-us'
+PWA_APP_ROOT_URL = '/'
+PWA_APP_SCOPE = '/'
+PWA_APP_START_URL = '/'
+PWA_APP_FETCH_URL = '/'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_DIR = 'ltr'
+PWA_APP_THEME_COLOR = '#04060b'
+PWA_APP_BACKGROUND_COLOR = '#04060b'
+PWA_APP_STATUS_BAR_COLOR = 'black-translucent'
+PWA_APP_DEBUG_MODE = DEBUG
+PWA_APP_SPLASH_SCREEN = []  # our own art direction — no stock splash screens
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/pwa/icon-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png',
+        'purpose': 'any',
+    },
+    {
+        'src': '/static/img/pwa/icon-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png',
+        'purpose': 'any',
+    },
+    {
+        'src': '/static/img/pwa/maskable-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png',
+        'purpose': 'maskable',
+    },
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/img/pwa/apple-touch-icon-180x180.png',
+        'sizes': '180x180',
+        'type': 'image/png',
+    },
+]
+PWA_APP_SHORTCUTS = [
+    {
+        'name': 'Mission Control',
+        'short_name': 'Control',
+        'description': 'Your callsign, sector and departure countdown.',
+        'url': '/mission-control/',
+        'icons': [{'src': '/static/img/pwa/icon-192x192.png', 'sizes': '192x192'}],
+    },
+    {
+        'name': 'Claim passage',
+        'short_name': 'Passage',
+        'description': 'Join the passenger registry for Expedition 01.',
+        'url': '/signup/',
+        'icons': [{'src': '/static/img/pwa/icon-192x192.png', 'sizes': '192x192'}],
+    },
+    {
+        'name': 'TerraX market',
+        'short_name': 'TerraX',
+        'description': 'Live TerraX prices, trading desk and services.',
+        'url': '/market/',
+        'icons': [{
+            'src': '/static/img/terrax/terrax-192.png',
+            'sizes': '192x192',
+            'type': 'image/png',
+        }],
+    },
+]
