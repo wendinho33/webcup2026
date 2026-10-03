@@ -1,0 +1,105 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Terra Nova — A second Earth{% endblock %}</title>
+  <meta name="description" content="Terra Nova is a catalogued twin of Earth: 1.02 g, a 21% oxygen sky, six oceans and no extinction events on record. Expedition 01 is boarding.">
+  <meta name="theme-color" content="#04060b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/terra.css' %}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%23123a72'/><circle cx='16' cy='16' r='13' fill='none' stroke='%239bd7ff' stroke-width='1.5'/><path d='M8 12c3 1 4-2 7-1s2 4 5 4 4-2 5-1' stroke='%237ff0c0' stroke-width='2' fill='none'/></svg>">
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+
+  <header class="nav" data-nav>
+    <div class="nav__inner container">
+      <a class="brand" href="{% url 'terra:home' %}" aria-label="Terra Nova home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Terra<i>Nova</i></span>
+      </a>
+
+      <nav class="nav__links" data-nav-links aria-label="Sections">
+        <a href="{% url 'terra:home' %}#manifesto">Manifesto</a>
+        <a href="{% url 'terra:home' %}#atlas">Atlas</a>
+        <a href="{% url 'terra:home' %}#program">Program</a>
+        <a href="{% url 'terra:home' %}#access">Access</a>
+      </nav>
+
+      <div class="nav__auth">
+        {% if user.is_authenticated %}
+          <a class="btn btn--line btn--sm" href="{% url 'terra:dashboard' %}">Mission Control</a>
+          <form class="nav__form" method="post" action="{% url 'terra:logout' %}">
+            {% csrf_token %}
+            <button class="btn btn--quiet btn--sm" type="submit">Sign out</button>
+          </form>
+        {% else %}
+          <a class="btn btn--quiet btn--sm" href="{% url 'terra:login' %}">Sign in</a>
+          <a class="btn btn--solid btn--sm" href="{% url 'terra:signup' %}">Claim passage</a>
+        {% endif %}
+        <button class="nav__toggle" type="button" data-menu-toggle aria-label="Menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="{% url 'terra:home' %}">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__name">Terra<i>Nova</i></span>
+        </a>
+        <p>A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers.</p>
+        <p class="footer__coords mono">12.0°N · 44.0°E — AURELIA BASIN · K-284 b</p>
+      </div>
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <a href="{% url 'terra:home' %}#manifesto">Manifesto</a>
+        <a href="{% url 'terra:home' %}#atlas">Atlas</a>
+        <a href="{% url 'terra:home' %}#program">Program</a>
+        <a href="{% url 'terra:home' %}#access">Access</a>
+      </div>
+      <div class="footer__col">
+        <h4>Passages</h4>
+        <a href="{% url 'terra:login' %}">Sign in</a>
+        <a href="{% url 'terra:signup' %}">Claim passage</a>
+        <a href="{% url 'terra:dashboard' %}">Mission Control</a>
+      </div>
+      <div class="footer__col">
+        <h4>Signals</h4>
+        <span class="footer__line">hello@terranova.earth</span>
+        <span class="footer__line mono">LAGOON ARRAY · CH. 04</span>
+        <span class="footer__line mono">RESPONSE TIME · 41 YRS</span>
+      </div>
+    </div>
+    <div class="container footer__bar">
+      <span>© 2026 Terra Nova Expedition</span>
+      <span class="mono">SOL SYSTEM RIGHTS RESERVED — FOR NOW</span>
+    </div>
+  </footer>
+
+  {% if messages %}
+    <div class="toasts" data-toasts>
+      {% for message in messages %}
+        <div class="toast toast--{{ message.tags }}" role="status">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <script src="{% static 'js/terra.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

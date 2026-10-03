@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Mission Control — Terra Nova{% endblock %}
+
+{% block content %}
+<section class="mc">
+  <div class="container">
+    <header class="mc__head">
+      <div class="mc__intro">
+        <p class="eyebrow" data-reveal><span class="pulse"></span>Mission control · session active</p>
+        <h1 class="mc__title" data-reveal style="--d:.06s">Welcome back, <em>{{ user.first_name|default:user.username }}</em>.</h1>
+        <p class="mc__sub" data-reveal style="--d:.12s">Passage confirmed. Your sector, clearance and manifest are below.</p>
+      </div>
+      <div class="mc__callsign" data-reveal style="--d:.18s">
+        <span class="mono">CALLSIGN</span>
+        <strong>{{ profile.callsign }}</strong>
+        <span class="mc__joined mono">RECORDED {{ profile.created_at|date:"d M Y" }}</span>
+      </div>
+    </header>
+
+    <div class="mc__grid">
+      <article class="card card--profile" data-reveal>
+        <header class="card__head">
+          <h2>Passenger record</h2>
+          <span class="card__tag mono">CLEARANCE · C3</span>
+        </header>
+        <dl class="rec">
+          <div><dt class="mono">NAME</dt><dd>{{ user.get_full_name|default:user.username }}</dd></div>
+          <div><dt class="mono">PASSENGER</dt><dd>{{ user.username }}</dd></div>
+          <div><dt class="mono">SIGNAL</dt><dd>{{ user.email|default:"—" }}</dd></div>
+          <div><dt class="mono">SECTOR</dt><dd>{{ profile.sector_name }}</dd></div>
+        </dl>
+        <form class="mc__log" method="post">
+          {% csrf_token %}
+          <label for="id_tagline">Log entry</label>
+          <div class="mc__log-row">
+            <input id="id_tagline" name="tagline" maxlength="140" value="{{ profile.tagline }}" placeholder="Botanist. Prefers warm gravity.">
+            <button class="btn btn--line btn--sm" type="submit">Save</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="card card--countdown" data-reveal style="--d:.08s">
+        <header class="card__head">
+          <h2>Departure window</h2>
+          <span class="card__tag mono card__tag--live">LIVE</span>
+        </header>
+        <div class="cd" data-countdown="2027-03-21T00:00:00Z">
+          <div class="cd__unit"><strong data-cd="d">—</strong><span class="mono">DAYS</span></div>
+          <div class="cd__unit"><strong data-cd="h">—</strong><span class="mono">HRS</span></div>
+          <div class="cd__unit"><strong data-cd="m">—</strong><span class="mono">MIN</span></div>
+          <div class="cd__unit"><strong data-cd="s">—</strong><span class="mono">SEC</span></div>
+        </div>
+        <p class="card__foot">Transit window opens <strong>21 March 2027</strong> · Aurelia Basin landing site.</p>
+      </article>
+      <article class="card card--sector biome--{{ profile.sector }}" data-reveal style="--d:.16s">
+        <div class="card--sector__art" aria-hidden="true"></div>
+        <div class="card--sector__body">
+          <header class="card__head">
+            <h2>Assigned sector</h2>
+            <span class="card__tag mono">DRAWN AT RANDOM</span>
+          </header>
+          <p class="sector__name">{{ sector_info.name }}</p>
+          <p class="sector__blurb">{{ sector_info.blurb }}</p>
+          <span class="biome__stat mono">{{ sector_info.stat }}</span>
+        </div>
+      </article>
+
+      <article class="card card--telemetry" data-reveal style="--d:.2s">
+        <header class="card__head">
+          <h2>Boarding readiness</h2>
+          <span class="card__tag mono">87%</span>
+        </header>
+        <svg class="spark" viewBox="0 0 320 96" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7ff0c0" stop-opacity=".35"/>
+              <stop offset="100%" stop-color="#7ff0c0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="spark__area" d="M0 74 L32 68 L64 70 L96 58 L128 60 L160 46 L192 50 L224 36 L256 38 L288 24 L320 18 L320 96 L0 96 Z" fill="url(#sparkFill)"/>
+          <path class="spark__line" pathLength="1" d="M0 74 L32 68 L64 70 L96 58 L128 60 L160 46 L192 50 L224 36 L256 38 L288 24 L320 18" fill="none" stroke="#7ff0c0" stroke-width="2"/>
+        </svg>
+        <ul class="meters">
+          <li><span>Documents</span><span class="meter" style="--w:100%"></span><em class="mono">100%</em></li>
+          <li><span>Medical</span><span class="meter" style="--w:84%"></span><em class="mono">84%</em></li>
+          <li><span>Orientation</span><span class="meter" style="--w:62%"></span><em class="mono">62%</em></li>
+        </ul>
+      </article>
+
+      <article class="card card--crew" data-reveal style="--d:.24s">
+        <header class="card__head">
+          <h2>Latest on the manifest</h2>
+          <span class="card__tag mono">CREW</span>
+        </header>
+        <ul class="crew">
+          {% for member in crew %}
+            <li>
+              <span class="crew__avatar">{{ member.username|first|upper }}</span>
+              <div>
+                <strong>{{ member.get_full_name|default:member.username }}</strong>
+                <span class="mono">JOINED {{ member.date_joined|date:"d M Y" }}</span>
+              </div>
+            </li>
+          {% empty %}
+            <li class="crew__empty">The manifest opens with your passage.</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      <article class="card card--actions" data-reveal style="--d:.28s">
+        <header class="card__head">
+          <h2>Continue</h2>
+          <span class="card__tag mono">EXPEDITION 01</span>
+        </header>
+        <div class="actions">
+          <a class="btn btn--line" href="{% url 'terra:home' %}#atlas">Review your sector</a>
+          <a class="btn btn--line" href="{% url 'terra:home' %}#program">See the program</a>
+        </div>
+        <form method="post" action="{% url 'terra:logout' %}">
+          {% csrf_token %}
+          <button class="btn btn--quiet btn--block" type="submit">Sign out of Mission Control</button>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}
