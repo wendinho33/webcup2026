@@ -109,6 +109,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Sessions
+# Store sessions in a signed cookie instead of the database so logins survive
+# on Hodifly, whose Passenger releases are immutable — SQLite session rows
+# written at request time can be lost before the next request. The session here
+# only holds auth identity + flash messages, so a cookie is more than enough.
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
+
+# The site runs over HTTPS behind a proxy that may not forward the scheme, so
+# trust its origin for CSRF checks on admin POSTs (logout, actions, edits).
+CSRF_TRUSTED_ORIGINS = ['https://technophile.rodrigues.webcup.hodi.cloud']
+
+
 # Authentication
 # https://docs.djangoproject.com/en/6.1/topics/auth/
 
