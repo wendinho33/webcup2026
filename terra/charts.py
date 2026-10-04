@@ -11,13 +11,13 @@ import math
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
-SOLAR = '#ffb257'
-SOLAR2 = '#ff8f45'
-MINT = '#7ff0c0'
-ICE = '#9bd7ff'
-DIM = '#a6b6cf'
-GRID = 'rgba(155, 190, 235, .16)'
-TRACK = 'rgba(155, 190, 235, .10)'
+SOLAR = '#f59e0b'
+SOLAR2 = '#ea580c'
+MINT = '#10b981'
+ICE = '#0284c7'
+DIM = '#94a3b8'
+GRID = 'rgba(15, 23, 42, .08)'
+TRACK = 'rgba(15, 23, 42, .05)'
 
 SEVERITY_COLORS = {'elevated': ICE, 'high': SOLAR, 'extreme': SOLAR2}
 
