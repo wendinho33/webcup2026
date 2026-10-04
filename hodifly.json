@@ -1,6 +1,6 @@
 {
   "mode": "python",
   "startup": "passenger_wsgi.py",
-  "build": "python manage.py migrate --noinput && python manage.py collectstatic --noinput",
-  "persist": ["media/"]
+  "build": "python manage.py migrate --noinput && python manage.py collectstatic --noinput && python manage.py ensure_superuser",
+  "persist": ["media/","db.sqlite3"]
 }
