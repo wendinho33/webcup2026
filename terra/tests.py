@@ -189,6 +189,26 @@ class LoginTests(TestCase):
         self.assertContains(response, 'Please enter a correct username and password.')
 
 
+class NavTests(TestCase):
+    """Compact, mobile-ready navigation (hamburger + slide-down panel)."""
+
+    def test_nav_is_compact_and_mobile_ready(self):
+        response = self.client.get(reverse('terra:home'))
+        self.assertEqual(response.status_code, 200)
+        # Hamburger toggle and a single panel holding links + account controls.
+        self.assertContains(response, 'class="nav__menu" data-nav-menu')
+        self.assertContains(response, 'data-menu-toggle')
+        self.assertContains(response, 'aria-expanded="false"')
+        # Section links and account controls live inside the panel.
+        self.assertContains(response, 'data-nav-links')
+        self.assertContains(response, 'nav__lang')
+
+    def test_auth_controls_visible_for_guest(self):
+        response = self.client.get(reverse('terra:login'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, reverse('terra:signup'))
+
+
 class DashboardTests(TestCase):
     def test_requires_login(self):
         response = self.client.get(reverse('terra:dashboard'))

@@ -19,15 +19,23 @@
 
     var toggle = document.querySelector('[data-menu-toggle]');
     if (toggle) {
-      toggle.addEventListener('click', function () {
-        var open = nav.classList.toggle('is-open');
+      var setOpen = function (open) {
+        nav.classList.toggle('is-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
       });
       document.querySelectorAll('[data-nav-links] a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          nav.classList.remove('is-open');
-          toggle.setAttribute('aria-expanded', 'false');
-        });
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { setOpen(false); }
+      });
+      document.addEventListener('click', function (e) {
+        if (nav.classList.contains('is-open') && !nav.contains(e.target)) {
+          setOpen(false);
+        }
       });
     }
   }

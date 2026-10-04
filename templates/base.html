@@ -61,7 +61,8 @@
         <span class="brand__name">Terra<i>Nova</i></span>
       </a>
 
-      <nav class="nav__links" data-nav-links aria-label="Sections">
+      <div class="nav__menu" data-nav-menu>
+        <nav class="nav__links" data-nav-links aria-label="Sections">
         <a href="{% url 'terra:home' %}#manifesto">{% trans "Manifesto" %}</a>
         <a href="{% url 'terra:home' %}#atlas">{% trans "Atlas" %}</a>
         <a href="{% url 'terra:news' %}">{% trans "News" %}</a>
@@ -127,10 +128,12 @@
           <a class="btn btn--quiet btn--sm" href="{% url 'terra:login' %}">{% trans "Sign in" %}</a>
           <a class="btn btn--solid btn--sm" href="{% url 'terra:signup' %}">{% trans "Claim passage" %}</a>
         {% endif %}
-        <button class="nav__toggle" type="button" data-menu-toggle aria-label="{% trans "Menu" %}" aria-expanded="false">
-          <span></span><span></span>
-        </button>
       </div>
+      </div>
+
+      <button class="nav__toggle" type="button" data-menu-toggle aria-label="{% trans "Menu" %}" aria-expanded="false">
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
