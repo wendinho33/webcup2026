@@ -20,15 +20,17 @@ class Command(BaseCommand):
     help = 'Ensure a superuser exists from DJANGO_SUPERUSER_* env vars.'
 
     def handle(self, *args, **options):
+        verbosity = options.get('verbosity', 1)
         username = os.environ.get('DJANGO_SUPERUSER_USERNAME', '').strip()
         email = os.environ.get('DJANGO_SUPERUSER_EMAIL', '').strip()
         password = os.environ.get('DJANGO_SUPERUSER_PASSWORD', '')
 
         if not username or not password:
-            self.stdout.write(self.style.WARNING(
-                'DJANGO_SUPERUSER_USERNAME and DJANGO_SUPERUSER_PASSWORD '
-                'not set — skipping superuser creation.'
-            ))
+            if verbosity >= 1:
+                self.stdout.write(self.style.WARNING(
+                    'DJANGO_SUPERUSER_USERNAME and DJANGO_SUPERUSER_PASSWORD '
+                    'not set — skipping superuser creation.'
+                ))
             return
 
         User = get_user_model()
@@ -44,4 +46,5 @@ class Command(BaseCommand):
         user.save()
 
         verb = 'Created' if created else 'Updated'
-        self.stdout.write(self.style.SUCCESS(f'{verb} superuser "{username}".'))
+        if verbosity >= 1:
+            self.stdout.write(self.style.SUCCESS(f'{verb} superuser "{username}".'))
