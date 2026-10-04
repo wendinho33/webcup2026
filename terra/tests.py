@@ -209,6 +209,48 @@ class NavTests(TestCase):
         self.assertContains(response, reverse('terra:signup'))
 
 
+class TutorialTests(TestCase):
+    """First-login tour overlay + dismiss endpoint."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            'rookie', 'rookie@example.com', 'orbit-pass-88',
+        )
+
+    def _login(self):
+        self.client.login(username='rookie', password='orbit-pass-88')
+
+    def test_tour_shown_on_first_login(self):
+        self._login()
+        response = self.client.get(reverse('terra:dashboard'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-tutorial')
+        self.assertContains(response, 'Welcome to Terra Nova')
+        self.assertContains(response, 'First contact')
+        self.assertContains(response, 'Mission Control')
+
+    def test_tour_not_shown_to_anonymous(self):
+        response = self.client.get(reverse('terra:home'))
+        self.assertNotContains(response, 'data-tutorial')
+
+    def test_dismiss_hides_tour(self):
+        self._login()
+        response = self.client.post(reverse('terra:tutorial_dismiss'))
+        self.assertRedirects(response, reverse('terra:dashboard'))
+        response = self.client.get(reverse('terra:dashboard'))
+        self.assertNotContains(response, 'data-tutorial')
+
+    def test_dismiss_requires_login(self):
+        response = self.client.post(reverse('terra:tutorial_dismiss'))
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('terra:login'), response['Location'])
+
+    def test_dismiss_requires_post(self):
+        self._login()
+        response = self.client.get(reverse('terra:tutorial_dismiss'))
+        self.assertEqual(response.status_code, 405)
+
+
 class DashboardTests(TestCase):
     def test_requires_login(self):
         response = self.client.get(reverse('terra:dashboard'))

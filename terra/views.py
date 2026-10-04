@@ -168,6 +168,20 @@ def logout_view(request):
 
 
 @login_required
+@require_POST
+def tutorial_dismiss(request):
+    """Mark the first-login tour as seen and send the passenger back."""
+    profile = ensure_profile(request.user)
+    profile.tutorial_seen = True
+    profile.save(update_fields=['tutorial_seen'])
+
+    next_url = request.POST.get('next', '')
+    if next_url.startswith('/') and not next_url.startswith('//'):
+        return redirect(next_url)
+    return redirect('terra:dashboard')
+
+
+@login_required
 @require_http_methods(['GET', 'POST'])
 def dashboard(request):
     profile = ensure_profile(request.user)

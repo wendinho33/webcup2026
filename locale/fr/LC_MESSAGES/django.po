@@ -3547,3 +3547,66 @@ msgstr "Impossible d'enregistrer la note."
 #: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Action de compte inconnue."
+#: templates/base.html
+msgid "First contact"
+msgstr "Premier contact"
+
+#: templates/base.html
+msgid "Welcome to Terra Nova"
+msgstr "Bienvenue sur Terra Nova"
+
+#: templates/base.html
+msgid "Skip tour"
+msgstr "Passer la visite"
+
+#: templates/base.html
+msgid "Your home base. Track your callsign, clearance, departure countdown and passenger record here."
+msgstr "Votre base d'attache. Suivez ici votre indicatif, votre habilitation, le compte à rebours du départ et votre dossier passager."
+
+#: templates/base.html
+msgid "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits."
+msgstr "Vous démarrez avec un bonus de bienvenue de 10 000 TRX. Achetez et vendez des TerraX sur le marché contre des crédits terrestres."
+
+#: templates/base.html
+msgid "News & signals"
+msgstr "Actualités & signaux"
+
+#: templates/base.html
+msgid "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts."
+msgstr "Lisez les dernières dépêches, laissez des commentaires et surveillez la cloche pour les notifications et alertes de sécurité."
+
+#: templates/base.html
+msgid "Weather & alerts"
+msgstr "Météo & alertes"
+
+#: templates/base.html
+msgid "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away."
+msgstr "Météo en direct de la colonie. Activez les notifications push du navigateur pour recevoir les alertes de tempête même en votre absence."
+
+#: templates/base.html
+msgid "City services"
+msgstr "Services municipaux"
+
+#: templates/base.html
+msgid "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat."
+msgstr "Horaires de transport, bilans de santé avec Terra Watch, impôts et pension du gouvernement, et Terra Chat."
+
+#: templates/base.html
+msgid "Feedback & help"
+msgstr "Avis & aide"
+
+#: templates/base.html
+msgid "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility."
+msgstr "Signalez ce qui ne fonctionne pas ou ce qui manque sur la page Avis. Réglez la taille du texte et le contraste dans Accessibilité."
+
+#: templates/base.html
+msgid "Back"
+msgstr "Retour"
+
+#: templates/base.html
+msgid "Next"
+msgstr "Suivant"
+
+#: templates/base.html
+msgid "Got it"
+msgstr "Compris"

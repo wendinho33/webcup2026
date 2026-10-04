@@ -70,6 +70,7 @@ TEMPLATES = [
                 'terra.context_processors.notifications',
                 'terra.context_processors.net_tier',
                 'terra.context_processors.webpush',
+                'terra.context_processors.tutorial',
             ],
         },
     },

@@ -3493,3 +3493,66 @@ msgstr "Не удалось сохранить оценку."
 #: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Неизвестное действие аккаунта."
+#: templates/base.html
+msgid "First contact"
+msgstr "Первый контакт"
+
+#: templates/base.html
+msgid "Welcome to Terra Nova"
+msgstr "Добро пожаловать на Terra Nova"
+
+#: templates/base.html
+msgid "Skip tour"
+msgstr "Пропустить тур"
+
+#: templates/base.html
+msgid "Your home base. Track your callsign, clearance, departure countdown and passenger record here."
+msgstr "Ваша база. Здесь отслеживайте позывной, уровень допуска, обратный отсчёт до отправления и личное дело."
+
+#: templates/base.html
+msgid "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits."
+msgstr "Вы начинаете с приветственного бонуса в 10 000 TRX. Покупайте и продавайте TerraX на бирже за земные кредиты."
+
+#: templates/base.html
+msgid "News & signals"
+msgstr "Новости и сигналы"
+
+#: templates/base.html
+msgid "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts."
+msgstr "Читайте свежие сводки, оставляйте комментарии и следите за колокольчиком — там уведомления и оповещения безопасности."
+
+#: templates/base.html
+msgid "Weather & alerts"
+msgstr "Погода и оповещения"
+
+#: templates/base.html
+msgid "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away."
+msgstr "Погода в поселении в реальном времени. Включите push-уведомления браузера, чтобы получать штормовые предупреждения даже когда вас нет рядом."
+
+#: templates/base.html
+msgid "City services"
+msgstr "Городские службы"
+
+#: templates/base.html
+msgid "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat."
+msgstr "Расписание транспорта, медосмотры Terra Watch, налоги и пенсия, а также Terra Chat."
+
+#: templates/base.html
+msgid "Feedback & help"
+msgstr "Отзывы и помощь"
+
+#: templates/base.html
+msgid "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility."
+msgstr "Сообщите, что сломано или чего не хватает, на странице «Отзывы». Размер текста и контраст настраиваются в «Специальных возможностях»."
+
+#: templates/base.html
+msgid "Back"
+msgstr "Назад"
+
+#: templates/base.html
+msgid "Next"
+msgstr "Далее"
+
+#: templates/base.html
+msgid "Got it"
+msgstr "Понятно"

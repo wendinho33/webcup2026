@@ -53,6 +53,10 @@ class Profile(models.Model):
         default=False,
         help_text='Terra Watch health monitor paired (50 TRX).',
     )
+    tutorial_seen = models.BooleanField(
+        default=False,
+        help_text='Passenger has finished the first-login Mission Control tour.',
+    )
     avatar = models.ImageField(
         upload_to='avatars/%Y/%m/',
         blank=True,

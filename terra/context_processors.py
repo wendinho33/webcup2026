@@ -37,3 +37,17 @@ def webpush(request):
         'vapid_public_key': conf.get('VAPID_PUBLIC_KEY', ''),
         'webpush_save_url': reverse('save_webpush_info'),
     }
+
+
+def tutorial(request):
+    """Whether to surface the first-login tour overlay."""
+    user = getattr(request, 'user', None)
+    if user and user.is_authenticated:
+        from terra.models import Profile
+
+        try:
+            return {'show_tutorial': not user.profile.tutorial_seen}
+        except Profile.DoesNotExist:
+            # No profile yet (e.g. a fresh admin/shell account): first login.
+            return {'show_tutorial': True}
+    return {'show_tutorial': False}

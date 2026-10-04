@@ -3530,3 +3530,66 @@ msgstr "Tsy nahomby ny fandrahoana ny fanomezana."
 #: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Asa kaonty tsy fantatra."
+#: templates/base.html
+msgid "First contact"
+msgstr "Fifandraisana voalohany"
+
+#: templates/base.html
+msgid "Welcome to Terra Nova"
+msgstr "Tonga soa eto Terra Nova"
+
+#: templates/base.html
+msgid "Skip tour"
+msgstr "Hitsidina"
+
+#: templates/base.html
+msgid "Your home base. Track your callsign, clearance, departure countdown and passenger record here."
+msgstr "Ny toeram-ponenanao. Araho eto ny kaodim-piaranao, ny fahazoan-dàlanao, ny fanisam-potoana hialàna ary ny rakitsoratrao."
+
+#: templates/base.html
+msgid "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits."
+msgstr "Manomboka amin'ny bonus fandraisana 10 000 TRX ianao. Mividiana sy amidio TerraX eny an-tsena amin'ny crédit an-tany."
+
+#: templates/base.html
+msgid "News & signals"
+msgstr "Vaovao & famantarana"
+
+#: templates/base.html
+msgid "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts."
+msgstr "Vakio ny tatitra farany, mametraha fanehoan-kevitra, ary araho ny lakolosy hahazoana fampandrenesana sy fanairana fiarovana."
+
+#: templates/base.html
+msgid "Weather & alerts"
+msgstr "Toetr'andro & fanairana"
+
+#: templates/base.html
+msgid "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away."
+msgstr "Toetr'andro mivantana ho an'ny tanàna. Alefaso ny push an'ny navigateur mba hahazoana fanairana rivo-mahery na dia tsy eo aza ianao."
+
+#: templates/base.html
+msgid "City services"
+msgstr "Serivisy an-tanàna"
+
+#: templates/base.html
+msgid "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat."
+msgstr "Fandaharam-potoanan'ny fitaterana, fizahana ara-pahasalamana amin'ny Terra Watch, hetra sy fisotroan-drononon'ny governemanta, ary Terra Chat."
+
+#: templates/base.html
+msgid "Feedback & help"
+msgstr "Hevitra & fanampiana"
+
+#: templates/base.html
+msgid "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility."
+msgstr "Lazao izay simba na tsy ampy ao amin'ny pejin'ny hevitra. Ahitsio ny haben'ny soratra sy ny contraste ao amin'ny fidirana."
+
+#: templates/base.html
+msgid "Back"
+msgstr "Miverina"
+
+#: templates/base.html
+msgid "Next"
+msgstr "Manaraka"
+
+#: templates/base.html
+msgid "Got it"
+msgstr "Azoko"

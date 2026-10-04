@@ -3382,3 +3382,66 @@ msgstr "无法保存评分。"
 #: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "未知账户操作。"
+#: templates/base.html
+msgid "First contact"
+msgstr "首次接触"
+
+#: templates/base.html
+msgid "Welcome to Terra Nova"
+msgstr "欢迎来到新地球（Terra Nova）"
+
+#: templates/base.html
+msgid "Skip tour"
+msgstr "跳过导览"
+
+#: templates/base.html
+msgid "Your home base. Track your callsign, clearance, departure countdown and passenger record here."
+msgstr "您的主基地。在这里查看您的呼号、权限、出发倒计时和乘客档案。"
+
+#: templates/base.html
+msgid "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits."
+msgstr "您将以 10,000 TRX 欢迎奖励起步，可在市场用地球信用点买卖 TerraX。"
+
+#: templates/base.html
+msgid "News & signals"
+msgstr "新闻与信号"
+
+#: templates/base.html
+msgid "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts."
+msgstr "阅读最新快讯、发表评论，并留意铃铛中的通知和安全警报。"
+
+#: templates/base.html
+msgid "Weather & alerts"
+msgstr "天气与警报"
+
+#: templates/base.html
+msgid "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away."
+msgstr "定居点的实时天气。开启浏览器推送，即使您不在也能收到风暴警告。"
+
+#: templates/base.html
+msgid "City services"
+msgstr "城市服务"
+
+#: templates/base.html
+msgid "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat."
+msgstr "交通时刻表、Terra Watch 健康体检、政府税务与养老金，以及 Terra Chat。"
+
+#: templates/base.html
+msgid "Feedback & help"
+msgstr "反馈与帮助"
+
+#: templates/base.html
+msgid "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility."
+msgstr "请在“反馈”页面告诉我们哪里有问题或缺失；可在“无障碍”中调整文字大小和对比度。"
+
+#: templates/base.html
+msgid "Back"
+msgstr "返回"
+
+#: templates/base.html
+msgid "Next"
+msgstr "下一步"
+
+#: templates/base.html
+msgid "Got it"
+msgstr "知道了"

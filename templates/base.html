@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lexend:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/terra.css' %}">
   <link rel="stylesheet" href="{% static 'css/accessibility.css' %}">
+  <link rel="stylesheet" href="{% static 'css/tutorial.css' %}">
   <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/toastr.css' %}">
   {% block extra_css %}{% endblock %}
@@ -276,12 +277,90 @@
     </div>
   {% endif %}
 
+  {% if show_tutorial %}
+  <div class="tut" data-tutorial>
+    <div class="tut__backdrop" data-tut-close aria-hidden="true"></div>
+    <form class="tut__card" method="post" action="{% url 'terra:tutorial_dismiss' %}" data-tut-form>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <header class="tut__head">
+        <div>
+          <p class="tut__kicker mono">{% trans "First contact" %}</p>
+          <h2 class="tut__title" id="tut-title">{% trans "Welcome to Terra Nova" %}</h2>
+        </div>
+        <button class="tut__x" type="submit" aria-label="{% trans "Skip tour" %}">✕</button>
+      </header>
+
+      <div class="tut__track">
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 12 16 8"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <h3>{% trans "Mission Control" %}</h3>
+          <p>{% trans "Your home base. Track your callsign, clearance, departure countdown and passenger record here." %}</p>
+        </section>
+
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M3.5 9.5h17"/><path d="M15.5 13.5h1.5"/></svg>
+          </div>
+          <h3>{% trans "TerraX wallet" %}</h3>
+          <p>{% trans "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits." %}</p>
+        </section>
+
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 11h6M9 14.5h6"/></svg>
+          </div>
+          <h3>{% trans "News & signals" %}</h3>
+          <p>{% trans "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts." %}</p>
+        </section>
+
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1 .5-7.97A5 5 0 0 1 17 8.5 3.5 3.5 0 0 1 16.5 15z"/><path d="M12 11.5 10.5 14.5h2.6l-1.4 3"/></svg>
+          </div>
+          <h3>{% trans "Weather & alerts" %}</h3>
+          <p>{% trans "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away." %}</p>
+        </section>
+
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg>
+          </div>
+          <h3>{% trans "City services" %}</h3>
+          <p>{% trans "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat." %}</p>
+        </section>
+
+        <section class="tut__step" data-tut-step>
+          <div class="tut__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3 1.2-4.2A8 8 0 1 1 21 12z"/></svg>
+          </div>
+          <h3>{% trans "Feedback & help" %}</h3>
+          <p>{% trans "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility." %}</p>
+        </section>
+      </div>
+
+      <footer class="tut__foot">
+        <div class="tut__dots" data-tut-dots aria-hidden="true"></div>
+        <div class="tut__nav">
+          <button class="btn btn--quiet btn--sm" type="button" data-tut-prev hidden>{% trans "Back" %}</button>
+          <span class="tut__counter mono" data-tut-counter aria-live="polite"></span>
+          <button class="btn btn--line btn--sm" type="button" data-tut-next hidden>{% trans "Next" %}</button>
+          <button class="btn btn--solid btn--sm" type="submit">{% trans "Got it" %}</button>
+        </div>
+      </footer>
+    </form>
+  </div>
+  {% endif %}
+
   <script src="{% static 'vendor/jquery/jquery.min.js' %}" defer></script>
   <script src="{% static 'vendor/toastr/toastr.min.js' %}" defer></script>
   <script src="{% static 'js/toasts.js' %}" defer></script>
   <script src="{% static 'js/terra.js' %}" defer></script>
   <script src="{% static 'js/accessibility.js' %}" defer></script>
   <script src="{% static 'js/net.js' %}" defer></script>
+  <script src="{% static 'js/tutorial.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

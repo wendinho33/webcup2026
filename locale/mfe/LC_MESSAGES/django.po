@@ -3443,3 +3443,66 @@ msgstr "Sak pa kapav save not lan."
 #: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Azion kont inkonu."
+#: templates/base.html
+msgid "First contact"
+msgstr "Premie kontak"
+
+#: templates/base.html
+msgid "Welcome to Terra Nova"
+msgstr "Bienveni lor Terra Nova"
+
+#: templates/base.html
+msgid "Skip tour"
+msgstr "Sote vizit"
+
+#: templates/base.html
+msgid "Your home base. Track your callsign, clearance, departure countdown and passenger record here."
+msgstr "To baz prinsipal. Swiv to sinyal, to clearance, konte-a-rebour depa ek to dosye pasaze isi."
+
+#: templates/base.html
+msgid "You start with a 10,000 TRX welcome bonus. Buy and sell TerraX in the market against Earth credits."
+msgstr "To koumans avek enn bonis bienveni 10 000 TRX. Aste ek vann TerraX lor marse kont kredi Later."
+
+#: templates/base.html
+msgid "News & signals"
+msgstr "Nouvel & sinyal"
+
+#: templates/base.html
+msgid "Read the latest dispatches, leave comments, and watch the bell for notifications and security alerts."
+msgstr "Lir bann dernie dispatch, les komanter, ek get sinyal lor laklos pou notifikasion ek alert sekirite."
+
+#: templates/base.html
+msgid "Weather & alerts"
+msgstr "Metéo & alert"
+
+#: templates/base.html
+msgid "Live weather for the settlement. Turn on browser push to get storm warnings even when you're away."
+msgstr "Meteo an direk pou koloni. Aktive push navigateur pou gagn bann alerte loraz mem si to pa la."
+
+#: templates/base.html
+msgid "City services"
+msgstr "Servis vil"
+
+#: templates/base.html
+msgid "Transport timetables, health check-ups with Terra Watch, government tax and pension, and Terra Chat."
+msgstr "Orer transport, check-up sante avek Terra Watch, taks ek pansyon gouvernman, ek Terra Chat."
+
+#: templates/base.html
+msgid "Feedback & help"
+msgstr "Feedback & led"
+
+#: templates/base.html
+msgid "Tell us what's broken or missing on the Feedback page. Adjust text size and contrast under accessibility."
+msgstr "Dir nou ki kase ou ki manke lor paz Feedback. Aziste taille text ek kontras dan aksesibilite."
+
+#: templates/base.html
+msgid "Back"
+msgstr "Retourne"
+
+#: templates/base.html
+msgid "Next"
+msgstr "Swivan"
+
+#: templates/base.html
+msgid "Got it"
+msgstr "Konpran"
