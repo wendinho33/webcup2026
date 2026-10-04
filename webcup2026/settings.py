@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'webcup2026.wsgi.application'
 
 _MYSQL = {
     'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'technophile_terra',
+    'NAME': 'technophile_webcup',
     'USER': 'technophile_marius',
     'PASSWORD': 'webcup2026',
     'HOST': 'localhost',
