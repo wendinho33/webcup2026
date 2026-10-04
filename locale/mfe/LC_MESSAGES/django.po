@@ -3506,3 +3506,14 @@ msgstr "Swivan"
 #: templates/base.html
 msgid "Got it"
 msgstr "Konpran"
+#: templates/base.html
+msgid "Install app"
+msgstr "Instal laplikasion"
+
+#: templates/base.html
+msgid "Terra Nova app installed."
+msgstr "Laplikasion Terra Nova inn instale."
+
+#: templates/base.html
+msgid "To install, tap Share and choose “Add to Home Screen”."
+msgstr "Pou instale, tap Partaze ek swazir « Azout lor lekran lakaz »."

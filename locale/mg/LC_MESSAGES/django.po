@@ -3593,3 +3593,14 @@ msgstr "Manaraka"
 #: templates/base.html
 msgid "Got it"
 msgstr "Azoko"
+#: templates/base.html
+msgid "Install app"
+msgstr "Hampiditra ny fampiharana"
+
+#: templates/base.html
+msgid "Terra Nova app installed."
+msgstr "Voaorina ny fampiharana Terra Nova."
+
+#: templates/base.html
+msgid "To install, tap Share and choose “Add to Home Screen”."
+msgstr "Raha hampiditra, tsindrio ny Mizarà ary fidio ny « Ampiana amin'ny efijery fandraisana »."

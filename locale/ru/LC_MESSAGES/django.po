@@ -3556,3 +3556,14 @@ msgstr "Далее"
 #: templates/base.html
 msgid "Got it"
 msgstr "Понятно"
+#: templates/base.html
+msgid "Install app"
+msgstr "Установить приложение"
+
+#: templates/base.html
+msgid "Terra Nova app installed."
+msgstr "Приложение Terra Nova установлено."
+
+#: templates/base.html
+msgid "To install, tap Share and choose “Add to Home Screen”."
+msgstr "Чтобы установить, нажмите «Поделиться» и выберите «На экран “Домой”»."

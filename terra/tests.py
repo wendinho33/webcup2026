@@ -335,6 +335,16 @@ class PwaTests(TestCase):
             self.assertContains(response, 'rel="apple-touch-icon"')
             self.assertContains(response, 'name="theme-color"')
 
+    def test_install_button_and_script_present(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'id="install-app"')
+        self.assertContains(response, 'data-label-installed')
+        self.assertContains(response, 'data-label-ios')
+        self.assertContains(response, 'js/install.js')
+        js = (Path(settings.BASE_DIR) / 'static' / 'js' / 'install.js').read_text()
+        self.assertIn('beforeinstallprompt', js)
+
     def test_pwa_icons_exist_with_expected_sizes(self):
         from django.contrib.staticfiles import finders
         from PIL import Image

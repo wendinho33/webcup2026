@@ -151,6 +151,16 @@
         </a>
         <p>{% trans "A second Earth, catalogued and waiting. Expedition 01 opens the transit window for the first one thousand passengers." %}</p>
         <p class="footer__coords mono">12.0°N · 44.0°E — AURELIA BASIN · K-284 b</p>
+        <button id="install-app" class="btn btn--line btn--sm" type="button" hidden
+                data-label-installed="{% trans "Terra Nova app installed." %}"
+                data-label-ios="{% trans "To install, tap Share and choose “Add to Home Screen”." %}">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v11"/><path d="m7 9 5 5 5-5"/>
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/>
+          </svg>
+          <span>{% trans "Install app" %}</span>
+        </button>
       </div>
       <div class="footer__col">
         <h4>{% trans "Explore" %}</h4>
@@ -361,6 +371,7 @@
   <script src="{% static 'js/accessibility.js' %}" defer></script>
   <script src="{% static 'js/net.js' %}" defer></script>
   <script src="{% static 'js/tutorial.js' %}" defer></script>
+  <script src="{% static 'js/install.js' %}" defer></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -3445,3 +3445,14 @@ msgstr "下一步"
 #: templates/base.html
 msgid "Got it"
 msgstr "知道了"
+#: templates/base.html
+msgid "Install app"
+msgstr "安装应用"
+
+#: templates/base.html
+msgid "Terra Nova app installed."
+msgstr "Terra Nova 应用已安装。"
+
+#: templates/base.html
+msgid "To install, tap Share and choose “Add to Home Screen”."
+msgstr "要安装，请点击“分享”，然后选择“添加到主屏幕”。"

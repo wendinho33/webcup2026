@@ -127,7 +127,12 @@ main { position: relative; z-index: 2; }
 .btn--quiet:hover { color: var(--paper); background: rgba(255, 255, 255, .05); }
 .btn--sm { padding: .5em 1.05em; font-size: .84rem; }
 .btn--lg { padding: 1.05em 1.9em; font-size: 1rem; }
-.btn--block { width: 100%; }
+/* PWA install button + hidden-attribute reset (btn uses display:inline-flex,
+   which otherwise overrides the HTML `hidden` attribute). */
+[hidden] { display: none !important; }
+#install-app { margin-top: 1.15rem; }
+#install-app svg { flex: 0 0 auto; }
+
 
 /* --- scroll reveals --- */
 .js [data-reveal] {

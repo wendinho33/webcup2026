@@ -10,7 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import sys
 from pathlib import Path
+
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except ImportError:  # pragma: no cover — PyMySQL is a declared dependency
+    pymysql = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,12 +89,53 @@ WSGI_APPLICATION = 'webcup2026.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# Database
+# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
+#
+# Production (Hodifly) runs on MySQL via PyMySQL. If the server can't be
+# reached with these credentials, we fall back to the local SQLite file so the
+# site never hard-fails on a bad database connection.
+
+_MYSQL = {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': 'technophile_terra',
+    'USER': 'technophile_marius',
+    'PASSWORD': 'webcup2026',
+    'HOST': 'localhost',
+    'PORT': '3306',
+    'OPTIONS': {'charset': 'utf8mb4'},
 }
+
+_SQLITE = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
+}
+
+
+def _mysql_reachable():
+    """True when the MySQL server accepts a connection with our credentials."""
+    if pymysql is None:
+        return False
+    try:
+        conn = pymysql.connect(
+            host=_MYSQL['HOST'],
+            port=int(_MYSQL['PORT']),
+            user=_MYSQL['USER'],
+            password=_MYSQL['PASSWORD'],
+            database=_MYSQL['NAME'],
+            connect_timeout=3,
+        )
+        conn.close()
+        return True
+    except Exception:
+        return False
+
+
+if _mysql_reachable():
+    DATABASES = {'default': _MYSQL}
+else:
+    print('MySQL unreachable — falling back to SQLite (db.sqlite3).', file=sys.stderr)
+    DATABASES = {'default': _SQLITE}
 
 
 # Password validation

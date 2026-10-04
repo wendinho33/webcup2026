@@ -3610,3 +3610,14 @@ msgstr "Suivant"
 #: templates/base.html
 msgid "Got it"
 msgstr "Compris"
+#: templates/base.html
+msgid "Install app"
+msgstr "Installer l'application"
+
+#: templates/base.html
+msgid "Terra Nova app installed."
+msgstr "Application Terra Nova installée."
+
+#: templates/base.html
+msgid "To install, tap Share and choose “Add to Home Screen”."
+msgstr "Pour installer, touchez Partager puis choisissez « Ajouter à l'écran d'accueil »."
