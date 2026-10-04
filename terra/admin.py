@@ -33,6 +33,7 @@ from .models import (
     CivicRequest,
     DeviceLogin,
     FareTicket,
+    Feedback,
     LoginAttempt,
     NewsComment,
     NewsItem,
@@ -585,6 +586,33 @@ class NewsCommentAdmin(admin.ModelAdmin):
         return obj.created_at.strftime('%d %b %Y · %H:%M')
 
 
+class FeedbackAdmin(admin.ModelAdmin):
+    """The council inbox — every filed insight, moderated in one place."""
+
+    list_display = ('passenger', 'topic_col', 'excerpt', 'filed')
+    search_fields = ('body', 'user__username', 'user__first_name')
+    list_filter = ('topic', 'created_at')
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at',)
+
+    @admin.display(description='Passenger', ordering='user__username')
+    def passenger(self, obj):
+        return obj.user.get_full_name() or obj.user.username
+
+    @admin.display(description='Topic', ordering='topic')
+    def topic_col(self, obj):
+        return obj.get_topic_display()
+
+    @admin.display(description='Insight')
+    def excerpt(self, obj):
+        return obj.body[:60]
+
+    @admin.display(description='Filed', ordering='created_at')
+    def filed(self, obj):
+        return obj.created_at.strftime('%d %b %Y · %H:%M')
+
+
 NewsItemAdmin.inlines = [NewsCommentInline]
 
 
@@ -714,6 +742,7 @@ terra_admin_site.register(ChatMessage, ChatMessageAdmin)
 terra_admin_site.register(WeatherAlert, WeatherAlertAdmin)
 terra_admin_site.register(NewsItem, NewsItemAdmin)
 terra_admin_site.register(NewsComment, NewsCommentAdmin)
+terra_admin_site.register(Feedback, FeedbackAdmin)
 terra_admin_site.register(DeviceLogin, DeviceLoginAdmin)
 terra_admin_site.register(LoginAttempt, LoginAttemptAdmin)
 terra_admin_site.register(Notification, NotificationAdmin)

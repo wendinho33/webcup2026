@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static i18n newsroom %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock %}
+
+{% block title %}{% trans "Feedback — Terra Nova" %}{% endblock %}
+
+{% block content %}
+<section class="fb">
+  <div class="container">
+    <header class="fb__head" data-reveal>
+      <div>
+        <p class="eyebrow"><span class="pulse"></span>{% trans "Council inbox · open channel" %}</p>
+        <h1 class="fb__title">{% trans "Your insight" %} <em>{% trans "builds Terra Nova." %}</em></h1>
+        <p class="fb__lede">
+          {% blocktrans %}What should the colony do better — transport, market,
+          weather alerts, the stories on the wire? File it below; every
+          Novarian can read what the others filed.{% endblocktrans %}
+        </p>
+      </div>
+    </header>
+
+    {% if user.is_authenticated %}
+      <form class="fb__form" method="post" action="{% url 'terra:feedback_post' %}">
+        {% csrf_token %}
+        <div class="fb__row">
+          <label class="fb__label" for="id-fb-topic">{% trans "Topic" %}</label>
+          <select id="id-fb-topic" name="topic">
+            {% for code, label in topics %}
+              <option value="{{ code }}">{{ label|t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <label class="visually-hidden" for="id-fb-body">{% trans "Your insight" %}</label>
+        <textarea id="id-fb-body" name="body" rows="4" maxlength="1000" required
+                  placeholder="{% trans "What would make Terra Nova better?" %}"></textarea>
+        <button class="btn btn--solid" type="submit">{% trans "File insight" %}</button>
+      </form>
+    {% else %}
+      <p class="fb__signin">
+        <a href="{% url 'terra:login' %}?next={{ request.path }}">{% trans "Sign in" %}</a>
+        {% trans "to file an insight — and read what the others filed." %}
+      </p>
+    {% endif %}
+
+    <section class="fb__wall" id="wall">
+      <header class="section__head">
+        <p class="eyebrow" data-reveal>{% trans "The wall" %}</p>
+        <h2 class="section__title" data-reveal style="--d:.06s">
+          {% blocktrans count n=feedbacks|length %}{{ n }} insight from the crew{% plural %}{{ n }} insights from the crew{% endblocktrans %}
+        </h2>
+      </header>
+
+      {% if feedbacks %}
+        <ul class="fb__list">
+          {% for f in feedbacks %}
+            <li class="fb-card" data-reveal style="--d: calc({{ forloop.counter0 }} * .04s)">
+              <p class="fb-card__meta mono">
+                <span class="fb-card__topic fb-card__topic--{{ f.topic }}">{{ f.get_topic_display|t }}</span>
+                {% if f.user == user %}<span class="fb-card__mine">{% trans "Yours" %}</span>{% endif %}
+                <strong>{{ f.user.get_full_name|default:f.user.username }}</strong>
+                <span>{{ f.created_at|date:"d M Y · H:i" }}</span>
+              </p>
+              <p class="fb-card__body">{{ f.body }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="fb__empty">{% trans "No insights on the wall yet — file the first one above." %}</p>
+      {% endif %}
+    </section>
+  </div>
+</section>
+{% endblock %}

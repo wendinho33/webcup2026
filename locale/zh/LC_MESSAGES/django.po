@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Terra Nova 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 23:19+0000\n"
+"POT-Creation-Date: 2026-10-04 00:45+0000\n"
 "PO-Revision-Date: 2026-10-03 00:00+0000\n"
 "Language-Team: Chinese\n"
 "Language: zh\n"
@@ -121,32 +121,34 @@ msgstr "共 %(full_result_count)s 条"
 msgid "Skip to content"
 msgstr "跳转到内容"
 
-#: templates/base.html:65 templates/base.html:152
+#: templates/base.html:65 templates/base.html:153
 msgid "Manifesto"
 msgstr "宣言"
 
-#: templates/base.html:66 templates/base.html:153
+#: templates/base.html:66 templates/base.html:154
 msgid "Atlas"
 msgstr "图集"
 
-#: templates/base.html:67 templates/base.html:155
+#: templates/base.html:67 templates/base.html:156
 #: terra/templates/terra/news_detail.html:14
 msgid "News"
 msgstr "新闻"
 
-#: templates/base.html:68
+#: templates/base.html:68 terra/models.py:446
 msgid "Market"
 msgstr "市场"
 
-#: templates/base.html:69 templates/base.html:157
+#: templates/base.html:69 templates/base.html:158 terra/models.py:445
 msgid "Weather"
 msgstr "天气"
 
-#: templates/base.html:70 terra/templates/terra/dashboard.html:143
+#: templates/base.html:70 terra/models.py:447
+#: terra/templates/terra/dashboard.html:143
 msgid "Transport"
 msgstr "交通"
 
-#: templates/base.html:71 terra/templates/terra/dashboard.html:144
+#: templates/base.html:71 terra/models.py:449
+#: terra/templates/terra/dashboard.html:144
 msgid "Health"
 msgstr "健康"
 
@@ -154,104 +156,108 @@ msgstr "健康"
 msgid "Government"
 msgstr "政府"
 
-#: templates/base.html:84
+#: templates/base.html:73 templates/base.html:171
+msgid "Feedback"
+msgstr "反馈"
+
+#: templates/base.html:85
 msgid "Language"
 msgstr "语言"
 
-#: templates/base.html:95 templates/base.html:96
+#: templates/base.html:96 templates/base.html:97
 msgid "Notifications"
 msgstr "通知"
 
-#: templates/base.html:105
+#: templates/base.html:106
 #, python-format
 msgid "%(counter)s unread signal"
 msgid_plural "%(counter)s unread signals"
 msgstr[0] "%(counter)s 条未读信号"
 
-#: templates/base.html:111 templates/base.html:112
+#: templates/base.html:112 templates/base.html:113
 #: terra/templates/terra/account.html:8
 msgid "Account centre"
 msgstr "账户中心"
 
-#: templates/base.html:120 templates/base.html:169
+#: templates/base.html:121 templates/base.html:170
 #: terra/templates/terra/account.html:149
 msgid "Mission Control"
 msgstr "任务控制中心"
 
-#: templates/base.html:123
+#: templates/base.html:124
 msgid "Sign out"
 msgstr "退出登录"
 
-#: templates/base.html:126 templates/base.html:167
-#: terra/templates/terra/market.html:273
+#: templates/base.html:127 templates/base.html:168
+#: terra/templates/terra/feedback.html:43 terra/templates/terra/market.html:273
 #: terra/templates/terra/news_detail.html:78
 msgid "Sign in"
 msgstr "登录"
 
-#: templates/base.html:127 templates/base.html:168
+#: templates/base.html:128 templates/base.html:169
 #: terra/templates/terra/market.html:272
 msgid "Claim passage"
 msgstr "申请通行证"
 
-#: templates/base.html:129
+#: templates/base.html:130
 msgid "Menu"
 msgstr "菜单"
 
-#: templates/base.html:147
+#: templates/base.html:148
 msgid ""
 "A second Earth, catalogued and waiting. Expedition 01 opens the transit "
 "window for the first one thousand passengers."
 msgstr "第二颗地球，已编目，静候来客。01 号远征为首批一千名旅客开启航行窗口。"
 
-#: templates/base.html:151
+#: templates/base.html:152
 msgid "Explore"
 msgstr "探索"
 
-#: templates/base.html:154
+#: templates/base.html:155
 msgid "Program"
 msgstr "计划"
 
-#: templates/base.html:156
+#: templates/base.html:157
 msgid "TerraX market"
 msgstr "TerraX 市场"
 
-#: templates/base.html:158
+#: templates/base.html:159
 msgid "Map of Terra Nova"
 msgstr "Terra Nova 地图"
 
-#: templates/base.html:159
+#: templates/base.html:160
 msgid "Access"
 msgstr "入场"
 
-#: templates/base.html:162
+#: templates/base.html:163
 msgid "Novarians"
 msgstr "诺瓦人"
 
-#: templates/base.html:163
+#: templates/base.html:164
 msgid "Transport & fares"
 msgstr "交通与票价"
 
-#: templates/base.html:164
+#: templates/base.html:165
 msgid "Government portal"
 msgstr "政府门户"
 
-#: templates/base.html:165
+#: templates/base.html:166
 msgid "Health & Terra Watch"
 msgstr "健康与 Terra Watch"
 
-#: templates/base.html:172
+#: templates/base.html:174
 msgid "Signals"
 msgstr "信号"
 
-#: templates/base.html:180
+#: templates/base.html:182
 msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
 msgstr "太阳系权利保留 — 暂且如此"
 
-#: templates/base.html:184
+#: templates/base.html:186
 msgid "Open Terra Chat"
 msgstr "打开 Terra Chat"
 
-#: templates/base.html:194 templates/base.html:195
+#: templates/base.html:196 templates/base.html:197
 msgid "Accessibility settings"
 msgstr "无障碍设置"
 
@@ -331,6 +337,277 @@ msgstr "这位客服如何处理了您的信号？"
 #: terra/forms.py:253
 msgid "Unknown agent."
 msgstr "未知客服。"
+
+#: terra/models.py:444
+msgid "Expedition"
+msgstr "远征"
+
+#: terra/models.py:448
+msgid "Civic"
+msgstr "民生"
+
+#: terra/models.py:450
+msgid "Science"
+msgstr "科学"
+
+#: terra/models.py:512
+msgid "Idea"
+msgstr "点子"
+
+#: terra/models.py:513
+msgid "Balance"
+msgstr "平衡"
+
+#: terra/models.py:514
+msgid "Fault"
+msgstr "故障"
+
+#: terra/models.py:515
+msgid "Story & content"
+msgstr "故事与内容"
+
+#: terra/models.py:516
+msgid "Other"
+msgstr "其他"
+
+#: terra/news.py:20
+msgid "Expedition 01 boarding window opens for the first thousand passengers"
+msgstr "远征 01 向首批一千名乘客开放登船窗口"
+
+#: terra/news.py:21
+msgid ""
+"Mission Control has released seat assignments for the transit window; "
+"passengers can review their dossier and QR boarding pass in Mission Control."
+msgstr ""
+"任务控制中心已发布中转窗口的座位分配；乘客可在任务控制中心查看档案和二维码登"
+"机牌。"
+
+#: terra/news.py:23 terra/news.py:226 terra/news.py:325
+msgid "Terra Nova Newsroom"
+msgstr "Terra Nova Newsroom"
+
+#: terra/news.py:42
+msgid "Heat wave holds: eight-day anomaly forecast issued for all four sectors"
+msgstr "热浪持续：四大区域发布八天异常预报"
+
+#: terra/news.py:43
+msgid ""
+"The Aurelia observatory records a +7°C anomaly; every day of the simulation "
+"window crosses the alert threshold."
+msgstr "奥瑞利亚天文台录得 +7°C 异常；模拟窗口的每一天都越过警戒线。"
+
+#: terra/news.py:45 terra/news.py:293
+msgid "Aurelia Observatory Wire"
+msgstr "奥瑞利亚天文台电讯"
+
+#: terra/news.py:63
+msgid "TerraX steadies as ledger volume doubles week on week"
+msgstr "TerraX 企稳，账本成交量周环比翻倍"
+
+#: terra/news.py:64
+msgid ""
+"Exchange fee revenue funds the colony's service budget; traders watch the "
+"0.5% fee that settles every TerraX exchange."
+msgstr ""
+"交易所手续费收入为殖民地服务预算注资；交易员关注每笔 TerraX 兑换结算的 0.5% "
+"手续费。"
+
+#: terra/news.py:66 terra/news.py:243
+msgid "TerraX Desk"
+msgstr "TerraX 交易台"
+
+#: terra/news.py:84
+msgid "Night rails return to the Glass Tundra after a six-week refit"
+msgstr "六周检修后，玻璃苔原的夜班列车恢复运行"
+
+#: terra/news.py:85
+msgid ""
+"The northern line reopens with live departure boards and QR tickets accepted "
+"at every receiver aboard."
+msgstr "北线重新开放，配备实时发车牌，车上接收器一律接受二维码车票。"
+
+#: terra/news.py:87 terra/news.py:206 terra/news.py:276
+msgid "Nova Transit"
+msgstr "Nova Transit"
+
+#: terra/news.py:105
+msgid "Council opens the season tax window; sector levies published"
+msgstr "议会开启本季税务窗口；各区域征费公布"
+
+#: terra/news.py:106
+msgid ""
+"Levies are set per sector and payable from the government portal before the "
+"window closes."
+msgstr "征费按区域核定，可在政府门户于窗口关闭前缴纳。"
+
+#: terra/news.py:108 terra/news.py:259 terra/news.py:357
+msgid "Colony Council"
+msgstr "殖民地议会"
+
+#: terra/news.py:125
+msgid "Terra Watch band rolls continuous vitals into the colony health record"
+msgstr "Terra Watch 手环将连续体征汇入殖民地健康档案"
+
+#: terra/news.py:126
+msgid ""
+"Heart rate, blood oxygen and heat-strain warnings now stream to the record "
+"your medical team reads."
+msgstr "心率、血氧与热应激预警现已流入你的医疗团队查阅的档案。"
+
+#: terra/news.py:128 terra/news.py:309 terra/news.py:373
+msgid "Health Services"
+msgstr "卫生服务局"
+
+#: terra/news.py:145
+msgid "Deep-listening survey maps the Pelagos thermocline to eleven kilometres"
+msgstr "深听测绘将佩拉戈斯温跃层绘至十一公里"
+
+#: terra/news.py:146
+msgid ""
+"Hydrophone arrays record the living light layer and the currents that shape "
+"the midnight ocean."
+msgstr "水听阵列记录发光生命层与塑造午夜海洋的洋流。"
+
+#: terra/news.py:148 terra/news.py:341
+msgid "Pelagos Survey Office"
+msgstr "佩拉戈斯勘测局"
+
+#: terra/news.py:164
+msgid "Waste rotation restored across the Vermilion Steps villages"
+msgstr "朱红阶地各村恢复垃圾轮值收集"
+
+#: terra/news.py:165
+msgid ""
+"Collection resumes on the published schedule after the canyon-road repair "
+"closed the depot approach."
+msgstr "峡谷道路修复期间关闭料场后，收集按公布的时间表恢复。"
+
+#: terra/news.py:167
+msgid "Colony Works"
+msgstr "殖民地工程处"
+
+#: terra/news.py:183
+msgid "Passengers can now score the agents who answer them in Terra Chat"
+msgstr "乘客如今可在 Terra Chat 为服务他们的坐席打分"
+
+#: terra/news.py:184
+msgid ""
+"Ratings from one to five stars flow back to the agent roster and shape which "
+"threads get escalated first."
+msgstr "一到五星的评分回流坐席名册，决定哪些对话优先升级。"
+
+#: terra/news.py:186
+msgid "Terra Chat Operations"
+msgstr "Terra Chat 运营组"
+
+#: terra/news.py:203
+msgid "Second bus line links Aurelia Basin to the Pelagos coast"
+msgstr "第二条公交线连接奥瑞利亚盆地与佩拉戈斯海岸"
+
+#: terra/news.py:204
+msgid ""
+"The coastal run adds a daytime connection between the first landing site and "
+"the fishing harbours."
+msgstr "海岸线路在首个着陆点与渔港之间增加日间班次。"
+
+#: terra/news.py:223
+msgid "LAGOON array completes its southern-hemisphere sweep"
+msgstr "LAGOON 阵列完成南半球扫描"
+
+#: terra/news.py:224
+msgid ""
+"All ninety-six dishes have listened through the full sky window; water-"
+"vapour candidates now go to review."
+msgstr "九十六面天线已扫过完整天空窗口；水汽候选信号进入复审。"
+
+#: terra/news.py:240
+msgid "Welcome-bonus wallets pass the ten-thousand mark"
+msgstr "迎新钱包突破一万个"
+
+#: terra/news.py:241
+msgid ""
+"Every claimed passage carries 10,000 TRX; the ledger shows the bonus "
+"credited at sign-in for the thousandth passenger."
+msgstr "每份认领的航程都带有 10,000 TRX；账本显示第一千名乘客注册即入账。"
+
+#: terra/news.py:256
+msgid "Council publishes the second season levy schedule"
+msgstr "议会公布第二季征费时间表"
+
+#: terra/news.py:257
+msgid ""
+"Sector rates hold steady while the transport surcharge funds the night rails."
+msgstr "区域税率保持不变，交通附加费继续资助夜间列车。"
+
+#: terra/news.py:273
+msgid "Night rails carry ten thousand riders since reopening"
+msgstr "夜班列车复运以来载客逾万"
+
+#: terra/news.py:274
+msgid ""
+"Nova Transit reports load factors above expectations on the northern line; "
+"extra cars arrive next week."
+msgstr "Nova Transit 报告北线载客率高于预期；下周增挂车厢。"
+
+#: terra/news.py:290
+msgid "Observatory: warm spell to ease as the window closes"
+msgstr "天文台：暖期将在窗口结束时缓解"
+
+#: terra/news.py:291
+msgid ""
+"The eight-day anomaly finally drops below the alert line; residents are "
+"asked to keep bands charged until it does."
+msgstr "八天异常终于回落至警戒线以下；居民请保持手环充电直至窗口关闭。"
+
+#: terra/news.py:306
+msgid "Heat-strain drills run in every village before the peak"
+msgstr "峰值前各村开展热应激演练"
+
+#: terra/news.py:307
+msgid ""
+"Wardens walk each habitat through hydration and shade routines; Terra Watch "
+"pairing offered at the door."
+msgstr "管理员逐个栖居舱讲解补水与遮阳规程；门口可办理 Terra Watch 配对。"
+
+#: terra/news.py:322
+msgid "Passenger manifest passes the halfway mark"
+msgstr "乘客名单过半"
+
+#: terra/news.py:323
+msgid ""
+"Five hundred confirmed passages with sectors drawn; the remaining seats "
+"release in waves through the boarding window."
+msgstr "五百份航程确认、舱区已抽签；剩余座位在登船窗口内分批放出。"
+
+#: terra/news.py:338
+msgid "Glass Tundra ice core dated to the first settlement winter"
+msgstr "玻璃苔原冰芯定年至首个定居冬天"
+
+#: terra/news.py:339
+msgid ""
+"A two-metre core gives the colony its first hard record of the quiet year "
+"before the survey."
+msgstr "两米冰芯为殖民地留下勘测前平静年份的首份硬记录。"
+
+#: terra/news.py:354
+msgid "First month of elder pensions settles without a backlog"
+msgstr "首月养老金结清无积压"
+
+#: terra/news.py:355
+msgid ""
+"The pension desk reports every eligible claim paid on the scheduled day, "
+"straight to TerraX wallets."
+msgstr "养老服务台报告每份合格申请均按期发放，直接进入 TerraX 钱包。"
+
+#: terra/news.py:370
+msgid "Terra Watch fall detection links straight to Terra Chat"
+msgstr "Terra Watch 跌倒检测直连 Terra Chat"
+
+#: terra/news.py:371
+msgid ""
+"A one-press beacon now opens a thread with vitals attached; agents see the "
+"numbers before they reply."
+msgstr "一按式信标现在直接开启附带体征的对话；坐席先看到数字再回复。"
 
 #: terra/templates/terra/account.html:15
 msgid "Passage office · passenger file"
@@ -727,6 +1004,64 @@ msgstr "远征 01"
 msgid "Sign out of Mission Control"
 msgstr "退出任务控制中心"
 
+#: terra/templates/terra/feedback.html:8
+msgid "Feedback — Terra Nova"
+msgstr "反馈 — Terra Nova"
+
+#: terra/templates/terra/feedback.html:15
+msgid "Council inbox · open channel"
+msgstr "议会收件箱 · 开放频道"
+
+#: terra/templates/terra/feedback.html:16
+#: terra/templates/terra/feedback.html:36
+msgid "Your insight"
+msgstr "你的建议"
+
+#: terra/templates/terra/feedback.html:16
+msgid "builds Terra Nova."
+msgstr "共建 Terra Nova。"
+
+#: terra/templates/terra/feedback.html:18
+msgid ""
+"What should the colony do better — transport, market,\n"
+"          weather alerts, the stories on the wire? File it below; every\n"
+"          Novarian can read what the others filed."
+msgstr "殖民地还能做得更好吗——交通、市场、天气警报、线上的故事？\n写在这里；每位新星居民都能读到别人提交的建议。"
+
+#: terra/templates/terra/feedback.html:29
+msgid "Topic"
+msgstr "主题"
+
+#: terra/templates/terra/feedback.html:38
+msgid "What would make Terra Nova better?"
+msgstr "什么能让 Terra Nova 变得更好？"
+
+#: terra/templates/terra/feedback.html:39
+msgid "File insight"
+msgstr "提交建议"
+
+#: terra/templates/terra/feedback.html:44
+msgid "to file an insight — and read what the others filed."
+msgstr "即可提交建议——也能读到其他人提交的内容。"
+
+#: terra/templates/terra/feedback.html:50
+msgid "The wall"
+msgstr "公示墙"
+
+#: terra/templates/terra/feedback.html:52
+#, python-format
+msgid "%(n)s insight from the crew"
+msgid_plural "%(n)s insights from the crew"
+msgstr[0] "来自船员的 %(n)s 条建议"
+
+#: terra/templates/terra/feedback.html:62
+msgid "Yours"
+msgstr "你的"
+
+#: terra/templates/terra/feedback.html:71
+msgid "No insights on the wall yet — file the first one above."
+msgstr "公示墙上还没有建议——在上方提交第一条吧。"
+
 #: terra/templates/terra/government.html:8
 msgid "Government Portal — Terra Nova"
 msgstr "政府门户 — Terra Nova"
@@ -901,7 +1236,7 @@ msgid "Next pickup"
 msgstr "下次收运"
 
 #: terra/templates/terra/government.html:145
-#: terra/templates/terra/weather.html:127
+#: terra/templates/terra/weather.html:129
 msgid "TODAY"
 msgstr "今天"
 
@@ -1616,7 +1951,7 @@ msgstr "游离氧、液态海洋、坚守的磁层。任何模型都无法解释
 msgid "Expedition 01 opens"
 msgstr "远征 01 开启"
 
-#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:85
+#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:87
 msgid "NOW"
 msgstr "现在"
 
@@ -1773,11 +2108,11 @@ msgstr "实时读数"
 msgid "Feels like"
 msgstr "体感"
 
-#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:41
+#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:43
 msgid "Wind"
 msgstr "风"
 
-#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:40
+#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:42
 msgid "Humidity"
 msgstr "湿度"
 
@@ -1785,7 +2120,7 @@ msgstr "湿度"
 msgid "Wind force"
 msgstr "风力"
 
-#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:58
+#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:60
 msgid "YOUR SECTOR"
 msgstr "您的舱区"
 
@@ -2610,12 +2945,12 @@ msgstr "还没有车票 — 在上方出发板选一个班次并支付票价。"
 msgid "Weather — Terra Nova"
 msgstr "天气 — Terra Nova"
 
-#: terra/templates/terra/weather.html:28
+#: terra/templates/terra/weather.html:30
 #, python-format
 msgid "Live · Aurelia observatory · observed %(observed)s"
 msgstr "实时 · Aurelia 天文台 · 观测于 %(observed)s"
 
-#: terra/templates/terra/weather.html:35
+#: terra/templates/terra/weather.html:37
 #, python-format
 msgid ""
 "Feels like %(feels)s°C across the surveyed sectors —\n"
@@ -2626,35 +2961,35 @@ msgstr ""
 "          远高于 %(mean)s°C 的季节均值，\n"
 "          热浪仍在持续。"
 
-#: terra/templates/terra/weather.html:42
+#: terra/templates/terra/weather.html:44
 msgid "Seasonal mean"
 msgstr "季节均值"
 
-#: terra/templates/terra/weather.html:44
+#: terra/templates/terra/weather.html:46
 msgid "Heat anomaly"
 msgstr "温度异常"
 
-#: terra/templates/terra/weather.html:48
+#: terra/templates/terra/weather.html:50
 msgid "Open the 3D map →"
 msgstr "打开 3D 地图 →"
 
-#: terra/templates/terra/weather.html:52
+#: terra/templates/terra/weather.html:54
 msgid "Sector conditions"
 msgstr "舱区实况"
 
-#: terra/templates/terra/weather.html:71
+#: terra/templates/terra/weather.html:73
 msgid "Heat simulation"
 msgstr "热浪模拟"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "Eight days of"
 msgstr "八天"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "rising heat."
 msgstr "升温。"
 
-#: terra/templates/terra/weather.html:75
+#: terra/templates/terra/weather.html:77
 #, python-format
 msgid ""
 "The thermal model runs from <strong>%(start)s</strong>\n"
@@ -2667,23 +3002,23 @@ msgstr ""
 "        每一天都越过警报阈值，因此您的设备整周\n"
 "        每天都会收到一条升温通知。"
 
-#: terra/templates/terra/weather.html:102
+#: terra/templates/terra/weather.html:104
 msgid "Heat watch"
 msgstr "热浪监控"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "Be told before"
 msgstr "在空气灼烧前"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "the air burns."
 msgstr "收到预警。"
 
-#: terra/templates/terra/weather.html:108
+#: terra/templates/terra/weather.html:110
 msgid "Push notifications"
 msgstr "推送通知"
 
-#: terra/templates/terra/weather.html:110
+#: terra/templates/terra/weather.html:112
 msgid ""
 "Allow notifications and Terra Nova warns you the moment a heat alert\n"
 "          is issued — delivered by the service worker even when this tab is\n"
@@ -2696,23 +3031,23 @@ msgstr ""
 "          Service Worker 送达。模拟在整个\n"
 "          窗口期内每天触发一条警报。"
 
-#: terra/templates/terra/weather.html:115
+#: terra/templates/terra/weather.html:117
 msgid "CHECKING PERMISSION…"
 msgstr "正在检查权限…"
 
-#: terra/templates/terra/weather.html:119
+#: terra/templates/terra/weather.html:121
 msgid "Enable push alerts"
 msgstr "启用推送警报"
 
-#: terra/templates/terra/weather.html:120
+#: terra/templates/terra/weather.html:122
 msgid "Trigger heat alert now"
 msgstr "立即触发热浪警报"
 
-#: terra/templates/terra/weather.html:135
+#: terra/templates/terra/weather.html:137
 msgid "The simulation is warming up — no alerts issued yet."
 msgstr "模拟正在升温 — 尚未发布警报。"
 
-#: terra/templates/terra/weather.html:140
+#: terra/templates/terra/weather.html:142
 #, python-format
 msgid ""
 "SIMULATION WINDOW · %(days)s DAYS · ONE NOTIFICATION PER DAY ·\n"
@@ -2737,7 +3072,7 @@ msgstr "移除此筛选"
 msgid "Clear all ✕"
 msgstr "全部清除 ✕"
 
-#: terra/views.py:128
+#: terra/views.py:130
 #, python-format
 msgid ""
 "Passage confirmed — you fly as %(callsign)s. Welcome bonus: +%(bonus)s TRX "
@@ -2746,68 +3081,68 @@ msgstr ""
 "通行证已确认 — 您将以呼号 %(callsign)s 飞行。欢迎奖励：+%(bonus)s TRX 已入"
 "账。"
 
-#: terra/views.py:152
+#: terra/views.py:154
 msgid "Airlock sealed. Mission Control is yours."
 msgstr "气闸已密封。任务控制中心归您。"
 
-#: terra/views.py:164
+#: terra/views.py:166
 msgid "Signed out. The hatch is sealed behind you."
 msgstr "已登出。您身后的舱门已封闭。"
 
-#: terra/views.py:176
+#: terra/views.py:178
 msgid "Log entry updated."
 msgstr "日志条目已更新。"
 
-#: terra/views.py:224 terra/views.py:260
+#: terra/views.py:226 terra/views.py:262
 msgid "Invalid amount."
 msgstr "金额无效。"
 
-#: terra/views.py:233
+#: terra/views.py:235
 #, python-format
 msgid "Not enough Earth credits — your wallet holds $%(balance)s."
 msgstr "地球信用点不足 — 您的钱包持有 $%(balance)s。"
 
-#: terra/views.py:250
+#: terra/views.py:252
 #, python-format
 msgid "Filled: %(trx)s TRX for $%(usd)s."
 msgstr "已成交：%(trx)s TRX，花费 $%(usd)s。"
 
-#: terra/views.py:271
+#: terra/views.py:273
 #, python-format
 msgid "Not enough TerraX — your wallet holds %(balance)s TRX."
 msgstr "TerraX 不足 — 您的钱包持有 %(balance)s TRX。"
 
-#: terra/views.py:288
+#: terra/views.py:290
 #, python-format
 msgid "Sold %(trx)s TRX for $%(usd)s."
 msgstr "已卖出 %(trx)s TRX，获得 $%(usd)s。"
 
-#: terra/views.py:295
+#: terra/views.py:297
 msgid "Unknown trade action."
 msgstr "未知交易操作。"
 
-#: terra/views.py:303
+#: terra/views.py:305
 msgid "That service does not exist."
 msgstr "该服务不存在。"
 
-#: terra/views.py:311 terra/views.py:861
+#: terra/views.py:313 terra/views.py:872
 msgid "Choose a valid sector."
 msgstr "请选择有效舱区。"
 
-#: terra/views.py:318
+#: terra/views.py:320
 msgid "Callsigns are 3–24 characters: letters, digits and dashes."
 msgstr "呼号为 3–24 个字符：字母、数字与连字符。"
 
-#: terra/views.py:331
+#: terra/views.py:333
 msgid "Priority boarding is already active on your manifest."
 msgstr "清单上已启用优先登船。"
 
-#: terra/views.py:339
+#: terra/views.py:341
 #, python-format
 msgid "Callsign %(callsign)s is already in use."
 msgstr "呼号 %(callsign)s 已被使用。"
 
-#: terra/views.py:347
+#: terra/views.py:349
 #, python-format
 msgid ""
 "Not enough TerraX — %(name)s costs %(price)s TRX and your wallet holds "
@@ -2815,29 +3150,29 @@ msgid ""
 msgstr ""
 "TerraX 不足 — %(name)s 需要 %(price)s TRX，而您的钱包只有 %(balance)s TRX。"
 
-#: terra/views.py:377
+#: terra/views.py:379
 msgid "That callsign was claimed by another passenger a moment ago."
 msgstr "该呼号刚被另一位乘客认领。"
 
-#: terra/views.py:383
+#: terra/views.py:385
 #, python-format
 msgid "%(name)s purchased for %(price)s TRX."
 msgstr "%(name)s 已购买，花费 %(price)s TRX。"
 
-#: terra/views.py:438
+#: terra/views.py:440
 msgid "The channel is open — say something first."
 msgstr "频道已开启 — 先说点什么吧。"
 
-#: terra/views.py:490
+#: terra/views.py:492
 msgid "Empty transmission — nothing was sent."
 msgstr "空传输 — 未发送任何内容。"
 
-#: terra/views.py:727
+#: terra/views.py:738
 #, python-format
 msgid "%(code)s is already settled."
 msgstr "%(code)s 已结清。"
 
-#: terra/views.py:737
+#: terra/views.py:748
 #, python-format
 msgid ""
 "Not enough TerraX — the %(code)s levy is %(amount)s TRX and your wallet "
@@ -2846,68 +3181,68 @@ msgstr ""
 "TerraX 不足 — %(code)s 税费为 %(amount)s TRX，而您的钱包只有 %(balance)s "
 "TRX。"
 
-#: terra/views.py:761
+#: terra/views.py:772
 #, python-format
 msgid ""
 "%(code)s settled — %(amount)s TRX paid. The receipt is in your TerraX ledger."
 msgstr "%(code)s 已结清 — 支付 %(amount)s TRX。收据已入 TerraX 账本。"
 
-#: terra/views.py:780
+#: terra/views.py:791
 msgid "No date of birth on file — register it at the pension desk first."
 msgstr "档案中没有出生日期 — 请先到养老金柜台登记。"
 
-#: terra/views.py:786
+#: terra/views.py:797
 #, python-format
 msgid "Eligibility starts at age %(age)s — you are %(months)s months away."
 msgstr "资格自 %(age)s 岁起 — 您还有 %(months)s 个月。"
 
-#: terra/views.py:794
+#: terra/views.py:805
 msgid "This month’s pension is already on your ledger."
 msgstr "本月养老金已在您的账本上。"
 
-#: terra/views.py:812
+#: terra/views.py:823
 #, python-format
 msgid "Pension claimed — %(amount)s TRX credited. Next claim opens next month."
 msgstr "养老金已领取 — %(amount)s TRX 已入账。下月开放领取。"
 
-#: terra/views.py:826
+#: terra/views.py:837
 msgid "Enter a valid date of birth (YYYY-MM-DD)."
 msgstr "请输入有效出生日期 (YYYY-MM-DD)。"
 
-#: terra/views.py:831
+#: terra/views.py:842
 msgid "Date of birth cannot be in the future."
 msgstr "出生日期不能在未来。"
 
-#: terra/views.py:835
+#: terra/views.py:846
 msgid "That age cannot be right — check the date."
 msgstr "这个年龄不对 — 请检查日期。"
 
-#: terra/views.py:843
+#: terra/views.py:854
 #, python-format
 msgid "Date of birth on file — age %(age)s. The pension desk is updated."
 msgstr "出生日期已登记 — %(age)s 岁。养老金柜台已更新。"
 
-#: terra/views.py:856
+#: terra/views.py:867
 msgid "Unknown request type."
 msgstr "未知请求类型。"
 
-#: terra/views.py:866
+#: terra/views.py:877
 msgid "Give the location at least a few characters."
 msgstr "地址至少输入几个字符。"
 
-#: terra/views.py:880
+#: terra/views.py:891
 #, python-format
 msgid ""
 "%(label)s request filed · tracking %(tracking)s. Watch it move through "
 "review below."
 msgstr "%(label)s 请求已提交 · 跟踪号 %(tracking)s。在下方查看其进展。"
 
-#: terra/views.py:917
+#: terra/views.py:928
 #, python-format
 msgid "Terra Watch %(device)s is already paired."
 msgstr "Terra Watch %(device)s 已配对。"
 
-#: terra/views.py:929
+#: terra/views.py:940
 #, python-format
 msgid ""
 "Not enough TerraX — the Terra Watch costs %(price)s TRX and your wallet "
@@ -2916,31 +3251,31 @@ msgstr ""
 "TerraX 不足 — Terra Watch 售价 %(price)s TRX，而您的钱包只有 %(balance)s "
 "TRX。"
 
-#: terra/views.py:950
+#: terra/views.py:961
 #, python-format
 msgid "Terra Watch paired · device %(device)s is streaming vitals."
 msgstr "Terra Watch 已配对 · 设备 %(device)s 正在直播体征。"
 
-#: terra/views.py:975
+#: terra/views.py:986
 msgid "Choose a departure from the board first."
 msgstr "请先在出发板上选择出发班次。"
 
-#: terra/views.py:980
+#: terra/views.py:991
 msgid "That departure has already left the station."
 msgstr "该班次已离站。"
 
-#: terra/views.py:991
+#: terra/views.py:1002
 msgid "Choose who is travelling first."
 msgstr "请先选择出行人。"
 
-#: terra/views.py:1005
+#: terra/views.py:1016
 #, python-format
 msgid ""
 "Not enough TerraX — this fare is %(fare)s TRX and your wallet holds "
 "%(balance)s TRX."
 msgstr "TerraX 不足 — 此票价 %(fare)s TRX，而您的钱包只有 %(balance)s TRX。"
 
-#: terra/views.py:1037
+#: terra/views.py:1048
 #, python-format
 msgid ""
 "Fare paid — %(before)s − %(fare)s = %(balance)s TRX. QR ticket issued for "
@@ -2949,93 +3284,101 @@ msgstr ""
 "票价已付 — %(before)s − %(fare)s = %(balance)s TRX。已为 %(route)s 签发二维码"
 "车票，出发时间 %(time)s，随时给接收端查验。"
 
-#: terra/views.py:1068
+#: terra/views.py:1079
 msgid "Give the traveller a name."
 msgstr "给出行者一个名字。"
 
-#: terra/views.py:1070
+#: terra/views.py:1081
 msgid "Choose a relationship."
 msgstr "请选择关系。"
 
-#: terra/views.py:1077
+#: terra/views.py:1088
 #, python-format
 msgid "%(name)s added — you can now buy their fare too."
 msgstr "已添加 %(name)s — 现在也可以为 TA 购票。"
 
-#: terra/views.py:1090
+#: terra/views.py:1101
 msgid "That ticket is not on your account."
 msgstr "该车票不在您的账户上。"
 
-#: terra/views.py:1093
+#: terra/views.py:1104
 msgid "This ticket was already scanned."
 msgstr "该车票已扫过。"
 
-#: terra/views.py:1099
+#: terra/views.py:1110
 #, python-format
 msgid "Receiver accepted %(route)s · %(who)s is aboard. Safe travels."
 msgstr "接收端已接受 %(route)s · %(who)s 已上车。一路平安。"
 
-#: terra/views.py:1107
+#: terra/views.py:1118
 msgid "Unknown transport action."
 msgstr "未知交通操作。"
 
-#: terra/views.py:1175
+#: terra/views.py:1186
 msgid "The comment is empty — write something first."
 msgstr "评论是空的 —— 先写点什么吧。"
 
-#: terra/views.py:1179
+#: terra/views.py:1190
 msgid "Comment posted."
 msgstr "评论已发布。"
 
-#: terra/views.py:1198
+#: terra/views.py:1216
+msgid "The insight is empty — write something first."
+msgstr "建议是空的——先写点什么吧。"
+
+#: terra/views.py:1222
+msgid "Insight filed — the council reads every signal."
+msgstr "建议已提交——议会会读到每一条信号。"
+
+#: terra/views.py:1242
 #, python-format
 msgid "%(n)s signal acknowledged."
 msgid_plural "%(n)s signals acknowledged."
 msgstr[0] "%(n)s 条信号已确认。"
 
-#: terra/views.py:1207
+#: terra/views.py:1251
 msgid "Signal acknowledged."
 msgstr "信号已确认。"
 
-#: terra/views.py:1225
+#: terra/views.py:1269
 #, python-format
 msgid "%(n)s other session sealed behind you."
 msgid_plural "%(n)s other sessions sealed behind you."
 msgstr[0] "%(n)s 个其他会话已在您身后封闭。"
 
-#: terra/views.py:1231
+#: terra/views.py:1275
 msgid "Unknown signal action."
 msgstr "未知信号操作。"
 
-#: terra/views.py:1288
+#: terra/views.py:1332
 msgid "Passenger record updated."
 msgstr "乘客记录已更新。"
 
-#: terra/views.py:1292
+#: terra/views.py:1336
 msgid "Could not save the record."
 msgstr "无法保存记录。"
 
-#: terra/views.py:1303
+#: terra/views.py:1347
 msgid "Passenger photo updated."
 msgstr "乘客照片已更新。"
 
-#: terra/views.py:1307
+#: terra/views.py:1351
 msgid "Could not store the photo."
 msgstr "无法存储照片。"
 
-#: terra/views.py:1316
+#: terra/views.py:1360
 msgid "Passenger photo removed."
 msgstr "乘客照片已移除。"
 
-#: terra/views.py:1335
+#: terra/views.py:1379
 #, python-format
 msgid "Rating saved — %(stars)s★ for %(who)s."
 msgstr "评分已保存 — %(stars)s★ 给 %(who)s。"
 
-#: terra/views.py:1343
+#: terra/views.py:1387
 msgid "Could not save the rating."
 msgstr "无法保存评分。"
 
-#: terra/views.py:1347
+#: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "未知账户操作。"

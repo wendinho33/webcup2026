@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Terra Nova 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 23:19+0000\n"
+"POT-Creation-Date: 2026-10-04 00:45+0000\n"
 "PO-Revision-Date: 2026-10-03 00:00+0000\n"
 "Language-Team: Malagasy\n"
 "Language: mg\n"
@@ -123,32 +123,34 @@ msgstr "Totalin'ny %(full_result_count)s"
 msgid "Skip to content"
 msgstr "Mandeha amin'ny vokatra"
 
-#: templates/base.html:65 templates/base.html:152
+#: templates/base.html:65 templates/base.html:153
 msgid "Manifesto"
 msgstr "Manifesty"
 
-#: templates/base.html:66 templates/base.html:153
+#: templates/base.html:66 templates/base.html:154
 msgid "Atlas"
 msgstr "Atlas"
 
-#: templates/base.html:67 templates/base.html:155
+#: templates/base.html:67 templates/base.html:156
 #: terra/templates/terra/news_detail.html:14
 msgid "News"
 msgstr "Vaovao"
 
-#: templates/base.html:68
+#: templates/base.html:68 terra/models.py:446
 msgid "Market"
 msgstr "Tsena"
 
-#: templates/base.html:69 templates/base.html:157
+#: templates/base.html:69 templates/base.html:158 terra/models.py:445
 msgid "Weather"
 msgstr "Toetr'andro"
 
-#: templates/base.html:70 terra/templates/terra/dashboard.html:143
+#: templates/base.html:70 terra/models.py:447
+#: terra/templates/terra/dashboard.html:143
 msgid "Transport"
 msgstr "Fifohazana"
 
-#: templates/base.html:71 terra/templates/terra/dashboard.html:144
+#: templates/base.html:71 terra/models.py:449
+#: terra/templates/terra/dashboard.html:144
 msgid "Health"
 msgstr "Fahasalamana"
 
@@ -156,50 +158,54 @@ msgstr "Fahasalamana"
 msgid "Government"
 msgstr "Firenena"
 
-#: templates/base.html:84
+#: templates/base.html:73 templates/base.html:171
+msgid "Feedback"
+msgstr "Torohevitra"
+
+#: templates/base.html:85
 msgid "Language"
 msgstr "Teny"
 
-#: templates/base.html:95 templates/base.html:96
+#: templates/base.html:96 templates/base.html:97
 msgid "Notifications"
 msgstr "Fampitandremana"
 
-#: templates/base.html:105
+#: templates/base.html:106
 #, python-format
 msgid "%(counter)s unread signal"
 msgid_plural "%(counter)s unread signals"
 msgstr[0] "%(counter)s hafa-tsoratra tsy novainy"
 
-#: templates/base.html:111 templates/base.html:112
+#: templates/base.html:112 templates/base.html:113
 #: terra/templates/terra/account.html:8
 msgid "Account centre"
 msgstr "Toerana ho an'ny kaonty"
 
-#: templates/base.html:120 templates/base.html:169
+#: templates/base.html:121 templates/base.html:170
 #: terra/templates/terra/account.html:149
 msgid "Mission Control"
 msgstr "Kontrolin'ny misiona"
 
-#: templates/base.html:123
+#: templates/base.html:124
 msgid "Sign out"
 msgstr "Hivoaka"
 
-#: templates/base.html:126 templates/base.html:167
-#: terra/templates/terra/market.html:273
+#: templates/base.html:127 templates/base.html:168
+#: terra/templates/terra/feedback.html:43 terra/templates/terra/market.html:273
 #: terra/templates/terra/news_detail.html:78
 msgid "Sign in"
 msgstr "Hiditra"
 
-#: templates/base.html:127 templates/base.html:168
+#: templates/base.html:128 templates/base.html:169
 #: terra/templates/terra/market.html:272
 msgid "Claim passage"
 msgstr "Maka fandraisana"
 
-#: templates/base.html:129
+#: templates/base.html:130
 msgid "Menu"
 msgstr "Menu"
 
-#: templates/base.html:147
+#: templates/base.html:148
 msgid ""
 "A second Earth, catalogued and waiting. Expedition 01 opens the transit "
 "window for the first one thousand passengers."
@@ -207,55 +213,55 @@ msgstr ""
 "Anizin-po masoandro, voamarina ary miandry. Ny fandehan'ny fandevenana 01 "
 "dia manokatra ny fotoan'ny fipetrahana ho an'ny takelaka voalohany arivo."
 
-#: templates/base.html:151
+#: templates/base.html:152
 msgid "Explore"
 msgstr "Hijery"
 
-#: templates/base.html:154
+#: templates/base.html:155
 msgid "Program"
 msgstr "Programy"
 
-#: templates/base.html:156
+#: templates/base.html:157
 msgid "TerraX market"
 msgstr "Tsena TerraX"
 
-#: templates/base.html:158
+#: templates/base.html:159
 msgid "Map of Terra Nova"
 msgstr "Rakitr'i Terra Nova"
 
-#: templates/base.html:159
+#: templates/base.html:160
 msgid "Access"
 msgstr "Fampidirana"
 
-#: templates/base.html:162
+#: templates/base.html:163
 msgid "Novarians"
 msgstr "Novariana"
 
-#: templates/base.html:163
+#: templates/base.html:164
 msgid "Transport & fares"
 msgstr "Fifohazana sy vidiny"
 
-#: templates/base.html:164
+#: templates/base.html:165
 msgid "Government portal"
 msgstr "Portalin'ny firenena"
 
-#: templates/base.html:165
+#: templates/base.html:166
 msgid "Health & Terra Watch"
 msgstr "Fahasalamana sy Terra Watch"
 
-#: templates/base.html:172
+#: templates/base.html:174
 msgid "Signals"
 msgstr "Fampitana"
 
-#: templates/base.html:180
+#: templates/base.html:182
 msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
 msgstr "ZON-JAVAN'NY RAFAHANA SOLY VOATOKY — ANIO"
 
-#: templates/base.html:184
+#: templates/base.html:186
 msgid "Open Terra Chat"
 msgstr "Sokafy Terra Chat"
 
-#: templates/base.html:194 templates/base.html:195
+#: templates/base.html:196 templates/base.html:197
 msgid "Accessibility settings"
 msgstr "Fametrahana fahafahana"
 
@@ -335,6 +341,337 @@ msgstr "Ahoana no nandray ny hafa-tsoratra ianao?"
 #: terra/forms.py:253
 msgid "Unknown agent."
 msgstr "Mpanjafa tsy fantatra."
+
+#: terra/models.py:444
+msgid "Expedition"
+msgstr "Ekspedision"
+
+#: terra/models.py:448
+msgid "Civic"
+msgstr "Sivika"
+
+#: terra/models.py:450
+msgid "Science"
+msgstr "Siansa"
+
+#: terra/models.py:512
+msgid "Idea"
+msgstr "Hevitra"
+
+#: terra/models.py:513
+msgid "Balance"
+msgstr "Fitsipika"
+
+#: terra/models.py:514
+msgid "Fault"
+msgstr "Fahadisoana"
+
+#: terra/models.py:515
+msgid "Story & content"
+msgstr "Sangolo & loharano"
+
+#: terra/models.py:516
+msgid "Other"
+msgstr "Hafa"
+
+#: terra/news.py:20
+msgid "Expedition 01 boarding window opens for the first thousand passengers"
+msgstr ""
+"Ny Ekspedision 01 dia manomboka ny fenoy fandroahana ho an'ny mpandeha "
+"tapitrisa voalohany"
+
+#: terra/news.py:21
+msgid ""
+"Mission Control has released seat assignments for the transit window; "
+"passengers can review their dossier and QR boarding pass in Mission Control."
+msgstr ""
+"Ny Fitantanana dia nandray ny filazana toerana ho an'ny fenoy fandroahana ; "
+"ny mpandeha afaka jerena ny kiloga sy ny kaontin-kena QR ao anatin'izy."
+
+#: terra/news.py:23 terra/news.py:226 terra/news.py:325
+msgid "Terra Nova Newsroom"
+msgstr "Terra Nova Newsroom"
+
+#: terra/news.py:42
+msgid "Heat wave holds: eight-day anomaly forecast issued for all four sectors"
+msgstr ""
+"Ny hafa-maso mafana miambina : filazana anomalia eny andro ho an'ny "
+"singofitra efatra rehetra"
+
+#: terra/news.py:43
+msgid ""
+"The Aurelia observatory records a +7°C anomaly; every day of the simulation "
+"window crosses the alert threshold."
+msgstr ""
+"Ny fizahan-panorenana Aurelia dia mijery anomalia +7°C ; andro rehetra ao "
+"anatin'ny foto-pandinihana dia any am-pelatanan'ny fetra fanenjehana."
+
+#: terra/news.py:45 terra/news.py:293
+msgid "Aurelia Observatory Wire"
+msgstr "Fitserian'ny fizahan-panorenana Aurelia"
+
+#: terra/news.py:63
+msgid "TerraX steadies as ledger volume doubles week on week"
+msgstr ""
+"Ny TerraX dia mifantoka fa ny habetsin'ny tabilao dia miroso lalina isan-"
+"kerinandro"
+
+#: terra/news.py:64
+msgid ""
+"Exchange fee revenue funds the colony's service budget; traders watch the "
+"0.5% fee that settles every TerraX exchange."
+msgstr ""
+"Ny tombon'ny hetra an-kirakirana dia manome vola asa an'ny koloni ; ny "
+"mpanjifa dia mijery ny 0,5 % avy amin'ny varotra rehetra."
+
+#: terra/news.py:66 terra/news.py:243
+msgid "TerraX Desk"
+msgstr "Birao TerraX"
+
+#: terra/news.py:84
+msgid "Night rails return to the Glass Tundra after a six-week refit"
+msgstr ""
+"Ny tranon-kirenina an-alina dia miverina ao amin'i Glass Tundra taorian'ny "
+"famolavolana enina volana"
+
+#: terra/news.py:85
+msgid ""
+"The northern line reopens with live departure boards and QR tickets accepted "
+"at every receiver aboard."
+msgstr ""
+"Ny lalana ambany dia miroso amin'ny loko-tsary mazava sy kaontin-kena QR "
+"raisina amin'ny orinasa eo anaty."
+
+#: terra/news.py:87 terra/news.py:206 terra/news.py:276
+msgid "Nova Transit"
+msgstr "Nova Transit"
+
+#: terra/news.py:105
+msgid "Council opens the season tax window; sector levies published"
+msgstr ""
+"Ny Antonoloana dia manomboka ny fotoana fandoavana tavy an'ny taona ; ny "
+"tavy an'ny singofitra nanao"
+
+#: terra/news.py:106
+msgid ""
+"Levies are set per sector and payable from the government portal before the "
+"window closes."
+msgstr ""
+"Ny tavy samy araka ny singofitra ary azo alaina eo anaty portal fitondram-po "
+"alohan'ny fanarana ny fotoana."
+
+#: terra/news.py:108 terra/news.py:259 terra/news.py:357
+msgid "Colony Council"
+msgstr "Antonoloan'ny koloni"
+
+#: terra/news.py:125
+msgid "Terra Watch band rolls continuous vitals into the colony health record"
+msgstr ""
+"Ny bakily Terra Watch dia mandefa mitohy ny kiloga fahasalamana an'ny koloni"
+
+#: terra/news.py:126
+msgid ""
+"Heart rate, blood oxygen and heat-strain warnings now stream to the record "
+"your medical team reads."
+msgstr ""
+"Fametrahana fo, oksizenina ao amin'ny ra ary fampitandreman-javatra mafana "
+"dia ao anaty kilogi-zava-maisa ampiasain'ny ekipa havezina anao."
+
+#: terra/news.py:128 terra/news.py:309 terra/news.py:373
+msgid "Health Services"
+msgstr "Servisy fahasalamana"
+
+#: terra/news.py:145
+msgid "Deep-listening survey maps the Pelagos thermocline to eleven kilometres"
+msgstr ""
+"Ny fikarohana lalina dia mamaritra ny thermocline an'i Pelagos hatramin'ny "
+"11 kilometatra"
+
+#: terra/news.py:146
+msgid ""
+"Hydrophone arrays record the living light layer and the currents that shape "
+"the midnight ocean."
+msgstr ""
+"Ny rindrika mandray feo dia mandray ny fipetrahana fiainana mivantana sy ny "
+"rivotra manokatra ny ranomasina alina."
+
+#: terra/news.py:148 terra/news.py:341
+msgid "Pelagos Survey Office"
+msgstr "Biro Fahadihadianana Pelagos"
+
+#: terra/news.py:164
+msgid "Waste rotation restored across the Vermilion Steps villages"
+msgstr ""
+"Ny fandroazana zafody dia miverina ao amin'ny kaominina ao amin'i Vermilion "
+"Steps"
+
+#: terra/news.py:165
+msgid ""
+"Collection resumes on the published schedule after the canyon-road repair "
+"closed the depot approach."
+msgstr ""
+"Ny fanangiana dia miverina araka ny andro natao taorian'ny famolavolana "
+"lalan-tanimbato nanokatra lehan-dà."
+
+#: terra/news.py:167
+msgid "Colony Works"
+msgstr "Asan'ny koloni"
+
+#: terra/news.py:183
+msgid "Passengers can now score the agents who answer them in Terra Chat"
+msgstr ""
+"Ny mpandeha afaka anontany ny mpanjafa am-pelatanany ao anaty Terra Chat"
+
+#: terra/news.py:184
+msgid ""
+"Ratings from one to five stars flow back to the agent roster and shape which "
+"threads get escalated first."
+msgstr ""
+"Ny fametrahana avy amin'ny kely ho an'ny folo dia miverina amin'ny lisitry "
+"ny mpanjafa ary mamaritra ny filaharan'ny antso."
+
+#: terra/news.py:186
+msgid "Terra Chat Operations"
+msgstr "Fivoriam-piainan'ny Terra Chat"
+
+#: terra/news.py:203
+msgid "Second bus line links Aurelia Basin to the Pelagos coast"
+msgstr "Lalana faharoa mampifandray Basin Aurelia sy morontsirak'i Pelagos"
+
+#: terra/news.py:204
+msgid ""
+"The coastal run adds a daytime connection between the first landing site and "
+"the fishing harbours."
+msgstr ""
+"Ny lalana moram-basy dia manampy fanangiana an-drou voalohany eo amin'ny "
+"toerana nifanerenana sy ny trano anompanahana."
+
+#: terra/news.py:223
+msgid "LAGOON array completes its southern-hemisphere sweep"
+msgstr "Ny rezo LAGOON vita ny tantaran'ny ambin'ny roa folo"
+
+#: terra/news.py:224
+msgid ""
+"All ninety-six dishes have listened through the full sky window; water-"
+"vapour candidates now go to review."
+msgstr ""
+"Ny sakan-dalona 96 dia efa nandeha anatin'ny fotoana rehetra misy an-"
+"kibon'ny lanitra ; ny mpandray anjara vaovao dia alefa fanadihadiana."
+
+#: terra/news.py:240
+msgid "Welcome-bonus wallets pass the ten-thousand mark"
+msgstr "Ny kapa-kisoa lova soa dia lasa ambony noho ny zato alina"
+
+#: terra/news.py:241
+msgid ""
+"Every claimed passage carries 10,000 TRX; the ledger shows the bonus "
+"credited at sign-in for the thousandth passenger."
+msgstr ""
+"Ny passage rehetra dia manana 10 000 TRX ; ny tabilao dia maneho ny lova soa "
+"natao amin'ny fandraisana ho an'ny mpandeha faharovo."
+
+#: terra/news.py:256
+msgid "Council publishes the second season levy schedule"
+msgstr "Ny Antonoloana dia manoratra ny tetibola tavy an'ny taona faharoa"
+
+#: terra/news.py:257
+msgid ""
+"Sector rates hold steady while the transport surcharge funds the night rails."
+msgstr ""
+"Ny vidin'ny singofitra dia mitovy fa ny fanampiana fandraisana dia manome "
+"vola ny tranon-kirenina an-alina."
+
+#: terra/news.py:273
+msgid "Night rails carry ten thousand riders since reopening"
+msgstr ""
+"Ny tranon-kirenina an-alina nentiny mpandeha 10 000 taorian'ny fanokafana"
+
+#: terra/news.py:274
+msgid ""
+"Nova Transit reports load factors above expectations on the northern line; "
+"extra cars arrive next week."
+msgstr ""
+"Ny Nova Transit dia maneho fampindramam-bolana ambony noho ny fanantenana "
+"amin'ny lalana ambany ; karotra vaovao tonga amin'ny kerinandro manaraka."
+
+#: terra/news.py:290
+msgid "Observatory: warm spell to ease as the window closes"
+msgstr ""
+"Fizahan-panorenana : ny hafa-maso dia mihena mialoha ny fanarana ny fotoana"
+
+#: terra/news.py:291
+msgid ""
+"The eight-day anomaly finally drops below the alert line; residents are "
+"asked to keep bands charged until it does."
+msgstr ""
+"Ny anomalia eny andro dia miverina farany ambany noho ny fetra fanenjehana ; "
+"ny mponina dia antsoina hiresaka bakiny mandra izay."
+
+#: terra/news.py:306
+msgid "Heat-strain drills run in every village before the peak"
+msgstr ""
+"Ny fanazaran-javatra mafana dia atao ao amin'ny kaominina rehetra alohan'ny "
+"foto-javatra mafana"
+
+#: terra/news.py:307
+msgid ""
+"Wardens walk each habitat through hydration and shade routines; Terra Watch "
+"pairing offered at the door."
+msgstr ""
+"Ny mpiandry dia mandeha manodidina ny trano fitaovana rehetra amin'ny "
+"fampianarana famenoan-drano sy fiainana an-tokotany ; fampanantenana Terra "
+"Watch omeo an-dohasakana."
+
+#: terra/news.py:322
+msgid "Passenger manifest passes the halfway mark"
+msgstr "Ny lisitan'ny mpandeha dia lasa an-pantsan'ny feno"
+
+#: terra/news.py:323
+msgid ""
+"Five hundred confirmed passages with sectors drawn; the remaining seats "
+"release in waves through the boarding window."
+msgstr ""
+"Passage 500 voamarina, sektè voatery ; ny toerana sisa dia omena fangatahana "
+"mandritra ny fotoana fandraisana."
+
+#: terra/news.py:338
+msgid "Glass Tundra ice core dated to the first settlement winter"
+msgstr ""
+"Didy an'i Glass Tundra voalàlana ny fahavaratra nandritry ny taona voalohany"
+
+#: terra/news.py:339
+msgid ""
+"A two-metre core gives the colony its first hard record of the quiet year "
+"before the survey."
+msgstr ""
+"Didy roa metatra dia manome an'ny koloni ny jerena voalohany mazava momba ny "
+"taona mora alohan'ny fanadihadianana."
+
+#: terra/news.py:354
+msgid "First month of elder pensions settles without a backlog"
+msgstr "Ny volana voalohany ny pensioana dia vita tsy misy"
+
+#: terra/news.py:355
+msgid ""
+"The pension desk reports every eligible claim paid on the scheduled day, "
+"straight to TerraX wallets."
+msgstr ""
+"Ny stokin'ny pensioana dia maneho fa ny fanangiana rehetra nofoana natao teo "
+"amin'ny andro natao, mivantana ao amin'ny kapa-kisoa TerraX."
+
+#: terra/news.py:370
+msgid "Terra Watch fall detection links straight to Terra Chat"
+msgstr ""
+"Ny fandikana fanoherana an'i Terra Watch dia mampifandray mivantana amin'i "
+"Terra Chat"
+
+#: terra/news.py:371
+msgid ""
+"A one-press beacon now opens a thread with vitals attached; agents see the "
+"numbers before they reply."
+msgstr ""
+"Baky iray dia manokatra rindrika iray miaraka amin'ny fametrahana zo ; ny "
+"mpanjafa jerena ny isa alohan'ny handamenany."
 
 #: terra/templates/terra/account.html:15
 msgid "Passage office · passenger file"
@@ -736,6 +1073,64 @@ msgstr "FANDAHARAHANA 01"
 msgid "Sign out of Mission Control"
 msgstr "Hivoaka avy amin'ny Fitantanana"
 
+#: terra/templates/terra/feedback.html:8
+msgid "Feedback — Terra Nova"
+msgstr "Hevitra — Terra Nova"
+
+#: terra/templates/terra/feedback.html:15
+msgid "Council inbox · open channel"
+msgstr "Kaopy an'ny Antonoloana · lanonana mivoaha"
+
+#: terra/templates/terra/feedback.html:16
+#: terra/templates/terra/feedback.html:36
+msgid "Your insight"
+msgstr "Ny hevitrinao"
+
+#: terra/templates/terra/feedback.html:16
+msgid "builds Terra Nova."
+msgstr "mamorona Terra Nova."
+
+#: terra/templates/terra/feedback.html:18
+msgid ""
+"What should the colony do better — transport, market,\n"
+"          weather alerts, the stories on the wire? File it below; every\n"
+"          Novarian can read what the others filed."
+msgstr "Inona no tokony hahatsara ny koloni — fitaovana idirana,\ntsena, fitsapana masoandro, ireo tantara amin'ny filazana ?\nAmpidiro eto alohana ; ny Novarian rehetra afaka mijery ny an'ny hafa."
+
+#: terra/templates/terra/feedback.html:29
+msgid "Topic"
+msgstr "Karazana"
+
+#: terra/templates/terra/feedback.html:38
+msgid "What would make Terra Nova better?"
+msgstr "Inona no mahatsara an'i Terra Nova ?"
+
+#: terra/templates/terra/feedback.html:39
+msgid "File insight"
+msgstr "Ampidiro ny hevitra"
+
+#: terra/templates/terra/feedback.html:44
+msgid "to file an insight — and read what the others filed."
+msgstr "hoa hampidirana hevitra — ary hijerena ireny hafa."
+
+#: terra/templates/terra/feedback.html:50
+msgid "The wall"
+msgstr "Ny rindrina"
+
+#: terra/templates/terra/feedback.html:52
+#, python-format
+msgid "%(n)s insight from the crew"
+msgid_plural "%(n)s insights from the crew"
+msgstr[0] "%(n)s hevitra avy amin'ny ekipa"
+
+#: terra/templates/terra/feedback.html:62
+msgid "Yours"
+msgstr "Ny anao"
+
+#: terra/templates/terra/feedback.html:71
+msgid "No insights on the wall yet — file the first one above."
+msgstr "Tsy misy hevitra anatin'ny rindrina — ampidiro ny voalohany ambonin'ny ambony."
+
 #: terra/templates/terra/government.html:8
 msgid "Government Portal — Terra Nova"
 msgstr "Portal fitondram-po — Terra Nova"
@@ -911,7 +1306,7 @@ msgid "Next pickup"
 msgstr "Famangiana manaraka"
 
 #: terra/templates/terra/government.html:145
-#: terra/templates/terra/weather.html:127
+#: terra/templates/terra/weather.html:129
 msgid "TODAY"
 msgstr "ANDRO"
 
@@ -1656,7 +2051,7 @@ msgstr ""
 msgid "Expedition 01 opens"
 msgstr "Ny Fandaharana 01 misokatra"
 
-#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:85
+#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:87
 msgid "NOW"
 msgstr "AN-dRANO"
 
@@ -1826,11 +2221,11 @@ msgstr "Hevitra mivantana"
 msgid "Feels like"
 msgstr "Tahaka ny"
 
-#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:41
+#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:43
 msgid "Wind"
 msgstr "Rivotra"
 
-#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:40
+#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:42
 msgid "Humidity"
 msgstr "Hahalàlana"
 
@@ -1838,7 +2233,7 @@ msgstr "Hahalàlana"
 msgid "Wind force"
 msgstr "ny herin'ny rivotra"
 
-#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:58
+#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:60
 msgid "YOUR SECTOR"
 msgstr "SINGOFITRAO"
 
@@ -2682,12 +3077,12 @@ msgstr ""
 msgid "Weather — Terra Nova"
 msgstr "Masoandro — Terra Nova"
 
-#: terra/templates/terra/weather.html:28
+#: terra/templates/terra/weather.html:30
 #, python-format
 msgid "Live · Aurelia observatory · observed %(observed)s"
 msgstr "Mivantana · fizahan-tso-ponenana Aurelia · nijerena %(observed)s"
 
-#: terra/templates/terra/weather.html:35
+#: terra/templates/terra/weather.html:37
 #, python-format
 msgid ""
 "Feels like %(feels)s°C across the surveyed sectors —\n"
@@ -2698,35 +3093,35 @@ msgstr ""
 "          ambony kokoa noho ny %(mean)s°C nandritra ny\n"
 "        vanim-potoana mafana."
 
-#: terra/templates/terra/weather.html:42
+#: terra/templates/terra/weather.html:44
 msgid "Seasonal mean"
 msgstr "Fametahan'ny vanim-potoana"
 
-#: terra/templates/terra/weather.html:44
+#: terra/templates/terra/weather.html:46
 msgid "Heat anomaly"
 msgstr "Anomalian'ny hafan-traupo"
 
-#: terra/templates/terra/weather.html:48
+#: terra/templates/terra/weather.html:50
 msgid "Open the 3D map →"
 msgstr "Osian'ny katam-pahendrika 3D"
 
-#: terra/templates/terra/weather.html:52
+#: terra/templates/terra/weather.html:54
 msgid "Sector conditions"
 msgstr "Firenenan'ny singofitra"
 
-#: terra/templates/terra/weather.html:71
+#: terra/templates/terra/weather.html:73
 msgid "Heat simulation"
 msgstr "Fanandramana hafan-traupo"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "Eight days of"
 msgstr "Valo andro"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "rising heat."
 msgstr "hafan-traupo miakatra."
 
-#: terra/templates/terra/weather.html:75
+#: terra/templates/terra/weather.html:77
 #, python-format
 msgid ""
 "The thermal model runs from <strong>%(start)s</strong>\n"
@@ -2740,23 +3135,23 @@ msgstr ""
 "        mandray fampitandremana hafan-traupo isan'ny andro manodidina ny "
 "folo."
 
-#: terra/templates/terra/weather.html:102
+#: terra/templates/terra/weather.html:104
 msgid "Heat watch"
 msgstr "Fiomanana hafan-traupo"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "Be told before"
 msgstr "Mahay ny andro"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "the air burns."
 msgstr "ambony kokoa."
 
-#: terra/templates/terra/weather.html:108
+#: terra/templates/terra/weather.html:110
 msgid "Push notifications"
 msgstr "Fampitandremana an-kafatra"
 
-#: terra/templates/terra/weather.html:110
+#: terra/templates/terra/weather.html:112
 msgid ""
 "Allow notifications and Terra Nova warns you the moment a heat alert\n"
 "          is issued — delivered by the service worker even when this tab is\n"
@@ -2771,23 +3166,23 @@ msgstr ""
 "        na dia voakony ihany koa io pejy io. Ny fanandramana dia manome\n"
 "        fampitandremana iray isan'ny andro ao anatin'ny pejy ambany."
 
-#: terra/templates/terra/weather.html:115
+#: terra/templates/terra/weather.html:117
 msgid "CHECKING PERMISSION…"
 msgstr "MANAOFANA NY ALALANA…"
 
-#: terra/templates/terra/weather.html:119
+#: terra/templates/terra/weather.html:121
 msgid "Enable push alerts"
 msgstr "Akiffo ny fampitandremana an-kafatra"
 
-#: terra/templates/terra/weather.html:120
+#: terra/templates/terra/weather.html:122
 msgid "Trigger heat alert now"
 msgstr "Handefa fampitandremana hafan-traupo izao"
 
-#: terra/templates/terra/weather.html:135
+#: terra/templates/terra/weather.html:137
 msgid "The simulation is warming up — no alerts issued yet."
 msgstr "Ny fanandramana dia mihotsaka — tsy misy fampitandremana novorina."
 
-#: terra/templates/terra/weather.html:140
+#: terra/templates/terra/weather.html:142
 #, python-format
 msgid ""
 "SIMULATION WINDOW · %(days)s DAYS · ONE NOTIFICATION PER DAY ·\n"
@@ -2812,7 +3207,7 @@ msgstr "Esorina siviana ity"
 msgid "Clear all ✕"
 msgstr "Fao rehetra ✕"
 
-#: terra/views.py:128
+#: terra/views.py:130
 #, python-format
 msgid ""
 "Passage confirmed — you fly as %(callsign)s. Welcome bonus: +%(bonus)s TRX "
@@ -2821,68 +3216,68 @@ msgstr ""
 "Fandraisana voamarina — ianao mandeha amin'ny marikan-kena %(callsign)s. "
 "Lova soa fandraisana: +%(bonus)s TRX ao anatin'ny kapa-kisoa."
 
-#: terra/views.py:152
+#: terra/views.py:154
 msgid "Airlock sealed. Mission Control is yours."
 msgstr "Ny efitra efa voapely. Ny Fitantanana anao."
 
-#: terra/views.py:164
+#: terra/views.py:166
 msgid "Signed out. The hatch is sealed behind you."
 msgstr "Nivoaka ianao. Ny vata-vavony voapely anaty."
 
-#: terra/views.py:176
+#: terra/views.py:178
 msgid "Log entry updated."
 msgstr "Taloha ao anaty kaonty nofoana."
 
-#: terra/views.py:224 terra/views.py:260
+#: terra/views.py:226 terra/views.py:262
 msgid "Invalid amount."
 msgstr "Tsy mety ny isa."
 
-#: terra/views.py:233
+#: terra/views.py:235
 #, python-format
 msgid "Not enough Earth credits — your wallet holds $%(balance)s."
 msgstr "Tsy ampy ny volan-tany — ao anaty kapa-kisoa $%(balance)s."
 
-#: terra/views.py:250
+#: terra/views.py:252
 #, python-format
 msgid "Filled: %(trx)s TRX for $%(usd)s."
 msgstr "Vita: %(trx)s TRX amin'ny %(usd)s $."
 
-#: terra/views.py:271
+#: terra/views.py:273
 #, python-format
 msgid "Not enough TerraX — your wallet holds %(balance)s TRX."
 msgstr "Tsy ampy ny TerraX — ao anaty kapa-kisoa %(balance)s TRX."
 
-#: terra/views.py:288
+#: terra/views.py:290
 #, python-format
 msgid "Sold %(trx)s TRX for $%(usd)s."
 msgstr "Nivokaina %(trx)s TRX amin'ny %(usd)s $."
 
-#: terra/views.py:295
+#: terra/views.py:297
 msgid "Unknown trade action."
 msgstr "Asa varotana tsy fantatra."
 
-#: terra/views.py:303
+#: terra/views.py:305
 msgid "That service does not exist."
 msgstr "Tsy misy serivisy toy izao."
 
-#: terra/views.py:311 terra/views.py:861
+#: terra/views.py:313 terra/views.py:872
 msgid "Choose a valid sector."
 msgstr "Safidio singofitra mety."
 
-#: terra/views.py:318
+#: terra/views.py:320
 msgid "Callsigns are 3–24 characters: letters, digits and dashes."
 msgstr "Ny marikan-kena 3–24 famantarana: litera, isa sy lafilaha."
 
-#: terra/views.py:331
+#: terra/views.py:333
 msgid "Priority boarding is already active on your manifest."
 msgstr "Ny fidirana mamindra efa miasa eo amin'ny lisitanao."
 
-#: terra/views.py:339
+#: terra/views.py:341
 #, python-format
 msgid "Callsign %(callsign)s is already in use."
 msgstr "Ny marikan-kena %(callsign)s efa ampiasaina."
 
-#: terra/views.py:347
+#: terra/views.py:349
 #, python-format
 msgid ""
 "Not enough TerraX — %(name)s costs %(price)s TRX and your wallet holds "
@@ -2891,29 +3286,29 @@ msgstr ""
 "Tsy ampy ny TerraX — %(name)s kifo %(price)s TRX fa ao anaty kapa-kisoa "
 "%(balance)s TRX."
 
-#: terra/views.py:377
+#: terra/views.py:379
 msgid "That callsign was claimed by another passenger a moment ago."
 msgstr "Ilay marikan-kena no nangataka tamin'ny mpandeha hafa vao izao."
 
-#: terra/views.py:383
+#: terra/views.py:385
 #, python-format
 msgid "%(name)s purchased for %(price)s TRX."
 msgstr "%(name)s no nividy amin'ny %(price)s TRX."
 
-#: terra/views.py:438
+#: terra/views.py:440
 msgid "The channel is open — say something first."
 msgstr "Ny lanonana dia miova — lahara ilay teny aloha."
 
-#: terra/views.py:490
+#: terra/views.py:492
 msgid "Empty transmission — nothing was sent."
 msgstr "Teny feno — tsy nandefa na inona na inona."
 
-#: terra/views.py:727
+#: terra/views.py:738
 #, python-format
 msgid "%(code)s is already settled."
 msgstr "%(code)s efa vita."
 
-#: terra/views.py:737
+#: terra/views.py:748
 #, python-format
 msgid ""
 "Not enough TerraX — the %(code)s levy is %(amount)s TRX and your wallet "
@@ -2922,63 +3317,63 @@ msgstr ""
 "Tsy ampy ny TerraX — ny levyan'ny %(code)s dia %(amount)s TRX fa ao anaty "
 "kapa-kisoa %(balance)s TRX."
 
-#: terra/views.py:761
+#: terra/views.py:772
 #, python-format
 msgid ""
 "%(code)s settled — %(amount)s TRX paid. The receipt is in your TerraX ledger."
 msgstr ""
 "%(code)s vita — nandoa %(amount)s TRX. Ny resi ao anaty tabilao TerraX."
 
-#: terra/views.py:780
+#: terra/views.py:791
 msgid "No date of birth on file — register it at the pension desk first."
 msgstr ""
 "Tsy misy daty nahaterahana — apetao aloha ao amin'ny toeran'ny pensiona."
 
-#: terra/views.py:786
+#: terra/views.py:797
 #, python-format
 msgid "Eligibility starts at age %(age)s — you are %(months)s months away."
 msgstr ""
 "Ny zo dia manomboka amin'ny %(age)s taona — misokatra %(months)s volana."
 
-#: terra/views.py:794
+#: terra/views.py:805
 msgid "This month’s pension is already on your ledger."
 msgstr "Ny pensiona'ity volana ity efa ao anaty tabilao."
 
-#: terra/views.py:812
+#: terra/views.py:823
 #, python-format
 msgid "Pension claimed — %(amount)s TRX credited. Next claim opens next month."
 msgstr ""
 "Pensiona voandray — %(amount)s TRX nodin'ny. Ny fandrosoana manaraka: volana "
 "manaraka."
 
-#: terra/views.py:826
+#: terra/views.py:837
 msgid "Enter a valid date of birth (YYYY-MM-DD)."
 msgstr "Ampetaho daty nahaterahana mety (AAAA-MM-JJ)."
 
-#: terra/views.py:831
+#: terra/views.py:842
 msgid "Date of birth cannot be in the future."
 msgstr "Ny daty nahaterahana tsy maintsy ho eo amin'ny manaraka."
 
-#: terra/views.py:835
+#: terra/views.py:846
 msgid "That age cannot be right — check the date."
 msgstr "Tsy mety io taona io — jereo ilay daty."
 
-#: terra/views.py:843
+#: terra/views.py:854
 #, python-format
 msgid "Date of birth on file — age %(age)s. The pension desk is updated."
 msgstr ""
 "Daty nahaterahana ao anaty kiloga — %(age)s taona. Ny toeran'ny pensiona "
 "nofoana."
 
-#: terra/views.py:856
+#: terra/views.py:867
 msgid "Unknown request type."
 msgstr "Kind'ny fanomezana tsy fantatra."
 
-#: terra/views.py:866
+#: terra/views.py:877
 msgid "Give the location at least a few characters."
 msgstr "Ampio hafy famantarana eo anatin'ny adiresy."
 
-#: terra/views.py:880
+#: terra/views.py:891
 #, python-format
 msgid ""
 "%(label)s request filed · tracking %(tracking)s. Watch it move through "
@@ -2986,12 +3381,12 @@ msgid ""
 msgstr ""
 "Nifidy ny %(label)s · mari-pandeha %(tracking)s. Araho ny endrik'izy ambany."
 
-#: terra/views.py:917
+#: terra/views.py:928
 #, python-format
 msgid "Terra Watch %(device)s is already paired."
 msgstr "Terra Watch %(device)s efa voampy."
 
-#: terra/views.py:929
+#: terra/views.py:940
 #, python-format
 msgid ""
 "Not enough TerraX — the Terra Watch costs %(price)s TRX and your wallet "
@@ -3000,25 +3395,25 @@ msgstr ""
 "Tsy ampy ny TerraX — ny Terra Watch kifo %(price)s TRX fa ao anaty kapa-"
 "kisoa %(balance)s TRX."
 
-#: terra/views.py:950
+#: terra/views.py:961
 #, python-format
 msgid "Terra Watch paired · device %(device)s is streaming vitals."
 msgstr ""
 "Terra Watch voampy · fitaovana %(device)s mandeha amin'ny fahasem-boaloha."
 
-#: terra/views.py:975
+#: terra/views.py:986
 msgid "Choose a departure from the board first."
 msgstr "Safidio aloha fandroahana eo amin'ny tabilo."
 
-#: terra/views.py:980
+#: terra/views.py:991
 msgid "That departure has already left the station."
 msgstr "Ilay fandroahana efa nivoaka."
 
-#: terra/views.py:991
+#: terra/views.py:1002
 msgid "Choose who is travelling first."
 msgstr "Safidio aloha iza no mandeha."
 
-#: terra/views.py:1005
+#: terra/views.py:1016
 #, python-format
 msgid ""
 "Not enough TerraX — this fare is %(fare)s TRX and your wallet holds "
@@ -3027,7 +3422,7 @@ msgstr ""
 "Tsy ampy ny TerraX — io fifandraisana io kifo %(fare)s TRX fa ao anaty kapa-"
 "kisoa %(balance)s TRX."
 
-#: terra/views.py:1037
+#: terra/views.py:1048
 #, python-format
 msgid ""
 "Fare paid — %(before)s − %(fare)s = %(balance)s TRX. QR ticket issued for "
@@ -3036,94 +3431,102 @@ msgstr ""
 "Fifandraisana voavoha — %(before)s − %(fare)s = %(balance)s TRX. Kaontin-"
 "kena QR nomorona ho an'ny %(route)s amin'ny %(time)s, vonona handeha."
 
-#: terra/views.py:1068
+#: terra/views.py:1079
 msgid "Give the traveller a name."
 msgstr "Ampio anarana ny mpandeha."
 
-#: terra/views.py:1070
+#: terra/views.py:1081
 msgid "Choose a relationship."
 msgstr "Safidio tokanteny."
 
-#: terra/views.py:1077
+#: terra/views.py:1088
 #, python-format
 msgid "%(name)s added — you can now buy their fare too."
 msgstr "%(name)s no ampiana — izao azo atao ny hividianana fifandraisany koa."
 
-#: terra/views.py:1090
+#: terra/views.py:1101
 msgid "That ticket is not on your account."
 msgstr "Io kaontin-kena io tsy ao amin'ny kaontinao."
 
-#: terra/views.py:1093
+#: terra/views.py:1104
 msgid "This ticket was already scanned."
 msgstr "Efa nosakaina io kaontin-kena io."
 
-#: terra/views.py:1099
+#: terra/views.py:1110
 #, python-format
 msgid "Receiver accepted %(route)s · %(who)s is aboard. Safe travels."
 msgstr ""
 "Nandray anjara ny %(route)s ny mpandaka · efa anaty %(who)s. Fandehana tsara."
 
-#: terra/views.py:1107
+#: terra/views.py:1118
 msgid "Unknown transport action."
 msgstr "Asa fandraisana tsy fantatra."
 
-#: terra/views.py:1175
+#: terra/views.py:1186
 msgid "The comment is empty — write something first."
 msgstr "Ny fanamarihana dia tsy misy — soraty aloha zavatra."
 
-#: terra/views.py:1179
+#: terra/views.py:1190
 msgid "Comment posted."
 msgstr "Ny fanamarihana nofoana."
 
-#: terra/views.py:1198
+#: terra/views.py:1216
+msgid "The insight is empty — write something first."
+msgstr "Foana ny hevitra — soraty aloha ny tokony hosoratra."
+
+#: terra/views.py:1222
+msgid "Insight filed — the council reads every signal."
+msgstr "Nampiditra ny hevitra — mianatra ny Antonoloana samy signal."
+
+#: terra/views.py:1242
 #, python-format
 msgid "%(n)s signal acknowledged."
 msgid_plural "%(n)s signals acknowledged."
 msgstr[0] "%(n)s hafa-tsoratra voanaraka."
 
-#: terra/views.py:1207
+#: terra/views.py:1251
 msgid "Signal acknowledged."
 msgstr "Hafa-tsoratra voanaraka."
 
-#: terra/views.py:1225
+#: terra/views.py:1269
 #, python-format
 msgid "%(n)s other session sealed behind you."
 msgid_plural "%(n)s other sessions sealed behind you."
 msgstr[0] "%(n)s hafa-tsoratra hafa voakasika anaty."
 
-#: terra/views.py:1231
+#: terra/views.py:1275
 msgid "Unknown signal action."
 msgstr "Asa hafa-tsoratra tsy fantatra."
 
-#: terra/views.py:1288
+#: terra/views.py:1332
 msgid "Passenger record updated."
 msgstr "Taloha ao anaty kaonty nofoana."
 
-#: terra/views.py:1292
+#: terra/views.py:1336
 msgid "Could not save the record."
 msgstr "Tsy nahomby ny fandrahinana."
 
-#: terra/views.py:1303
+#: terra/views.py:1347
 msgid "Passenger photo updated."
 msgstr "Sary mpanjifa nofoana."
 
-#: terra/views.py:1307
+#: terra/views.py:1351
 msgid "Could not store the photo."
 msgstr "Tsy nahomby ny fitahirizana ny sary."
 
-#: terra/views.py:1316
+#: terra/views.py:1360
 msgid "Passenger photo removed."
 msgstr "Sary mpanjifa nesorina."
 
-#: terra/views.py:1335
+#: terra/views.py:1379
 #, python-format
 msgid "Rating saved — %(stars)s★ for %(who)s."
 msgstr "Fanomezana nofoana — %(stars)s★ ho an'ny %(who)s."
 
-#: terra/views.py:1343
+#: terra/views.py:1387
 msgid "Could not save the rating."
 msgstr "Tsy nahomby ny fandrahoana ny fanomezana."
 
-#: terra/views.py:1347
+#: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Asa kaonty tsy fantatra."

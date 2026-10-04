@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Terra Nova 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-03 23:19+0000\n"
+"POT-Creation-Date: 2026-10-04 00:45+0000\n"
 "PO-Revision-Date: 2026-10-03 00:00+0000\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -128,32 +128,34 @@ msgstr "Всего %(full_result_count)s"
 msgid "Skip to content"
 msgstr "Перейти к содержанию"
 
-#: templates/base.html:65 templates/base.html:152
+#: templates/base.html:65 templates/base.html:153
 msgid "Manifesto"
 msgstr "Манифест"
 
-#: templates/base.html:66 templates/base.html:153
+#: templates/base.html:66 templates/base.html:154
 msgid "Atlas"
 msgstr "Атлас"
 
-#: templates/base.html:67 templates/base.html:155
+#: templates/base.html:67 templates/base.html:156
 #: terra/templates/terra/news_detail.html:14
 msgid "News"
 msgstr "Новости"
 
-#: templates/base.html:68
+#: templates/base.html:68 terra/models.py:446
 msgid "Market"
 msgstr "Рынок"
 
-#: templates/base.html:69 templates/base.html:157
+#: templates/base.html:69 templates/base.html:158 terra/models.py:445
 msgid "Weather"
 msgstr "Погода"
 
-#: templates/base.html:70 terra/templates/terra/dashboard.html:143
+#: templates/base.html:70 terra/models.py:447
+#: terra/templates/terra/dashboard.html:143
 msgid "Transport"
 msgstr "Транспорт"
 
-#: templates/base.html:71 terra/templates/terra/dashboard.html:144
+#: templates/base.html:71 terra/models.py:449
+#: terra/templates/terra/dashboard.html:144
 msgid "Health"
 msgstr "Здоровье"
 
@@ -161,15 +163,19 @@ msgstr "Здоровье"
 msgid "Government"
 msgstr "Правительство"
 
-#: templates/base.html:84
+#: templates/base.html:73 templates/base.html:171
+msgid "Feedback"
+msgstr "Отзывы"
+
+#: templates/base.html:85
 msgid "Language"
 msgstr "Язык"
 
-#: templates/base.html:95 templates/base.html:96
+#: templates/base.html:96 templates/base.html:97
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: templates/base.html:105
+#: templates/base.html:106
 #, python-format
 msgid "%(counter)s unread signal"
 msgid_plural "%(counter)s unread signals"
@@ -177,36 +183,36 @@ msgstr[0] "%(counter)s непрочитанный сигнал"
 msgstr[1] "%(counter)s непрочитанных сигнала"
 msgstr[2] "%(counter)s непрочитанных сигналов"
 
-#: templates/base.html:111 templates/base.html:112
+#: templates/base.html:112 templates/base.html:113
 #: terra/templates/terra/account.html:8
 msgid "Account centre"
 msgstr "Центр аккаунта"
 
-#: templates/base.html:120 templates/base.html:169
+#: templates/base.html:121 templates/base.html:170
 #: terra/templates/terra/account.html:149
 msgid "Mission Control"
 msgstr "Центр управления"
 
-#: templates/base.html:123
+#: templates/base.html:124
 msgid "Sign out"
 msgstr "Выйти"
 
-#: templates/base.html:126 templates/base.html:167
-#: terra/templates/terra/market.html:273
+#: templates/base.html:127 templates/base.html:168
+#: terra/templates/terra/feedback.html:43 terra/templates/terra/market.html:273
 #: terra/templates/terra/news_detail.html:78
 msgid "Sign in"
 msgstr "Войти"
 
-#: templates/base.html:127 templates/base.html:168
+#: templates/base.html:128 templates/base.html:169
 #: terra/templates/terra/market.html:272
 msgid "Claim passage"
 msgstr "Получить пропуск"
 
-#: templates/base.html:129
+#: templates/base.html:130
 msgid "Menu"
 msgstr "Меню"
 
-#: templates/base.html:147
+#: templates/base.html:148
 msgid ""
 "A second Earth, catalogued and waiting. Expedition 01 opens the transit "
 "window for the first one thousand passengers."
@@ -214,55 +220,55 @@ msgstr ""
 "Вторая Земля, каталогированная и ожидающая. Экспедиция 01 открывает "
 "транзитное окно для первой тысячи пассажиров."
 
-#: templates/base.html:151
+#: templates/base.html:152
 msgid "Explore"
 msgstr "Обзор"
 
-#: templates/base.html:154
+#: templates/base.html:155
 msgid "Program"
 msgstr "Программа"
 
-#: templates/base.html:156
+#: templates/base.html:157
 msgid "TerraX market"
 msgstr "Рынок TerraX"
 
-#: templates/base.html:158
+#: templates/base.html:159
 msgid "Map of Terra Nova"
 msgstr "Карта Терра-Нова"
 
-#: templates/base.html:159
+#: templates/base.html:160
 msgid "Access"
 msgstr "Посадка"
 
-#: templates/base.html:162
+#: templates/base.html:163
 msgid "Novarians"
 msgstr "Новарианцы"
 
-#: templates/base.html:163
+#: templates/base.html:164
 msgid "Transport & fares"
 msgstr "Транспорт и тарифы"
 
-#: templates/base.html:164
+#: templates/base.html:165
 msgid "Government portal"
 msgstr "Портал правительства"
 
-#: templates/base.html:165
+#: templates/base.html:166
 msgid "Health & Terra Watch"
 msgstr "Здоровье и Terra Watch"
 
-#: templates/base.html:172
+#: templates/base.html:174
 msgid "Signals"
 msgstr "Сигналы"
 
-#: templates/base.html:180
+#: templates/base.html:182
 msgid "SOL SYSTEM RIGHTS RESERVED — FOR NOW"
 msgstr "ПРАВА СОЛНЕЧНОЙ СИСТЕМЫ СОХРАНЕНЫ — ПОКА ЧТО"
 
-#: templates/base.html:184
+#: templates/base.html:186
 msgid "Open Terra Chat"
 msgstr "Открыть Terra Chat"
 
-#: templates/base.html:194 templates/base.html:195
+#: templates/base.html:196 templates/base.html:197
 msgid "Accessibility settings"
 msgstr "Настройки доступности"
 
@@ -342,6 +348,320 @@ msgstr "Как агент справился с вашим сигналом?"
 #: terra/forms.py:253
 msgid "Unknown agent."
 msgstr "Неизвестный агент."
+
+#: terra/models.py:444
+msgid "Expedition"
+msgstr "Экспедиция"
+
+#: terra/models.py:448
+msgid "Civic"
+msgstr "Гражданские"
+
+#: terra/models.py:450
+msgid "Science"
+msgstr "Наука"
+
+#: terra/models.py:512
+msgid "Idea"
+msgstr "Идея"
+
+#: terra/models.py:513
+msgid "Balance"
+msgstr "Баланс"
+
+#: terra/models.py:514
+msgid "Fault"
+msgstr "Ошибка"
+
+#: terra/models.py:515
+msgid "Story & content"
+msgstr "Истории и контент"
+
+#: terra/models.py:516
+msgid "Other"
+msgstr "Прочее"
+
+#: terra/news.py:20
+msgid "Expedition 01 boarding window opens for the first thousand passengers"
+msgstr "Экспедиция 01 открывает окно посадки для первой тысячи пассажиров"
+
+#: terra/news.py:21
+msgid ""
+"Mission Control has released seat assignments for the transit window; "
+"passengers can review their dossier and QR boarding pass in Mission Control."
+msgstr ""
+"Центр управления распределил места на окно транзита; пассажиры могут "
+"проверить досье и посадочный QR в центре управления."
+
+#: terra/news.py:23 terra/news.py:226 terra/news.py:325
+msgid "Terra Nova Newsroom"
+msgstr "Terra Nova Newsroom"
+
+#: terra/news.py:42
+msgid "Heat wave holds: eight-day anomaly forecast issued for all four sectors"
+msgstr ""
+"Жара держится: восьмидневный прогноз аномалии для всех четырёх секторов"
+
+#: terra/news.py:43
+msgid ""
+"The Aurelia observatory records a +7°C anomaly; every day of the simulation "
+"window crosses the alert threshold."
+msgstr ""
+"Обсерватория Аурелии фиксирует аномалию +7 °C; каждый день окна "
+"моделирования пересекает порог тревоги."
+
+#: terra/news.py:45 terra/news.py:293
+msgid "Aurelia Observatory Wire"
+msgstr "Лента обсерватории Аурелии"
+
+#: terra/news.py:63
+msgid "TerraX steadies as ledger volume doubles week on week"
+msgstr "TerraX стабилизируется, пока объём реестра удваивается за неделю"
+
+#: terra/news.py:64
+msgid ""
+"Exchange fee revenue funds the colony's service budget; traders watch the "
+"0.5% fee that settles every TerraX exchange."
+msgstr ""
+"Доход от комиссии финансирует сервисный бюджет колонии; трейдеры следят за "
+"0,5 % с каждой конвертации TerraX."
+
+#: terra/news.py:66 terra/news.py:243
+msgid "TerraX Desk"
+msgstr "Биржа TerraX"
+
+#: terra/news.py:84
+msgid "Night rails return to the Glass Tundra after a six-week refit"
+msgstr ""
+"Ночные рейсы возвращаются в Стеклянную тундру после шестинедельного ремонта"
+
+#: terra/news.py:85
+msgid ""
+"The northern line reopens with live departure boards and QR tickets accepted "
+"at every receiver aboard."
+msgstr ""
+"Северная линия открыта заново: табло отправлений в реальном времени и QR-"
+"билеты принимают все бортовые приёмники."
+
+#: terra/news.py:87 terra/news.py:206 terra/news.py:276
+msgid "Nova Transit"
+msgstr "Nova Transit"
+
+#: terra/news.py:105
+msgid "Council opens the season tax window; sector levies published"
+msgstr "Совет открывает окно налогового сезона; сборы по секторам опубликованы"
+
+#: terra/news.py:106
+msgid ""
+"Levies are set per sector and payable from the government portal before the "
+"window closes."
+msgstr ""
+"Ставки устанавливаются по секторам и оплачиваются через государственный "
+"портал до закрытия окна."
+
+#: terra/news.py:108 terra/news.py:259 terra/news.py:357
+msgid "Colony Council"
+msgstr "Совет колонии"
+
+#: terra/news.py:125
+msgid "Terra Watch band rolls continuous vitals into the colony health record"
+msgstr ""
+"Браслет Terra Watch непрерывно передаёт показатели в медицинскую карту "
+"колонии"
+
+#: terra/news.py:126
+msgid ""
+"Heart rate, blood oxygen and heat-strain warnings now stream to the record "
+"your medical team reads."
+msgstr ""
+"Пульс, сатурация и предупреждения о тепловом ударе теперь попадают в карту, "
+"которую читает ваша медицинская бригада."
+
+#: terra/news.py:128 terra/news.py:309 terra/news.py:373
+msgid "Health Services"
+msgstr "Медицинская служба"
+
+#: terra/news.py:145
+msgid "Deep-listening survey maps the Pelagos thermocline to eleven kilometres"
+msgstr ""
+"Глубокое прослушивание картографирует термоклин Пелагоса до одиннадцати "
+"километров"
+
+#: terra/news.py:146
+msgid ""
+"Hydrophone arrays record the living light layer and the currents that shape "
+"the midnight ocean."
+msgstr ""
+"Гидрофонные массивы записывают слой живого света и течения, формирующие "
+"полуночный океан."
+
+#: terra/news.py:148 terra/news.py:341
+msgid "Pelagos Survey Office"
+msgstr "Бюро съёмки Пелагоса"
+
+#: terra/news.py:164
+msgid "Waste rotation restored across the Vermilion Steps villages"
+msgstr "Вращение вывоза отходов возобновлено в посёлках Красных ступеней"
+
+#: terra/news.py:165
+msgid ""
+"Collection resumes on the published schedule after the canyon-road repair "
+"closed the depot approach."
+msgstr ""
+"Вывоз идёт по опубликованному графику после закрытия свалки на время ремонта "
+"каньонной дороги."
+
+#: terra/news.py:167
+msgid "Colony Works"
+msgstr "Колонийные работы"
+
+#: terra/news.py:183
+msgid "Passengers can now score the agents who answer them in Terra Chat"
+msgstr "Пассажиры теперь могут оценивать агентов, отвечающих им в Terra Chat"
+
+#: terra/news.py:184
+msgid ""
+"Ratings from one to five stars flow back to the agent roster and shape which "
+"threads get escalated first."
+msgstr ""
+"Оценки от одной до пяти звёзд поступают в список агентов и определяют "
+"очерёдность эскалаций."
+
+#: terra/news.py:186
+msgid "Terra Chat Operations"
+msgstr "Операции Terra Chat"
+
+#: terra/news.py:203
+msgid "Second bus line links Aurelia Basin to the Pelagos coast"
+msgstr ""
+"Вторая автобусная линия связывает бассейн Аурелии с побережьем Пелагоса"
+
+#: terra/news.py:204
+msgid ""
+"The coastal run adds a daytime connection between the first landing site and "
+"the fishing harbours."
+msgstr ""
+"Прибрежный рейс добавляет дневное сообщение между первой площадкой высадки и "
+"рыбацкими портами."
+
+#: terra/news.py:223
+msgid "LAGOON array completes its southern-hemisphere sweep"
+msgstr "Массив LAGOON завершил обход южного полушария"
+
+#: terra/news.py:224
+msgid ""
+"All ninety-six dishes have listened through the full sky window; water-"
+"vapour candidates now go to review."
+msgstr ""
+"Все девяносто шесть антенн прослушали полное окно неба; кандидаты линий "
+"водяного пара уходят на проверку."
+
+#: terra/news.py:240
+msgid "Welcome-bonus wallets pass the ten-thousand mark"
+msgstr "Кошельки приветственного бонуса перевалили за десять тысяч"
+
+#: terra/news.py:241
+msgid ""
+"Every claimed passage carries 10,000 TRX; the ledger shows the bonus "
+"credited at sign-in for the thousandth passenger."
+msgstr ""
+"Каждый заявленный проезд несёт 10 000 TRX; в реестре видно бонус, "
+"зачисленный при регистрации тысячному пассажиру."
+
+#: terra/news.py:256
+msgid "Council publishes the second season levy schedule"
+msgstr "Совет публикует расписание сборов второго сезона"
+
+#: terra/news.py:257
+msgid ""
+"Sector rates hold steady while the transport surcharge funds the night rails."
+msgstr ""
+"Ставки по секторам остаются прежними, а транспортная надбавка финансирует "
+"ночные рейсы."
+
+#: terra/news.py:273
+msgid "Night rails carry ten thousand riders since reopening"
+msgstr "Ночные рейсы перевезли десять тысяч пассажиров с момента открытия"
+
+#: terra/news.py:274
+msgid ""
+"Nova Transit reports load factors above expectations on the northern line; "
+"extra cars arrive next week."
+msgstr ""
+"Nova Transit сообщает о загрузке выше ожидаемой на северной линии; "
+"дополнительные вагоны прибудут на следующей неделе."
+
+#: terra/news.py:290
+msgid "Observatory: warm spell to ease as the window closes"
+msgstr "Обсерватория: жара ослабнет к закрытию окна"
+
+#: terra/news.py:291
+msgid ""
+"The eight-day anomaly finally drops below the alert line; residents are "
+"asked to keep bands charged until it does."
+msgstr ""
+"Восьмидневная аномалия наконец опускается ниже порога тревоги; жителей "
+"просят держать браслеты заряженными до конца."
+
+#: terra/news.py:306
+msgid "Heat-strain drills run in every village before the peak"
+msgstr "Тренировки по тепловому удару прошли в каждом посёлке перед пиком"
+
+#: terra/news.py:307
+msgid ""
+"Wardens walk each habitat through hydration and shade routines; Terra Watch "
+"pairing offered at the door."
+msgstr ""
+"Смотрители обходят каждый жилой модуль с правилами питья и тени; парировка "
+"Terra Watch предлагается на месте."
+
+#: terra/news.py:322
+msgid "Passenger manifest passes the halfway mark"
+msgstr "Список пассажиров перевалил за половину"
+
+#: terra/news.py:323
+msgid ""
+"Five hundred confirmed passages with sectors drawn; the remaining seats "
+"release in waves through the boarding window."
+msgstr ""
+"Пятьсот подтверждённых проездов с жребием секторов; оставшиеся места "
+"выпускаются волнами в окно посадки."
+
+#: terra/news.py:338
+msgid "Glass Tundra ice core dated to the first settlement winter"
+msgstr "Ледяной керн из Стеклянной тундры датирован первой зимой поселения"
+
+#: terra/news.py:339
+msgid ""
+"A two-metre core gives the colony its first hard record of the quiet year "
+"before the survey."
+msgstr ""
+"Двухметровый керн дал колонии первую твёрдую запись тихого года до "
+"экспедиции."
+
+#: terra/news.py:354
+msgid "First month of elder pensions settles without a backlog"
+msgstr "Первый месяц пенсий закрыт без задержек"
+
+#: terra/news.py:355
+msgid ""
+"The pension desk reports every eligible claim paid on the scheduled day, "
+"straight to TerraX wallets."
+msgstr ""
+"Пенсионное окно сообщает, что каждая подходящая заявка оплачена в "
+"назначенный день прямо в кошельки TerraX."
+
+#: terra/news.py:370
+msgid "Terra Watch fall detection links straight to Terra Chat"
+msgstr "Детектор падения Terra Watch связан напрямую с Terra Chat"
+
+#: terra/news.py:371
+msgid ""
+"A one-press beacon now opens a thread with vitals attached; agents see the "
+"numbers before they reply."
+msgstr ""
+"Кнопка-маяк теперь открывает диалог с прикреплёнными показателями; агент "
+"видит цифры до ответа."
 
 #: terra/templates/terra/account.html:15
 msgid "Passage office · passenger file"
@@ -741,6 +1061,66 @@ msgstr "ЭКСПЕДИЦИЯ 01"
 msgid "Sign out of Mission Control"
 msgstr "Выйти из центра управления"
 
+#: terra/templates/terra/feedback.html:8
+msgid "Feedback — Terra Nova"
+msgstr "Обратная связь — Terra Nova"
+
+#: terra/templates/terra/feedback.html:15
+msgid "Council inbox · open channel"
+msgstr "Входящие совета · открытый канал"
+
+#: terra/templates/terra/feedback.html:16
+#: terra/templates/terra/feedback.html:36
+msgid "Your insight"
+msgstr "Ваше предложение"
+
+#: terra/templates/terra/feedback.html:16
+msgid "builds Terra Nova."
+msgstr "строит Terra Nova."
+
+#: terra/templates/terra/feedback.html:18
+msgid ""
+"What should the colony do better — transport, market,\n"
+"          weather alerts, the stories on the wire? File it below; every\n"
+"          Novarian can read what the others filed."
+msgstr "Что колония может делать лучше — транспорт, рынок, оповещения о погоде, истории на ленте? Отправьте его ниже — каждый новарианец может прочитать, что предложили другие."
+
+#: terra/templates/terra/feedback.html:29
+msgid "Topic"
+msgstr "Тема"
+
+#: terra/templates/terra/feedback.html:38
+msgid "What would make Terra Nova better?"
+msgstr "Что сделает Terra Nova лучше?"
+
+#: terra/templates/terra/feedback.html:39
+msgid "File insight"
+msgstr "Отправить предложение"
+
+#: terra/templates/terra/feedback.html:44
+msgid "to file an insight — and read what the others filed."
+msgstr "чтобы отправить предложение — и прочитать, что предложили другие."
+
+#: terra/templates/terra/feedback.html:50
+msgid "The wall"
+msgstr "Стена"
+
+#: terra/templates/terra/feedback.html:52
+#, python-format
+msgid "%(n)s insight from the crew"
+msgid_plural "%(n)s insights from the crew"
+msgstr[0] "%(n)s предложение от экипажа"
+msgstr[1] "%(n)s предложения от экипажа"
+msgstr[2] "%(n)s предложений от экипажа"
+
+#: terra/templates/terra/feedback.html:62
+msgid "Yours"
+msgstr "Ваше"
+
+#: terra/templates/terra/feedback.html:71
+msgid "No insights on the wall yet — file the first one above."
+msgstr "На стене пока нет предложений — отправьте первое выше."
+
 #: terra/templates/terra/government.html:8
 msgid "Government Portal — Terra Nova"
 msgstr "Портал правительства — Terra Nova"
@@ -916,7 +1296,7 @@ msgid "Next pickup"
 msgstr "Следующий вывоз"
 
 #: terra/templates/terra/government.html:145
-#: terra/templates/terra/weather.html:127
+#: terra/templates/terra/weather.html:129
 msgid "TODAY"
 msgstr "СЕГОДНЯ"
 
@@ -1649,7 +2029,7 @@ msgstr ""
 msgid "Expedition 01 opens"
 msgstr "Экспедиция 01 открывается"
 
-#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:85
+#: terra/templates/terra/home.html:219 terra/templates/terra/weather.html:87
 msgid "NOW"
 msgstr "СЕЙЧАС"
 
@@ -1814,11 +2194,11 @@ msgstr "Живые показания"
 msgid "Feels like"
 msgstr "Ощущается как"
 
-#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:41
+#: terra/templates/terra/map.html:108 terra/templates/terra/weather.html:43
 msgid "Wind"
 msgstr "Ветер"
 
-#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:40
+#: terra/templates/terra/map.html:110 terra/templates/terra/weather.html:42
 msgid "Humidity"
 msgstr "Влажность"
 
@@ -1826,7 +2206,7 @@ msgstr "Влажность"
 msgid "Wind force"
 msgstr "Сила ветра"
 
-#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:58
+#: terra/templates/terra/map.html:127 terra/templates/terra/weather.html:60
 msgid "YOUR SECTOR"
 msgstr "ВАШ СЕКТОР"
 
@@ -2665,12 +3045,12 @@ msgstr ""
 msgid "Weather — Terra Nova"
 msgstr "Погода — Terra Nova"
 
-#: terra/templates/terra/weather.html:28
+#: terra/templates/terra/weather.html:30
 #, python-format
 msgid "Live · Aurelia observatory · observed %(observed)s"
 msgstr "В эфире · обсерватория Aurelia · наблюдение %(observed)s"
 
-#: terra/templates/terra/weather.html:35
+#: terra/templates/terra/weather.html:37
 #, python-format
 msgid ""
 "Feels like %(feels)s°C across the surveyed sectors —\n"
@@ -2681,35 +3061,35 @@ msgstr ""
 "          заметно выше сезонной нормы %(mean)s°C,\n"
 "          пока держится жара."
 
-#: terra/templates/terra/weather.html:42
+#: terra/templates/terra/weather.html:44
 msgid "Seasonal mean"
 msgstr "Сезонная норма"
 
-#: terra/templates/terra/weather.html:44
+#: terra/templates/terra/weather.html:46
 msgid "Heat anomaly"
 msgstr "Тепловая аномалия"
 
-#: terra/templates/terra/weather.html:48
+#: terra/templates/terra/weather.html:50
 msgid "Open the 3D map →"
 msgstr "Открыть 3D-карту →"
 
-#: terra/templates/terra/weather.html:52
+#: terra/templates/terra/weather.html:54
 msgid "Sector conditions"
 msgstr "Состояние секторов"
 
-#: terra/templates/terra/weather.html:71
+#: terra/templates/terra/weather.html:73
 msgid "Heat simulation"
 msgstr "Симуляция жары"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "Eight days of"
 msgstr "Восемь дней"
 
-#: terra/templates/terra/weather.html:72
+#: terra/templates/terra/weather.html:74
 msgid "rising heat."
 msgstr "нарастающего зноя."
 
-#: terra/templates/terra/weather.html:75
+#: terra/templates/terra/weather.html:77
 #, python-format
 msgid ""
 "The thermal model runs from <strong>%(start)s</strong>\n"
@@ -2722,23 +3102,23 @@ msgstr ""
 "        окне превышает порог оповещения, поэтому ваше устройство получает\n"
 "        одно уведомление о повышении температуры в день всю неделю."
 
-#: terra/templates/terra/weather.html:102
+#: terra/templates/terra/weather.html:104
 msgid "Heat watch"
 msgstr "Наблюдение за жарой"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "Be told before"
 msgstr "Узнайте раньше, чем"
 
-#: terra/templates/terra/weather.html:103
+#: terra/templates/terra/weather.html:105
 msgid "the air burns."
 msgstr "воздух сгорит."
 
-#: terra/templates/terra/weather.html:108
+#: terra/templates/terra/weather.html:110
 msgid "Push notifications"
 msgstr "Push-уведомления"
 
-#: terra/templates/terra/weather.html:110
+#: terra/templates/terra/weather.html:112
 msgid ""
 "Allow notifications and Terra Nova warns you the moment a heat alert\n"
 "          is issued — delivered by the service worker even when this tab is\n"
@@ -2751,23 +3131,23 @@ msgstr ""
 "          вкладка закрыта. Симуляция выдаёт по одному оповещению в день\n"
 "          на всё окно ниже."
 
-#: terra/templates/terra/weather.html:115
+#: terra/templates/terra/weather.html:117
 msgid "CHECKING PERMISSION…"
 msgstr "ПРОВЕРКА РАЗРЕШЕНИЯ…"
 
-#: terra/templates/terra/weather.html:119
+#: terra/templates/terra/weather.html:121
 msgid "Enable push alerts"
 msgstr "Включить push-оповещения"
 
-#: terra/templates/terra/weather.html:120
+#: terra/templates/terra/weather.html:122
 msgid "Trigger heat alert now"
 msgstr "Запустить тепловое оповещение сейчас"
 
-#: terra/templates/terra/weather.html:135
+#: terra/templates/terra/weather.html:137
 msgid "The simulation is warming up — no alerts issued yet."
 msgstr "Симуляция прогревается — оповещений пока нет."
 
-#: terra/templates/terra/weather.html:140
+#: terra/templates/terra/weather.html:142
 #, python-format
 msgid ""
 "SIMULATION WINDOW · %(days)s DAYS · ONE NOTIFICATION PER DAY ·\n"
@@ -2792,7 +3172,7 @@ msgstr "Убрать этот фильтр"
 msgid "Clear all ✕"
 msgstr "Сбросить всё ✕"
 
-#: terra/views.py:128
+#: terra/views.py:130
 #, python-format
 msgid ""
 "Passage confirmed — you fly as %(callsign)s. Welcome bonus: +%(bonus)s TRX "
@@ -2801,68 +3181,68 @@ msgstr ""
 "Проезд подтверждён — вы летите под позывным %(callsign)s. Приветственный "
 "бонус: +%(bonus)s TRX уже в кошельке."
 
-#: terra/views.py:152
+#: terra/views.py:154
 msgid "Airlock sealed. Mission Control is yours."
 msgstr "Шлюз закрыт. Центр управления ваш."
 
-#: terra/views.py:164
+#: terra/views.py:166
 msgid "Signed out. The hatch is sealed behind you."
 msgstr "Вы вышли. Люк закрылся за вами."
 
-#: terra/views.py:176
+#: terra/views.py:178
 msgid "Log entry updated."
 msgstr "Запись в журнале обновлена."
 
-#: terra/views.py:224 terra/views.py:260
+#: terra/views.py:226 terra/views.py:262
 msgid "Invalid amount."
 msgstr "Неверная сумма."
 
-#: terra/views.py:233
+#: terra/views.py:235
 #, python-format
 msgid "Not enough Earth credits — your wallet holds $%(balance)s."
 msgstr "Недостаточно земельных кредитов — на кошельке $%(balance)s."
 
-#: terra/views.py:250
+#: terra/views.py:252
 #, python-format
 msgid "Filled: %(trx)s TRX for $%(usd)s."
 msgstr "Исполнено: %(trx)s TRX за $%(usd)s."
 
-#: terra/views.py:271
+#: terra/views.py:273
 #, python-format
 msgid "Not enough TerraX — your wallet holds %(balance)s TRX."
 msgstr "Недостаточно TerraX — на кошельке %(balance)s TRX."
 
-#: terra/views.py:288
+#: terra/views.py:290
 #, python-format
 msgid "Sold %(trx)s TRX for $%(usd)s."
 msgstr "Продано %(trx)s TRX за $%(usd)s."
 
-#: terra/views.py:295
+#: terra/views.py:297
 msgid "Unknown trade action."
 msgstr "Неизвестное действие обмена."
 
-#: terra/views.py:303
+#: terra/views.py:305
 msgid "That service does not exist."
 msgstr "Такого сервиса нет."
 
-#: terra/views.py:311 terra/views.py:861
+#: terra/views.py:313 terra/views.py:872
 msgid "Choose a valid sector."
 msgstr "Выберите допустимый сектор."
 
-#: terra/views.py:318
+#: terra/views.py:320
 msgid "Callsigns are 3–24 characters: letters, digits and dashes."
 msgstr "Позывной — 3–24 символа: буквы, цифры и дефисы."
 
-#: terra/views.py:331
+#: terra/views.py:333
 msgid "Priority boarding is already active on your manifest."
 msgstr "Приоритетная посадка уже активна в вашем манифесте."
 
-#: terra/views.py:339
+#: terra/views.py:341
 #, python-format
 msgid "Callsign %(callsign)s is already in use."
 msgstr "Позывной %(callsign)s уже занят."
 
-#: terra/views.py:347
+#: terra/views.py:349
 #, python-format
 msgid ""
 "Not enough TerraX — %(name)s costs %(price)s TRX and your wallet holds "
@@ -2871,29 +3251,29 @@ msgstr ""
 "Недостаточно TerraX — %(name)s стоит %(price)s TRX, а на кошельке "
 "%(balance)s TRX."
 
-#: terra/views.py:377
+#: terra/views.py:379
 msgid "That callsign was claimed by another passenger a moment ago."
 msgstr "Этот позывной только что занял другой пассажир."
 
-#: terra/views.py:383
+#: terra/views.py:385
 #, python-format
 msgid "%(name)s purchased for %(price)s TRX."
 msgstr "%(name)s куплено за %(price)s TRX."
 
-#: terra/views.py:438
+#: terra/views.py:440
 msgid "The channel is open — say something first."
 msgstr "Канал открыт — скажите что-нибудь."
 
-#: terra/views.py:490
+#: terra/views.py:492
 msgid "Empty transmission — nothing was sent."
 msgstr "Пустая передача — ничего не отправлено."
 
-#: terra/views.py:727
+#: terra/views.py:738
 #, python-format
 msgid "%(code)s is already settled."
 msgstr "%(code)s уже оплачен."
 
-#: terra/views.py:737
+#: terra/views.py:748
 #, python-format
 msgid ""
 "Not enough TerraX — the %(code)s levy is %(amount)s TRX and your wallet "
@@ -2902,59 +3282,59 @@ msgstr ""
 "Недостаточно TerraX — сбор %(code)s составляет %(amount)s TRX, а на кошельке "
 "%(balance)s TRX."
 
-#: terra/views.py:761
+#: terra/views.py:772
 #, python-format
 msgid ""
 "%(code)s settled — %(amount)s TRX paid. The receipt is in your TerraX ledger."
 msgstr "%(code)s оплачен — %(amount)s TRX внесено. Чек в вашем реестре TerraX."
 
-#: terra/views.py:780
+#: terra/views.py:791
 msgid "No date of birth on file — register it at the pension desk first."
 msgstr ""
 "Дата рождения не в записи — сначала зарегистрируйте её на стойке пенсий."
 
-#: terra/views.py:786
+#: terra/views.py:797
 #, python-format
 msgid "Eligibility starts at age %(age)s — you are %(months)s months away."
 msgstr "Право начинается с %(age)s лет — до него %(months)s мес."
 
-#: terra/views.py:794
+#: terra/views.py:805
 msgid "This month’s pension is already on your ledger."
 msgstr "Пенсия за этот месяц уже в вашем реестре."
 
-#: terra/views.py:812
+#: terra/views.py:823
 #, python-format
 msgid "Pension claimed — %(amount)s TRX credited. Next claim opens next month."
 msgstr ""
 "Пенсия получена — %(amount)s TRX зачислено. Следующий запрос — в следующем "
 "месяце."
 
-#: terra/views.py:826
+#: terra/views.py:837
 msgid "Enter a valid date of birth (YYYY-MM-DD)."
 msgstr "Введите корректную дату рождения (ГГГГ-ММ-ДД)."
 
-#: terra/views.py:831
+#: terra/views.py:842
 msgid "Date of birth cannot be in the future."
 msgstr "Дата рождения не может быть в будущем."
 
-#: terra/views.py:835
+#: terra/views.py:846
 msgid "That age cannot be right — check the date."
 msgstr "Такого возраста не может быть — проверьте дату."
 
-#: terra/views.py:843
+#: terra/views.py:854
 #, python-format
 msgid "Date of birth on file — age %(age)s. The pension desk is updated."
 msgstr "Дата рождения в записи — возраст %(age)s. Стойка пенсий обновлена."
 
-#: terra/views.py:856
+#: terra/views.py:867
 msgid "Unknown request type."
 msgstr "Неизвестный тип заявки."
 
-#: terra/views.py:866
+#: terra/views.py:877
 msgid "Give the location at least a few characters."
 msgstr "Укажите в адресе хотя бы несколько символов."
 
-#: terra/views.py:880
+#: terra/views.py:891
 #, python-format
 msgid ""
 "%(label)s request filed · tracking %(tracking)s. Watch it move through "
@@ -2963,12 +3343,12 @@ msgstr ""
 "Заявка %(label)s принята · отслеживание %(tracking)s. Следите за статусом "
 "ниже."
 
-#: terra/views.py:917
+#: terra/views.py:928
 #, python-format
 msgid "Terra Watch %(device)s is already paired."
 msgstr "Terra Watch %(device)s уже привязан."
 
-#: terra/views.py:929
+#: terra/views.py:940
 #, python-format
 msgid ""
 "Not enough TerraX — the Terra Watch costs %(price)s TRX and your wallet "
@@ -2977,24 +3357,24 @@ msgstr ""
 "Недостаточно TerraX — Terra Watch стоит %(price)s TRX, а на кошельке "
 "%(balance)s TRX."
 
-#: terra/views.py:950
+#: terra/views.py:961
 #, python-format
 msgid "Terra Watch paired · device %(device)s is streaming vitals."
 msgstr "Terra Watch привязан · устройство %(device)s передаёт показатели."
 
-#: terra/views.py:975
+#: terra/views.py:986
 msgid "Choose a departure from the board first."
 msgstr "Сначала выберите отправление на табло."
 
-#: terra/views.py:980
+#: terra/views.py:991
 msgid "That departure has already left the station."
 msgstr "Этот рейс уже ушёл."
 
-#: terra/views.py:991
+#: terra/views.py:1002
 msgid "Choose who is travelling first."
 msgstr "Сначала выберите, кто едет."
 
-#: terra/views.py:1005
+#: terra/views.py:1016
 #, python-format
 msgid ""
 "Not enough TerraX — this fare is %(fare)s TRX and your wallet holds "
@@ -3002,7 +3382,7 @@ msgid ""
 msgstr ""
 "Недостаточно TerraX — этот тариф %(fare)s TRX, а на кошельке %(balance)s TRX."
 
-#: terra/views.py:1037
+#: terra/views.py:1048
 #, python-format
 msgid ""
 "Fare paid — %(before)s − %(fare)s = %(balance)s TRX. QR ticket issued for "
@@ -3011,45 +3391,53 @@ msgstr ""
 "Тариф оплачен — %(before)s − %(fare)s = %(balance)s TRX. QR-билет выдан на "
 "%(route)s в %(time)s, готов для приёмника."
 
-#: terra/views.py:1068
+#: terra/views.py:1079
 msgid "Give the traveller a name."
 msgstr "Дайте попутчику имя."
 
-#: terra/views.py:1070
+#: terra/views.py:1081
 msgid "Choose a relationship."
 msgstr "Выберите родство."
 
-#: terra/views.py:1077
+#: terra/views.py:1088
 #, python-format
 msgid "%(name)s added — you can now buy their fare too."
 msgstr "%(name)s добавлен — теперь можно купить и его билет."
 
-#: terra/views.py:1090
+#: terra/views.py:1101
 msgid "That ticket is not on your account."
 msgstr "Этого билета нет на вашем аккаунте."
 
-#: terra/views.py:1093
+#: terra/views.py:1104
 msgid "This ticket was already scanned."
 msgstr "Этот билет уже сканировали."
 
-#: terra/views.py:1099
+#: terra/views.py:1110
 #, python-format
 msgid "Receiver accepted %(route)s · %(who)s is aboard. Safe travels."
 msgstr "Приёмник принял %(route)s · %(who)s на борту. Счастливого пути."
 
-#: terra/views.py:1107
+#: terra/views.py:1118
 msgid "Unknown transport action."
 msgstr "Неизвестное действие транспорта."
 
-#: terra/views.py:1175
+#: terra/views.py:1186
 msgid "The comment is empty — write something first."
 msgstr "Комментарий пуст — сначала что-нибудь напишите."
 
-#: terra/views.py:1179
+#: terra/views.py:1190
 msgid "Comment posted."
 msgstr "Комментарий опубликован."
 
-#: terra/views.py:1198
+#: terra/views.py:1216
+msgid "The insight is empty — write something first."
+msgstr "Предложение пустое — напишите сначала что-нибудь."
+
+#: terra/views.py:1222
+msgid "Insight filed — the council reads every signal."
+msgstr "Предложение отправлено — совет читает каждый сигнал."
+
+#: terra/views.py:1242
 #, python-format
 msgid "%(n)s signal acknowledged."
 msgid_plural "%(n)s signals acknowledged."
@@ -3057,11 +3445,11 @@ msgstr[0] "%(n)s сигнал подтверждён."
 msgstr[1] "%(n)s сигнала подтверждены."
 msgstr[2] "%(n)s сигналов подтверждено."
 
-#: terra/views.py:1207
+#: terra/views.py:1251
 msgid "Signal acknowledged."
 msgstr "Сигнал подтверждён."
 
-#: terra/views.py:1225
+#: terra/views.py:1269
 #, python-format
 msgid "%(n)s other session sealed behind you."
 msgid_plural "%(n)s other sessions sealed behind you."
@@ -3069,39 +3457,39 @@ msgstr[0] "%(n)s другая сессия запечатана за вами."
 msgstr[1] "%(n)s другие сессии запечатаны за вами."
 msgstr[2] "%(n)s других сессий запечатано за вами."
 
-#: terra/views.py:1231
+#: terra/views.py:1275
 msgid "Unknown signal action."
 msgstr "Неизвестное действие сигнала."
 
-#: terra/views.py:1288
+#: terra/views.py:1332
 msgid "Passenger record updated."
 msgstr "Запись пассажира обновлена."
 
-#: terra/views.py:1292
+#: terra/views.py:1336
 msgid "Could not save the record."
 msgstr "Не удалось сохранить запись."
 
-#: terra/views.py:1303
+#: terra/views.py:1347
 msgid "Passenger photo updated."
 msgstr "Фото пассажира обновлено."
 
-#: terra/views.py:1307
+#: terra/views.py:1351
 msgid "Could not store the photo."
 msgstr "Не удалось сохранить фото."
 
-#: terra/views.py:1316
+#: terra/views.py:1360
 msgid "Passenger photo removed."
 msgstr "Фото пассажира удалено."
 
-#: terra/views.py:1335
+#: terra/views.py:1379
 #, python-format
 msgid "Rating saved — %(stars)s★ for %(who)s."
 msgstr "Оценка сохранена — %(stars)s★ для %(who)s."
 
-#: terra/views.py:1343
+#: terra/views.py:1387
 msgid "Could not save the rating."
 msgstr "Не удалось сохранить оценку."
 
-#: terra/views.py:1347
+#: terra/views.py:1391
 msgid "Unknown account action."
 msgstr "Неизвестное действие аккаунта."

@@ -21,6 +21,7 @@ from .models import (
     CivicRequest,
     DeviceLogin,
     FareTicket,
+    Feedback,
     LoginAttempt,
     NewsComment,
     NewsItem,
@@ -1157,26 +1158,26 @@ class NewsTests(TestCase):
         self.assertContains(response, 'Heat wave holds')
         self.assertContains(response, 'TerraX steadies')
 
-    def test_exactly_ten_dispatches_are_seeded(self):
+    def test_exactly_twenty_dispatches_are_seeded(self):
         from terra.news import NEWS_ITEMS, ensure_news
 
         created = ensure_news()
         self.assertEqual(created, [])          # migration already seeded them
-        self.assertEqual(NewsItem.objects.count(), 10)
-        self.assertEqual(len(NEWS_ITEMS), 10)
+        self.assertEqual(NewsItem.objects.count(), 20)
+        self.assertEqual(len(NEWS_ITEMS), 20)
         # second run is idempotent — no duplicates
         self.assertEqual(ensure_news(), [])
-        self.assertEqual(NewsItem.objects.count(), 10)
+        self.assertEqual(NewsItem.objects.count(), 20)
 
     def test_seeder_creates_missing_dispatches_only(self):
         from terra.news import ensure_news
 
         NewsItem.objects.all().delete()
         created = ensure_news()
-        self.assertEqual(len(created), 10)
-        self.assertEqual(NewsItem.objects.count(), 10)
+        self.assertEqual(len(created), 20)
+        self.assertEqual(NewsItem.objects.count(), 20)
         self.assertEqual(
-            len({n.slug for n in NewsItem.objects.all()}), 10,
+            len({n.slug for n in NewsItem.objects.all()}), 20,
         )                                     # slugs are unique
 
     def test_dispatches_cover_the_colony_desks(self):
@@ -1324,6 +1325,130 @@ class NewsTests(TestCase):
             {'body': 'x' * 1500},
         )
         self.assertEqual(len(NewsComment.objects.get().body), 1000)
+
+    # ---- the week-long archive + translated content ----
+
+    NEW_WEEK_SLUGS = (
+        'lagoon-array-completes-southern-sweep',
+        'welcome-bonus-wallets-pass-ten-thousand',
+        'council-publishes-second-season-levies',
+        'night-rails-ten-thousand-riders',
+        'warm-spell-to-ease-as-window-closes',
+        'heat-strain-drills-run-in-every-village',
+        'manifest-passes-the-halfway-mark',
+        'glass-tundra-ice-core-dated',
+        'first-month-of-pensions-settles-clean',
+        'terra-watch-beacon-links-to-terra-chat',
+    )
+
+    def test_the_archive_spans_a_full_week(self):
+        now = timezone.localtime()
+        fresh = NewsItem.objects.filter(slug__in=self.NEW_WEEK_SLUGS)
+        self.assertEqual(fresh.count(), 10)
+        for item in fresh:
+            age = now - item.published_at
+            self.assertGreaterEqual(age, timedelta(hours=107))
+            self.assertLessEqual(age, timedelta(hours=168, minutes=5))
+        oldest = NewsItem.objects.order_by('published_at').first()
+        self.assertGreaterEqual(
+            now - oldest.published_at, timedelta(days=6, hours=22),
+        )
+        # strictly newest-first ordering across the whole wire
+        published = list(
+            NewsItem.objects.values_list('published_at', flat=True),
+        )
+        self.assertEqual(published, sorted(published, reverse=True))
+
+    def test_news_page_content_translates_to_french(self):
+        self.client.cookies['django_language'] = 'fr'
+        response = self.client.get(reverse('terra:news'))
+        self.assertEqual(response.status_code, 200)
+        html = response.content.decode()
+        # the lead headline resolves through the newsroom filter …
+        # (apostrophes are HTML-escaped, so probe without them)
+        self.assertIn('Expédition 01 ouvre sa fenêtre', html)
+        # … and the English msgid no longer leaks into the page
+        self.assertNotIn(
+            'Expedition 01 boarding window opens for the first', html,
+        )
+
+
+class FeedbackTests(TestCase):
+    """The Feedback page: file an insight, read the crew's wall."""
+
+    def _login(self, username='novarian'):
+        user = User.objects.create_user(
+            username, f'{username}@example.com', 'signal-pass-31x',
+        )
+        self.client.force_login(user)
+        return user
+
+    def test_feedback_page_renders_with_empty_state(self):
+        response = self.client.get(reverse('terra:feedback'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'No insights on the wall yet')
+        self.assertContains(response, 'Council inbox')
+        self.assertContains(response, 'to file an insight')
+
+    def test_anonymous_post_redirects_to_login(self):
+        response = self.client.post(
+            reverse('terra:feedback_post'),
+            {'topic': 'idea', 'body': 'Night buses should run later.'},
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('login', response['Location'])
+        self.assertEqual(Feedback.objects.count(), 0)
+
+    def test_signed_in_novarian_files_an_insight(self):
+        user = self._login()
+        response = self.client.post(
+            reverse('terra:feedback_post'),
+            {'topic': 'balance',
+             'body': 'The 0.5% exchange fee feels fair — keep it.'},
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Feedback.objects.count(), 1)
+        entry = Feedback.objects.get()
+        self.assertEqual(entry.user, user)
+        self.assertEqual(entry.topic, 'balance')
+        # back on the wall, marked as yours
+        self.assertContains(response, 'The 0.5% exchange fee feels fair')
+        self.assertContains(response, 'Yours')
+
+    def test_empty_insight_is_rejected(self):
+        self._login()
+        self.client.post(
+            reverse('terra:feedback_post'),
+            {'topic': 'idea', 'body': '   '},
+        )
+        self.assertEqual(Feedback.objects.count(), 0)
+
+    def test_unknown_topic_falls_back_to_idea(self):
+        self._login()
+        self.client.post(
+            reverse('terra:feedback_post'),
+            {'topic': 'nonsense', 'body': 'Add a canteen to the night train.'},
+        )
+        self.assertEqual(Feedback.objects.get().topic, 'idea')
+
+    def test_novarians_see_each_others_insights(self):
+        ada = User.objects.create_user(
+            'ada', 'ada@example.com', 'pw-ada-99x', first_name='Ada',
+        )
+        Feedback.objects.create(
+            user=ada, topic='fault',
+            body='The market filter resets after every trade.',
+        )
+        self._login()
+        response = self.client.get(reverse('terra:feedback'))
+        self.assertContains(response, 'The market filter resets after every trade.')
+        self.assertContains(response, 'Ada')          # author from another novarian
+        self.assertContains(response, '1 insight')    # pluralised heading
+
+    def test_feedback_link_sits_in_the_navigation(self):
+        response = self.client.get(reverse('terra:home'))
+        self.assertContains(response, reverse('terra:feedback'))
 
 
 class CivicTests(TestCase):

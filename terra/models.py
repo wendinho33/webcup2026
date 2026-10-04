@@ -4,6 +4,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_noop
 from datetime import timedelta
 
 from .transit import WELCOME_BONUS
@@ -440,13 +441,13 @@ class NewsItem(models.Model):
     """One dispatch from the Terra Nova newsroom (the News section)."""
 
     CATEGORY_CHOICES = [
-        ('expedition', 'Expedition'),
-        ('weather', 'Weather'),
-        ('market', 'Market'),
-        ('transport', 'Transport'),
-        ('civic', 'Civic'),
-        ('health', 'Health'),
-        ('science', 'Science'),
+        ('expedition', gettext_noop('Expedition')),
+        ('weather', gettext_noop('Weather')),
+        ('market', gettext_noop('Market')),
+        ('transport', gettext_noop('Transport')),
+        ('civic', gettext_noop('Civic')),
+        ('health', gettext_noop('Health')),
+        ('science', gettext_noop('Science')),
     ]
 
     title = models.CharField(max_length=160)
@@ -502,6 +503,33 @@ class NewsComment(models.Model):
 
     def __str__(self):
         return f'{self.user} · {self.item_id}: {self.body[:40]}'
+
+
+class Feedback(models.Model):
+    """One insight a Novarian files to improve Terra Nova (Feedback page)."""
+
+    TOPIC_CHOICES = [
+        ('idea', gettext_noop('Idea')),
+        ('balance', gettext_noop('Balance')),
+        ('fault', gettext_noop('Fault')),
+        ('content', gettext_noop('Story & content')),
+        ('other', gettext_noop('Other')),
+    ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='feedbacks',
+    )
+    topic = models.CharField(max_length=12, choices=TOPIC_CHOICES, default='idea')
+    body = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.user} · {self.get_topic_display()}: {self.body[:40]}'
 
 
 class DeviceLogin(models.Model):

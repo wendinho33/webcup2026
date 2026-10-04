@@ -1,0 +1,75 @@
+/* ============================================================
+   TERRA NOVA — Feedback page (open channel + the wall)
+   ============================================================ */
+
+.fb { position: relative; z-index: 2; padding: calc(var(--nav-h) + 2.2rem) 0 clamp(3rem, 7vh, 5rem); }
+
+/* --- page head --- */
+.fb__head { margin-bottom: clamp(1.6rem, 4vw, 2.4rem); }
+.fb__title { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-top: 1rem; max-width: 18ch; }
+.fb__lede { color: var(--dim); max-width: 58ch; margin-top: 1rem; }
+
+/* --- file-an-insight form --- */
+.fb__form {
+  display: grid; gap: .9rem; max-width: 64ch;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  background: color-mix(in srgb, var(--panel) 70%, transparent);
+}
+.fb__row { display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+.fb__label {
+  font-family: var(--font-mono); font-size: .62rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--mute);
+}
+.fb__form select {
+  background: transparent; color: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: .45rem .8rem; font-size: .85rem;
+}
+.fb__form textarea {
+  width: 100%; background: transparent; color: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: .8rem .9rem; font-size: .95rem; line-height: 1.55; resize: vertical;
+}
+.fb__form textarea:focus, .fb__form select:focus {
+  outline: none; border-color: var(--mint);
+}
+.fb__form .btn { justify-self: start; }
+.fb__signin { color: var(--mute); font-size: .9rem; margin-bottom: clamp(2rem, 5vw, 3rem); }
+.fb__signin a { color: var(--paper); border-bottom: 1px solid var(--line-strong); }
+
+/* --- the wall --- */
+.fb__wall { margin-top: clamp(1rem, 3vw, 2rem); }
+.fb__list { display: grid; gap: 1rem; }
+.fb-card {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: clamp(1rem, 2.5vw, 1.35rem) clamp(1.1rem, 3vw, 1.5rem);
+  background: color-mix(in srgb, var(--panel) 55%, transparent);
+  transition: border-color .3s, transform .3s;
+}
+.fb-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.fb-card__meta {
+  display: flex; align-items: center; gap: .8rem; flex-wrap: wrap;
+  font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--mute); margin-bottom: .6rem;
+}
+.fb-card__meta strong { color: var(--paper); font-weight: 600; }
+.fb-card__topic {
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: .18rem .6rem; color: var(--dim);
+}
+.fb-card__topic--idea     { border-color: var(--mint);  color: var(--mint); }
+.fb-card__topic--balance  { border-color: var(--solar); color: var(--solar); }
+.fb-card__topic--fault    { border-color: var(--ice);   color: var(--ice); }
+.fb-card__topic--content  { border-color: var(--high);  color: var(--high); }
+.fb-card__mine {
+  border: 1px solid var(--mint); border-radius: 999px;
+  padding: .18rem .6rem; color: var(--mint);
+}
+.fb-card__body { line-height: 1.65; overflow-wrap: anywhere; }
+.fb__empty { color: var(--mute); padding: 1.5rem 0; }
+
+@media (max-width: 640px) {
+  .fb-card__meta { gap: .55rem; }
+}

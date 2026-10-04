@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n newsroom %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/news.css' %}">
 {% endblock %}
 
-{% block title %}{{ item.title }} — {% trans "News — Terra Nova" %}{% endblock %}
+{% block title %}{{ item.title|t }} — {% trans "News — Terra Nova" %}{% endblock %}
 
 {% block content %}
 <section class="nws nws--article">
@@ -13,7 +13,7 @@
     <nav class="nws-crumb mono" data-reveal aria-label="{% trans "Breadcrumb" %}">
       <a href="{% url 'terra:news' %}">{% trans "News" %}</a>
       <span aria-hidden="true">/</span>
-      <a href="{% url 'terra:news' %}?category={{ item.category }}">{{ item.get_category_display }}</a>
+      <a href="{% url 'terra:news' %}?category={{ item.category }}">{{ item.get_category_display|t }}</a>
       <span aria-hidden="true">/</span>
       <span>{{ item.published_at|date:"d M Y" }}</span>
     </nav>
@@ -21,14 +21,14 @@
     <article class="nws-article" data-reveal>
       <header class="nws-article__head">
         <p class="nws-meta mono">
-          <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display }}</span>
+          <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display|t }}</span>
           {% if item.is_featured %}<span>{% trans "Featured" %}</span>{% endif %}
           <span>{{ item.published_at|date:"d M Y · H:i" }}</span>
         </p>
-        <h1>{{ item.title }}</h1>
-        <p class="nws-article__summary">{{ item.summary }}</p>
+        <h1>{{ item.title|t }}</h1>
+        <p class="nws-article__summary">{{ item.summary|t }}</p>
         <p class="nws-byline mono">
-          {{ item.source }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}
+          {{ item.source|t }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}
         </p>
       </header>
 
@@ -85,18 +85,18 @@
       <section class="nws-section">
         <header class="section__head">
           <p class="eyebrow" data-reveal>{% trans "More from this desk" %}</p>
-          <h2 class="section__title" data-reveal style="--d:.06s">{{ item.get_category_display }} <em>{% trans "stories." %}</em></h2>
+          <h2 class="section__title" data-reveal style="--d:.06s">{{ item.get_category_display|t }} <em>{% trans "stories." %}</em></h2>
         </header>
         <div class="nws-grid">
           {% for rel in related %}
             <article class="nws-card" data-reveal style="--d: calc({{ forloop.counter0 }} * .05s)">
               <p class="nws-meta mono">
-                <span class="nws-cat nws-cat--{{ rel.category }}">{{ rel.get_category_display }}</span>
+                <span class="nws-cat nws-cat--{{ rel.category }}">{{ rel.get_category_display|t }}</span>
                 <span>{{ rel.published_at|date:"d M" }}</span>
               </p>
-              <h3><a href="{% url 'terra:news_detail' rel.slug %}">{{ rel.title }}</a></h3>
-              <p class="nws-card__summary">{{ rel.summary }}</p>
-              <p class="nws-byline mono">{{ rel.source }} · {% blocktrans with mins=rel.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
+              <h3><a href="{% url 'terra:news_detail' rel.slug %}">{{ rel.title|t }}</a></h3>
+              <p class="nws-card__summary">{{ rel.summary|t }}</p>
+              <p class="nws-byline mono">{{ rel.source|t }} · {% blocktrans with mins=rel.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
             </article>
           {% endfor %}
         </div>

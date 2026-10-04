@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static i18n %}
+{% load static i18n newsroom %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/news.css' %}">
@@ -31,7 +31,7 @@
          href="{% url 'terra:news' %}">{% trans "All desks" %}<b>{{ total }}</b></a>
       {% for code, label, count in categories %}
         <a class="nws-chip{% if active == code %} is-active{% endif %}"
-           href="{% url 'terra:news' %}?category={{ code }}">{{ label }}<b>{{ count }}</b></a>
+           href="{% url 'terra:news' %}?category={{ code }}">{{ label|t }}<b>{{ count }}</b></a>
       {% endfor %}
     </nav>
 
@@ -39,14 +39,14 @@
       <article class="nws-lead" id="lead" data-reveal>
         <div class="nws-lead__body">
           <p class="nws-meta mono">
-            <span class="nws-cat nws-cat--{{ lead.category }}">{{ lead.get_category_display }}</span>
+            <span class="nws-cat nws-cat--{{ lead.category }}">{{ lead.get_category_display|t }}</span>
             <span>{% trans "Featured" %}</span>
             <span>{{ lead.published_at|date:"d M Y · H:i" }}</span>
           </p>
-          <h2><a href="{% url 'terra:news_detail' lead.slug %}">{{ lead.title }}</a></h2>
-          <p class="nws-lead__summary">{{ lead.summary }}</p>
+          <h2><a href="{% url 'terra:news_detail' lead.slug %}">{{ lead.title|t }}</a></h2>
+          <p class="nws-lead__summary">{{ lead.summary|t }}</p>
           <p class="nws-byline mono">
-            {{ lead.source }} · {% blocktrans with mins=lead.reading_minutes %}{{ mins }} min read{% endblocktrans %}
+            {{ lead.source|t }} · {% blocktrans with mins=lead.reading_minutes %}{{ mins }} min read{% endblocktrans %}
           </p>
           <a class="btn btn--line" href="{% url 'terra:news_detail' lead.slug %}">{% trans "Read the dispatch →" %}</a>
         </div>
@@ -69,12 +69,12 @@
         {% for item in stream %}
           <article class="nws-card" data-reveal style="--d: calc({{ forloop.counter0 }} * .05s)">
             <p class="nws-meta mono">
-              <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display }}</span>
+              <span class="nws-cat nws-cat--{{ item.category }}">{{ item.get_category_display|t }}</span>
               <span>{{ item.published_at|date:"d M" }}</span>
             </p>
-            <h3><a href="{% url 'terra:news_detail' item.slug %}">{{ item.title }}</a></h3>
-            <p class="nws-card__summary">{{ item.summary }}</p>
-            <p class="nws-byline mono">{{ item.source }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
+            <h3><a href="{% url 'terra:news_detail' item.slug %}">{{ item.title|t }}</a></h3>
+            <p class="nws-card__summary">{{ item.summary|t }}</p>
+            <p class="nws-byline mono">{{ item.source|t }} · {% blocktrans with mins=item.reading_minutes %}{{ mins }} min read{% endblocktrans %}</p>
           </article>
         {% empty %}
           <p class="nws-empty">{% trans "No dispatches on this desk yet — pick another filter above." %}</p>

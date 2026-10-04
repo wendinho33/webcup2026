@@ -54,6 +54,7 @@ from .models import (
     CivicRequest,
     DeviceLogin,
     FareTicket,
+    Feedback,
     NewsComment,
     NewsItem,
     Notification,
@@ -1188,6 +1189,39 @@ def news_comment(request, slug):
         NewsComment.objects.create(item=item, user=request.user, body=body)
         messages.success(request, _('Comment posted.'))
     return redirect('terra:news_detail', slug=slug)
+
+
+# ---------------- Feedback ----------------
+
+def feedback(request):
+    """The open channel: file an insight, read what other Novarians filed."""
+    return render(request, 'terra/feedback.html', {
+        'feedbacks': Feedback.objects.select_related('user'),
+        'topics': Feedback.TOPIC_CHOICES,
+    })
+
+
+@login_required
+@require_POST
+def feedback_post(request):
+    """File one insight from the Feedback page."""
+    topic = request.POST.get('topic', 'idea')
+    body = (request.POST.get('body') or '').strip()[:1000]
+    valid_topics = {code for code, _label in Feedback.TOPIC_CHOICES}
+    if topic not in valid_topics:
+        topic = 'idea'
+    if not body:
+        messages.error(
+            request,
+            _('The insight is empty — write something first.'),
+        )
+    else:
+        Feedback.objects.create(user=request.user, topic=topic, body=body)
+        messages.success(
+            request,
+            _('Insight filed — the council reads every signal.'),
+        )
+    return redirect('terra:feedback')
 
 
 # ---------------- Notification centre ----------------
