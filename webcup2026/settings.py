@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -93,18 +94,22 @@ WSGI_APPLICATION = 'webcup2026.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 #
 # Production (Hodifly) runs on MySQL via PyMySQL. If the server can't be
-# reached with these credentials, we fall back to the local SQLite file so the
-# site never hard-fails on a bad database connection.
+# reached, we fall back to the local SQLite file so the site never hard-fails
+# on a bad database connection. Every value can be overridden via environment
+# variables (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD).
 
-_MYSQL = {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'technophile_webcup',
-    'USER': 'technophile_marius',
-    'PASSWORD': 'webcup2026',
-    'HOST': 'localhost',
-    'PORT': '3306',
-    'OPTIONS': {'charset': 'utf8mb4'},
-}
+
+def _mysql_config():
+    return {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME', 'technophile_webcup'),
+        'USER': os.environ.get('DB_USER', 'technophile_marius'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'webcup2026'),
+        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+        'OPTIONS': {'charset': 'utf8mb4'},
+    }
+
 
 _SQLITE = {
     'ENGINE': 'django.db.backends.sqlite3',
@@ -115,26 +120,32 @@ _SQLITE = {
 def _mysql_reachable():
     """True when the MySQL server accepts a connection with our credentials."""
     if pymysql is None:
+        print('PyMySQL not installed — falling back to SQLite.', file=sys.stderr)
         return False
+    cfg = _mysql_config()
     try:
         conn = pymysql.connect(
-            host=_MYSQL['HOST'],
-            port=int(_MYSQL['PORT']),
-            user=_MYSQL['USER'],
-            password=_MYSQL['PASSWORD'],
-            database=_MYSQL['NAME'],
+            host=cfg['HOST'],
+            port=int(cfg['PORT']),
+            user=cfg['USER'],
+            password=cfg['PASSWORD'],
+            database=cfg['NAME'],
             connect_timeout=3,
         )
         conn.close()
         return True
-    except Exception:
+    except Exception as exc:
+        print(
+            f'MySQL unreachable ({type(exc).__name__}: {exc}) — '
+            'falling back to SQLite (db.sqlite3).',
+            file=sys.stderr,
+        )
         return False
 
 
 if _mysql_reachable():
-    DATABASES = {'default': _MYSQL}
+    DATABASES = {'default': _mysql_config()}
 else:
-    print('MySQL unreachable — falling back to SQLite (db.sqlite3).', file=sys.stderr)
     DATABASES = {'default': _SQLITE}
 
 
